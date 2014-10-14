@@ -229,14 +229,6 @@ class Wallet
 
     approve_account: (name, approve) ->
         @wallet_api.account_set_approval(name, approve)
-    
-    refresh_transactions_on_update: () ->
-        #@refresh_transactions()
-#        .then ->
-#            promises = []
-#            angular.forEach @accounts, (account, name) =>
-#                if account.is_my_account
-#                    promises.push @refresh_transactions(name)
 
     update_transaction: (t, val) ->
         time = @utils.toDate(val.timestamp)
@@ -248,8 +240,8 @@ class Wallet
         t.error = val.error
         t.trx_num = val.trx_num
         t.time = time
-        t.expiration_pretty_time = @utils.toDate(val.expiration_timestamp).toLocaleString()
-        t.pretty_time = time.toLocaleString()
+        t.expiration_pretty_time = @utils.toDate(val.expiration_timestamp).toLocaleString(undefined, {timeZone:"UTC"})
+        t.pretty_time = time.toLocaleString(undefined, {timeZone:"UTC"})
         t.fee = @utils.asset(val.fee.amount, @blockchain.asset_records[val.fee.asset_id])
         t.vote = "N/A"
         if t.status != "rebroadcasted"

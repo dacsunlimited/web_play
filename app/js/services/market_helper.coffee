@@ -90,18 +90,17 @@ class MarketHelper
 
         td.display_type = @capitalize(td.type.split("_")[0])
 
-    trade_history_to_order: (t, assets, invert_price) ->
+    trade_history_to_order: (t, o, assets, invert_price) ->
         ba = assets[t.ask_price.base_asset_id]
         qa = assets[t.ask_price.quote_asset_id]
-        o = {type: t.bid_type}
-        o.id = t.ask_owner
+        o.type = t.bid_type
+        o.id = t.ask_owner+t.bid_owner
         o.price = t.ask_price.ratio * (ba.precision / qa.precision)
         o.price = 1.0 / o.price if invert_price
         o.paid = t.ask_paid.amount / ba.precision
         o.received = t.ask_received.amount / qa.precision
         o.timestamp = @filter('prettyDate')(t.timestamp)
         o.display_type = @capitalize(o.type.split("_")[0])
-        return o
 
     array_to_hash: (list) ->
         hash = {}
@@ -122,6 +121,8 @@ class MarketHelper
                     params.update(tv,dv)
                 else if tv.update
                     tv.update(dv)
+                else
+                    throw "no update callback provided"
             else
                 target.push dv
         for i, tv of target
@@ -162,18 +163,9 @@ class MarketHelper
         return "bid_order" if type == "ask_order"
         return type
 
-    find_order_by_transaction: (orders, t) ->
-#        res = jsonPath.eval(t, "$.ledger_entries[0].to_account")
-#        return null if not res or res.length == 0
-#        to_account = res[0]
-#        match = /^([A-Z]+)\-(\w+)/.exec(to_account)
-#        return null unless match
-#        subid = match[2]
-#        return null unless subid.length > 5
-#        for o in orders
-#            return o if o.id and o.id.indexOf(subid) > -1
-        for o in orders
-            return o if o.id == t.trx_id
+    find_by_id: (array, id) ->
+        for a in array
+            return a if a.id == id
         return null
 
     date: (t) ->
