@@ -5,7 +5,7 @@ angular.module("app").controller "PreferencesController", ($scope, $location, $q
     $scope.model.symbol = ''
     $scope.model.languages =
         "en": "English"
-        "zh-CN": "Chinese"
+        "zh-CN": "简体中文"
         "de": "German"
         "ru": "Russian"
     $scope.model.language_locale = $translate.preferredLanguage()
@@ -56,4 +56,5 @@ angular.module("app").controller "PreferencesController", ($scope, $location, $q
         ]
         $q.all(calls).then (r) ->
             $translate.use($scope.model.language_locale)
+            moment.locale($scope.model.language_locale)
             Growl.notice "Preferences Updated", ""

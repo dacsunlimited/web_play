@@ -2,23 +2,24 @@
     "unknown": "Неизвестно",
     "btn":{
         "ok": "ОК",
-        "cancel": "Отмена",
+        "cancel": "Отменить",
         "edit": "Редактировать",
         "save": "Сохранить",
         "create": "Создать",
         "confirm": "Подтвердить",
         "update": "Обновить",
-        "cover": "Покрытие",
-        "register": "Зарегистрировать"
+        "cover": "Покрыть",
+        "register": "Зарегистрировать",
+        "close": "Закрыть"
     },
     "tip": {
         "privacy_statement": "Заявление о конфиденциальности",
         "warning": "Внимание",
         "validate_symbol": "Тикер должен состоять из 3-5 символов в верхнем регистре",
         "validate_precision": "Точность должна быть больше 0 и должна быть степенью 10 (или 1).",
-        "pay_with_info": "Регистрация стоит BTSX, оплатить из",
+        "pay_with_info": "Регистрация стоит BTS, оплатить из",
         "reg_as_delegate": "Зарегистрирован как делегат",
-        "reg_delegate_tip": "Регистрация в качестве делегата стоит много BTSX",
+        "reg_delegate_tip": "Регистрация в качестве делегата стоит много BTS",
         "reg_pending": "Ожидание регистрации. Еще не зарегистрирован.",
         "not_reg_onchain": "Не зарегистрирован в цепочке блоков",
         "add_account_name_existed": "Невозможно добавить контакт. Название аккаунта существует.",
@@ -88,13 +89,18 @@
         "type": "ТИП",
         "quantity": "КОЛИЧЕСТВО",
         "order_price": "Цена",
+        "call_price": "Цена марджин-колл",
+        "units_owed": "{{value}} занято",
         "cost": "СТОИМОСТЬ",
+        "total": "Всего",
         "collateral": "ОБЕСПЕЧЕНИЕ",
         "collateral_ratio": "КОЭФФИЦИЕНТ ОБЕСПЕЧЕНИЯ",
         "price_limit": "ОГРАНИЧЕНИЕ ЦЕНЫ",
         "action": "ДЕЙСТВИЕ",
         "paid": "ОПЛАЧЕНО",
-        "received": "ПОЛУЧЕНО"
+        "received": "ПОЛУЧЕНО",
+        "expiration": "Истекает",
+        "interest_rate": "ДОХОДНОСТЬ (%)"
     },
     "block": {
         "title": "Блок",
@@ -133,8 +139,8 @@
     },
     "unlock": {
         "btn_unlock": "Разблокировать",
-        "desc_title": "BitSharesX децентрализованная биржа",
-        "desc_content_1": "BitSharesX - это экспериментальная децентрализованная биржа, которая позволяет торговать особыми типами производных активов (например BitGold), которые отслеживают цены реальных физических активов (например золота), используя контракт на разницу, основанный на децентрализованной потоковой цене. Функционирование биржи обеспечивает механизм, схожий с используемым на информационных рынках, который вознаграждает трейдеров за ценовое давление в сторону консенсуса. Биржа также позволяет пользователям эмитировать традиционные, не привязанные к другим рыночным позициям, активы.",
+        "desc_title": "будущее банковской индустрии",
+        "desc_content_1": "BitShares - это глобальное сообщество, которое с помощью распределенного приложения, создает лучшие деньги в мире.",
         "desc_content_2": "",
         "wrong_pass": "Неверный пароль."
     },
@@ -144,7 +150,7 @@
         "create_wallet": "Создать бумажник"
     },
     "index": {
-        "title": "BitSharesX Бумажник",
+        "title": "BitShares Бумажник",
         "overview": "Обзор",
         "my_account": "Мои Аккаунты",
         "directory": "Каталог",
@@ -173,7 +179,9 @@
     },
     "market": {
         "title": "Рынок",
+        "featured_markets": "Featured рынки",
         "search_market": "Поиск рынка",
+        "market_name": "Market Name",
         "all_markets": "Все рынки",
         "recent_markets": "Последние рынки",
         "median_price": "Медианная цена",
@@ -195,8 +203,8 @@
         "blockchain_orders_history": "История сделок в цепочке блоков",
         "account_orders_history": "История сделок",
         "margin_orders": "Ордера по залоговому/margin требованию",
-        "margin_orders_explain": "Марджин-колл будет исполнен в любое время, если наименьшая цена Спроса составит менее чем 110% плавающего среднего и, при этом, наименьшая цена Спроса превышает цену марджин-колла. Цена начальной ставки составляет 150% цены Шорта (например, BTSX 45.00 для Шорта, выставленного при цене BTSX 30.00). Эта цена, при которой 75% залога потребуется для выкупа USD, необходимых для обеспечения открытой позиции. Если марджин-колл исполнятся и остаётся некая сумма из обеспечения, в таком случае 5% удерживается системой как комиссия, а 95% возвращается владельцу.",
-        "margin_call_price_explain": "Цена начальной ставки составляет 150% цены Шорта (например, BTSX 45.00 для Шорта, выставленного при цене BTSX 30.00). Это цена, при которой 75% залога потребуется для выкупа USD, необходимых для обеспечения открытой позиции.",
+        "margin_orders_explain": "Марджин-колл будет исполнен в любое время, если наименьшая цена Спроса составит менее чем 110% плавающего среднего и, при этом, наименьшая цена Спроса превышает цену марджин-колла. Цена начальной ставки составляет 150% цены Шорта (например, BTS 45.00 для Шорта, выставленного при цене BTSX 30.00). Эта цена, при которой 75% залога потребуется для выкупа USD, необходимых для обеспечения открытой позиции. Если марджин-колл исполнятся и остаётся некая сумма из обеспечения, в таком случае 5% удерживается системой как комиссия, а 95% возвращается владельцу.",
+        "margin_call_price_explain": "Цена начальной ставки составляет 150% цены Шорта (например, BTS 45.00 для Шорта, выставленного при цене BTSX 30.00). Это цена, при которой 75% залога потребуется для выкупа USD, необходимых для обеспечения открытой позиции.",
         "flip_market": "Развернуть рынок",
         "buy_orders": "Ордера на Покупку {{value}}",
         "sell_orders": "Ордера на Продажу {{value}}",
@@ -229,7 +237,9 @@
         "open_sell_orders": "Открытые Ордера на Продажу {{value}}",
         "open_short_orders": "Открытые Ордера на Шорт {{value}}",
         "open_margin_orders": "Открытые Залоговые/Margin Ордера",
-        "collateral_ratio": "Collateral Ratio",
+        "collateral": "Обеспечение",
+        "collateral_ratio": "Коэффициент Обеспечения",
+        "interest_rate": "Доходность",
         "price_limit": "Price Limit",
         "help": {
             "buy_quantity": "The amount of {{value}} that you would like to buy.",
@@ -243,7 +253,7 @@
             "short_quantity": "The number {{value}} that you would like to borrow and sell.",
             "short_collateral_ratio": "The number of {{quantity}} per {{base}} that you are willing to post as collateral. Short orders are matched in order of highest collateral ratio.",
             "short_price_limit_direct": "The highest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{base}}. Short orders only match at the price feed or price limit, whichever is more.",
-            "short_price_limit_inverted": "The lowest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{base}}. Short orders only match at the price feed or price limit, whichever is less.",
+            "short_price_limit_inverted": "The lowest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{quantity}}. Short orders only match at the price feed or price limit, whichever is less.",
             "short_feed_price": "The median exchange rate on external exchanges according to delegates.",
             "short_total": "The amount {{value}} required to fund this order. Calculated as Quantity times Collateral Ratio."
         }
@@ -337,6 +347,7 @@
         "description": "Описание",
         "memo_data": "Примечание",
         "maximum_share_supply": "Максимальное количество акций",
+        "total_supply": "Всего эмитировано",
         "precision": "Точность",
         "issued_by": "Эмитирован",
         "create_new_asset": "Создать новый актив",
@@ -352,7 +363,7 @@
     },
     "privacy": {
         "email_warning1": "Адрес Вашей электронной почты используется только в целях идентификации Вашего аккаунта, ",
-        "email_warning2": "который может быть связан с Вашим аккаунтом в BitSharesX. Это поможет Вам и другим убедится, что средства отправляются тому, кому предназначаются. ",
+        "email_warning2": "который может быть связан с Вашим аккаунтом в BitShares. Это поможет Вам и другим убедится, что средства отправляются тому, кому предназначаются. ",
         "email_warning3": "Адрес Вашей электронной почты никуда не передается, и никто не сможет использовать его для отправки спама."
     },
     "directory": {
@@ -410,8 +421,15 @@
         "about": "О программе"
     },
     "footer": {
-        "enable_trx_scan": "Enable Transaction Scanning",
-        "up_to_date": "Up to date, processed {{value}} blocks",
-        "catching_up": "Catching up.. processed {{value1}} out of {{value2}}"
+        "enable_trx_scan": "Включить сканирование транзакций",
+        "up_to_date": "Цепочка блоков загружена, обработано {{value}} блоков",
+        "catching_up": "Цепочка блоков загружается.. обработано {{value1}} из {{value2}} блоков"
+    },
+    "utils": {
+        "expired": "Истек",
+        "seconds": "{{value}} Секунд",
+        "minutes": "{{value}} Минут",
+        "hours": "{{value}} Часов",
+        "days": "{{value}} Дней"
     }
 }

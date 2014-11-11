@@ -26,7 +26,8 @@ module.exports = function(lineman) {
         "vendor/js/angular-translate-loader-static-files.min.js",
         "vendor/js/jsonpath.js",
         "vendor/js/angular-pageslide-directive.js",
-        "vendor/js/highstock.src.js"
+        "vendor/js/highstock.src.js",
+        "vendor/js/moment-with-locales.js"
       ],
       app: [
         "app/js/app.js",
@@ -61,7 +62,8 @@ module.exports = function(lineman) {
         "app/css/footer.css",
         "app/css/market.css",
         "app/css/spinner.css",
-        "app/css/help.css"
+        "app/css/help.css",
+        "app/css/splashpage.css"
       ]
     }
 
