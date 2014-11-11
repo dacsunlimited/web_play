@@ -139,8 +139,8 @@
     },
     "unlock": {
         "btn_unlock": "Разблокировать",
-        "desc_title": "будущее банковской индустрии",
-        "desc_content_1": "BitShares - это глобальное сообщество, которое с помощью распределенного приложения, создает лучшие деньги в мире.",
+        "desc_title": "BitShares Play",
+        "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
         "wrong_pass": "Неверный пароль."
     },

@@ -139,9 +139,9 @@
     },
     "unlock": {
         "btn_unlock": "Anmelden",
-        "desc_title": "Handeln Sie weltweit BitAssets vertraulich, sicher und unverzüglich.",
-        "desc_content_1": "BitShares ist eine vollständig dezentrale Handelsplattform auf der Sie BitAssets aller Art handeln können. Zum Beispiel: BitGLD = XAU(Gold)",
-        "desc_content_2": "Weitere Informationen und Hilfe zu BitShares erhalten Sie unter http://bitsharestalk.org und http://wiki.bitshares.org",
+        "desc_title": "BitShares Play",
+        "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
+        "desc_content_2": "",
         "wrong_pass": "Falsches Passwort."
     },
     "wallet": {
@@ -363,7 +363,7 @@
     },
     "privacy": {
         "email_warning1": "Ihre Emailaddresse wir ausschließlich dazu genutzt Sie zu identifizieren.",
-	"email_warning2": "Konten die mit Ihnen in Verbindung gebracht werden. Dies erlaubt es anderen Parteien Ihr Konto vor einer Überweisung zu verifizieren.",
+  "email_warning2": "Konten die mit Ihnen in Verbindung gebracht werden. Dies erlaubt es anderen Parteien Ihr Konto vor einer Überweisung zu verifizieren.",
         "email_warning3": "Ihre Emailaddresse wird nicht geteilt und niemand kann Ihnen Spam schicken."
     },
     "directory": {

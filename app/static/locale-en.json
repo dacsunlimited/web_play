@@ -139,8 +139,8 @@
     },
     "unlock": {
         "btn_unlock": "unlock",
-        "desc_title": "the future of banking",
-        "desc_content_1": "BitShares is a global community using a distributed application to produce the best money in the world.",
+        "desc_title": "BitShares Play",
+        "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
         "wrong_pass": "Wrong Password."
     },
