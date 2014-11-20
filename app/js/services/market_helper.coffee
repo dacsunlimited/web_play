@@ -62,7 +62,7 @@ class MarketHelper
         td.cost = td.quantity * price
         if order.expiration
             @utils.formatExpirationDate(order.expiration).then (result) ->
-                td.expiration_days = result
+                td.expiration = {days: result}
 
         td.status = "posted"
         if order.type == "bid_order"
@@ -70,7 +70,7 @@ class MarketHelper
             td.quantity = td.cost / price if price > 0.0
         else if order.type == "short_order"
             td.collateral = order.state.balance / quantity_asset.precision
-            if order.state.short_price_limit and order.state.short_price_limit.ratio > 0
+            if order.state.short_price_limit and order.state.short_price_limit.ratio > 0.0
                 short_price_limit =  @order_price(order.state.short_price_limit, base_asset, quantity_asset)
                 td.short_price_limit = if invert_price then 1.0 / short_price_limit else short_price_limit
             else
@@ -94,7 +94,7 @@ class MarketHelper
         td.expiration = order.expiration
         if td.expiration
             @utils.formatExpirationDate(td.expiration).then (result) ->
-                td.expiration_days = result
+                td.expiration = {days: result, date: td.expiration}
 
     trade_history_to_order: (t, o, assets, invert_price) ->
         ba = assets[t.ask_price.base_asset_id]

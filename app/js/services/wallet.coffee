@@ -5,7 +5,7 @@ class Wallet
     balances: {}
     bonuses: {}
     
-    open_orders_balances: {}
+    #open_orders_balances: {}
 
     asset_balances : {}
 
@@ -13,6 +13,8 @@ class Wallet
     transactions_loading_promise: null
     transactions_last_block: 0
     transactions_all_by_id: {}
+    transactions_last_time: 0
+    transactions_counter: 0
 
     # set in constructor
     timeout: null
@@ -51,6 +53,7 @@ class Wallet
                 @get_setting('interface_locale').then (result) =>
                     if result and result.value
                         @interface_locale = result.value
+                        moment.locale(result.value)
                         @translate.use(result.value)
                 if not result.unlocked
                     navigate_to('unlockwallet')
@@ -92,18 +95,18 @@ class Wallet
                     @balances[acct.name] = {}
                     @balances[acct.name][@main_asset.symbol] = @utils.asset(0, @main_asset)
 
-    refresh_open_order_balances: (name) ->
-        if !@open_orders_balances[name]
-            @open_orders_balances[name] = {}
-        @open_order_balances[name]["BTSX"] = 0
-        @wallet_api.account_order_list(name).then (result) =>
-            angular.forEach result, (order) =>
-                base = @blockchain.asset_records[order.market_index.order_price.base_asset_id]
-                quote = @blockchain.asset_records[order.market_index.order_price.quote_asset_id]
-                if order.type == "ask_order"
-                    @open_orders_balances[name][base.symbol] = @utils.asset(order.state.balance, @blockchain.symbol2records[base.symbol])
-                if order.type == "bid_order" or order.type == "short_order"
-                    @open_orders_balances[name][quote.symbol] = @utils.asset(order.state.balance, @blockchain.symbol2records[quote.symbol])
+#    refresh_open_order_balances: (name) ->
+#        if !@open_orders_balances[name]
+#            @open_orders_balances[name] = {}
+#        @open_order_balances[name]["BTS"] = 0
+#        @wallet_api.account_order_list(name).then (result) =>
+#            angular.forEach result, (order) =>
+#                base = @blockchain.asset_records[order.market_index.order_price.base_asset_id]
+#                quote = @blockchain.asset_records[order.market_index.order_price.quote_asset_id]
+#                if order.type == "ask_order"
+#                    @open_orders_balances[name][base.symbol] = @utils.asset(order.state.balance, @blockchain.symbol2records[base.symbol])
+#                if order.type == "bid_order" or order.type == "short_order"
+#                    @open_orders_balances[name][quote.symbol] = @utils.asset(order.state.balance, @blockchain.symbol2records[quote.symbol])
 
     refresh_bonuses_promise: null
     
@@ -128,7 +131,7 @@ class Wallet
 
 
 #    account_yield: []
-#    
+#
 #    #empty account_name = all
 #    wallet_account_yield: (account_name = "") ->
 #        if @utils.too_soon("wallet_account_yield #{account_name}", 10 * 1000)
@@ -243,13 +246,10 @@ class Wallet
         if t.status != "rebroadcasted"
             t.status = if not val.is_confirmed and not val.is_virtual then "pending" else "-"
 
-    process_transaction: (val) ->
-        existing_transaction = @transactions_all_by_id[val.trx_id]
-        if existing_transaction and existing_transaction.id
-            @update_transaction(existing_transaction, val)
-            return
+    update_ledger_entries: (t, val) ->
+        if t.ledger_entries then t.ledger_entries.splice(0, t.ledger_entries.length) else t.ledger_entries = []
         involved_accounts = {}
-        ledger_entries = []
+        used_balance_symbols = {}
         angular.forEach val.ledger_entries, (entry) =>
             involved_accounts[entry.from_account] = true if @accounts[entry.from_account]
             involved_accounts[entry.to_account] = true if @accounts[entry.to_account]
@@ -259,22 +259,40 @@ class Wallet
                 balances = acct[1]
                 continue unless involved_accounts[account_name]
                 #console.log "------ running_balances item ------>",account_name, balances
+                running_balances[account_name] = []
                 for item in balances
-                    asset = @utils.asset(item[1].amount, @blockchain.asset_records[item[1].asset_id])
-                    running_balances[account_name] ||= []
-                    running_balances[account_name].push asset
-
-            ledger_entries.push
+                    asset_record = @blockchain.asset_records[item[1].asset_id]
+                    asset = @utils.asset(item[1].amount, asset_record)
+                    running_balances[account_name].push asset unless used_balance_symbols[asset.symbol]
+                    used_balance_symbols[asset.symbol] = true
+            t.ledger_entries.push
                 from: entry.from_account
                 to: entry.to_account
                 amount: entry.amount.amount
                 amount_asset : @utils.asset(entry.amount.amount, @blockchain.asset_records[entry.amount.asset_id])
                 memo: entry.memo
                 running_balances: running_balances
+        return involved_accounts
+
+    process_transaction: (val) ->
+        #console.log "------ process_transaction ------>", val
+        existing_transaction = @transactions_all_by_id[val.trx_id]
+        if existing_transaction and existing_transaction.id
+            @update_transaction(existing_transaction, val)
+            @update_ledger_entries(existing_transaction, val)
+            existing_transaction.time.setMilliseconds(existing_transaction.num)
+            return
 
         transaction = { id: val.trx_id }
-        transaction.ledger_entries = ledger_entries
         @update_transaction(transaction, val)
+        involved_accounts = @update_ledger_entries(transaction, val)
+        if val.timestamp == @transactions_last_time
+            @transactions_counter += 1
+        else
+            @transactions_counter = 0
+        @transactions_last_time = val.timestamp
+        transaction.time.setMilliseconds(@transactions_counter)
+        transaction.num = @transactions_counter
 
         @transactions_all_by_id[val.trx_id] = transaction
 
@@ -295,14 +313,16 @@ class Wallet
             deffered.reject(error)
 
         refresh_asset_records_promise.then =>
-
-            account_transaction_history_promise = @wallet_api.account_transaction_history("", "", 0, @transactions_last_block, -1)
+            go_back_to_block = if @transactions_last_block > 20 then @transactions_last_block else 0
+            #console.log "------ wallet_account_transaction_history '' '' 0 #{go_back_to_block} -1"
+            account_transaction_history_promise = @wallet_api.account_transaction_history("", "", 0, go_back_to_block, -1)
             account_transaction_history_promise.catch (error) =>
                 @transactions_loading_promise = null
                 deffered.reject(error)
 
             account_transaction_history_promise.then (result) =>
                 for val in result
+                    #console.log "------ account_transaction ------>", val
                     @transactions_last_block = val.block_num
                     @process_transaction(val) if val.is_confirmed
 
@@ -314,8 +334,6 @@ class Wallet
                 pending_transactions_promise.finally =>
                     @transactions_loading_promise = null
                     deffered.resolve(@transactions)
-
-                #console.log "------ account_transactions finished ------>"
 
         return @transactions_loading_promise
 
@@ -370,11 +388,11 @@ class Wallet
     
     wallet_get_info: (error_handler = null) ->
         @rpc.request('wallet_get_info', [], error_handler).then (response) =>
-            @info.transaction_fee = response.result.transaction_fee
+            @info.transaction_fee = response.result.transaction_fee if response.result
             response.result
 
-    wallet_add_contact_account: (name, address) ->
-        @rpc.request('wallet_add_contact_account', [name, address]).then (response) =>
+    wallet_add_contact_account: (name, address, error_handler) ->
+        @rpc.request('wallet_add_contact_account', [name, address], error_handler).then (response) =>
           response.result
 
     wallet_account_register: (account_name, pay_from_account, public_data, pay_rate, account_type) ->

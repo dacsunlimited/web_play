@@ -1,9 +1,9 @@
 <section class="splashpage-wrapper">
   <div class="str-top">
-    <img src="img/xts-logo-xl-white-shadow.png"/>
+    <img src="img/play-logo-h-white-shadow.png"/>
   </div>
-  <div class="str-content" ng-click="descriptionCollapsed = !descriptionCollapsed" translate>unlock.desc_title</div>
-  <div class="description" collapse="descriptionCollapsed">
+  <div class="str-content" ng-click="descriptionCollapsed = descriptionCollapsed" translate>unlock.desc_title</div>
+  <div class="description" collapse="!descriptionCollapsed">
     <p translate>unlock.desc_content_1</p>
     <p translate>unlock.desc_content_2</p>
   </div>
@@ -24,7 +24,11 @@
       </div>
       <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label>
     </form>
-    <img src="img/logo-ico.svg" width="64" height="64"/> <br/><br/> <span
-      class="client-version">{{client_version}}</span>
+    <div class="powered">
+      <img src="img/logo-ico.svg" width="64" height="64"/>
+      <div class="text-muted">Powered by BitShares</div>
+      <br/><br/>
+      <span class="client-version">{{client_version}}</span>
+    </div>
   </div>
 </section>

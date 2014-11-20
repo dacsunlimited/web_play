@@ -9,7 +9,8 @@
         "confirm": "Bestätigen",
         "update": "Aktualisieren",
         "cover": "Cover",
-        "register": "Registriere"
+        "register": "Registriere",
+        "close": "Close"
     },
     "tip": {
         "privacy_statement": "Datenschutzerklärung",
@@ -138,9 +139,9 @@
     },
     "unlock": {
         "btn_unlock": "Anmelden",
-        "desc_title": "Handeln Sie weltweit BitAssets vertraulich, sicher und unverzüglich.",
-        "desc_content_1": "BitShares ist eine vollständig dezentrale Handelsplattform auf der Sie BitAssets aller Art handeln können. Zum Beispiel: BitGLD = XAU(Gold)",
-        "desc_content_2": "Weitere Informationen und Hilfe zu BitShares erhalten Sie unter http://bitsharestalk.org und http://wiki.bitshares.org",
+        "desc_title": "BitShares Play",
+        "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
+        "desc_content_2": "",
         "wrong_pass": "Falsches Passwort."
     },
     "wallet": {
@@ -178,7 +179,9 @@
     },
     "market": {
         "title": "Marktübersicht",
+        "featured_markets": "Featured Märkte",
         "search_market": "Suche Markt",
+        "market_name": "Market Name",
         "all_markets": "Alle Märkte",
         "recent_markets": "Zuletzt genutzte Märkte",
         "median_price": "Median Preis",
@@ -247,7 +250,7 @@
             "sell_total" : "Die Menge an {{base}} die auf Ihr Konto {{account}} durch diese Order gutgeschrieben werden wird.",
             "short_quantity": "Die Menge an {{value}} die Sie leihen und verkaufen möchten.",
             "short_price_limit_direct": "Der höchste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{base}} zu leihen und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer größer ist.",
-            "short_price_limit_inverted": "Der niedrigste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{base}} zu leihen zu und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer niedriger ist.",
+            "short_price_limit_inverted": "Der niedrigste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{quantity}} zu leihen zu und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer niedriger ist.",
             "short_feed_price": "Der Median des Handelspreis von externen Handelsplatformen gemäß der Delegierten Preis-Feeds.",
             "short_total": "Die benötigte Menge {{value}} für diese Order. Bestimmt als Quantität mal Kollateral-Ratio.",
             "short_interest_rate": "Der Zinssatz, den Sie zu zahlen bereit sind."
@@ -360,7 +363,7 @@
     },
     "privacy": {
         "email_warning1": "Ihre Emailaddresse wir ausschließlich dazu genutzt Sie zu identifizieren.",
-	"email_warning2": "Konten die mit Ihnen in Verbindung gebracht werden. Dies erlaubt es anderen Parteien Ihr Konto vor einer Überweisung zu verifizieren.",
+  "email_warning2": "Konten die mit Ihnen in Verbindung gebracht werden. Dies erlaubt es anderen Parteien Ihr Konto vor einer Überweisung zu verifizieren.",
         "email_warning3": "Ihre Emailaddresse wird nicht geteilt und niemand kann Ihnen Spam schicken."
     },
     "directory": {
