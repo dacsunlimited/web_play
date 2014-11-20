@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/BitShares/web_wallet.png?label=ready&title=Ready)](https://waffle.io/BitShares/web_wallet)
+[![Stories in Ready](https://badge.waffle.io/bitsuperlab/web_play.png?label=ready&title=Ready)](https://waffle.io/bitsuperlab/web_play)
 # BitShares GUI (web wallet)
 
 This repository holds the BitShares graphical user interface, also
