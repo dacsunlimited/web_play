@@ -64,7 +64,7 @@ span.cell {
 
 .market-table button.btn-xs {
 	display: table-cell;
-	width: 5em;
+	min-width: 5em;
 }
 
 .market-table button.btn-xs {
@@ -240,12 +240,8 @@ tr.short_wall td {
 
 .market-grid {
 	border: none;
-	/*font-family: Helvetica, Arial, sans-serif;*/
 	color: #222;
 	overflow-x: hidden;
-
-	/*width: 600px;*/
-	/*height: 300px;*/
 	border-top: 1px solid #d4d4d4;
 }
 
@@ -285,8 +281,13 @@ tr.short_wall td {
 
 .market-grid .ui-grid-cell.short_wall {
 	background-color: #E4F0FB;
+	font-weight: bold;
 }
 
 .market-grid .ui-grid-row:hover .ui-grid-cell {
 	background-color: #eef8ff;
+}
+
+.market-grid .ui-grid-native-scrollbar.vertical {
+	right: 6px;
 }
