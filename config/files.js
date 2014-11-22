@@ -14,11 +14,21 @@ module.exports = function(lineman) {
         "vendor/js/jquery.growl.js",
         // "vendor/js/ark.js",
         "vendor/js/stacktrace.js",
-        "vendor/js/angular.js",
+        // "vendor/js/angular.js",
+
+        // angular-material
+        "bower_components/angular/angular.js",
+        "bower_components/angular-aria/angular-aria.js",
+        "bower_components/angular-animate/angular-animate.js",
+        "bower_components/hammerjs/hammer.js",
+        "bower_components/angular-material/angular-material.js",
+        "bower_components/angular-aria/angular-aria.js",
+        "bower_components/angular-animate/angular-animate.js",
+
         "vendor/js/angular-resource.js",
         "vendor/js/angular-ui-router.js",
         "vendor/js/ui-bootstrap-tpls.js",
-	 	    "vendor/js/ui-grid.js",
+         "vendor/js/ui-grid.js",
         "vendor/js/angular-idle.js",
         "vendor/js/validate.js",
         "vendor/js/xeditable.js",
@@ -44,26 +54,30 @@ module.exports = function(lineman) {
 //    },
 
     css: {
-      vendor: [
-        "vendor/css/jquery.growl.css",
-        "vendor/css/bootstrap.css",
-        "vendor/css/font-awesome.css",
-        "vendor/css/ark.css",
-        "vendor/css/xeditable.css",
-        "vendor/css/ui-grid.css"
-      ],
+      // vendor: [
+      //   "vendor/css/jquery.growl.css",
+      //   "vendor/css/bootstrap.css",
+      //   "vendor/css/font-awesome.css",
+      //   "vendor/css/ark.css",
+      //   "vendor/css/xeditable.css",
+      //   "vendor/css/ui-grid.css",
+      //   "vendor/css/material.css",
+      //   "vendor/css/material-wfont.css",
+      //   "vendor/css/ripples.css",
+      //   "bower_components/angular-material/angular-material.css",
+      // ],
       app: [
-        "app/css/bootstrap_overrides.css",
-        "app/css/main.css",
-        "app/css/forms.css",
-        "app/css/layout.css",
-        "app/css/my-ng-grid.css",
-        "app/css/toolbar.css",
-        "app/css/footer.css",
-        "app/css/market.css",
-        "app/css/spinner.css",
-        "app/css/help.css",
-        "app/css/splashpage.css"
+      //   "app/css/bootstrap_overrides.css",
+      //   "app/css/main.css",
+      //   "app/css/forms.css",
+      //   "app/css/layout.css",
+      //   "app/css/my-ng-grid.css",
+      //   "app/css/toolbar.css",
+      //   "app/css/footer.css",
+      //   "app/css/market.css",
+      //   "app/css/spinner.css",
+      //   "app/css/help.css",
+        "app/css/splashpage.scss"
       ]
     }
 

@@ -1,9 +1,13 @@
-<section class="splashpage-wrapper">
+<section class="splashpage-wrapper well">
+  <style type="text/css" media="screen">
+  .wrapper { background-color: #eee !important; }
+  </style>
   <div class="str-top">
     <img src="img/play-logo-h-white-shadow.png"/>
   </div>
-  <div class="str-content" ng-click="descriptionCollapsed = descriptionCollapsed" translate>unlock.desc_title</div>
-  <div class="description" collapse="!descriptionCollapsed">
+  <!---->
+  <div class="str-content" ng-click="descriptionCollapsed = !descriptionCollapsed"></div>
+  <div class="description" collapse="descriptionCollapsed">
     <p translate>unlock.desc_content_1</p>
     <p translate>unlock.desc_content_2</p>
   </div>
@@ -13,22 +17,26 @@
 
   <div class="str-bottom">
     <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
-    <form ng-submit="submitForm()" role="form" novalidate>
+    <form ng-submit="submitForm()" role="form" novalidate class="form-horizontal">
       <div class="form-group">
-        <input ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password"
-               class="form-control input" placeholder="Password" tabindex="1" required focus
-               autofocus ng-minlength="9" ng-maxlength="255">
+        <div class="form-control-wrapper">
+          <input ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password"
+                 class="form-control input" placeholder="Password" tabindex="1" required focus
+                 autofocus ng-minlength="9" ng-maxlength="255">
+        </div>
+      </div>
+      <div class="form-group">
         <button ng-disabled="loading_indicator.show" type="submit" tabindex="2" class="btn btn-primary"
                 translate>unlock.btn_unlock
         </button>
       </div>
       <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label>
     </form>
-    <div class="powered">
-      <img src="img/logo-ico.svg" width="64" height="64"/>
-      <div class="text-muted">Powered by BitShares</div>
-      <br/><br/>
-      <span class="client-version">{{client_version}}</span>
-    </div>
+     <span class="client-version">{{client_version}}1221</span>
   </div>
 </section>
+
+<div class="powered">
+  <img src="img/logo-ico.svg" width="64" height="64"/>
+  <div class="text-muted">Powered by BitShares</div>
+</div>

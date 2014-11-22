@@ -1,10 +1,10 @@
 .splashpage > .wrapper {
-  font-family: 'Open Sans', sans-serif;
+//  font-family: 'Open Sans', sans-serif;
   color: #eee;
   font-size: 16px;
   margin: 0;
   padding: 0;
-  background: #0b384d url('/img/xt-background.jpg') no-repeat left top !important;
+/*  background: #0b384d url('/img/xt-background.jpg') no-repeat left top !important;*/
   background-size: cover !important;
 }
 
@@ -25,10 +25,10 @@
 }
 
 .splashpage-wrapper {
-  width: 400px;
-  height: 400px;
+  width: 380px;
+  height: 430px;
   position: absolute;
-  top: 35%;
+  top: 30%;
   left: 50%;
   margin-left: -200px;
   margin-top: -100px;
@@ -36,14 +36,15 @@
 
 .splashpage-wrapper .description {
   font-size: 14px;
-  color: #ccc;
+//  color: #ccc;
 }
 
 .splashpage-wrapper .str-top {
-/*  height: 80px;*/
+  padding-top:1em;
   text-align: center;
 /*  border-bottom: 1px solid rgba(255, 255, 255, .5);*/
-  -webkit-background-clip: padding-box; for Safari background-clip : padding-box; for IE9+, Firefox 4 +, Opera, Chrome
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
 }
 
 /*.splashpage-wrapper .str-top img { margin-bottom: 8px; }*/
@@ -73,7 +74,8 @@
   padding: 25px;
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, .5);
-  -webkit-background-clip: padding-box; for Safari background-clip : padding-box; for IE9+, Firefox 4 +, Opera, Chrome
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
 }
 
 .splashpage-wrapper .str-bottom img { margin-top: 24px; }
@@ -82,19 +84,29 @@
   text-align: center;
 }
 
-.splashpage-wrapper .powered .text-muted {
-  font-size:12px; margin-top:4px;
-}
-
-.splashpage-wrapper .client-version {
-  color: #aaa;
-}
-
-.splashpage-wrapper .input {
-  width: 220px;
-  margin: 0 auto 10px auto;
-}
 
 .splashpage-wrapper .spacedrow {
   margin-top: 10px;
+}
+
+.splashpage-wrapper {
+  form input {
+    text-align:center;
+  }
+
+  .client-version {
+    color: #aaa; font-size:12px;
+    position:absolute; bottom:19px; right:19px;
+  }
+}
+
+.powered {
+  width: 400px;
+  position: absolute; text-align: center;
+  left: 50%;
+  margin-left: -200px;
+  bottom:80px;
+  .text-muted {
+    font-size:12px; margin-top:4px;
+  }
 }

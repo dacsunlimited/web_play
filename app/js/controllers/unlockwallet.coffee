@@ -2,7 +2,7 @@ angular.module("app").controller "UnlockWalletController", ($scope, $rootScope, 
     $rootScope.splashpage = true
     $scope.stopIdleWatch()
 
-    $scope.descriptionCollapsed = true
+    $scope.descriptionCollapsed = false
     $scope.wrongPass = false
     $scope.keydown = -> $scope.wrongPass = false
 
