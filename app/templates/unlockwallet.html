@@ -1,42 +1,39 @@
-<section class="splashpage-wrapper well">
-  <style type="text/css" media="screen">
-  .wrapper { background-color: #eee !important; }
-  </style>
-  <div class="str-top">
-    <img src="img/play-logo-h-white-shadow.png"/>
-  </div>
-  <!---->
-  <div class="str-content" ng-click="descriptionCollapsed = !descriptionCollapsed"></div>
-  <div class="description" collapse="descriptionCollapsed">
-    <p translate>unlock.desc_content_1</p>
-    <p translate>unlock.desc_content_2</p>
-  </div>
+<div layout="vertical" layout-align="center center">
+  <md-card class="splashpage-wrapper md-whiteframe-z1">
+  <md-content class="md-padding">
+    <div class="str-top">
+      <img src="img/play-logo-h-white-shadow.png"/>
+    </div>
 
-  <a href class="str-arrow fa {{descriptionCollapsed ? 'fa-sort-desc' : 'fa-sort-asc'}}"
-     ng-click="descriptionCollapsed = !descriptionCollapsed"></a>
+    <div class="str-content" ng-click="descriptionCollapsed = !descriptionCollapsed"></div>
+    <div class="description" collapse="descriptionCollapsed">
+      <p translate>unlock.desc_content_1</p>
+      <p translate>unlock.desc_content_2</p>
+    </div>
+
+    <md-button class="str-arrow fa {{descriptionCollapsed ? 'fa-sort-desc' : 'fa-sort-asc'}}" style="width:50px;" ng-click="descriptionCollapsed = !descriptionCollapsed"></md-button>
 
   <div class="str-bottom">
     <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
     <form ng-submit="submitForm()" role="form" novalidate class="form-horizontal">
-      <div class="form-group">
-        <div class="form-control-wrapper">
-          <input ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password"
-                 class="form-control input" placeholder="Password" tabindex="1" required focus
-                 autofocus ng-minlength="9" ng-maxlength="255">
-        </div>
+
+      <md-text-float ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password" label="Password" tabindex="1" required focus autofocus ng-minlength="9" ng-maxlength="255" class="full-width" ng-disabled></md-text-float>
+
+      <div layout="row" layout-align="center">
+        <md-button flex="50" ng-disabled="loading_indicator.show" type="submit" tabindex="2" class="md-raised md-primary" translate > unlock.btn_unlock </md-button>
       </div>
-      <div class="form-group">
-        <button ng-disabled="loading_indicator.show" type="submit" tabindex="2" class="btn btn-primary"
-                translate>unlock.btn_unlock
-        </button>
-      </div>
+
       <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label>
     </form>
-     <span class="client-version">{{client_version}}1221</span>
-  </div>
-</section>
 
-<div class="powered">
-  <img src="img/logo-ico.svg" width="64" height="64"/>
-  <div class="text-muted">Powered by BitShares</div>
+    <div class="client-version">{{client_version}}</div>
+  </div>
+
+  <div class="powered">
+    <div class="bts-logo"></div>
+    <div class="text-muted">Powered by BitShares</div>
+  </div>
+  </md-content>
+  </md-card>
+
 </div>

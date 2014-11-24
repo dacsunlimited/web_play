@@ -16,19 +16,19 @@
 
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
-  <body class="cover fixed_header" ng-class="{splashpage: splashpage}" ng-controller="RootController">
+  <body class="cover fixed_header" layout="vertial" layout-fill ng-class="{splashpage: splashpage}" ng-controller="RootController">
     <pageslide ps-open="context_help.open" ps-size="460px">
     <div id="context-help">
       <a class="close-help-link" ng-click="close_context_help()">{{ 'btn.close' | translate }} <i class="fa fa-angle-double-right fa-fw"></i></a>
       <div class="context-help-content" ng-include src="context_help.file"></div>
     </div>
     </pageslide>
-    <div class="wrapper">
+    <div class="wrapper" flex layout="vertical" layout-fill>
       <!-- TOOLBAR -->
       <div class="navbar navbar-default navbar-static-top navbar-main" role="navigation" ng-controller="ToolbarController">
         <div ng-include src="'toolbar.html'"></div>
       </div>
-      <div class="body">
+      <div class="body" flex layout="row" layout-align="center center">
         <!-- SIDEBAR -->
         <aside class="sidebar">
           <ul class="nav nav-stacked">
@@ -44,8 +44,8 @@
             <li ui-sref-active="active"><a ui-sref="help"><i class="fa fa-question-circle fa-fw"></i>{{ 'index.help' | translate }}</a></li>
           </ul>
         </aside>
-        <section class="content">
-          <div ui-view></div>
+        <section class="content" flex layout layout-align="center center">
+          <div ui-view flex></div>
         </section>
       </div>
     </div>
