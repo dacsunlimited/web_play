@@ -6,3 +6,4 @@
 generated/*
 dist/*
 .sass-cache
+/vendor/bower

@@ -9,6 +9,8 @@
     "test": "lineman spec"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "lineman-bower": "0.0.5",
     "lineman-less": "~0.1.0"
   }
 }
