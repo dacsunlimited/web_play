@@ -138,10 +138,11 @@
         "trxs_only": "只显示带有交易的那些区块"
     },
     "unlock": {
-        "btn_unlock": "解锁",
-        "desc_title": "BitShares Play",
-        "desc_content_1": "BitShares Play是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
+        "btn_unlock": "解 锁",
+        "desc_title": "BitShares PLAY",
+        "desc_content_1": "BitShares PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
         "desc_content_2": "",
+        "spending_password": "密 码",
         "wrong_pass": "密码错误"
     },
     "wallet": {

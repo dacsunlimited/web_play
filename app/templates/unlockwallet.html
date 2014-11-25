@@ -17,13 +17,13 @@
     <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
     <form ng-submit="submitForm()" role="form" novalidate class="form-horizontal">
 
-      <md-text-float ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password" label="Password" tabindex="1" required focus autofocus ng-minlength="9" ng-maxlength="255" class="full-width" ng-disabled></md-text-float>
+      <md-text-float ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password" label="{{'unlock.spending_password' | translate}}" tabindex="1" required focus autofocus ng-minlength="9" ng-maxlength="255" class="full-width" ng-disabled></md-text-float>
 
       <div layout="row" layout-align="center">
         <md-button flex="50" ng-disabled="loading_indicator.show" type="submit" tabindex="2" class="md-raised md-primary" translate > unlock.btn_unlock </md-button>
       </div>
 
-      <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label>
+      <div class="text-danger text-center mt" ng-show="wrongPass" translate> unlock.wrong_pass </div>
     </form>
 
     <div class="client-version">{{client_version}}</div>

@@ -139,9 +139,10 @@
     },
     "unlock": {
         "btn_unlock": "Разблокировать",
-        "desc_title": "BitShares Play",
+        "desc_title": "BitShares PLAY",
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
+        "spending_password": "Password",
         "wrong_pass": "Неверный пароль."
     },
     "wallet": {
