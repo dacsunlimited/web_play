@@ -50,6 +50,7 @@ module.exports = function(lineman) {
         // "vendor/js/stacktrace.js",
         // "vendor/js/angular.js",
         // "vendor/js/angular-resource.js",
+// "vendor/js/angular-idle.js",
         // "vendor/js/angular-ui-router.js",
         // "vendor/js/ui-bootstrap-tpls.js",
         // "vendor/js/ui-grid.js",
@@ -62,6 +63,8 @@ module.exports = function(lineman) {
         // "vendor/js/angular-pageslide-directive.js",
         // "vendor/js/highstock.src.js",
         // "vendor/js/moment-with-locales.js"
+        "vendor/js/moment-with-locales.js",
+        "vendor/js/bytebuffer.js"
       ],
       app: [
         "app/js/app.js",
@@ -108,7 +111,9 @@ module.exports = function(lineman) {
         // "app/css/footer.css",
         // "app/css/market.css",
         // "app/css/spinner.css",
+        // "app/css/mail.css",
         // "app/css/help.css",
+        // "app/css/splashpage.css",
         //
         // "app/main.scss"
       ]

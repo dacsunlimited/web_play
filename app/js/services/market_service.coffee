@@ -158,7 +158,7 @@ class MarketService
     id_sequence: 0
     loading_promise: null
 
-    constructor: (@q, @interval, @log, @wallet, @wallet_api, @blockchain, @blockchain_api, @helper) ->
+    constructor: (@q, @interval, @log, @filter, @wallet, @wallet_api, @blockchain, @blockchain_api, @helper) ->
         window.hlp = @helper
         TradeData.helper = @helper
 
@@ -380,13 +380,11 @@ class MarketService
                     if inverted
                         short_wall.cost += td.collateral
                         short_wall.quantity += td.quantity
-                        #@lowest_ask = shorts_price if shorts_price < @lowest_ask
+                        @lowest_ask = shorts_price if shorts_price < @lowest_ask
                     else
                         short_wall.quantity += td.collateral
                         short_wall.cost += td.quantity
-                        #short_wall.quantity += td.cost
-                        #short_wall.cost += td.cost / shorts_price
-                    @highest_bid = shorts_price if shorts_price > @highest_bid
+                        @highest_bid = shorts_price if shorts_price > @highest_bid
 
                 shorts.push td
 
@@ -506,7 +504,7 @@ class MarketService
                 td = {}
                 td.block_num = t.block_num
                 td.id = t.id
-                td.timestamp = t.pretty_time
+                td.time = @filter('prettySortableTime')(t.time)
                 l = t.ledger_entries[0]
                 continue unless l.memo.indexOf(toolkit_market_name) > 0
                 td.memo = l.memo
@@ -663,9 +661,9 @@ class MarketService
 #                    deferred.reject(error)
 
         , (error) ->
-                deferred.reject(error)
+            deferred.reject(error)
 
         return deferred.promise
 
 
-angular.module("app").service("MarketService", ["$q", "$interval", "$log", "Wallet", "WalletAPI", "Blockchain",  "BlockchainAPI", "MarketHelper",  MarketService])
+angular.module("app").service("MarketService", ["$q", "$interval", "$log", "$filter", "Wallet", "WalletAPI", "Blockchain",  "BlockchainAPI", "MarketHelper",  MarketService])

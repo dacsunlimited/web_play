@@ -15,7 +15,7 @@
     "tip": {
         "privacy_statement": "Privacy",
         "warning": "Attenzione",
-        "validate_symbol": "Il Simbolo deve contenere 3-5 caratteri maiuscoli",
+        "validate_symbol": "Il Simbolo deve contenere 3-8 caratteri maiuscoli",
         "validate_precision": "Precision deve essere sia maggiore di 0 che una potenza di 10 (o 1)",
         "pay_with_info": "Registrarsi costa BTS, Paga con",
         "reg_as_delegate": "Registrato come delegato",
@@ -60,6 +60,8 @@
         "precision": "PRECISIONE",
         "current_share_supply": "QUOTE ATTUALMENTE DISPONIBILI",
         "maximum_share_supply": "QUOTE MASSIME DISPONIBILI",
+        "share_supply": "QUOTE DISPONIBILI",
+        "asset": "ASSET",
         "collected_fees": "COMMISSIONI RACCOLTE",
         "registration_date": "DATA DI REGISTRAZIONE",
         "height": "Altezza",
@@ -100,7 +102,8 @@
         "paid": "PAGATO",
         "received": "RICEVUTO",
         "expiration": "SCADENZA",
-        "interest_rate": "Interest Rate (APR)"
+        "interest_rate": "Interest Rate (APR)",
+        "message": "Message"
     },
     "block": {
         "title": "Blocco",
@@ -118,6 +121,8 @@
         "pending_trxs": "Transazioni Pendenti",
         "block_explorer": "Block Explorer",
         "missing_block": "Blocco Perso",
+		"older": "Older",
+		"newer": "Newer",
         "trx": {
             "title": "Transazioni",
             "expired_trx": "Transazioni Scadute",
@@ -140,6 +145,7 @@
     "unlock": {
         "btn_unlock": "Sblocca",
         "desc_title": "BitShares PLAY",
+        "caps_lock_on": "Caps Lock is on!",
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
         "spending_password": "Password",
@@ -176,7 +182,21 @@
         "standby_delegates": "Delegati in Attesa",
         "votes_obtained": "Approvazione",
         "version": "Versione",
-        "un_approve_all": "Disapprova tutti"
+        "un_approve_all": "Disapprova tutti",
+        "description": "Description",
+        "proposal": "Delegate bid",
+        "location": "Server location",
+        "handle": "BitsharesTalk username",
+        "ann": "Announcements",
+        "country": "Legal jurisdiction",
+        "role_0": "Development",
+        "role_1": "Marketing",
+        "role_2": "Faucet",
+        "role_3": "Backbone",
+        "role_4": "Charity",
+        "role_5": "Technical Support",
+        "role_6": "Law/Regulations",
+        "role_7": "Media/Public Relations"
     },
     "market": {
         "title": "Mercato",
@@ -270,6 +290,7 @@
         "load_more_trxs": "Carica Più Transazioni",
         "all_trxs": "Cronologia di Tutte le Transazioni",
         "transfer": "Trasferisci",
+        "transfer_authorization": "Transfer Authorization",
         "amount": "Importo",
         "from": "Da",
         "to": "A",
@@ -296,6 +317,7 @@
         "email_tip": "Email (Opzionale)",
         "active_delegate": "Delegato Attivo",
         "standby_delegate": "Delegato in Attesa",
+        "rank": "Current rank",
         "toggle": {
             "favorite": "Favorito",
             "approval": "Approvato"
@@ -332,7 +354,17 @@
         "rename_account": "Rinomina Conto",
         "rename_account_locally": "Rinomina Conto Localmente",
         "public_info": "Informazioni Pubbliche",
-        "estimated_yield": "RENDIMENTO STIMATO"
+        "estimated_yield": "RENDIMENTO STIMATO",
+        "wall" : {
+            "tab_title": "Wall",
+            "burn_records": "Burn Records",
+            "burn_post": "Burn/Post Message",
+            "message": "Message",
+            "post_message": "Post Message",
+            "burn_confirmation": "Burn/Post Message Confirmation",
+            "receiver": "Receiver",
+            "explain": "Burns given amount to {{account_name}}'s account. This will allow you to post message to this wall as a form of reputation."
+        }
     },
     "accounts": {
         "create_account": "Crea Nuovo Conto",
@@ -359,7 +391,9 @@
         "btn_issue": "Distribuisci",
         "amount": "Importo",
         "issue_to": "A",
-        "asset_create_auth": "Autorizza la Creazione dell'Asset"
+        "asset_create_auth": "Autorizza la Creazione dell'Asset",
+        "market_pegged_assets": "Market-Pegged Assets",
+        "user_issued_assets": "User-Issued Assets"
     },
     "privacy": {
         "email_warning1": "Il tuo indirizzo email è usato al solo scopo di identificare",
@@ -388,7 +422,10 @@
         "trx_fee": "Commissione",
         "autocomplete_receiver": "Autocompleta il Nome del Ricevente",
         "autocomplete_info": "Autocompleta il nome del ricevente nel modulo di trasferiment, così come i tipi di utente",
-        "language": "Lingua"
+        "language": "Lingua",
+        "theme": "Sblocca Theme Schermo",
+        "default": "Difetto",
+        "flowers": "Fiori"
     },
     "console": {
         "type_cmd_and_enter": "Scrivi un comando e premi Invio"
@@ -410,7 +447,7 @@
     },
     "help": {
         "title": "Aiuto",
-        "console_intro": "Per una lista di comandi vai nella pagina della console, scrivi "help" e premi Invio.",
+        "console_intro": "Per una lista di comandi vai nella pagina della console, scrivi 'help' e premi Invio.",
         "valid_names": "Nomi Validi",
         "valid_names_intro": "Solo caratteri alfanumerici minuscoli, punti, e trattini sono permessi. I nomi devono iniziare con una lettera e non può finire con un trattino. I caratteri che sono delimitati da punti, devono formare un nome valido. I punti non possono essere consecutivi o essere all'inizio o alla fine del nome. ",
         "network_issues": "Problemi di Rete",
@@ -423,7 +460,8 @@
     "footer": {
         "enable_trx_scan": "Avvia Scansione Transazioni",
         "up_to_date": "Aggiornato, processati {{value}} blocchi",
-        "catching_up": "In aggiornamento.. processati {{value1}} di {{value2}}"
+        "catching_up": "In aggiornamento.. processati {{value1}} di {{value2}}",
+        "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}"
     },
     "utils": {
         "expired": "Scaduto",

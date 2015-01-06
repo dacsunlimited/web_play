@@ -29,3 +29,17 @@ span.help-block {
 .hgroup-button {
 	margin-bottom: 0;
 }
+
+.ng-invalid > input {
+	border-color: #d97572 !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.input-group button.add-btn {
+	margin-top: 6px;
+}
+
+.input-group-addon.label-success {
+	color: #fff;
+}

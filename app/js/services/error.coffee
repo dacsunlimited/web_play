@@ -5,7 +5,7 @@ servicesModule.config ($httpProvider, $provide) ->
 
     $provide.decorator "$exceptionHandler", ["$delegate", "Shared", (delegate, Shared) ->
         (exception, cause) ->
-            stack = exception.stack.replace(/randomuser\:[\w\d]+\@[\d\.]+\:\d+/gm, "localhost").replace(/(\r\n|\n|\r)/gm,"\n ○ ")
+            stack = exception.stack?.replace(/randomuser\:[\w\d]+\@[\d\.]+\:\d+/gm, "localhost").replace(/(\r\n|\n|\r)/gm,"\n ○ ")
             if magic_unicorn?
                 magic_unicorn.log_message "js error: #{exception.message}\n#{stack}"
             else
@@ -29,7 +29,7 @@ processRpcError = (response, Shared) ->
     else if response.message
         error_msg = response.message
 
-    unless dont_report
+    if !dont_report and error_msg
         error_msg = error_msg.substring(0, 512)
         stack = if response.config?.stack then response.config?.stack else ""
         stack = stack.replace(/http\:.+app\.js([\d:]+)/mg, "app.js$1").replace(/^Error/,"RPC Server Error in '#{method}'") if stack

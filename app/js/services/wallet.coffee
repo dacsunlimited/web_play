@@ -1,3 +1,4 @@
+
 class Wallet
 
     accounts: {}
@@ -11,6 +12,9 @@ class Wallet
 
     transactions: {"*": []}
     transactions_loading_promise: null
+    check_vote_proportion_promise: null
+    refresh_accounts_promise: null
+    refresh_accounts_request: off
     transactions_last_block: 0
     transactions_all_by_id: {}
     transactions_last_time: 0
@@ -34,6 +38,21 @@ class Wallet
 
     interface_locale: null
 
+    interface_theme = 'default'
+    
+    observer_config:->
+        name: "WalletEachBlockObserver"
+        frequency: "each_block"
+        update: (data, deferred) =>
+            #console.log '[wallet] WalletEachBlockObserver'
+            @refresh_balances_promise = null
+            @transactions_loading_promise = null
+            @check_vote_proportion_promise = null
+            @refresh_accounts_promise = null
+            @refresh_accounts() if @refresh_accounts_request
+            deferred.resolve(true)
+        #notify: (data) ->
+
     set_current_account: (account) ->
         @current_account = account
         @set_setting("current_account", account.name)
@@ -44,10 +63,10 @@ class Wallet
             @wallet_get_info().then (result) =>
                 deferred.resolve()
                 @get_setting('timeout').then (result) =>
-                if result && result.value
-                    @timeout = result.value
-                    @idle._options().idleDuration = @timeout
-                    @idle.watch()
+                    if result && result.value
+                        @timeout = result.value
+                        @idle._options().idleDuration = @timeout
+                        @idle.watch()
                 @get_setting('autocomplete').then (result) =>
                     @autocomplete = result.value if result
                 @get_setting('interface_locale').then (result) =>
@@ -55,6 +74,9 @@ class Wallet
                         @interface_locale = result.value
                         moment.locale(result.value)
                         @translate.use(result.value)
+                @get_setting('interface_theme').then (result) =>
+                    if result and result.value
+                        @interface_theme = result.value
                 if not result.unlocked
                     navigate_to('unlockwallet')
             , (error) ->
@@ -64,7 +86,14 @@ class Wallet
 
         return deferred.promise
 
+    refresh_balances_promise: null
+
     refresh_balances: ->
+        return @refresh_balances_promise if @refresh_balances_promise
+        deffered = @q.defer()
+        @refresh_balances_promise = deffered.promise
+
+        #console.log "------ refresh_balances ***** ------>"
         requests =
             refresh_bonuses: @refresh_bonuses()
             account_balances : @wallet_api.account_balance("")
@@ -73,11 +102,12 @@ class Wallet
 
         @q.all(requests).then (results) =>
             @main_asset = results.main_asset
-            @balances = {}
-            @asset_balances = {}
+            delete @balances[id] for id in Object.keys @balances
+            delete @asset_balances[id] for id in Object.keys @asset_balances
             angular.forEach results.account_balances, (name_bal_pair) =>
                 name = name_bal_pair[0]
                 balances = name_bal_pair[1]
+                #console.log "------ refresh_balances name ------>", name
                 angular.forEach balances, (asset_id_amt_pair) =>
                     asset_id = asset_id_amt_pair[0]
                     asset_record = @blockchain.asset_records[asset_id]
@@ -88,12 +118,18 @@ class Wallet
                     @asset_balances[asset_id] = @asset_balances[asset_id] || 0
                     @asset_balances[asset_id] = @asset_balances[asset_id] + amount
             angular.forEach @accounts, (acct) =>
-                #if acct.is_my_account
-                    #@refresh_open_order_balances(acct.name)
-                    
+                #console.log "------ refresh_balances acct.name ------>", acct.name
                 if acct.is_my_account and !@balances[acct.name]
                     @balances[acct.name] = {}
                     @balances[acct.name][@main_asset.symbol] = @utils.asset(0, @main_asset)
+            deffered.resolve(@balances)
+            # @observer_config will clear after each block
+            #@refresh_balances_promise = null
+        , (error) ->
+            deffered.reject(error)
+            @refresh_balances_promise = null
+
+        return @refresh_balances_promise
 
 #    refresh_open_order_balances: (name) ->
 #        if !@open_orders_balances[name]
@@ -170,19 +206,33 @@ class Wallet
             @populate_account(result)
             @refresh_balances()
 
-    refresh_accounts: (prevent_rapid_refresh = false) ->
-        if prevent_rapid_refresh and @utils.too_soon('refresh_accounts', 10 * 1000)
-            deferred = @q.defer()
-            deferred.resolve()
-            return deferred.promise
+    refresh_accounts: (prevent_rapid_refresh = true) ->
+        @refresh_accounts_request = on
+        if @refresh_accounts_promise and prevent_rapid_refresh
+            return @refresh_accounts_promise 
+        
+        deferred = @q.defer()
+        @refresh_accounts_promise = deferred.promise
+        @refresh_accounts_request = off
 
         #console.log "refresh_accounts clearing cache"
-        @accounts = {}
+        delete @accounts[id] for id in Object.keys @accounts
         @wallet_api.list_accounts().then (result) =>
             angular.forEach result, (val) =>
                 @populate_account(val)
             @refresh_balances()
+            deferred.resolve()
+        @refresh_accounts_promise
 
+    check_vote_proportion: (account_names) ->
+        return @check_vote_proportion_promise if @check_vote_proportion_promise
+        deferred = @q.defer()
+        @check_vote_proportion_promise = deferred.promise
+        @RpcService.request("batch", ["wallet_check_vote_proportion", account_names]).then (response) ->
+            #console.log '[Wallet] check_vote_proportion',response
+            deferred.resolve(response)
+        @check_vote_proportion_promise
+        
     get_setting: (name) ->
         @wallet_api.get_setting(name)
 
@@ -301,8 +351,9 @@ class Wallet
             @transactions[account] ||= []
             @transactions[account].unshift transaction
 
-    refresh_transactions: ->
+    refresh_transactions: () ->
         return @transactions_loading_promise if @transactions_loading_promise
+        #console.log "------ refresh_transactions ------>"
         deffered = @q.defer()
 
         @transactions_loading_promise = deffered.promise
@@ -332,10 +383,11 @@ class Wallet
                     for val in result
                         @process_transaction(val) if not val.is_confirmed and not val.is_virtual
                 pending_transactions_promise.finally =>
-                    @transactions_loading_promise = null
+                    # each_block observer will reset transactions_loading_promise
+                    #@transactions_loading_promise = null
                     deffered.resolve(@transactions)
 
-        return @transactions_loading_promise
+        @transactions_loading_promise
 
 
     refresh_transactions_on_new_block: () ->
@@ -467,8 +519,8 @@ class Wallet
 
         return deferred.promise
 
-    constructor: (@q, @log, @location, @translate, @growl, @rpc, @blockchain, @utils, @wallet_api, @blockchain_api, @interval, @idle) ->
+    constructor: (@q, @log, @location, @translate, @growl, @rpc, @blockchain, @utils, @wallet_api, @blockchain_api, @RpcService, @interval, @idle) ->
         @wallet_name = ""
         @timeout = @idle._options().idleDuration
 
-angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "$interval", "$idle", Wallet])
+angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "$idle", Wallet])

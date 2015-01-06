@@ -1,5 +1,5 @@
-angular.module("app").controller "AccountController", ($scope, $state, $filter, $location, $stateParams, $q, Growl, Wallet, Utils, WalletAPI, $modal, Blockchain, BlockchainAPI, Info, Observer) ->
-    
+angular.module("app").controller "AccountController", ($scope, $state, $filter, $location, $stateParams, $q, Growl, Wallet, Utils, WalletAPI, $modal, Blockchain, BlockchainAPI, Info, Observer, $translate) ->
+
     Info.refresh_info()
     $scope.refresh_addresses=Wallet.refresh_accounts
     name = $stateParams.name
@@ -9,7 +9,25 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     $scope.formatAsset = Utils.formatAsset
     $scope.model = {}
     $scope.model.rescan = true
-
+    
+    # tabs
+    $scope.tabs = []
+    $scope.tabs.push { heading: "account.transactions", route: "account.transactions", active: true }
+    $scope.tabs.push { heading: "account.delegate", route: "account.delegate", active: false }
+    $scope.tabs.push { heading: "account.transfer", route: "account.transfer", active: false }
+    $scope.tabs.push { heading: "account.manageAssets", route: "account.manageAssets", active: false }
+    $scope.tabs.push { heading: "account.keys", route: "account.keys", active: false }
+    $scope.tabs.push { heading: "account.updateRegAccount", route: "account.updateRegAccount", active: false }
+    $scope.tabs.push { heading: "account.editLocal", route: "account.editLocal", active: false }
+    $scope.tabs.push { heading: "account.vote", route: "account.vote", active: false }
+    $scope.tabs.push { heading: "account.wall", route: "account.wall", active: false }
+    $scope.goto_tab = (route) ->
+        $state.go route
+    $scope.active_tab = (route) -> $state.is route
+    $scope.$on "$stateChangeSuccess", ->
+        $scope.tabs.forEach (tab) ->
+            tab.active = $scope.active_tab(tab.route)
+    
     $scope.transfer_info =
         amount : null
         symbol : "Symbol not set"
@@ -25,8 +43,9 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     $scope.p = { pendingRegistration: Wallet.pendingRegistrations[name] }
     $scope.wallet_info = {file: "", password: "", type: 'Bitcoin/PTS'}
     Blockchain.refresh_delegates().then ->
-        $scope.active_delegate = Blockchain.delegate_active_hash_map[name]
-    
+        if ($scope.account && $scope.account.delegate_info)
+            $scope.active_delegate = Blockchain.delegate_active_hash_map[name]
+            $scope.rank = Blockchain.all_delegates[name].rank
     # TODO: mixing the wallet account with blockchain account is not a good thing.
     Wallet.get_account(name).then (acct)->
         $scope.account = acct
@@ -39,10 +58,18 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
                 WalletAPI.account_update_private_data(name, $scope.account.private_data)
         )
         $scope.account_name = acct.name
+        if (acct.gui_data && acct.gui_data.website)
+            $scope.website = acct.gui_data.website;
+        if (acct.public_data && acct.public_data.website)
+            $scope.website = acct.public_data.website;
+
         Wallet.set_current_account(acct) if acct.is_my_account
         if $scope.account.delegate_info
+            update_delegate_info (acct) # update delegate info
             Blockchain.get_asset(0).then (asset_type) ->
                 $scope.account.delegate_info.pay_balance_asset = Utils.asset($scope.account.delegate_info.pay_balance, asset_type)
+            $state.go "account.delegate"
+            $scope.del_tab = true # necessary to display tab html
 
         #check if already registered.  this call should be removed when the name conflict info is added to the Wallet.get_account return value
         BlockchainAPI.get_account(name).then (result) ->
@@ -87,12 +114,20 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
         name: "account_balances_observer"
         frequency: "each_block"
         update: (data, deferred) ->
-            Wallet.refresh_account(name)
+            Wallet.refresh_account(name).then (result) ->
+                if Wallet.accounts[name]
+                    $scope.account.registration_date = Wallet.accounts[name].registration_date
             deferred.resolve(true)
     Observer.registerObserver(account_balances_observer)
 
     $scope.$on "$destroy", ->
         Observer.unregisterObserver(account_balances_observer)
+
+    update_delegate_info = (acct) ->
+        $scope.delegate = {}
+        if acct.public_data?.delegate?.role >= 0
+            $translate('delegate.role_' + acct.public_data.delegate.role).then (role) ->
+                $scope.delegate.role = role
 
     $scope.import_key = ->
         form = @import_key_form
@@ -165,10 +200,10 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
             Wallet.refresh_accounts()
 
     $scope.regDial = ->
-        if Wallet.asset_balances[0]
-          $modal.open
+        #if Wallet.asset_balances[0]
+        $modal.open
             templateUrl: "registration.html"
             controller: "RegistrationController"
             scope: $scope
-        else
-          Growl.error '','Account registration requires funds.  Please fund one of your accounts.'
+        #else
+        #  Growl.error '','Account registration requires funds.  Please fund one of your accounts.'

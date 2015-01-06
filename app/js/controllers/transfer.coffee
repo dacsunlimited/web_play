@@ -73,6 +73,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
     
     # Validation and display prior to form submit
     $scope.hot_check_send_amount = ->
+        return unless tx_fee
         return unless $scope.balances
         return unless $scope.balances[$scope.transfer_info.symbol]
         return unless my_transfer_form.amount
@@ -143,11 +144,10 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                     templateUrl: "dialog-transfer-confirmation.html"
                     controller: "DialogTransferConfirmationController"
                     resolve:
-                        title: -> "Transfer Authorization"
                         trx: -> trx
                         action: -> yesSend
-                        xts_transfer: -> 
-                            $scope.transfer_info.symbol == 'XTS' || $scope.transfer_info.symbol == 'BTS'
+                        transfer_type: ->
+                            if $scope.transfer_info.symbol == 'XTS' || $scope.transfer_info.symbol == 'BTS' then 'xts' else ''
 
     $scope.newContactModal = ->
         $modal.open

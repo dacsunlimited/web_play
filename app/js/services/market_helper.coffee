@@ -62,7 +62,7 @@ class MarketHelper
         td.cost = td.quantity * price
         if order.expiration
             @utils.formatExpirationDate(order.expiration).then (result) ->
-                td.expiration = {days: result}
+                td.expiration = {days: result, timestamp: order.expiration}
 
         td.status = "posted"
         if order.type == "bid_order"
@@ -70,8 +70,8 @@ class MarketHelper
             td.quantity = td.cost / price if price > 0.0
         else if order.type == "short_order"
             td.collateral = order.state.balance / quantity_asset.precision
-            if order.state.short_price_limit and order.state.short_price_limit.ratio > 0.0
-                short_price_limit =  @order_price(order.state.short_price_limit, base_asset, quantity_asset)
+            if order.state.limit_price and order.state.limit_price.ratio > 0.0
+                short_price_limit =  @order_price(order.state.limit_price, base_asset, quantity_asset)
                 td.short_price_limit = if invert_price then 1.0 / short_price_limit else short_price_limit
             else
                 td.short_price_limit = null
@@ -94,7 +94,7 @@ class MarketHelper
         td.expiration = order.expiration
         if td.expiration
             @utils.formatExpirationDate(td.expiration).then (result) ->
-                td.expiration = {days: result, date: td.expiration}
+                td.expiration = {days: result, timestamp: td.expiration}
 
     trade_history_to_order: (t, o, assets, invert_price) ->
         ba = assets[t.ask_price.base_asset_id]
@@ -105,7 +105,7 @@ class MarketHelper
         o.price = 1.0 / o.price if invert_price
         o.paid = t.ask_paid.amount / ba.precision
         o.received = t.ask_received.amount / qa.precision
-        o.timestamp = @filter('prettyDate')(t.timestamp)
+        o.timestamp = @filter('prettySortableTime')(t.timestamp)
         o.display_type = @capitalize(o.type.split("_")[0])
 
     array_to_hash: (list) ->
@@ -175,9 +175,12 @@ class MarketHelper
         return null
 
     date: (t) ->
-        dateRE = /(\d\d\d\d)(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)/
+        dateRE = /(\d\d\d\d)\-(\d\d)\-(\d\d)T(\d\d)\:(\d\d)\:(\d\d)/
         match = t.match(dateRE)
-        return 0 unless match
+        unless match
+            dateRE = /(\d\d\d\d)(\d\d)(\d\d)T(\d\d)(\d\d)(\d\d)/
+            match = t.match(dateRE)
+            return 0 unless match
         nums = []
         i = 1
         while i < match.length
@@ -197,14 +200,9 @@ class MarketHelper
         hour = @forceTwoDigits(date.getUTCHours())
         minute = @forceTwoDigits(date.getUTCMinutes())
         second = @forceTwoDigits(date.getUTCSeconds())
-        return "#{year}#{month}#{day}T#{hour}#{minute}#{second}"
+        return "#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}"
         
     is_in_short_wall: (short, shorts_price, inverted) ->
-#        short_collateral_ratio_condition = (not inverted and short.price < shorts_price) or (inverted and short.price > shorts_price)
-#        short_price_limit_condition = true
-#        if short.short_price_limit
-#            short_price_limit_condition = (not inverted and short.short_price_limit > shorts_price) or (inverted and short.short_price_limit < shorts_price)
-#        return short_collateral_ratio_condition and short_price_limit_condition
         return true if !short.short_price_limit or short.short_price_limit == 0.0
         return (not inverted and short.short_price_limit > shorts_price) or (inverted and short.short_price_limit < shorts_price)
 

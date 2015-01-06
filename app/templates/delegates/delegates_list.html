@@ -34,14 +34,14 @@
             <th translate>th.approval</th>
             <th translate>th.reliability</th>
             <th translate>th.blk_produced</th>
-            <th class='hideableCol' translate>th.pay_rate</th>
+            <th translate>th.pay_rate</th>
             <!--<th style="max-width: 100px;">Feeds</th>-->
             <th translate>th.approve</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="del in active_delegates | filter:search">
-            <td>{{ $index + 1 }}</td>
+            <td>{{ del.rank }}</td>
             <td>
               <a class='delegate-link' href="#/accounts/{{del.name}}">{{ del.name }}</a>
               <br>
@@ -61,7 +61,7 @@
               <span ng-switch-default translate>unknown</span>
             </td>
             <td>{{ del.delegate_info.blocks_produced }}</td>
-            <td class='hideableCol'>{{ del.delegate_info.pay_rate }}%</td>
+            <td>{{ del.delegate_info.pay_rate }}%</td>
             <!--<td style="max-width: 100px; font-size: 10px; text-overflow: ellipsis;">{{del.feeds.join(', ')}}</td>-->
             <td>
               <div class="btn-group">
@@ -109,7 +109,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="del in inactive_delegates | filter:search | startFrom: p.currentPage * p.pageSize | limitTo : p.pageSize">
-              <td>{{ $index + active_delegates.length + 1 + p.currentPage * p.pageSize}}</td>
+              <td>{{ del.rank }}</td>
               <td>
                 <a class='delegate-link' href="#/accounts/{{del.name}}">{{ del.name }}</a>
                 <br>

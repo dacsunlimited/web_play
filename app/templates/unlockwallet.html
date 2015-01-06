@@ -6,7 +6,7 @@
     </div>
 
     <div class="str-content" ng-click="descriptionCollapsed = !descriptionCollapsed"></div>
-    <div class="description" collapse="descriptionCollapsed">
+    <div class="description" ng-class="theme" collapse="descriptionCollapsed">
       <p translate>unlock.desc_content_1</p>
       <p translate>unlock.desc_content_2</p>
     </div>
@@ -24,7 +24,11 @@
       </div>
 
       <div class="text-danger text-center mt" ng-show="wrongPass" translate> unlock.wrong_pass </div>
+      <div class="text-danger text-center mt" ng-show="capsLockOn" translate> unlock.caps_lock_on </div>
     </form>
+
+    <img ng-if="theme==='default'" src="img/logo-ico.svg" width="64" height="64"/>
+    <img ng-if="theme==='flowers'" src="img/logo-ico-blue.svg" width="64" height="64"/>
 
     <div class="client-version">{{client_version}}</div>
   </div>

@@ -8,14 +8,14 @@
         "create": "创建",
         "confirm": "确认",
         "update": "更新",
-        "cover": "补仓",
+        "cover": "平仓",
         "register": "注册",
         "close": "关闭"
     },
     "tip": {
         "privacy_statement": "隐私申明",
         "warning": "警告",
-        "validate_symbol": "资产代码必须是3-5个大写字母",
+        "validate_symbol": "资产代码必须是3-8个大写字母",
         "validate_precision": "精度必须大于0，并且必须是10的指数(或者 1).",
         "pay_with_info": "注册需要花费BTS, 使用",
         "reg_as_delegate": "注册成为受托人",
@@ -56,10 +56,12 @@
         "registered": "已注册",
         "symbol": "资产代码",
         "desc": "描述",
-        "issue_account": "发行数量",
+        "issue_account": "发行人",
         "precision": "精度",
         "current_share_supply": "当前供给数量",
         "maximum_share_supply": "最大供给数量",
+        "share_supply": "供给数量",
+        "asset": "ASSET",
         "collected_fees": "已产生的交易费",
         "registration_date": "注册日期",
         "height": "高度",
@@ -81,7 +83,7 @@
         "operation_types": "操作类型",
         "approve": "投票支持",
         "delete": "删除",
-        "price": "喂价",
+        "price": "价格",
         "last_updated": "最后更新时间",
         "bitasset": "比特资产",
         "avatar": "头像",
@@ -100,7 +102,8 @@
         "paid": "付出",
         "received": "获得",
         "expiration": "截止日期",
-        "interest_rate": "利率 (年化)"
+        "interest_rate": "利率 (年化)",
+        "message": "消息"
     },
     "block": {
         "title": "区块",
@@ -118,6 +121,8 @@
         "pending_trxs": "待处理交易",
         "block_explorer": "区块浏览",
         "missing_block": "缺失块",
+		"older": "更早",
+		"newer": "更近",
         "trx": {
             "title": "交易",
             "expired_trx": "过期的交易",
@@ -139,6 +144,7 @@
     },
     "unlock": {
         "btn_unlock": "解 锁",
+        "caps_lock_on": "大写键已按下!",
         "desc_title": "BitShares PLAY",
         "desc_content_1": "BitShares PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
         "desc_content_2": "",
@@ -176,7 +182,22 @@
         "standby_delegates": "待命受托人",
         "votes_obtained": "得票",
         "version": "版本号",
-        "un_approve_all": "取消所有投票"
+        "un_approve_all": "取消所有投票",
+        "description": "描述",
+        "proposal": "受托人提案",
+        "location": "服务器地理位置",
+        "handle": "BitSharesTalk论坛用户名",
+        "ann": "公告",
+        "country": "法定管辖权",
+        "role_0": "技术开发",
+        "role_1": "市场推广",
+        "role_2": "Faucet",
+        "role_3": "骨干",
+        "role_4": "慈善",
+        "role_5": "技术支持",
+        "role_6": "法律/法规",
+        "role_7": "媒体/公关"
+
     },
     "market": {
         "title": "市场",
@@ -271,6 +292,7 @@
         "load_more_trxs": "查看更多交易...",
         "all_trxs": "所有交易历史",
         "transfer": "转账",
+        "transfer_authorization": "Transfer Authorization",
         "amount": "数量",
         "from": "来自",
         "to": "发往",
@@ -297,6 +319,7 @@
         "email_tip": "电子邮件（可选）",
         "active_delegate": "活跃受托人",
         "standby_delegate": "待命受托人",
+        "rank": "当前排名",
         "toggle": {
             "favorite": "切换收藏状态",
             "approval": "切换支持状态"
@@ -333,7 +356,17 @@
         "rename_account": "账户更名",
         "rename_account_locally": "本地更名账户",
         "public_info": "公共信息",
-        "estimated_yield": "预期收益"
+        "estimated_yield": "预期收益",
+        "wall" : {
+            "tab_title": "信誉墙",
+            "burn_records": "评价记录",
+            "burn_post": "销毁/发送消息",
+            "message": "消息",
+            "post_message": "发送消息",
+            "burn_confirmation": "销毁/发送消息确认",
+            "receiver": "受评账户",
+            "explain": "销毁自己账户下一定数量的资金，从而向 {{account_name}} 账户的信誉墙上进行留言/评价。"
+        }
     },
     "accounts": {
         "create_account": "创建新账户",
@@ -360,7 +393,9 @@
         "btn_issue": "发行",
         "amount": "数量",
         "issue_to": "发行到",
-        "asset_create_auth": "比特资产创建确认"
+        "asset_create_auth": "比特资产创建确认",
+        "market_pegged_assets": "市场锚定资产",
+        "user_issued_assets": "用户发行资产"
     },
     "privacy": {
         "email_warning1": "你的邮件地址只会被用来识别",
@@ -389,7 +424,10 @@
         "trx_fee": "交易手续费",
         "autocomplete_receiver": "自动补全转账接受账号",
         "autocomplete_info": "在转账表单中，当用户输入收款账户信息时，自动完成账户名称",
-        "language": "界面语言选择"
+        "language": "界面语言选择",
+        "theme": "解锁屏幕主题",
+        "default": "默认",
+        "flowers": "花卉"
     },
     "console": {
         "type_cmd_and_enter": "输入命令并回车"
@@ -403,7 +441,7 @@
         }
     },
     "pagination": {
-        "filter": "过滤器",
+        "filter": "关键字搜索",
         "first": "第一页",
         "prev": "前一页",
         "next": "下一页",
@@ -424,7 +462,8 @@
     "footer": {
         "enable_trx_scan": "启用交易记录扫描",
         "up_to_date": "已同步到最新状态：已处理 {{value}} 块区块",
-        "catching_up": "同步中：已处理 {{value}} 块区块，总共 {{value2}} 块区块"
+        "catching_up": "同步中：已处理 {{value}} 块区块，总共 {{value2}} 块区块",
+        "version_warning": "警告！钱包图形界面要求钱包工具包软件(Toolkit)版本 {{expected_client_version}} 或更高，当前版本为 {{client_version}}"
     },
     "utils": {
         "expired": "Expired",

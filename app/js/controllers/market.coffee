@@ -9,6 +9,7 @@ angular.module("app").controller "MarketController", ($scope, $state, $statePara
     $scope.account = account = {name: account_name, base_balance: 0.0, quantity_balance: 0.0}
     $scope.avg_price = 0
     $scope.advanced = false
+    $scope.asset_total_supply = 0.0
     current_market = null
     price_decimals = 4
 
@@ -41,6 +42,8 @@ angular.module("app").controller "MarketController", ($scope, $state, $statePara
         frequency: "each_block"
         update: (data, deferred) ->
             changed = false
+            Blockchain.get_asset($scope.actual_market.base_asset.id).then (asset) ->
+                $scope.asset_total_supply = asset.current_share_supply / asset.precision
             promise = WalletAPI.account_balance(account_name)
             promise.then (result) =>
                 #console.log "------ account_balances_observer result ------>", result
@@ -115,9 +118,6 @@ angular.module("app").controller "MarketController", ($scope, $state, $statePara
             account.quantity_balance = data[market.asset_quantity_symbol] / market.quantity_precision
             account.short_balance = if market.inverted then account.base_balance else account.quantity_balance
         Observer.registerObserver(account_balances_observer)
-
-        Blockchain.get_asset($scope.actual_market.base_asset.id).then (asset) ->
-            $scope.asset_total_supply = asset.current_share_supply / asset.precision
         Blockchain.get_info().then (config) ->
             $scope.blockchain_symbol = config.symbol #XTS or BTS
             WalletAPI.get_transaction_fee($scope.blockchain_symbol).then (blockchain_tx_fee) ->
@@ -364,7 +364,7 @@ angular.module("app").controller "MarketController", ($scope, $state, $statePara
         form.$error.message = "some error, please fix me"
 
 
-    MAX_SHORT_PERIOD_SEC = 2*60*60 #30*24*60*60
+    MAX_SHORT_PERIOD_SEC = 30*24*60*60
     SEC_PER_YEAR = 365 * 24 * 60 * 60
 
     $scope.cover_order = (order) ->
@@ -377,7 +377,7 @@ angular.module("app").controller "MarketController", ($scope, $state, $statePara
                 original_order = order
                 order = angular.copy(order)
 
-                start_time = Utils.toDate(order.expiration) - MAX_SHORT_PERIOD_SEC*1000
+                start_time = Utils.toDate(order.expiration.timestamp) - MAX_SHORT_PERIOD_SEC*1000
                 age_sec = (Date.now() + 2 * 3600 * 1000 - start_time) / 1000.0
                 age_sec = 0 if age_sec < 0
                 age_sec = MAX_SHORT_PERIOD_SEC if age_sec > MAX_SHORT_PERIOD_SEC
@@ -396,7 +396,7 @@ angular.module("app").controller "MarketController", ($scope, $state, $statePara
                     total_due: total_due
                     principal_due: principal_due
                     interest_due: interest_due
-                    total_paid: total_due
+                    total_paid: Utils.formatDecimal(total_due, scope.base_precision)
                     principal_paid: principal_due
                     interest_paid: interest_due
                     fee_paid: fee_paid

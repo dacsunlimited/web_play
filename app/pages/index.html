@@ -23,7 +23,7 @@
       <div class="context-help-content" ng-include src="context_help.file"></div>
     </div>
     </pageslide>
-    <div class="wrapper" flex layout="vertical" layout-fill>
+    <div class="wrapper" flex layout="vertical" ng-class="theme" layout-fill>
       <!-- TOOLBAR -->
       <div class="navbar navbar-default navbar-static-top navbar-main" role="navigation" ng-controller="ToolbarController">
         <div ng-include src="'toolbar.html'"></div>
@@ -41,6 +41,7 @@
             <li ng-class="{active: current_path_includes('blocks')}"><a ui-sref="blocks"><i class="fa fa-link fa-fw"></i>{{ 'index.block_explorer' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="preferences"><i class="fa fa-gears fa-fw"></i>{{ 'index.preferences' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="console"><i class="fa fa-terminal fa-fw"></i>{{ 'index.console' | translate }}</a></li>
+            <li ng-class="{active: current_path_includes('mail')}" ng-show="mail_enabled"><a ui-sref="mail({box:'inbox'})"><i class="fa fa-envelope fa-fw"></i>{{ 'index.mail' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="help"><i class="fa fa-question-circle fa-fw"></i>{{ 'index.help' | translate }}</a></li>
           </ul>
         </aside>
