@@ -80,7 +80,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
 #            $scope.unlockwallet = false
 #            Wallet.check_wallet_status()
 
-    
+
     $scope.$watch ->
         Info.info.wallet_unlocked
     , (unlocked)->

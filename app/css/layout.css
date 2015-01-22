@@ -24,12 +24,25 @@
   position: fixed;
   margin-top: 0;
   top: 36px;
-  padding-top: 10px;
+/*  padding-top: 10px;*/
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none ;
 }
 
+
 body.fixed_header .wrapper {
   padding-top: 0;
 }
+
+.md-sidenav-left.md-locked-open.sidebar {
+/*  min-width:210px;
+  width:210px;
+*/  background-color: white;
+}
+
+.sidebar a {
+  padding:6px; font-weight:500; border-radius: 3px;
+  margin-bottom:8px;
+}
+.sidebar h1.md-toolbar-tools { width:auto; }

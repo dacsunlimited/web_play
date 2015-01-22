@@ -35,6 +35,13 @@ module.exports = function(lineman) {
         "vendor/bower/angular-ui-utils/validate.js",
         "vendor/bower/angular-xeditable/dist/js/xeditable.js",
         "vendor/bower/moment/min/moment-with-locales.js",
+        // "vendor/js/ui-bootstrap-tpls.js",
+        //  "vendor/js/ui-grid.js",
+        // "vendor/js/angular-idle.js",
+        // "vendor/js/validate.js",
+        // "vendor/js/xeditable.js",
+        // "vendor/js/angular-translate.min.js",
+        // "vendor/js/angular-translate-loader-static-files.min.js",
         "vendor/js/jsonpath.js",
         "vendor/js/highstock.src.js",
 
@@ -117,6 +124,30 @@ module.exports = function(lineman) {
         //
         // "app/main.scss"
       ]
+      // vendor: [
+      //   "vendor/css/jquery.growl.css",
+      //   "vendor/css/bootstrap.css",
+      //   "vendor/css/font-awesome.css",
+      //   "vendor/css/ark.css",
+      //   "vendor/css/xeditable.css",
+      //   "vendor/css/ui-grid.css",
+      //   "vendor/css/material.css",
+      //   "vendor/css/material-wfont.css",
+      //   "vendor/css/ripples.css",
+      // ],
+      // app: [
+      //   "app/css/bootstrap_overrides.css",
+      //   "app/css/main.css",
+      //   "app/css/forms.css",
+      //   "app/css/layout.css",
+      //   "app/css/my-ng-grid.css",
+      //   "app/css/toolbar.css",
+      //   "app/css/footer.css",
+      //   "app/css/market.css",
+      //   "app/css/spinner.css",
+      //   "app/css/help.css",
+      //   "app/css/splashpage.scss"
+      // ]
     }
 
   };
