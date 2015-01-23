@@ -1,7 +1,33 @@
 class Blockchain
 
     constructor: (@client, @network, @rpc, @blockchain_api, @utils, @q, @interval) ->
+        ###
+        @observer_config =
+            name: "BlockchainObserver"
+            frequency: "each_block"
+            update: (data, deferred) =>
+                @observer_each_block().then ->
+                    deferred.resolve(true)
+            #notify: (data) ->
+        ###
+                
+    ###
+    observer_each_block: ->
+        #console.log 'blockchain refresh'
+        promises = []
+        promises.push @refresh_asset_records()
+        promises.push @rpc.request("blockchain_get_info", []).then (result) =>
+            @config = result.result
+            @config.page_count = 20
+            switch config.symbol
+                when "XTS"
+                    @is_testnet = on
+                when "BTS"
+                    @is_testnet = off
 
+        @q.all(promises)
+    ###
+    
     # # # # #
     #  Blockchain Config
     config : {}
@@ -17,6 +43,7 @@ class Blockchain
                 @config.page_count = 20
                 return @config
 
+        
     list_accounts: (start_name, limit) ->
         @rpc.request('blockchain_list_accounts', [start_name, limit]).then (response) ->
             reg = []
@@ -81,14 +108,15 @@ class Blockchain
         markets_hash = {}
         angular.forEach @asset_records, (asset1) =>
             angular.forEach @asset_records, (asset2) =>
-                asset1_symbol = if asset1.issuer_account_id == -2 then "Bit" + asset1.symbol else asset1.symbol
-                asset2_symbol = if asset2.issuer_account_id == -2 then "Bit" + asset2.symbol else asset2.symbol
-                if asset1.id > asset2.id
-                    value = asset1_symbol + ":" + asset2_symbol
-                    markets_hash[value] = value
-                else if asset2.id > asset1.id
-                    value = asset2_symbol + ":" + asset1_symbol
-                    markets_hash[value] = value
+                if not (asset1.id > 22 and asset2.id > 22) # one of the assets should be either bts or market pegged asset
+                    asset1_symbol = if asset1.issuer_account_id == -2 then "Bit" + asset1.symbol else asset1.symbol
+                    asset2_symbol = if asset2.issuer_account_id == -2 then "Bit" + asset2.symbol else asset2.symbol
+                    if asset1.id > asset2.id
+                        value = asset1_symbol + ":" + asset2_symbol
+                        markets_hash[value] = value
+                    else if asset2.id > asset1.id
+                        value = asset2_symbol + ":" + asset1_symbol
+                        markets_hash[value] = value
         angular.forEach markets_hash, (key, value) ->
             markets.push value
         #console.log markets
@@ -183,8 +211,9 @@ class Blockchain
         remove_collateral_op_type : "Remove Collateral Operation"
 
     # TODO
-    populate_delegate: (record, active) ->
+    populate_delegate: (record, active, rank) ->
         record.active = active
+        record.rank = rank
         @all_delegates[record.name] = record
 #        record.feeds ||= []
 #        if active and record.feeds.length == 0
@@ -197,13 +226,13 @@ class Blockchain
         @avg_act_del_pay_rate=0
         @q.all({dels: @blockchain_api.list_delegates(0, 10000), config: @get_info()}).then (results) =>
             for i in [0 ... results.config.delegate_num]
-                @active_delegates[i] = @populate_delegate(results.dels[i], true)
+                @active_delegates[i] = @populate_delegate(results.dels[i], true, i+1)
                 @id_delegates[results.dels[i].id] = results.dels[i]
                 @delegate_active_hash_map[@active_delegates[i].name]=true
                 @avg_act_del_pay_rate+=@active_delegates[i].delegate_info.pay_rate
             @avg_act_del_pay_rate=@avg_act_del_pay_rate/results.config.delegate_num
             for i in [results.config.delegate_num ... results.dels.length]
-                @inactive_delegates[i - results.config.delegate_num] = @populate_delegate(results.dels[i], false)
+                @inactive_delegates[i - results.config.delegate_num] = @populate_delegate(results.dels[i], false, i+1)
                 @id_delegates[results.dels[i].id] = results.dels[i]
                 @delegate_inactive_hash_map[@inactive_delegates[i-results.config.delegate_num].name]=true
                 

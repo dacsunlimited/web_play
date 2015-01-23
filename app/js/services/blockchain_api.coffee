@@ -13,6 +13,14 @@ class BlockchainAPI
     @rpc.request('blockchain_get_info').then (response) ->
       response.result
 
+  # Save snapshot of current base asset balances to specified file
+  # parameters: 
+  #   string `filename` - filename to save snapshot to
+  # return_type: `void`
+  generate_snapshot: (filename, error_handler = null) ->
+    @rpc.request('blockchain_generate_snapshot', [filename]).then (response) ->
+      response.result
+
   # Calculate the total supply of an asset from the current blockchain database state
   # parameters: 
   #   string `asset` - asset ticker symbol or ID to calculate supply for
@@ -24,9 +32,10 @@ class BlockchainAPI
   # Calculate the total amount of a market-issued asset that is owed to the network by open short positions
   # parameters: 
   #   string `asset` - asset ticker symbol or ID to calculate debt for
+  #   bool `include_interest` - true to include current outstanding interest and false otherwise
   # return_type: `asset`
-  calculate_debt: (asset, error_handler = null) ->
-    @rpc.request('blockchain_calculate_debt', [asset]).then (response) ->
+  calculate_debt: (asset, include_interest, error_handler = null) ->
+    @rpc.request('blockchain_calculate_debt', [asset, include_interest]).then (response) ->
       response.result
 
   # Returns true if the local blockchain is synced with the network; false otherwise
@@ -61,10 +70,17 @@ class BlockchainAPI
   # Returns registered accounts starting with a given name upto a the limit provided
   # parameters: 
   #   account_name `first_account_name` - the first account name to include. May be either a name or an index
-  #   int32_t `limit` - the maximum number of items to list
+  #   uint32_t `limit` - the maximum number of items to list
   # return_type: `account_record_array`
   list_accounts: (first_account_name, limit, error_handler = null) ->
     @rpc.request('blockchain_list_accounts', [first_account_name, limit]).then (response) ->
+      response.result
+
+  # Returns a list of recently updated accounts
+  # parameters: 
+  # return_type: `account_record_array`
+  list_recently_updated_accounts: (error_handler = null) ->
+    @rpc.request('blockchain_list_recently_updated_accounts').then (response) ->
       response.result
 
   # Returns a list of recently registered accounts
@@ -77,10 +93,17 @@ class BlockchainAPI
   # Returns registered assets starting with a given name upto a the limit provided
   # parameters: 
   #   asset_symbol `first_symbol` - the prefix of the first asset symbol name to include
-  #   int32_t `limit` - the maximum number of items to list
+  #   uint32_t `limit` - the maximum number of items to list
   # return_type: `asset_record_array`
   list_assets: (first_symbol, limit, error_handler = null) ->
     @rpc.request('blockchain_list_assets', [first_symbol, limit]).then (response) ->
+      response.result
+
+  # Returns a list of all currently valid feed prices
+  # parameters: 
+  # return_type: `price_map`
+  list_feed_prices: (error_handler = null) ->
+    @rpc.request('blockchain_list_feed_prices').then (response) ->
       response.result
 
   # returns all burn records associated with an account
@@ -100,17 +123,17 @@ class BlockchainAPI
 
   # Get detailed information about an in-wallet transaction
   # parameters: 
-  #   string `transaction_id` - the base58 transaction ID to return
+  #   string `transaction_id_prefix` - the base58 transaction ID to return
   #   bool `exact` - whether or not a partial match is ok
-  # return_type: `optional_blockchain_transaction_record`
-  get_transaction: (transaction_id, exact, error_handler = null) ->
-    @rpc.request('blockchain_get_transaction', [transaction_id, exact]).then (response) ->
+  # return_type: `transaction_record_pair`
+  get_transaction: (transaction_id_prefix, exact, error_handler = null) ->
+    @rpc.request('blockchain_get_transaction', [transaction_id_prefix, exact]).then (response) ->
       response.result
 
-  # Retrieves the block header for the given block number or ID
+  # Retrieves the block record for the given block number or ID
   # parameters: 
   #   string `block` - block number or ID to retrieve
-  # return_type: `odigest_block`
+  # return_type: `oblock_record`
   get_block: (block, error_handler = null) ->
     @rpc.request('blockchain_get_block', [block]).then (response) ->
       response.result
@@ -118,7 +141,7 @@ class BlockchainAPI
   # Retrieves the detailed transaction information for a block
   # parameters: 
   #   string `block` - the number or id of the block to get transactions from
-  # return_type: `blockchain_transaction_record_map`
+  # return_type: `transaction_record_map`
   get_block_transactions: (block, error_handler = null) ->
     @rpc.request('blockchain_get_block_transactions', [block]).then (response) ->
       response.result
@@ -129,6 +152,14 @@ class BlockchainAPI
   # return_type: `optional_account_record`
   get_account: (account, error_handler = null) ->
     @rpc.request('blockchain_get_account', [account]).then (response) ->
+      response.result
+
+  # Retrieves a map of delegate IDs and names defined by the given slate ID or recommending account
+  # parameters: 
+  #   string `slate` - slate ID or recommending account name for which to retrieve the slate of delegates
+  # return_type: `map<account_id_type, string>`
+  get_slate: (slate, error_handler = null) ->
+    @rpc.request('blockchain_get_slate', [slate]).then (response) ->
       response.result
 
   # Retrieves the balance record for the given address
@@ -146,6 +177,48 @@ class BlockchainAPI
   # return_type: `balance_record_map`
   list_balances: (first_balance_id, limit, error_handler = null) ->
     @rpc.request('blockchain_list_balances', [first_balance_id, limit]).then (response) ->
+      response.result
+
+  # Lists balance records which are the balance IDs or which can be claimed by signature for this address
+  # parameters: 
+  #   string `addr` - address to scan for
+  #   timestamp `chanced_since` - Filter all balances that haven't chanced since the provided timestamp
+  # return_type: `balance_record_map`
+  list_address_balances: (addr, chanced_since, error_handler = null) ->
+    @rpc.request('blockchain_list_address_balances', [addr, chanced_since]).then (response) ->
+      response.result
+
+  # Lists all transactions that involve the provided address after the specified time
+  # parameters: 
+  #   string `addr` - address to scan for
+  #   timestamp `filter_before` - Filter all transactions that occured prior to the specified timestamp
+  # return_type: `transaction_record_map`
+  list_address_transactions: (addr, filter_before, error_handler = null) ->
+    @rpc.request('blockchain_list_address_transactions', [addr, filter_before]).then (response) ->
+      response.result
+
+  # Get the account record for a given name
+  # parameters: 
+  #   account_name `account_name` - the name of the account whose public address you want
+  # return_type: `account_balance_summary_type`
+  get_account_public_balance: (account_name, error_handler = null) ->
+    @rpc.request('blockchain_get_account_public_balance', [account_name]).then (response) ->
+      response.result
+
+  # Get the account record for a given name
+  # parameters: 
+  #   asset_symbol `symbol` - the asset symbol to fetch the median price of in BTS
+  # return_type: `real_amount`
+  median_feed_price: (symbol, error_handler = null) ->
+    @rpc.request('blockchain_median_feed_price', [symbol]).then (response) ->
+      response.result
+
+  # Lists balance records which can be claimed by signature for this key
+  # parameters: 
+  #   public_key `key` - Key to scan for
+  # return_type: `balance_record_map`
+  list_key_balances: (key, error_handler = null) ->
+    @rpc.request('blockchain_list_key_balances', [key]).then (response) ->
       response.result
 
   # Retrieves the record for the given asset ticker symbol or ID
@@ -307,9 +380,11 @@ class BlockchainAPI
   # Query the block production slot records for a particular delegate
   # parameters: 
   #   string `delegate_name` - Delegate whose block production slot records to query
+  #   int64_t `start_block_num` - Only return slot records after the specified block's timestamp; negative to start backwards from the current head block
+  #   uint32_t `count` - Return at most count slot records
   # return_type: `slot_records_list`
-  get_delegate_slot_records: (delegate_name, error_handler = null) ->
-    @rpc.request('blockchain_get_delegate_slot_records', [delegate_name]).then (response) ->
+  get_delegate_slot_records: (delegate_name, start_block_num, count, error_handler = null) ->
+    @rpc.request('blockchain_get_delegate_slot_records', [delegate_name, start_block_num, count]).then (response) ->
       response.result
 
   # Get the delegate that signed a given block
@@ -318,6 +393,13 @@ class BlockchainAPI
   # return_type: `string`
   get_block_signee: (block, error_handler = null) ->
     @rpc.request('blockchain_get_block_signee', [block]).then (response) ->
+      response.result
+
+  # Returns a list of active markets
+  # parameters: 
+  # return_type: `market_status_array`
+  list_markets: (error_handler = null) ->
+    @rpc.request('blockchain_list_markets').then (response) ->
       response.result
 
   # Returns a list of market transactions executed on a given block.
@@ -346,12 +428,46 @@ class BlockchainAPI
 
   # Verify that the given signature proves the given hash was signed by the given account.
   # parameters: 
-  #   string `signing_account` - The account the signature claims to be from
+  #   string `signer` - A public key, address, or account name whose signature to check
   #   sha256 `hash` - The hash the signature claims to be for
   #   compact_signature `signature` - A signature produced by wallet_sign_hash
   # return_type: `bool`
-  verify_signature: (signing_account, hash, signature, error_handler = null) ->
-    @rpc.request('blockchain_verify_signature', [signing_account, hash, signature]).then (response) ->
+  verify_signature: (signer, hash, signature, error_handler = null) ->
+    @rpc.request('blockchain_verify_signature', [signer, hash, signature]).then (response) ->
+      response.result
+
+  # TODO
+  # parameters: 
+  #   string `path` - the directory to dump the state into
+  # return_type: `void`
+  dump_state: (path, error_handler = null) ->
+    @rpc.request('blockchain_dump_state', [path]).then (response) ->
+      response.result
+
+  # Takes a signed transaction and broadcasts it to the network.
+  # parameters: 
+  #   signed_transaction `trx` - The transaction to broadcast
+  # return_type: `void`
+  broadcast_transaction: (trx, error_handler = null) ->
+    @rpc.request('blockchain_broadcast_transaction', [trx]).then (response) ->
+      response.result
+
+  # Get a particular object with a known ID
+  # parameters: 
+  #   object_id_type `id` - 
+  # return_type: `object_record`
+  get_object: (id, error_handler = null) ->
+    @rpc.request('blockchain_get_object', [id]).then (response) ->
+      response.result
+
+  # Get all edges with given properties
+  # parameters: 
+  #   object_id_type `from` - -1
+  #   object_id_type `to` - 
+  #   string `name` - 
+  # return_type: `edge_array`
+  get_edges: (from, to, name, error_handler = null) ->
+    @rpc.request('blockchain_get_edges', [from, to, name]).then (response) ->
       response.result
 
 

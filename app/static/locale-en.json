@@ -15,7 +15,7 @@
     "tip": {
         "privacy_statement": "Privacy Statement",
         "warning": "Warning",
-        "validate_symbol": "The Symbol should be 3-5 uppercase characters",
+        "validate_symbol": "The Symbol should be 3-8 uppercase characters",
         "validate_precision": "Precision must be greater than 0 and must be a power of 10 (or 1).",
         "pay_with_info": "Registering costs BTS, Pay with",
         "reg_as_delegate": "Registered as delegate",
@@ -56,10 +56,12 @@
         "registered": "REGISTERED",
         "symbol": "SYMBOL",
         "desc": "DESCRIPTION",
-        "issue_account": "ISSUE ACCOUNT",
+        "issue_account": "ISSUER",
         "precision": "PRECISION",
         "current_share_supply": "CURRENT SHARE SUPPLY",
         "maximum_share_supply": "MAXIMUM SHARE SUPPLY",
+        "share_supply": "SHARE SUPPLY",
+        "asset": "ASSET",
         "collected_fees": "COLLECTED FEES",
         "registration_date": "REGISTRATION DATE",
         "height": "Height",
@@ -100,7 +102,8 @@
         "paid": "PAID",
         "received": "RECEIVED",
         "expiration": "EXPIRATION",
-        "interest_rate": "Interest Rate (APR)"
+        "interest_rate": "Interest Rate (APR)",
+        "message": "Message"
     },
     "block": {
         "title": "Block",
@@ -118,6 +121,8 @@
         "pending_trxs": "Pending Transactions",
         "block_explorer": "Block Explorer",
         "missing_block": "Missed Block",
+		"older": "Older",
+		"newer": "Newer",
         "trx": {
             "title": "Transactions",
             "expired_trx": "Expired Transaction",
@@ -139,10 +144,12 @@
     },
     "unlock": {
         "btn_unlock": "unlock",
+        "caps_lock_on": "Caps Lock is on!",
         "desc_title": "BitShares Play",
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
-        "wrong_pass": "Wrong Password."
+        "wrong_pass": "Wrong Password.",
+        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
     },
     "wallet": {
         "create_new_wallet": "Create a New Wallet",
@@ -159,6 +166,7 @@
         "block_explorer": "Block Explorer",
         "preferences": "Preferences",
         "console": "Console",
+        "mail": "Mail",
         "help": "Help",
         "lock": "Lock",
         "daily_income": "Network Daily Income",
@@ -175,7 +183,21 @@
         "standby_delegates": "Standby Delegates",
         "votes_obtained": "Approval",
         "version": "Version",
-        "un_approve_all": "Un-approve all"
+        "un_approve_all": "Un-approve all",
+        "description": "Description",
+        "proposal": "Delegate bid",
+        "location": "Server location",
+        "handle": "BitsharesTalk username",
+        "ann": "Announcements",
+        "country": "Legal jurisdiction",
+        "role_0": "Development",
+        "role_1": "Marketing",
+        "role_2": "Faucet",
+        "role_3": "Backbone",
+        "role_4": "Charity",
+        "role_5": "Technical Support",
+        "role_6": "Law/Regulations",
+        "role_7": "Media/Public Relations"
     },
     "market": {
         "title": "Market",
@@ -272,6 +294,7 @@
         "load_more_trxs": "Load more transactions...",
         "all_trxs": "All the transaction history",
         "transfer": "Transfer",
+        "transfer_authorization": "Transfer Authorization",
         "amount": "Amount",
         "from": "From",
         "to": "To",
@@ -281,7 +304,7 @@
         "assets": "Assets",
         "keys": "Keys",
         "advanced": "Advanced",
-        "account_key": "Account Key",
+        "account_key": "Public Key",
         "priv_key": "Private Key",
         "import_key": "Import Key",
         "wallet_type": "Wallet Type",
@@ -298,6 +321,7 @@
         "email_tip": "Email (Optional)",
         "active_delegate": "Active Delegate",
         "standby_delegate": "Standby Delegate",
+        "rank": "Current rank",
         "toggle": {
             "favorite": "Toggle Favorite",
             "approval": "Toggle Approval"
@@ -312,7 +336,7 @@
             "vote_all": "Vote All",
             "vote_none": "Vote None",
             "vote_random_subset": "Vote Random Subset",
-            "vote_as_delegates_recommended": "Vote as Delegates Recommended",
+            "vote_as_delegates_recommended": "Vote as My Delegates Recommended",
             "btn_update_vote": "Update Vote",
             "current_votes": "Current Votes",
             "future_votes": "Future Votes"
@@ -334,7 +358,17 @@
         "rename_account": "Rename Account",
         "rename_account_locally": "Rename Account Locally",
         "public_info": "Public Info",
-        "estimated_yield": "ESTIMATED YIELD"
+        "estimated_yield": "ESTIMATED YIELD",
+        "wall" : {
+            "tab_title": "Wall",
+            "burn_records": "Burn Records",
+            "burn_post": "Burn/Post Message",
+            "message": "Message",
+            "post_message": "Post Message",
+            "burn_confirmation": "Burn/Post Message Confirmation",
+            "receiver": "Receiver",
+            "explain": "Burns given amount to {{account_name}}'s account. This will allow you to post message to this wall as a form of reputation."
+        }
     },
     "accounts": {
         "create_account": "Create New Account",
@@ -347,7 +381,7 @@
         "symbol": "Symbol",
         "asset_name": "Asset Name",
         "description": "Description",
-        "memo_data": "Memo Data",
+        "memo_data": "Public Data",
         "maximum_share_supply": "Maximum Share Supply",
         "total_supply": "Total Supply",
         "info_create_asset_fee": "Fees for creating a new asset",
@@ -361,7 +395,9 @@
         "btn_issue": "Issue",
         "amount": "Amount",
         "issue_to": "To",
-        "asset_create_auth": "Asset Creation Authorization"
+        "asset_create_auth": "Asset Creation Authorization",
+        "market_pegged_assets": "Market-Pegged Assets",
+        "user_issued_assets": "User-Issued Assets"
     },
     "privacy": {
         "email_warning1": "Your email address is only used for the purpose of identifying your",
@@ -390,7 +426,10 @@
         "trx_fee": "Transaction Fee",
         "autocomplete_receiver": "Autocomplete Receiver Name",
         "autocomplete_info": "In the transfer form autocomplete the name of the receiver, as the user types",
-        "language": "Interface Language"
+        "language": "Interface Language",
+        "theme": "Unlock Screen Theme",
+        "default": "Default",
+        "flowers": "Flowers"
     },
     "console": {
         "type_cmd_and_enter": "Type a command and hit Enter"
@@ -410,6 +449,29 @@
         "next": "Next",
         "last": "Last"
     },
+    "mail": {
+        "sender": "Sender",
+        "recipient": "To",
+        "subject": "Topic",
+        "body": "Message",
+        "compose": "Compose",
+        "email": "Email",
+        "close": "Close",
+        "inbox": "Inbox",
+        "sent": "Sent",
+        "transmitting": "Transmitting",
+        "archive": "Archive",
+        "processing": "Processing..",
+        "failed": "Failed",
+        "proof_of_work": "Proof of Work",
+        "canceled": "Canceled",
+        "unspecified": "Unspecified",
+        "delete_pending": "Delete Pending..",
+        "undo": "UNDO",
+        "no_recipient_mail_servers": "Recipient is not checking mail.",
+        "Timed out while transmitting message.": "Timed out while transmitting message.",
+        "Could not find mail servers for this recipient.": "Could not find mail servers for this recipient."
+    },
     "help": {
         "title": "Help",
         "console_intro": "For a list of commands go to the console page, type help, and press Enter.",
@@ -425,7 +487,9 @@
     "footer": {
         "enable_trx_scan": "Enable Transaction Scanning",
         "up_to_date": "Up to date, processed {{value}} blocks",
-        "catching_up": "Catching up.. processed {{value1}} out of {{value2}} blocks"
+        "catching_up": "Catching up.. processed {{value1}} out of {{value2}} blocks",
+        "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}",
+        "testnet": "TestNet"
     },
     "utils": {
         "expired": "Expired",

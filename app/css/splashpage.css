@@ -1,11 +1,19 @@
 .splashpage > .wrapper {
-  font-family: 'Open Sans', sans-serif;
-  color: #eee;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  background: #0b384d url('/img/xt-background.jpg') no-repeat left top !important;
-  background-size: cover !important;
+	font-family: 'Open Sans', sans-serif;
+	color: #eee;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+}
+
+.splashpage > .wrapper.default {
+	background: #0b384d url('/img/xt-background.jpg') no-repeat left top !important;
+	background-size: cover !important;
+}
+
+.splashpage > .wrapper.flowers {
+	background: #0b384d url('/img/flowers-background.jpg') no-repeat left top !important;
+	background-size: cover !important;
 }
 
 .splashpage > .wrapper > .navbar {
@@ -34,24 +42,40 @@
   margin-top: -100px;
 }
 
-.splashpage-wrapper .description {
-  font-size: 14px;
-  color: #ccc;
+.splashpage-wrapper .description.default {
+	font-size: 12px;
+	color: #ccc;
+}
+
+.splashpage-wrapper .description.flowers {
+	font-size: 12px;
+	color: #4C3434;
 }
 
 .splashpage-wrapper .str-top {
-/*  height: 80px;*/
-  text-align: center;
-/*  border-bottom: 1px solid rgba(255, 255, 255, .5);*/
-  -webkit-background-clip: padding-box; for Safari background-clip : padding-box; for IE9+, Firefox 4 +, Opera, Chrome
+	/*height: 80px;*/
+	text-align: center;
+	border-bottom: 1px solid rgba(255, 255, 255, .5);
+	-webkit-background-clip: padding-box;
+	background-clip : padding-box;
 }
 
-/*.splashpage-wrapper .str-top img { margin-bottom: 8px; }*/
+.splashpage-wrapper .str-top img { margin-bottom: 4px; }
+
+.splashpage-wrapper .str-top h4 {
+	margin: 18px 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: lighter;
+}
 
 .splashpage-wrapper .str-content {
   text-align: center;
   padding: 20px 10px 5px;
   cursor: pointer;
+}
+
+.splashpage-wrapper .str-content.flowers {
+	color: #4C3434;
 }
 
 .splashpage-wrapper .str-arrow {
@@ -88,6 +112,10 @@
 
 .splashpage-wrapper .client-version {
   color: #aaa;
+}
+
+.splashpage-wrapper .client-version.flowers {
+	color: #4C3434;
 }
 
 .splashpage-wrapper .input {

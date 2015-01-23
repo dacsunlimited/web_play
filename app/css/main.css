@@ -209,6 +209,7 @@ a.white:hover {
 
 .header {
 	border-bottom: 1px solid #d5d8d9;
+	margin-bottom: 6px;
 }
 
 tabset:hover {
@@ -381,4 +382,27 @@ input.ng-dirty.ng-invalid {
 .transfer-amount-error {
 	position: relative;
 	top: -14px;
+}
+
+.no-bottom-border {
+	border-bottom: none;
+}
+
+.text-lighter {
+	font-weight: lighter;
+}
+
+.account-name {
+	color: white;
+	font-size: 200%;
+}
+
+.account-key {
+	padding-left: 24px;
+	color: #bbb;
+}
+
+.referral-success p, .referral-success i {
+	font-size: 200%;
+	color: #00aa00;
 }

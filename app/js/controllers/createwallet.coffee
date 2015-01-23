@@ -1,14 +1,11 @@
 angular.module("app").controller "CreateWalletController", ($scope, $rootScope, $modal, $log, $location, $idle, RpcService, Wallet, Growl) ->
     $rootScope.splashpage = true
+
     $idle.unwatch()
 
     $scope.wallet_name = "default"
     $scope.spending_password = ""
     $scope.descriptionCollapsed = true
-    $scope.license_accepted = false
-
-    $scope.accept_license = ->
-          $scope.license_accepted = true
 
     $scope.submitForm = (isValid, password) ->
         if isValid

@@ -15,7 +15,7 @@
     "tip": {
         "privacy_statement": "Заявление о конфиденциальности",
         "warning": "Внимание",
-        "validate_symbol": "Тикер должен состоять из 3-5 символов в верхнем регистре",
+        "validate_symbol": "Тикер должен состоять из 3-8 символов в верхнем регистре",
         "validate_precision": "Точность должна быть больше 0 и должна быть степенью 10 (или 1).",
         "pay_with_info": "Регистрация стоит BTS, оплатить из",
         "reg_as_delegate": "Зарегистрирован как делегат",
@@ -60,6 +60,8 @@
         "precision": "ТОЧНОСТЬ",
         "current_share_supply": "ТЕКУЩЕЕ КОЛИЧЕСТВО АКЦИЙ",
         "maximum_share_supply": "МАКСИМАЛЬНОЕ КОЛИЧЕСТВО АКЦИЙ",
+        "share_supply": "КОЛИЧЕСТВО АКЦИЙ",
+        "asset": "АКТИВ",
         "collected_fees": "СОБРАННАЯ КОМИССИЯ",
         "registration_date": "ДАТА РЕГИСТРАЦИИ",
         "height": "Высота",
@@ -100,7 +102,8 @@
         "paid": "ОПЛАЧЕНО",
         "received": "ПОЛУЧЕНО",
         "expiration": "Истекает",
-        "interest_rate": "ДОХОДНОСТЬ (%)"
+        "interest_rate": "ДОХОДНОСТЬ (%)",
+        "message": "Сообщение"
     },
     "block": {
         "title": "Блок",
@@ -118,6 +121,8 @@
         "pending_trxs": "Ожидающие транзакции",
         "block_explorer": "Обозреватель блоков",
         "missing_block": "Блок пропущен",
+		"older": "Старый",
+		"newer": "Новый",
         "trx": {
             "title": "Транзакции",
             "expired_trx": "Просроченная транзакция",
@@ -139,10 +144,12 @@
     },
     "unlock": {
         "btn_unlock": "Разблокировать",
+        "caps_lock_on": "Caps Lock is on!",
         "desc_title": "BitShares Play",
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
-        "wrong_pass": "Неверный пароль."
+        "wrong_pass": "Неверный пароль.",
+        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
     },
     "wallet": {
         "create_new_wallet": "Создать новый бумажник",
@@ -175,18 +182,32 @@
         "standby_delegates": "Делегаты в режиме ожидания",
         "votes_obtained": "Одобрение",
         "version": "Версия",
-        "un_approve_all": "Против всех"
+        "un_approve_all": "Против всех",
+        "description": "Описание",
+        "proposal": "Delegate bid",
+        "location": "Разположение сервера",
+        "handle": "BitsharesTalk username",
+        "ann": "Announcements",
+        "country": "Legal jurisdiction",
+        "role_0": "Development",
+        "role_1": "Marketing",
+        "role_2": "Faucet",
+        "role_3": "Backbone",
+        "role_4": "Charity",
+        "role_5": "Technical Support",
+        "role_6": "Law/Regulations",
+        "role_7": "Media/Public Relations"
     },
     "market": {
         "title": "Рынок",
-        "featured_markets": "Featured рынки",
+        "featured_markets": "Рекомендуемые рынки",
         "search_market": "Поиск рынка",
-        "market_name": "Market Name",
+        "market_name": "Имя рынка",
         "all_markets": "Все рынки",
         "recent_markets": "Последние рынки",
         "median_price": "Медианная цена",
         "avg_price": "Средняя цена",
-        "feed_price": "Feed Price",
+        "feed_price": "Текущая цена",
         "bid_depth": "Глубина Предложения",
         "ask_depth": "Глубина Спроса",
         "buy": "Купить",
@@ -270,6 +291,7 @@
         "load_more_trxs": "Загрузить еще...",
         "all_trxs": "Вся история транзакций",
         "transfer": "Перевод средств",
+        "transfer_authorization": "Подтверждение Перевода",
         "amount": "Количество",
         "from": "От",
         "to": "Кому",
@@ -279,7 +301,7 @@
         "assets": "Активы",
         "keys": "Ключи",
         "advanced": "Дополнительно",
-        "account_key": "Ключ аккаунта",
+        "account_key": "Публичный ключ",
         "priv_key": "Закрытый ключ",
         "import_key": "Импортировать ключ",
         "wallet_type": "Тип бумажника",
@@ -296,6 +318,7 @@
         "email_tip": "Email (необязательно)",
         "active_delegate": "Активный делегат",
         "standby_delegate": "Делегат в режиме ожидания",
+        "rank": "Current rank",
         "toggle": {
             "favorite": "Переключить избранное",
             "approval": "Переключить одобрение"
@@ -310,7 +333,7 @@
             "vote_all": "Голосовать за всех",
             "vote_none": "Голосовать против всех",
             "vote_random_subset": "Избрать депутатов случайным образом",
-            "vote_as_delegates_recommended": "Голосовать согласно рекомендациям делегатов",
+            "vote_as_delegates_recommended": "Голосовать как рекомендуют мои делегаты",
             "btn_update_vote": "Обновить выбор",
             "current_votes": "Текущий выбор",
             "future_votes": "Планируемый выбор"
@@ -332,7 +355,17 @@
         "rename_account": "Переименовать аккаунт",
         "rename_account_locally": "Переименовать аккаунт локально",
         "public_info": "Общедоступная информация",
-        "estimated_yield": "ОЖИДАЕМАЯ ДОХОДНОСТЬ"
+        "estimated_yield": "ОЖИДАЕМАЯ ДОХОДНОСТЬ",
+        "wall" : {
+            "tab_title": "Стена",
+            "burn_records": "Burn Records",
+            "burn_post": "Burn/Post Message",
+            "message": "Message",
+            "post_message": "Post Message",
+            "burn_confirmation": "Burn/Post Message Confirmation",
+            "receiver": "Receiver",
+            "explain": "Burns given amount to {{account_name}}'s account. This will allow you to post message to this wall as a form of reputation."
+        }
     },
     "accounts": {
         "create_account": "Создать новый аккаунт",
@@ -345,7 +378,7 @@
         "symbol": "Тикер",
         "asset_name": "Название актива",
         "description": "Описание",
-        "memo_data": "Примечание",
+        "memo_data": "Публичная информация",
         "maximum_share_supply": "Максимальное количество акций",
         "total_supply": "Всего эмитировано",
         "precision": "Точность",
@@ -359,7 +392,9 @@
         "amount": "Количество",
         "issue_to": "Кому",
         "info_create_asset_fee": "Комиссия за создание нового актива",
-        "asset_create_auth": "Авторизация создания актива"
+        "asset_create_auth": "Авторизация создания актива",
+        "market_pegged_assets": "Market-Pegged Assets",
+        "user_issued_assets": "User-Issued Assets"
     },
     "privacy": {
         "email_warning1": "Адрес Вашей электронной почты используется только в целях идентификации Вашего аккаунта, ",
@@ -388,7 +423,10 @@
         "trx_fee": "Комиссия за транзакцию",
         "autocomplete_receiver": "Авто заполнение имени получателя",
         "autocomplete_info": "Авто заполнение имени получателя при наборе имени, в форме для перевода средств",
-        "language": "Язык интерфейса"
+        "language": "Язык интерфейса",
+        "theme": "Разблокировать экран Стиль",
+        "default": "дефолт",
+        "flowers": "цветы"
     },
     "console": {
         "type_cmd_and_enter": "Введите команду и нажмите Enter"
@@ -423,7 +461,8 @@
     "footer": {
         "enable_trx_scan": "Включить сканирование транзакций",
         "up_to_date": "Цепочка блоков загружена, обработано {{value}} блоков",
-        "catching_up": "Цепочка блоков загружается.. обработано {{value1}} из {{value2}} блоков"
+        "catching_up": "Цепочка блоков загружается.. обработано {{value1}} из {{value2}} блоков",
+        "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}"
     },
     "utils": {
         "expired": "Истек",

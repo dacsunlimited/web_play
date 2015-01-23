@@ -15,7 +15,7 @@
     "tip": {
         "privacy_statement": "Datenschutzerklärung",
         "warning": "Warnung",
-        "validate_symbol": "Das Symbol sollte aus 3-5 Großbuchstaben bestehen",
+        "validate_symbol": "Das Symbol sollte aus 3-8 Großbuchstaben bestehen",
         "validate_precision": "Die Präzision muss größer als 0 und als 10er-Exponent (10^x) darstellbar sein.",
         "pay_with_info": "Eine Registrierung kostet BTS, bezahlen mit",
         "reg_as_delegate": "Als Delegierter registrieren",
@@ -60,6 +60,8 @@
         "precision": "NACHKOMMASTELLEN",
         "current_share_supply": "AKTUELLES ANTEILSANGEBOT",
         "maximum_share_supply": "MAXIMALES ANTEILSANGEBOT",
+        "share_supply": "ANTEILSANGEBOT",
+        "asset": "ASSET",
         "collected_fees": "EINGENOMMENE GEBÜHREN",
         "registration_date": "REGISTRIERT AM",
         "height": "Höhe",
@@ -100,7 +102,8 @@
         "paid": "BEZAHLT",
         "received": "EMPFANGEN",
         "expiration": "ABLAUF",
-        "interest_rate": "Interest Rate (APR)"
+        "interest_rate": "Interest Rate (APR)",
+        "message": "Message"
     },
     "block": {
         "title": "Block",
@@ -118,6 +121,8 @@
         "pending_trxs": "Anstehende Transaktionen",
         "block_explorer": "Block Übersicht",
         "missing_block": "Verpasster Block",
+		"older": "Older",
+		"newer": "Newer",
         "trx": {
             "title": "Transaktionen",
             "expired_trx": "Abgelaufene Transaktionen",
@@ -143,6 +148,8 @@
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
         "wrong_pass": "Falsches Passwort."
+        "wrong_pass": "Falsches Passwort.",
+        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
     },
     "wallet": {
         "create_new_wallet": "Neue Kontensammlung (Wallet) erstellen",
@@ -175,7 +182,21 @@
         "standby_delegates": "Bereitstehende Delegierte",
         "votes_obtained": "Stimmen gesamt",
         "version": "Version",
-        "un_approve_all": "Alle Stimmen zurücknehmen"
+        "un_approve_all": "Alle Stimmen zurücknehmen",
+        "description": "Description",
+        "proposal": "Delegate bid",
+        "location": "Server location",
+        "handle": "BitsharesTalk username",
+        "ann": "Announcements",
+        "country": "Legal jurisdiction",
+        "role_0": "Development",
+        "role_1": "Marketing",
+        "role_2": "Faucet",
+        "role_3": "Backbone",
+        "role_4": "Charity",
+        "role_5": "Technical Support",
+        "role_6": "Law/Regulations",
+        "role_7": "Media/Public Relations"
     },
     "market": {
         "title": "Marktübersicht",
@@ -270,6 +291,7 @@
         "load_more_trxs": "Lade weitere Transaktionen...",
         "all_trxs": "Transaktionsverlauf",
         "transfer": "Überweisung",
+        "transfer_authorization": "Transfer Authorization",
         "amount": "Betrag",
         "from": "Von",
         "to": "An",
@@ -296,6 +318,7 @@
         "email_tip": "Email (Optional)",
         "active_delegate": "Aktive Delegierte",
         "standby_delegate": "Bereitstehende Delegierte",
+        "rank": "Current rank",
         "toggle": {
             "favorite": "Favorit",
             "approval": "Zustimmung"
@@ -332,7 +355,17 @@
         "rename_account": "Konto umbenennen",
         "rename_account_locally": "Konto lokal umbenennen",
         "public_info": "Öffentliche Informationen",
-        "estimated_yield": "Voraussichtlicher Ertrag"
+        "estimated_yield": "Voraussichtlicher Ertrag",
+        "wall" : {
+            "tab_title": "Wall",
+            "burn_records": "Burn Records",
+            "burn_post": "Burn/Post Message",
+            "message": "Message",
+            "post_message": "Post Message",
+            "burn_confirmation": "Burn/Post Message Confirmation",
+            "receiver": "Receiver",
+            "explain": "Burns given amount to {{account_name}}'s account. This will allow you to post message to this wall as a form of reputation."
+        }
     },
     "accounts": {
         "create_account": "Konto erstellen",
@@ -359,7 +392,9 @@
         "btn_issue": "Ausgeben",
         "amount": "Betrag",
         "issue_to": "An",
-        "asset_create_auth": "BitAsset wird erstellt..."
+        "asset_create_auth": "BitAsset wird erstellt...",
+        "market_pegged_assets": "Market-Pegged Assets",
+        "user_issued_assets": "User-Issued Assets"
     },
     "privacy": {
         "email_warning1": "Ihre Emailaddresse wir ausschließlich dazu genutzt Sie zu identifizieren.",
@@ -388,7 +423,10 @@
         "trx_fee": "Transaktionsgebühr",
         "autocomplete_receiver": "Empfängernamen vorschlagen",
         "autocomplete_info": "Zeigt bei Überweisungen automatisch alle möglichen Empfänger an.",
-        "language": "Sprache"
+        "language": "Sprache",
+        "theme": "Display entsperren Theme",
+        "default": "Default",
+        "flowers": "Blumen"
     },
     "console": {
         "type_cmd_and_enter": "Wählen Sie ein Kommando und bestätigen Sie anschließend mit der Eingabetaste."
@@ -423,7 +461,8 @@
     "footer": {
         "enable_trx_scan": "Aktiviere die Transaktionsüberprüfung",
         "up_to_date": "Der Datenstand ist aktuell. Letzter Block: {{value}}",
-        "catching_up": "Der Datenstand wird aktualisiert: {{value1}} von {{value2}} Blöcken verarbeitet"
+        "catching_up": "Der Datenstand wird aktualisiert: {{value1}} von {{value2}} Blöcken verarbeitet",
+        "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}"
     },
     "utils": {
         "expired": "Abgelaufen",

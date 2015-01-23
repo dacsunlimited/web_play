@@ -8,7 +8,7 @@ window.getStackTrace = ->
 
 app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
-     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid"])
+     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "utils.autofocus"])
 
 app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
     $templateCache.put 'ui-grid/uiGridViewport',
@@ -73,7 +73,7 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
         else
             $rootScope.context_help.show = false
             $rootScope.context_help.file = ""
-
+            
     $idle.watch()
 
 app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvider, $tooltipProvider) ->
@@ -86,8 +86,9 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
 
     lang = switch(window.navigator.language)
       when "zh-CN" then "zh-CN"
-      when "de", "de-de" then "de"
-      when "ru", "ru-RU" then "ru"
+      when "de", "de-DE", "de-de" then "de"
+      when "ru", "ru-RU", "ru-ru" then "ru"
+      when "it", "it-IT", "it-it" then "it"
       else "en"
     moment.locale(lang)
 
@@ -165,11 +166,11 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
 
     sp.state "account.transactions", { url: "/account_transactions?pending_only", views: { 'account-transactions': { templateUrl: 'account_transactions.html', controller: 'TransactionsController' } } }
 
-    sp.state "account.priceFeed", { url: "/account_delegate", views: { 'account-delegate-price-feed': { templateUrl: 'account_delegate_price_feeds.html', controller: 'AccountDelegatePriceFeeds' } } }
+    sp.state "account.delegate", { url: "/account_delegate", views: { 'account-delegate': { templateUrl: 'account_delegate.html', controller: 'AccountDelegate' } } }
 
     sp.state "account.transfer", { url: "/account_transfer?from&to&amount&memo&asset", views: { 'account-transfer': { templateUrl: 'transfer.html', controller: 'TransferController' } } }
 
-    #sp.state "account.manageAssets", { url: "/account_assets", views: { 'account-manage-assets': { templateUrl: 'manage_assets.html', controller: 'ManageAssetsController' } } }
+    sp.state "account.manageAssets", { url: "/account_assets", views: { 'account-manage-assets': { templateUrl: 'manage_assets.html', controller: 'ManageAssetsController' } } }
 
     sp.state "account.keys", { url: "/account_keys", views: { 'account-keys': { templateUrl: 'account_keys.html', controller: 'AccountController' } } }
 
@@ -178,6 +179,8 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
     sp.state "account.editLocal", { url: "/account_edit_local", views: { 'account-editlocal': { templateUrl: 'editlocal.html', controller: 'EditLocalController' } } }
 
     sp.state "account.vote", { url: "/account_vote", views: { 'account-vote': { templateUrl: 'account_vote.html', controller: 'AccountVoteController' } } }
+
+    sp.state "account.wall", { url: "/account_wall", views: { 'account-wall': { templateUrl: 'account_wall.html', controller: 'AccountWallController' } } }
 
     sp.state "asset",
         url: "/assets/:ticker"
@@ -238,3 +241,41 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
         url: "/newcontact?name&key"
         templateUrl: "newcontact.html"
         controller: "NewContactController"
+
+    sp.state "mail",
+        url: "/mail/:box"
+        templateUrl: "mail.html"
+        controller: "MailController"
+    
+    sp.state "mail.compose",
+        url: "/compose"
+        onEnter: ($modal, $state) ->
+            modal = $modal.open
+                templateUrl: "dialog-mail-compose.html"
+                controller: "ComposeMailController"
+                
+            modal.result.then(
+                (result) ->
+                    $state.go 'mail'
+                () ->
+                    $state.go 'mail'
+            )
+    
+    sp.state "mail.show",
+        url: "/show/:id"
+        onEnter: ($modal, $state) ->
+            modal = $modal.open
+                templateUrl: "dialog-mail-show.html"
+                controller: "ShowMailController"
+                
+            modal.result.then(
+                (result) ->
+                    $state.go 'mail'
+                () ->
+                    $state.go 'mail'
+            )
+
+    sp.state "referral_code",
+        url: "/referral_code?faucet&code"
+        templateUrl: "referral_code.html"
+        controller: "ReferralCodeController"

@@ -4,7 +4,7 @@ angular.module("app.directives", []).directive "formHgroup", ->
         <label class="col-sm-4 control-label" for="{{for}}"><span popover="{{labelPopover}}" popover-trigger="mouseenter">{{label}}</span></label>
         <div class="input-group col-sm-8 col-md-7">
             <span ng-transclude></span>
-            <span class="input-group-addon">{{addon}}</span>
+            <span ng-if="addon" class="input-group-addon">{{addon}}</span>
         </div>
         <div class="col-sm-offset-4" ng-show="error_message"><span class="help-block text-danger">{{error_message | translate}}</span></div>
         <div class="col-sm-offset-4" ng-show="help" ng-if="helpIf"><span class="help-block">{{help}}</span></div>
@@ -22,8 +22,9 @@ angular.module("app.directives", []).directive "formHgroup", ->
 
     link: (scope, element, attrs, formController) ->
         formName = formController.$name
-        fieldName = element.find(":input").attr("name")
+        fieldName = element.find("[name]").attr("name")
         field = scope.$parent[formName][fieldName]
+        return unless field
         field.clear_errors = ->
             scope.has_error = false
             scope.error_message = field.$error.message = ''
@@ -37,6 +38,14 @@ angular.module("app.directives", []).directive "formHgroup", ->
         scope.$parent.$watch errorExpression, (error_message) ->
             scope.error_message = error_message
             scope.has_error = scope.has_error or !!error_message
+
+    controller: ($scope, $element) ->
+        @clear_errors = ->
+            $scope.error_message = null
+            $scope.has_error = false
+        return @
+
+
 
 angular.module("app.directives").directive "formHgroupSubmitBtn", ->
     template: '''
@@ -55,8 +64,11 @@ angular.module("app.directives").directive "formHgroupSubmitBtn", ->
 
     link: (scope, element, attrs, formController) ->
         watchExpression = formController.$name + ".$valid"
-        scope.$parent.$watch watchExpression, (value) ->
-            element.find("button").attr("disabled", !value)
+        scope.$parent.$watch watchExpression, (valid) ->
+            element.find("button").attr("disabled", !valid)
+            help = element.find(".help-block")
+            if valid then help.show() else help.hide()
+
 
 
 angular.module("app.directives").directive "formHgroupError", ->
@@ -79,6 +91,8 @@ angular.module("app.directives").directive "formHgroupError", ->
         scope.$watch watchExpression, (value) ->
             scope.error_message = value
 
+
+
 angular.module("app.directives").directive "formHgroupValue", ->
     template: '''
     <div class="form-group">
@@ -94,6 +108,8 @@ angular.module("app.directives").directive "formHgroupValue", ->
         showValue: "@"
     compile: (element, attrs) ->
         attrs.showValue = true if attrs.showValue == undefined
+
+
 
 angular.module("app.directives").directive "formHgroupNote", ->
     template: '''

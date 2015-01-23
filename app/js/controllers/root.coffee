@@ -1,7 +1,8 @@
-angular.module("app").controller "RootController", ($scope, $location, $modal, $q, $http, $rootScope, $state, $stateParams, Wallet, Client, $idle, Shared, Info) ->
+angular.module("app").controller "RootController", ($scope, $location, $modal, $q, $http, $rootScope, $state, $stateParams, Wallet, Client, $idle, Shared, Info, WalletAPI, Observer) ->
     $scope.unlockwallet = false
     $scope.bodyclass = "cover"
     $scope.currentPath = $location.path()
+    $scope.theme = 'default'
 
     $scope.current_path_includes = (str)->
         $state.current.name.indexOf(str) >= 0
@@ -42,6 +43,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
         closeModals()
         $idle.watch()
         $scope.started = true
+        Info.watch_for_updates()
         return
 
     $scope.stopIdleWatch = ->
@@ -78,10 +80,29 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
 #            $scope.unlockwallet = false
 #            Wallet.check_wallet_status()
 
+    
     $scope.$watch ->
         Info.info.wallet_unlocked
     , (unlocked)->
+        switch unlocked
+            #when undefined
+                # console.log 'wallet_unlocked undefined'
+            when on
+                #console.log 'wallet_unlocked',unlocked
+                Observer.registerObserver Wallet.observer_config()
+            when off
+                #console.log 'wallet_unlocked',unlocked
+                Observer.unregisterObserver Wallet.observer_config()
         navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
+        if unlocked
+            #console.log 'unlocked, scan for mail accounts..'
+            WalletAPI.list_accounts().then (result) ->
+                for account in result
+                    continue unless account.is_my_account
+                    if account.public_data?.mail_servers
+                        #console.log 'unlocked, mail account found..'
+                        $scope.mail_enabled = on
+                        break
     , true
 
     $scope.clear_form_errors = (form) ->
