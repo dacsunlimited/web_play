@@ -103,7 +103,7 @@
         "received": "ПОЛУЧЕНО",
         "expiration": "Истекает",
         "interest_rate": "ДОХОДНОСТЬ (%)",
-        "message": "Message"
+        "message": "Сообщение"
     },
     "block": {
         "title": "Блок",
@@ -121,8 +121,8 @@
         "pending_trxs": "Ожидающие транзакции",
         "block_explorer": "Обозреватель блоков",
         "missing_block": "Блок пропущен",
-		"older": "Older",
-		"newer": "Newer",
+		"older": "Старый",
+		"newer": "Новый",
         "trx": {
             "title": "Транзакции",
             "expired_trx": "Просроченная транзакция",
@@ -149,7 +149,8 @@
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
         "spending_password": "Password",
-        "wrong_pass": "Неверный пароль."
+        "wrong_pass": "Неверный пароль.",
+        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
     },
     "wallet": {
         "create_new_wallet": "Создать новый бумажник",
@@ -183,9 +184,9 @@
         "votes_obtained": "Одобрение",
         "version": "Версия",
         "un_approve_all": "Против всех",
-        "description": "Description",
+        "description": "Описание",
         "proposal": "Delegate bid",
-        "location": "Server location",
+        "location": "Разположение сервера",
         "handle": "BitsharesTalk username",
         "ann": "Announcements",
         "country": "Legal jurisdiction",
@@ -200,14 +201,14 @@
     },
     "market": {
         "title": "Рынок",
-        "featured_markets": "Featured рынки",
+        "featured_markets": "Рекомендуемые рынки",
         "search_market": "Поиск рынка",
-        "market_name": "Market Name",
+        "market_name": "Имя рынка",
         "all_markets": "Все рынки",
         "recent_markets": "Последние рынки",
         "median_price": "Медианная цена",
         "avg_price": "Средняя цена",
-        "feed_price": "Feed Price",
+        "feed_price": "Текущая цена",
         "bid_depth": "Глубина Предложения",
         "ask_depth": "Глубина Спроса",
         "buy": "Купить",
@@ -301,7 +302,7 @@
         "assets": "Активы",
         "keys": "Ключи",
         "advanced": "Дополнительно",
-        "account_key": "Ключ аккаунта",
+        "account_key": "Публичный ключ",
         "priv_key": "Закрытый ключ",
         "import_key": "Импортировать ключ",
         "wallet_type": "Тип бумажника",

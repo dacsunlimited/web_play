@@ -149,7 +149,8 @@
         "desc_content_1": "BitShares PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
         "desc_content_2": "",
         "spending_password": "密 码",
-        "wrong_pass": "密码错误"
+        "wrong_pass": "密码错误",
+        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
     },
     "wallet": {
         "create_new_wallet": "创建新钱包",

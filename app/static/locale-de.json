@@ -149,7 +149,8 @@
         "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
         "desc_content_2": "",
         "spending_password": "Passwort",
-        "wrong_pass": "Falsches Passwort."
+        "wrong_pass": "Falsches Passwort.",
+        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
     },
     "wallet": {
         "create_new_wallet": "Neue Kontensammlung (Wallet) erstellen",

@@ -1,7 +1,7 @@
 angular.module("app").controller "RegistrationController", ($scope, $modalInstance, $window, Wallet, WalletAPI, Shared, RpcService, Blockchain, Info, Utils, Observer) ->
     $scope.symbolOptions = []
 
-    $scope.m = {}
+    $scope.m = { subaccount: $scope.account.name.indexOf(".") > -1 }
     $scope.m.payrate = 50
     $scope.m.delegate = false
     $scope.available_faucets = [
@@ -29,7 +29,7 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
             angular.forEach balances, (asset, symbol) ->
                 bals.push asset if asset.amount
             $scope.accounts[name] = [name, bals] if bals.length
-        $scope.m.payfrom = if $scope.accounts[$scope.account.name] then $scope.accounts[$scope.account.name] else $scope.accounts[Object.keys($scope.accounts)[0]]
+            $scope.m.payfrom = if $scope.accounts[$scope.account.name] then $scope.accounts[$scope.account.name] else $scope.accounts[Object.keys($scope.accounts)[0]]
 
     Wallet.get_accounts().then ->
         refresh_accounts()
@@ -40,7 +40,7 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
         $modalInstance.dismiss "cancel"
 
     $scope.register = ->
-        if $scope.m.faucet?.url and $scope.m.faucet.url != 'add'
+        if !$scope.m.payfrom and $scope.m.faucet?.url and $scope.m.faucet.url != 'add'
             url = "#{$scope.m.faucet.url}?account_name=#{$scope.account.name}&account_key=#{$scope.account.active_key}"
             if magic_unicorn?
                 magic_unicorn.open_in_external_browser(url)
