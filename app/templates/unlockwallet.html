@@ -15,9 +15,19 @@
 
   <div class="str-bottom">
     <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
-    <form ng-submit="submitForm()" role="form" novalidate class="form-horizontal">
+    <form name="unlock_form" ng-submit="submitForm()" role="form" novalidate class="form-horizontal">
 
-      <md-text-float ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp" type="password" label="{{'unlock.spending_password' | translate}}" tabindex="1" required focus autofocus ng-minlength="9" ng-maxlength="255" class="full-width" ng-disabled></md-text-float>
+      <md-input-container>
+        <label class="text-left" translate>unlock.spending_password</label>
+        <input ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp"
+                type="password" tabindex="1" required focus autofocus ng-minlength="9"
+                ng-maxlength="255" class="full-width" ng-disabled>
+        <div ng-messages="unlock_form.sp.$error" ng-show="unlock_form.sp.$error">
+          <div ng-message="required">This is required!</div>
+          <div ng-message="md-maxlength">That's too long!</div>
+          <div ng-message="minlength">That's too short!</div>
+        </div>
+      </md-input-container>
 
       <div layout="row" layout-align="center">
         <md-button flex="50" ng-disabled="loading_indicator.show" type="submit" tabindex="2" class="md-raised md-primary" translate > unlock.btn_unlock </md-button>

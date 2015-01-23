@@ -10,9 +10,11 @@ angular.module("app").controller "UnlockWalletController", ($scope, $rootScope, 
     $scope.update_available = false
     $scope.spending_password = ""
 
+    keyCode = (evt) ->
+      event.keyCode || event.which
+
     isCapsLockOn = ($event) ->
-        keyCode = if $event.keyCode then $event.keyCode else $event.which
-        char = String.fromCharCode(keyCode);
+        char = String.fromCharCode(keyCode($event));
         if (char.toUpperCase() == char.toLowerCase())
             return undefined
         isUpperCase = (char == char.toUpperCase())
@@ -20,7 +22,7 @@ angular.module("app").controller "UnlockWalletController", ($scope, $rootScope, 
 
     $scope.keydown = ($event) ->
         $scope.wrongPass = false
-        if ($event.keyCode == 20 && $scope.capsLockOn?)
+        if (keyCode($event) == 20 && $scope.capsLockOn?)
             $scope.capsLockOn = !$scope.capsLockOn;
 
     $scope.keypress = ($event) ->

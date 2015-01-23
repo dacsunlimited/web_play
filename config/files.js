@@ -14,6 +14,7 @@ module.exports = function(lineman) {
         "vendor/bower/growl/javascripts/jquery.growl.js",
         "vendor/bower/stacktrace/dist/stacktrace.js",
         "vendor/bower/angular/angular.js",
+        "vendor/bower/angular-messages/angular-messages.js",
         "vendor/js/bootstrap.js",
         // angular-material
         "vendor/bower/angular-animate/angular-animate.js",
