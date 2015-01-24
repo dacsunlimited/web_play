@@ -3,16 +3,27 @@ angular.module("app").controller "DirectoryController", ($scope, $state, $locati
     $scope.first_letter = ""
 
     # tabs
-    $scope.tabs = []
-    $scope.tabs.push { heading: "directory.favorites", route: "directory.favorites", active: true }
-    $scope.tabs.push { heading: "directory.unregistered", route: "directory.unregistered", active: false }
-    $scope.tabs.push { heading: "directory.registered", route: "directory.registered", active: false }
-    $scope.tabs.push { heading: "directory.assets", route: "directory.assets", active: false }
+    $scope.tabs = [
+      { heading: "directory.favorites", route: "directory.favorites", active: true, icon: "fa-star" },
+      { heading: "directory.unregistered", route: "directory.unregistered", active: false, icon: "fa-eye-slash" },
+      { heading: "directory.registered", route: "directory.registered", active: false, icon: "fa-globe" },
+      { heading: "directory.assets", route: "directory.assets", active: false, icon: "fa-renren" }
+    ]
+
     $scope.goto_tab = (route) ->
         params = {letter: $scope.first_letter}
         $state.go route, params
+
+    $scope.$watch 'selectedIndex', (cur_index, old_index) ->
+      cur_index = cur_index or 0
+
+      tab = $scope.tabs[cur_index]
+      $scope.goto_tab(tab.route)
+
     $scope.active_tab = (route) -> $state.is route
+
     $scope.$on "$stateChangeSuccess", ->
+        console.log 'stateChangeSuccess'
         if $state.current.name == "directory.registered"
             $scope.first_letter = $state.params.letter or "a"
         $scope.tabs.forEach (tab) ->

@@ -1,25 +1,21 @@
-<div class="header">
-<div class="col-sm-12">
-    <h3 class="header-title" translate>index.console</h3>
+<md-card>
+  <md-card-content>
+    <div class="header">
+      <h3 class="header-title" translate>index.console</h3>
+    </div>
+
     <form ng-submit='submit()'>
-        <input 
+        <input
             id='cmd' ng-model="console_state.command" autofocus
-            typeahead="command for command in console_state.typeahead | filter:$viewValue | startsWithSort:$viewValue | limitTo:16 |  concatTypeAheadWorkAround:$viewValue | escapeHtmlList" 
-            typeahead-editable="true" 
-            placeholder="{{'console.type_cmd_and_enter'|translate}}" 
-            ng-trim="false" class="form-control" id="spending_password" 
+            typeahead="command for command in console_state.typeahead | filter:$viewValue | startsWithSort:$viewValue | limitTo:16 |  concatTypeAheadWorkAround:$viewValue | escapeHtmlList"
+            typeahead-editable="true"
+            placeholder="{{'console.type_cmd_and_enter'|translate}}"
+            ng-trim="false" class="form-control" id="spending_password"
             typeahead-on-select="select($item)">
     </form>
-    <br>
-    <div class="header-info">&nbsp;&nbsp;&nbsp;{{console_state.quick_help}}</div>
-</div>
-</div>
-<div class="header">
-    <div class="col-sm-12">
-        <div class="main-content">
-            <div ng-repeat="output in console_state.outputs track by $index">
-              <pre>{{output}}</pre>
-            </div>
-        </div>
+
+    <div ng-repeat="output in console_state.outputs track by $index">
+      <pre>{{output}}</pre>
     </div>
-</div>
+  </md-card-content>
+</md-card>

@@ -1,0 +1,40 @@
+.body {
+  margin-top: 36px;
+  height: 100%;
+  position: relative;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.content {
+  background: none;
+  overflow-y: auto;
+  zoom: 1;
+  margin-top: 0;
+  padding-bottom: 60px;
+  height: 100%;
+}
+
+body.fixed_header .wrapper {
+  padding-top: 0;
+}
+
+md-content.main-content {
+  background-color: #eee;
+}
+
+md-card {
+  background-color: white;
+}
+
+.header .header-title {
+  text-shadow:none; margin-bottom:0px;
+}
+
+/* tabs*/
+md-tabs.md-default-theme .md-header { background-color: white; border-bottom:1px solid #999;}
+md-tabs.md-default-theme md-tab.active { color: #666; }
+md-tabs.md-default-theme md-tab { color: #999; }
+md-tabs.md-default-theme md-tabs-ink-bar { background: $lgreen; }

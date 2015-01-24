@@ -23,52 +23,32 @@
       <div class="context-help-content" ng-include src="context_help.file"></div>
     </div>
     </pageslide>
-    <div class="wrapper" flex layout="row" ng-class="theme" layout-fill>
-      <!-- SIDEBAR -->
-      <md-sidenav class="md-sidenav-left md-whiteframe-z2 sidebar" md-component-id="sidenav" md-is-locked-open="$media('gt-md')">
-        <md-toolbar class="md-theme-indigo" layout="row" ng-controller="SidenavController">
-          <h1 class="md-toolbar-tools">BitShares PLAY</h1>
-          <span flex></span>
-          <md-button ng-click="back()" tooltip="Back" tooltip-placement="bottom">
-            <i class="fa fa-chevron-left"></i>
-          </md-button>
-          <md-button ng-click="forward()" tooltip="Forward" tooltip-placement="bottom" flex-offset="5">
-            <i class="fa fa-chevron-right"></i>
-          </md-button>
-        </md-toolbar>
-
-        <md-content class="md-padding" ng-controller="SidenavController" role="navigation">
-          <md-button ng-click="close()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
-          </md-button>
-
+    <div class="wrapper" flex layout="vertical" ng-class="theme" layout-fill>
+      <!-- TOOLBAR -->
+      <div class="navbar navbar-default navbar-static-top navbar-main" role="navigation" ng-controller="ToolbarController">
+        <div ng-include src="'toolbar.html'"></div>
+      </div>
+      <div class="body" flex layout="row" layout-align="center center">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
           <ul class="nav nav-stacked">
             <li ui-sref-active="active"><a ui-sref="home"><i class="fa fa-home fa-fw"></i>{{ 'index.overview' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="accounts"><i class="fa fa-bank fa-fw"></i>{{ 'index.my_account' | translate }}</a></li>
             <li ng-class="{active: current_path_includes('directory')}"><a ui-sref="directory.favorites"><i class="fa fa-book fa-fw"></i>{{ 'index.directory' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="delegates"><i class="fa fa-flag fa-fw"></i>{{ 'index.delegates' | translate }}</a></li>
-            <li ng-class="{active: current_path_includes('chips')}" class="disabled"><a ui-sref="chips"><i class="fa fa-exchange fa-fw"></i>{{ 'index.chips' | translate }}</a></li>
-            <li ng-class="{active: current_path_includes('games')}" class="disabled"><a ui-sref="games"><i class="fa fa-exchange fa-fw"></i>{{ 'index.games' | translate }}</a></li>
+            <li ng-class="{active: current_path_includes('chips')}"><a ui-sref="chips"><i class="fa fa-exchange fa-fw"></i>{{ 'index.chips' | translate }}</a></li>
+            <li ng-class="{active: current_path_includes('games')}"><a ui-sref="games"><i class="fa fa-exchange fa-fw"></i>{{ 'index.games' | translate }}</a></li>
             <li ng-class="{active: current_path_includes('blocks')}"><a ui-sref="blocks"><i class="fa fa-link fa-fw"></i>{{ 'index.block_explorer' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="preferences"><i class="fa fa-gears fa-fw"></i>{{ 'index.preferences' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="console"><i class="fa fa-terminal fa-fw"></i>{{ 'index.console' | translate }}</a></li>
             <li ng-class="{active: current_path_includes('mail')}" ng-show="mail_enabled"><a ui-sref="mail({box:'inbox'})"><i class="fa fa-envelope fa-fw"></i>{{ 'index.mail' | translate }}</a></li>
             <li ui-sref-active="active"><a ui-sref="help"><i class="fa fa-question-circle fa-fw"></i>{{ 'index.help' | translate }}</a></li>
           </ul>
-        </md-content>
-      </md-sidenav>
-
-      <div layout="column" layout-fill>
-        <!-- Toolbar -->
-        <md-toolbar class="md-default-theme" ng-if="!splashpage" ng-controller="ToolbarController">
-          <div layout="row" class="md-toolbar-tools fill-height" ng-include src="'toolbar.html'"></div>
-        </md-toolbar>
-
-        <!-- View -->
-        <md-content ui-view md-scroll-y flex class="md-padding main-content"></md-content>
-
+        </aside>
+        <section class="content" flex layout layout-align="center center">
+          <div ui-view flex></div>
+        </section>
       </div>
-
     </div>
     <div loading-indicator></div>
     <footer ng-if="!splashpage" ng-class="alert_level" ng-controller="FooterController">
