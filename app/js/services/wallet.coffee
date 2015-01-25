@@ -5,7 +5,7 @@ class Wallet
 
     balances: {}
     bonuses: {}
-    
+
     #open_orders_balances: {}
 
     asset_balances : {}
@@ -28,7 +28,7 @@ class Wallet
     pendingRegistrations: {}
 
     current_account: null
-    
+
     #Long time
     backendTimeout: 999999
 
@@ -39,7 +39,7 @@ class Wallet
     interface_locale: null
 
     interface_theme = 'default'
-    
+
     observer_config:->
         name: "WalletEachBlockObserver"
         frequency: "each_block"
@@ -56,7 +56,7 @@ class Wallet
     set_current_account: (account) ->
         @current_account = account
         @set_setting("current_account", account.name)
-    
+
     check_wallet_status: ->
         deferred = @q.defer()
         @open().then =>
@@ -145,13 +145,13 @@ class Wallet
 #                    @open_orders_balances[name][quote.symbol] = @utils.asset(order.state.balance, @blockchain.symbol2records[quote.symbol])
 
     refresh_bonuses_promise: null
-    
+
     refresh_bonuses: ->
         if @utils.too_soon("refresh_bonuses", 10 * 1000)
             return @refresh_bonuses_promise.then (response) =>
                 #console.log "wallet_account_yield(): too soon #{response}"
                 return response
-    
+
         @refresh_bonuses_promise = @wallet_api.account_yield("").then (response) =>
             @blockchain.refresh_asset_records().then () =>
                 #console.log "wallet_account_yield()",response
@@ -209,8 +209,8 @@ class Wallet
     refresh_accounts: (prevent_rapid_refresh = true) ->
         @refresh_accounts_request = on
         if @refresh_accounts_promise and prevent_rapid_refresh
-            return @refresh_accounts_promise 
-        
+            return @refresh_accounts_promise
+
         deferred = @q.defer()
         @refresh_accounts_promise = deferred.promise
         @refresh_accounts_request = off
@@ -232,7 +232,7 @@ class Wallet
             #console.log '[Wallet] check_vote_proportion',response
             deferred.resolve(response)
         @check_vote_proportion_promise
-        
+
     get_setting: (name) ->
         @wallet_api.get_setting(name)
 
@@ -437,13 +437,14 @@ class Wallet
     get_wallet_name: ->
         @rpc.request('wallet_get_name').then (response) =>
           @wallet_name = response.result
-    
+
     wallet_get_info: (error_handler = null) ->
         @rpc.request('wallet_get_info', [], error_handler).then (response) =>
             @info.transaction_fee = response.result.transaction_fee if response.result
             response.result
 
     wallet_add_contact_account: (name, address, error_handler) ->
+        console.log name
         @rpc.request('wallet_add_contact_account', [name, address], error_handler).then (response) =>
           response.result
 
@@ -473,7 +474,7 @@ class Wallet
     open: ->
         @rpc.request('wallet_open', ['default']).then (response) =>
           response.result
-    
+
     get_block: (block_num)->
         @rpc.request('blockchain_get_block', [block_num]).then (response) ->
           response.result

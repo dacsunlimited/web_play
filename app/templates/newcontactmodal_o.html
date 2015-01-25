@@ -1,8 +1,8 @@
-<md-dialog aria-label="{{'contact.new_contact'|translate}}">
+<div class="container-fluid">
 <div class="modal-header">
   <h3 class="modal-title" translate>contact.new_contact</h3>
 </div>
-<md-content>
+<div class="row">
   <div class="col-md-2">
     <div class="avatar">
       <br/>
@@ -24,12 +24,10 @@
         </div>
       </div>
     </form>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-disabled="!newcontact.$valid" ng-click="ok()">&nbsp; {{ 'btn.ok' | translate }} &nbsp;</button>
+      <button class="btn btn-warning" ng-click="cancel()">{{ 'btn.cancel' | translate }}</button>
+    </div>
   </div>
-</md-content>
-
-<div class="md-actions" layout="row">
-  <md-button ng-click="cancel()">{{ 'btn.cancel' | translate }}</md-button>
-  <md-button class="md-primary" ng-disabled="!newcontact.$valid" ng-click="ok()">{{ 'btn.ok' | translate }}</md-button>
 </div>
-
-</md-dialog>
+ </div>

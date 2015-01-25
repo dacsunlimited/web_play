@@ -43,3 +43,8 @@ span.help-block {
 .input-group-addon.label-success {
 	color: #fff;
 }
+
+
+.md-actions .md-button:not(.md-fab) {
+  min-width:8em;
+}

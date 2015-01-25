@@ -1,4 +1,4 @@
-angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, Wallet, WalletAPI, Blockchain, Utils, Info, Growl) ->
+angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, Wallet, WalletAPI, Blockchain, Utils, Info, Growl, $mdDialog) ->
     Info.refresh_info()
     $scope.utils = Utils
     $scope.balances = []
@@ -64,32 +64,32 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                     $scope.no_account = true
 
     #$scope.showLoadingIndicator(refresh_accounts_promise)
-    
+
     Blockchain.get_info().then (config) ->
         $scope.memo_size_max = config.memo_size_max
-    
+
     $scope.setForm = (form) ->
         my_transfer_form = form
-    
+
     # Validation and display prior to form submit
     $scope.hot_check_send_amount = ->
         return unless tx_fee
         return unless $scope.balances
         return unless $scope.balances[$scope.transfer_info.symbol]
         return unless my_transfer_form.amount
-        
+
         my_transfer_form.amount.error_message = null
-        
+
         if tx_fee.asset_id != tx_fee_asset.id
             console.log "ERROR hot_check[_send_amount] encountered unlike transfer and fee assets"
             return
-        
+
         fee=tx_fee.amount/tx_fee_asset.precision
         transfer_amount=$scope.transfer_info.amount
         _bal=$scope.balances[$scope.transfer_info.symbol]
         balance = _bal.amount/_bal.precision
         balance_after_transfer = balance - transfer_amount - fee
-        
+
         #display "New Balance 999 (...)"
         $scope.transfer_asset = Blockchain.symbol2records[$scope.transfer_info.symbol]
         $scope.balance_after_transfer = balance_after_transfer
@@ -97,7 +97,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         $scope.balance_precision = _bal.precision
         #transfer_amount -> already available as $scope.transfer_info.amount
         $scope.fee = fee
-        
+
         my_transfer_form.$setValidity "funds", balance_after_transfer >= 0
         if balance_after_transfer < 0
             my_transfer_form.amount.error_message = "Insufficent funds"
@@ -113,7 +113,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             Blockchain.get_asset(tx_fee.asset_id).then (_tx_fee_asset) ->
                 tx_fee_asset = _tx_fee_asset
                 $scope.hot_check_send_amount()
-    
+
     yesSend = ->
         WalletAPI.transfer($scope.transfer_info.amount, $scope.transfer_info.symbol, account_from_name, $scope.transfer_info.payto, $scope.transfer_info.memo, $scope.transfer_info.vote).then (response) ->
             $scope.transfer_info.payto = ""
@@ -149,8 +149,8 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                         transfer_type: ->
                             if $scope.transfer_asset.id is 0 then 'xts' else ''
 
-    $scope.newContactModal = ->
-        $modal.open
+    $scope.newContactModal = ($event) ->
+        $mdDialog.show
             templateUrl: "newcontactmodal.html"
             controller: "NewContactModalController"
             resolve:

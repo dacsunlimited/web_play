@@ -1,9 +1,9 @@
-angular.module("app").controller "NewContactModalController", ($scope, $modalInstance, Wallet, Utils, contact_name, action) ->
+angular.module("app").controller "NewContactModalController", ($scope, Wallet, Utils, $mdDialog, contact_name, action) ->
     $scope.name = contact_name if contact_name
     $scope.address = ''
 
     $scope.cancel = ->
-        $modalInstance.dismiss "cancel"
+        $mdDialog.cancel()
 
     $scope.ok = ->
         form = @newcontact
@@ -17,5 +17,5 @@ angular.module("app").controller "NewContactModalController", ($scope, $modalIns
             form.address.error_message = if message and message.length > 2 then message else "Not valid public key"
         Wallet.wallet_add_contact_account($scope.name, $scope.address, error_handler).then (response) ->
             Wallet.refresh_accounts()
-            $modalInstance.close("ok")
+            $mdDialog.close("ok")
             action($scope.name) if action
