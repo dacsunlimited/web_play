@@ -90,7 +90,7 @@ module.exports = function(lineman) {
 
     css: {
       vendor: [
-        "vendor/bower/growl/jquery.growl.css",
+        "vendor/bower/growl/stylesheets/jquery.growl.css",
         "vendor/bower/angular-material/angular-material.css",
         "vendor/bower/angular-ui-grid/ui-grid.css",
         "vendor/bower/angular-xeditable/dist/css/xeditable.css",

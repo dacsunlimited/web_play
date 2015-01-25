@@ -1,15 +1,17 @@
-<div ng-class="(account.delegate_info) ? 'row head-bg-delegate p-inner' : 'row head-bg p-inner'">
-  <div class="col-sm-2">
-    <div class="avatar-150">
-      <img ng-src="http://robohash.org/set_1/{{account_name}}?size=150x150" height="150" width="150"/>
-    </div>
-    <br/>
-    <div class="text-center avatar-150">
-      <button ng-click="toggleFavorite()" class="btn btn-sm btn-link primary" tooltip="{{ 'account.toggle.favorite' | translate }}">
-        <i ng-class="(account.is_favorite) ? 'fa fa-star fa-2x' : 'fa fa-star-o fa-2x'"></i>
-      </button>
-      <button ng-click="toggleVoteUp()" class="btn btn-sm btn-link primary"
-              tooltip="{{ 'account.toggle.approval' | translate }}">
+<md-card>
+
+  <div ng-class="(account.delegate_info) ? 'head-bg-delegate p-inner' : 'head-bg p-inner'">
+    <div class="col-sm-2">
+      <div class="avatar-150">
+        <img ng-src="http://robohash.org/set_1/{{account_name}}?size=150x150" height="150" width="150"/>
+      </div>
+      <br/>
+      <div class="text-center avatar-150">
+        <button ng-click="toggleFavorite()" class="btn btn-sm btn-link primary" tooltip="{{ 'account.toggle.favorite' | translate }}">
+          <i ng-class="(account.is_favorite) ? 'fa fa-star fa-2x' : 'fa fa-star-o fa-2x'"></i>
+        </button>
+        <button ng-click="toggleVoteUp()" class="btn btn-sm btn-link primary"
+        tooltip="{{ 'account.toggle.approval' | translate }}">
         <i ng-if="account.approved>0" class='fa fa-thumbs-up fa-2x'></i>
         <i ng-if="!account.approved || account.approved==0" class='fa fa-thumbs-o-up fa-2x'></i>
         <i ng-if="account.approved<0" class='fa fa-thumbs-down fa-2x'></i>
@@ -31,131 +33,131 @@
             <div ng-switch-default>
               <div class="pull-right">
                 <a ng-show="account.is_my_account" style="margin-top: 4px;" type="submit" ng-click='regDial()' class="btn btn-primary"><i
-                    class="fa fa-credit-card fa-lg fa-fw"></i> {{'account.reg' | translate}} {{account.name}}</a>
+                  class="fa fa-credit-card fa-lg fa-fw"></i> {{'account.reg' | translate}} {{account.name}}</a>
+                </div>
+                <span class="account-name">{{account.name}}</span>
+                &nbsp;&nbsp; <span class="text-muted">{{"tip.not_reg_onchain" | translate}}</span>
               </div>
-              <span class="account-name">{{account.name}}</span>
-              &nbsp;&nbsp; <span class="text-muted">{{"tip.not_reg_onchain" | translate}}</span>
             </div>
           </div>
+          <div ng-switch-default class="reg-date" style="" class="white-shadow">
+            <span class="account-name">{{account.name}}</span> &nbsp;
+            <i class="fa fa-fw fa-check text-success"></i> <span tooltip=" {{ 'account.reg_date' | translate }}: {{ account.registration_date | prettyDate }}">{{ 'directory.registered' | translate }}</span>
+            &nbsp; <a target="_blank" href='http://{{ website }}'>{{ website }}</a>
+            <div ng-if="delegate.role" style='color:white;font-size:150%'>Role: {{ delegate.role }}</div>
+          </div>
         </div>
-        <div ng-switch-default class="reg-date" style="" class="white-shadow">
-          <span class="account-name">{{account.name}}</span> &nbsp;
-          <i class="fa fa-fw fa-check text-success"></i> <span tooltip=" {{ 'account.reg_date' | translate }}: {{ account.registration_date | prettyDate }}">{{ 'directory.registered' | translate }}</span>
-          &nbsp; <a target="_blank" href='http://{{ website }}'>{{ website }}</a>
-          <div ng-if="delegate.role" style='color:white;font-size:150%'>Role: {{ delegate.role }}</div>
-        </div>
-      </div>
-      <div ng-if="account.delegate_info">
-      <div class='white-shadow' ng-if="active_delegate" translate>account.active_delegate</div>
-      <div class='white-shadow' ng-if="!active_delegate" translate>account.standby_delegate</div>
-      <div class='white-shadow'>{{ 'account.rank' | translate }}: {{ rank }}</div>
-      <table class="table table-striped table-acc-balance">
-        <thead>
-          <tr>
-            <th translate>th.approval</th>
-            <th translate>th.reliability</th>
-            <th translate>th.blk_produced</th>
-            <th translate>th.blk_missed</th>
-            <th translate>th.pay_rate</th>
-            <th translate>th.pay_balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-                <span ng-switch on='del.delegate_info.votes_for/current_xts_supply<0.0001'
-                      tooltip="Approval: {{ account.delegate_info.votes_for | formatVotes}}">
-          <span ng-switch-when='true'>&#60;0.01%</span>
-          <span ng-switch-default>{{ (account.delegate_info.votes_for)/current_xts_supply*100 | number:2 }}%</span>
-        </span>
-            </td>
-            <td ng-switch on='account.delegate_info.blocks_produced>0 || account.delegate_info.blocks_missed>0'>
-              <span ng-switch-when='true'>{{ account.delegate_info.blocks_produced/(account.delegate_info.blocks_produced + account.delegate_info.blocks_missed)*100 | number:2 }}%</span>
-              <span ng-switch-default translate>unknown</span>
-            </td>
-            <td>{{ account.delegate_info.blocks_produced }}</td>
-            <td>{{ account.delegate_info.blocks_missed }}</td>
-            <td>{{ account.delegate_info.pay_rate }}%</td>
-            <td>
+        <div ng-if="account.delegate_info">
+          <div class='white-shadow' ng-if="active_delegate" translate>account.active_delegate</div>
+          <div class='white-shadow' ng-if="!active_delegate" translate>account.standby_delegate</div>
+          <div class='white-shadow'>{{ 'account.rank' | translate }}: {{ rank }}</div>
+          <table class="table table-striped table-acc-balance">
+            <thead>
+              <tr>
+                <th translate>th.approval</th>
+                <th translate>th.reliability</th>
+                <th translate>th.blk_produced</th>
+                <th translate>th.blk_missed</th>
+                <th translate>th.pay_rate</th>
+                <th translate>th.pay_balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span ng-switch on='del.delegate_info.votes_for/current_xts_supply<0.0001'
+                  tooltip="Approval: {{ account.delegate_info.votes_for | formatVotes}}">
+                  <span ng-switch-when='true'>&#60;0.01%</span>
+                  <span ng-switch-default>{{ (account.delegate_info.votes_for)/current_xts_supply*100 | number:2 }}%</span>
+                </span>
+              </td>
+              <td ng-switch on='account.delegate_info.blocks_produced>0 || account.delegate_info.blocks_missed>0'>
+                <span ng-switch-when='true'>{{ account.delegate_info.blocks_produced/(account.delegate_info.blocks_produced + account.delegate_info.blocks_missed)*100 | number:2 }}%</span>
+                <span ng-switch-default translate>unknown</span>
+              </td>
+              <td>{{ account.delegate_info.blocks_produced }}</td>
+              <td>{{ account.delegate_info.blocks_missed }}</td>
+              <td>{{ account.delegate_info.pay_rate }}%</td>
+              <td>
                 {{account.delegate_info.pay_balance_asset | formatAsset}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <span class="account-key" ng-show="account.registration_date === '1970-01-01T00:00:00'">{{ 'account.account_key' | translate}}: {{account.active_key}}</span>
   </div>
 
   <div class="col-sm-5">
-  <!--  TODO
-    <div class="pull-right p-inner">
+    <!--  TODO
+      <div class="pull-right p-inner">
       <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
-        <thead>
-          <tr>
-            <th><h3 class="header-title text-muted" translate>IN OPEN ORDERS</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="(symbol, asset) in open_orders_balances">
-            <td>
-              {{asset | formatAsset}}
-            </td>
-          </tr>
-        </tbody>
+      <thead>
+      <tr>
+      <th><h3 class="header-title text-muted" translate>IN OPEN ORDERS</h3></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="(symbol, asset) in open_orders_balances">
+      <td>
+      {{asset | formatAsset}}
+      </td>
+      </tr>
+      </tbody>
       </table>
+      </div>
+      -->
     </div>
-  -->
+
+
+    <div class="col-sm-2">
+      <div class="pull-right p-inner">
+        <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
+          <thead>
+            <tr>
+              <th><h3 class="header-title text-muted" translate>account.balances</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(symbol, asset) in balances">
+              <td>
+                {{asset | formatAsset}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="col-sm-3">
+      <div class="pull-right p-inner">
+        <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
+          <thead>
+            <tr>
+              <th><h3 class="header-title text-muted" translate>account.estimated_yield</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(symbol, asset) in bonuses">
+              <td>
+                {{asset | formatAsset}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
   </div>
 
 
-  <div class="col-sm-2">
-    <div class="pull-right p-inner">
-      <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
-        <thead>
-          <tr>
-            <th><h3 class="header-title text-muted" translate>account.balances</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="(symbol, asset) in balances">
-            <td>
-              {{asset | formatAsset}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<md-card-content>
 
 
-  <div class="col-sm-3">
-    <div class="pull-right p-inner">
-      <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
-        <thead>
-          <tr>
-            <th><h3 class="header-title text-muted" translate>account.estimated_yield</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="(symbol, asset) in bonuses">
-            <td>
-              {{asset | formatAsset}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-</div>
-
-<div class="main-content">
 <div class="row">
-
-  <!--<button class="btn btn-primary"><i class="fa fa-file-excel-o fa-lg fa-fw"></i> Issue assets</button>
-  <button class="btn btn-primary">Free Registration</button> -->
 
   <div class="col-sm-12">
     <tabset>
@@ -201,7 +203,7 @@
         <tab-heading><i class="fa fa-edit fa-fw fa-lg"></i> {{ 'btn.edit' | translate }}</tab-heading>
         <div ui-view="account-editlocal"></div>
       </tab>
-      
+
       <!-- Vote tab -->
       <tab ng-click="goto_tab('account.vote')" active="tabs[7].active" ng-if='account.is_my_account'>
         <tab-heading><i class="fa fa-ticket fa-fw fa-lg"></i>{{'account.vote.tab_title'|translate}}</tab-heading>
@@ -218,4 +220,6 @@
 
   </div>
 </div>
-</div>
+
+</md-card-content>
+</md-card>

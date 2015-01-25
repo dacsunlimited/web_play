@@ -70,7 +70,7 @@ servicesModule.factory "Utils", ($translate,$q) ->
     assetValue: (asset) ->
         return 0.0 unless asset
         asset.amount / asset.precision
-    
+
     toDate: (t) ->
         new Date(@toUTCDate(t))
 
@@ -162,7 +162,7 @@ servicesModule.factory "Utils", ($translate,$q) ->
         deferred.promise
 
     too_soon_times: {}
-    
+
     too_soon: (name, time_mills) ->
         now = Date.now()
         was = @too_soon_times[name]
@@ -211,4 +211,3 @@ servicesModule.factory "Utils", ($translate,$q) ->
     parseFloat: (str) -> parseFloat(str.replace(/,/g, ""))
 
     parseInt: (str) -> parseInt(str.replace(/,/g, ""))
-

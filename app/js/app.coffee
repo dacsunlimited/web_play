@@ -85,7 +85,7 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
         suffix: '.json'
 
     lang = switch(window.navigator.language)
-      when "zh-CN" then "zh-CN"
+      when "zh-CN", "zh-cn" then "zh-CN"
       when "de", "de-DE", "de-de" then "de"
       when "ru", "ru-RU", "ru-ru" then "ru"
       when "it", "it-IT", "it-it" then "it"
