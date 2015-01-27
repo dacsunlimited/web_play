@@ -23,7 +23,6 @@ angular.module("app").controller "DirectoryController", ($scope, $state, $locati
     $scope.active_tab = (route) -> $state.is route
 
     $scope.$on "$stateChangeSuccess", ->
-        console.log 'stateChangeSuccess'
         if $state.current.name == "directory.registered"
             $scope.first_letter = $state.params.letter or "a"
         $scope.tabs.forEach (tab) ->

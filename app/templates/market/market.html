@@ -4,7 +4,7 @@
     <div class="account-selector pull-right">
       <span class="title">{{'account.name'|translate}} &nbsp;</span>
       <div class="btn-group" dropdown is-open="status.isopen">
-        <button type="button" class="btn btn-primary dropdown-toggle">
+        <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
           {{account ? account.name : ('accounts.select_account' | translate)}} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">

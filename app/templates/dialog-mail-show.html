@@ -11,7 +11,7 @@
         <label for="from" class="col-xs-2 control-label" translate>mail.sender</label>
         <div class="col-sm-10">
             <div class="btn-group" dropdown is-open="status.isopen">
-                <button type="button" id="from" class="form-control btn btn-primary dropdown-toggle">{{mail.sender}} <span class="caret"></span></button>
+                <button type="button" id="from" class="form-control btn btn-primary dropdown-toggle" dropdown-toggle>{{mail.sender}} <span class="caret"></span></button>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
 <textarea readonly class="form-control" rows="5" ng-model="mail.body" placeholder="{{ 'mail.body' | translate }}"></textarea>
 
 <div class="col-xs-12">
-    <span class="alert alert-danger" 
+    <span class="alert alert-danger"
         ng-show="mail.failure_reason">{{'mail.' + mail.failure_reason | translate}}</span>
 </div>
 
