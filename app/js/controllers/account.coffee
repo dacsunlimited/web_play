@@ -9,7 +9,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     $scope.formatAsset = Utils.formatAsset
     $scope.model = {}
     $scope.model.rescan = true
-    
+
     # tabs
     $scope.tabs = []
     $scope.tabs.push { heading: "account.transactions", route: "account.transactions", active: true }
@@ -27,7 +27,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     $scope.$on "$stateChangeSuccess", ->
         $scope.tabs.forEach (tab) ->
             tab.active = $scope.active_tab(tab.route)
-    
+
     $scope.transfer_info =
         amount : null
         symbol : "Symbol not set"

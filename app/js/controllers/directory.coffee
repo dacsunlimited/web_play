@@ -7,7 +7,7 @@ angular.module("app").controller "DirectoryController", ($scope, $state, $locati
       { heading: "directory.favorites", route: "directory.favorites", active: true, icon: "fa-star" },
       { heading: "directory.unregistered", route: "directory.unregistered", active: false, icon: "fa-eye-slash" },
       { heading: "directory.registered", route: "directory.registered", active: false, icon: "fa-globe" },
-      { heading: "directory.assets", route: "directory.assets", active: false, icon: "fa-renren" }
+      # { heading: "directory.assets", route: "directory.assets", active: false, icon: "fa-renren" }
     ]
 
     $scope.goto_tab = (route) ->
