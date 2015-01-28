@@ -35,6 +35,6 @@ md-card {
 
 /* tabs*/
 md-tabs.md-default-theme .md-header { background-color: white; border-bottom:1px solid #999;}
-md-tabs.md-default-theme md-tab.active { color: #666; }
-md-tabs.md-default-theme md-tab { color: #999; }
+md-tabs.md-default-theme md-tab.active { color: $header_color; }
+md-tabs.md-default-theme md-tab { color: $body_color; }
 md-tabs.md-default-theme md-tabs-ink-bar { background: $lgreen; }

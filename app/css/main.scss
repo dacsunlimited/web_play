@@ -4,7 +4,12 @@ $lyellow: #FFF000;
 $lgreen: #009940;
 $lpink: #E30883;
 
+$header_color: #000;
+$subheader_color: #333;
+$body_color: #333;
+
 //@import '*.css';
+@import 'bootstrap_overrides';
 @import 'splashpage';
 @import 'layout';
 @import 'sidebar';
@@ -68,7 +73,7 @@ a:hover, a:focus, {
 /* Colors & Gradients */
 
 body {
-	color: #555;
+	color: $body_color;
 	background-color: #fff;
 }
 
@@ -418,4 +423,13 @@ input.ng-dirty.ng-invalid {
 .referral-success p, .referral-success i {
 	font-size: 200%;
 	color: #00aa00;
+}
+
+.header {
+  .header-title {
+    color: $header_color;
+  }
+  .header-info {
+    color: $subheader_color;
+  }
 }
