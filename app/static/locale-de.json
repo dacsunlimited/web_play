@@ -158,7 +158,12 @@
     "wallet": {
         "create_new_wallet": "Neue Kontensammlung (Wallet) erstellen",
         "info": "Ihr Passwort ist unverzichtbar. Vergessen Sie es nicht! Teilen Sie es nicht! Ohne Ihr Passwort ist kein Zugriff auf Ihre Kontensammlung (Wallet) möglich.",
-        "create_wallet": "Kontensammlung (Wallet) erstellen"
+        "create_wallet": "Kontensammlung (Wallet) erstellen",
+        "confirm_password": "Confirm Password",
+        "pwd_too_short": "Password is too short. It must be 9 or more characters.",
+        "pwd_too_long": "Password is too long. It can be at most 255 characters.",
+        "pwd_required": "Password is required.",
+        "pwd_not_match": "Password fields do not match."
     },
     "index": {
         "title": "BitShares Wallet",

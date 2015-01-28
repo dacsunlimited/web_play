@@ -158,7 +158,12 @@
     "wallet": {
         "create_new_wallet": "Создать новый бумажник",
         "info": "Пароль является обязательным и защищает доступ к Вашим средствам. Если вы забудете этот пароль, вы больше не сможете получить доступ к своим средствам.",
-        "create_wallet": "Создать бумажник"
+        "create_wallet": "Создать бумажник",
+        "confirm_password": "Confirm Password",
+        "pwd_too_short": "Password is too short. It must be 9 or more characters.",
+        "pwd_too_long": "Password is too long. It can be at most 255 characters.",
+        "pwd_required": "Password is required.",
+        "pwd_not_match": "Password fields do not match."
     },
     "index": {
         "title": "BitShares Бумажник",

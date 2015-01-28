@@ -153,12 +153,17 @@
         "desc_content_2": "",
         "spending_password": "密 码",
         "wrong_pass": "密码错误",
-        "risks_warning": "Warning: This is experimental software. Make sure you understand the risks."
+        "risks_warning": "警告：这是一个实验性软件。请注意风险。"
     },
     "wallet": {
         "create_new_wallet": "创建新钱包",
-        "info": "请记住该密码，它将控制你的资金何时以及如何被花。如果你忘记该密码，你将无法转账使用你的资金或股份。",
-        "create_wallet": "创建钱包"
+        "info": "请记住该密码，它将控制你的资金。如果你忘记该密码，你将无法转账使用你的资金或股份。",
+        "create_wallet": "创建钱包",
+        "confirm_password": "重复密码",
+        "pwd_too_short": "密码太短，至少9个字符",
+        "pwd_too_long": "密码太长，最多255个字符",
+        "pwd_required": "密码必填",
+        "pwd_not_match": "2次输入的密码不符"
     },
     "index": {
         "title": "BitShares 钱包",
@@ -424,7 +429,7 @@
     },
     "pref": {
         "title": "设置",
-        "logout_timeout": "钱包自动锁定时间",
+        "logout_timeout": "钱包自动锁定时间（秒）",
         "trx_fee": "交易手续费",
         "autocomplete_receiver": "自动补全转账接受账号",
         "autocomplete_info": "在转账表单中，当用户输入收款账户信息时，自动完成账户名称",

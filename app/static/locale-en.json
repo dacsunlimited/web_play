@@ -158,7 +158,12 @@
     "wallet": {
         "create_new_wallet": "Create a New Wallet",
         "info": "Your password is mandatory and controls when and how your funds may be spent. If you forget this password you will be unable to transfer your shares.",
-        "create_wallet": "Create Wallet"
+        "create_wallet": "Create Wallet",
+        "confirm_password": "Confirm Password",
+        "pwd_too_short": "Password is too short. It must be 9 or more characters.",
+        "pwd_too_long": "Password is too long. It can be at most 255 characters.",
+        "pwd_required": "Password is required.",
+        "pwd_not_match": "Password fields do not match."
     },
     "index": {
         "title": "BitShares Wallet",

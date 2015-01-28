@@ -158,7 +158,12 @@
     "wallet": {
         "create_new_wallet": "Crea un nuovo Portafoglio",
         "info": "La password è obbligatoria, da essa dipende quando e come i tuoi fondi possono essere spesi. Se dimentichi questa password non ti sarà più possibile trasferire le tue quote.",
-        "create_wallet": "Crea Portafoglio"
+        "create_wallet": "Crea Portafoglio",
+        "confirm_password": "Confirm Password",
+        "pwd_too_short": "Password is too short. It must be 9 or more characters.",
+        "pwd_too_long": "Password is too long. It can be at most 255 characters.",
+        "pwd_required": "Password is required.",
+        "pwd_not_match": "Password fields do not match."
     },
     "index": {
         "title": "BitShares Portafoglio",
