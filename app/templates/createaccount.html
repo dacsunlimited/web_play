@@ -19,7 +19,7 @@
         <label for="account_name" translate>account.name</label>
         <input ng-model="f.name" name="account_name" autofocus form-name="createaccount" popover-append-to-body='true' show-note-1="true" show-note-2="false" required>
         <div ng-messages="createaccount.account_name.$error">
-          <div ng-message="required">This is required.</div>
+          <div ng-message="required" translate>tip.this_is_required</div>
         </div>
       </md-input-container>
 

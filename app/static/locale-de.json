@@ -42,7 +42,10 @@
         "no_trxs": "Keine Transaktionen!",
         "updating_trx_history": "Aktualisiere Liste der Transaktionen ...",
         "partial_voting_info": "Dieses Konto hat verfügbare Stimmen. Nutzen Sie Ihr Recht und wählen Sie Ihre favorisierten Delegierten mit dem gesamten Kontostand.",
-        "client_update_available": "Eine neues zwingend Update ist verfügbar. Besuchen Sie bitte http://www.bitshares-x.info"
+        "client_update_available": "Eine neues zwingend Update ist verfügbar. Besuchen Sie bitte http://www.bitshares-x.info",
+        "required": "This is required",
+        "too_long": "This is too long",
+        "too_short": "This is too short"
     },
     "th": {
         "date": "DATUM",
