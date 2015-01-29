@@ -15,11 +15,11 @@
   <div class="col-sm-9">
     <form name="createaccount" class="form-horizontal m-top" role="form" ng-submit="createaccount.$valid && createAccount()" novalidate>
 
-      <md-input-container flex ng-class="{ 'has-error' : (createaccount.account_name.$invalid || createaccount.account_name.error_message) && !createaccount.account_name.$pristine }">
+      <md-input-container flex>
         <label for="account_name" translate>account.name</label>
         <input ng-model="f.name" name="account_name" autofocus form-name="createaccount" popover-append-to-body='true' show-note-1="true" show-note-2="false" required>
-        <div ng-messages="createaccount.account_name.$error">
-          <div ng-message="required" translate>tip.this_is_required</div>
+        <div ng-messages="createaccount.account_name.$error" ng-show="(createaccount.account_name.$invalid || createaccount.account_name.error_message) && !createaccount.account_name.$pristine">
+          <div ng-message="required"><span translate>tip.required</span></div>
         </div>
       </md-input-container>
 
