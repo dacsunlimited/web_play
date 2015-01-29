@@ -41,7 +41,7 @@ class Observer
                 observer.busy = false
                 deferred_returned.resolve()
             deferred_returned.promise
-                
+
         last_new_block_update_time: 0
 
 
@@ -64,7 +64,7 @@ class Observer
             , 250
             return
         @private.update(observer, @q)
-        
+
     registerObserver: (observer) ->
         if @private.observers[observer.name]
             @log.warn("Observer.registerObserver: observer '#{observer.name}' is already registered")
@@ -81,7 +81,7 @@ class Observer
 
     unregisterObserver: (observer) ->
         unless @private.observers[observer.name]
-            @log.error("Observer.unregisterObserver: cannot find '#{observer.name}' observer")
+            @log.warn("Observer.unregisterObserver: cannot find '#{observer.name}' observer")
             return
         @interval.cancel(observer.interval_promise) if observer.interval_promise
         delete @private.observers[observer.name]

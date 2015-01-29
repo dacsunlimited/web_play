@@ -85,17 +85,15 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
         Info.info.wallet_unlocked
     , (unlocked)->
         switch unlocked
-            #when undefined
-                # console.log 'wallet_unlocked undefined'
+            # when undefined
+            #     console.log 'wallet_unlocked undefined'
             when on
-                #console.log 'wallet_unlocked',unlocked
                 Observer.registerObserver Wallet.observer_config()
             when off
-                #console.log 'wallet_unlocked',unlocked
                 Observer.unregisterObserver Wallet.observer_config()
         navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
         if unlocked
-            #console.log 'unlocked, scan for mail accounts..'
+            console.log 'unlocked, scan for mail accounts..'
             WalletAPI.list_accounts().then (result) ->
                 for account in result
                     continue unless account.is_my_account
