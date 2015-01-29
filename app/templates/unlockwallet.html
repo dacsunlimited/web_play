@@ -22,7 +22,7 @@
         <input ng-keydown='keydown()' ng-trim="false" ng-model="spending_password" name="sp"
                 type="password" tabindex="1" required focus autofocus ng-minlength="9"
                 ng-maxlength="255" class="full-width" ng-disabled>
-        <div ng-messages="unlock_form.sp.$error" ng-show="unlock_form.sp.$error && !wform.sp.$pristine">
+        <div ng-messages="unlock_form.sp.$error" ng-show="unlock_form.sp.$error && !unlock_form.sp.$pristine">
           <div ng-message="required"><span translate>tip.required</span></div>
           <div ng-message="md-maxlength"><span translate>tip.too_long</span></div>
           <div ng-message="minlength"><span translate>tip.too_short</span></div>
