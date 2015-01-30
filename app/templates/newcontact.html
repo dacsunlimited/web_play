@@ -28,7 +28,7 @@
 
         <md-input-container flex ng-class="{ 'has-error' : (newcontact.address.$invalid || newcontact.address.error_message) && !newcontact.address.$pristine }">
           <label for="address" translate>contact.public_key</label>
-          <input id="address" ng-model="address" form-name="newcontact" required>
+          <input id="address" ng-model="address" name="address" form-name="newcontact" required>
           <div ng-messages="newcontact.address.error_message && !newcontact.address.$pristine">
             <div ng-message="required"><span translate>tip.required</span></div>
             <div ng-message="required">{{newcontact.address.error_message}}</div>
