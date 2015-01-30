@@ -48,6 +48,9 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
             break unless prev_page
             break unless prev_page.state == "createwallet" or prev_page.state == "unlockwallet"
         return false if window.history.length < history_counter
+        if prev_page
+            navigate_to(prev_page.state)
+            return true
         $window.history.go(0 - history_counter)
         return true
 
