@@ -92,7 +92,7 @@ angular.module("app.directives").directive "inputAssetAmount", ($compile) ->
         <div class="input-asset-amount">
         <input style="width: 12em;" class="form-control" ng-model="amount.value" placeholder="0.0 {{required ? '' : '(optional)'}}" />
         <div class="input-group-btn" dropdown is-open="status.isopen">
-          <button type="button" class="btn dropdown-toggle" dropdown-toggle ng-disabled="false">{{amount.symbol}} <span class="caret"></span></button>
+          <button type="button" class="btn dropdown-toggle" ng-disabled="false">{{amount.symbol}} <span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu">
             <li ng-repeat="s in symbols">
               <a ng-click="amount.symbol = s; status.isopen = false">{{s}}</a>
@@ -114,6 +114,7 @@ angular.module("app.directives").directive "inputAssetAmount", ($compile) ->
         hgroup_ctrl = controllers[1]
 
         ctrl.$parsers.push (viewValue) ->
+            # console.log 'parsers: ', viewValue
             res = null
             if !viewValue.value and (!scope.required or ctrl.$pristine)
                 # TODO: ctrl.$pristine is always false for some reason
@@ -134,12 +135,15 @@ angular.module("app.directives").directive "inputAssetAmount", ($compile) ->
             return {value: modelValue.value, symbol: modelValue.symbol}
 
         scope.$watch 'amount.value + amount.symbol', ->
-            ctrl.$setViewValue(scope.amount)
+            # console.log 'amount.value+amount.symbol: ', scope.amount
+            ctrl.$modelValue.value = scope.amount.value
+            # ctrl.$setViewValue(scope.amount)
             hgroup_ctrl.clear_errors()
 
         scope.$watch ->
             ctrl.$modelValue
         , (val) ->
+            # console.log 'ctrl.$modelValue: ', val
             return unless val
             ctrl.$viewValue.value = val.value
             ctrl.$viewValue.symbol = val.symbol
