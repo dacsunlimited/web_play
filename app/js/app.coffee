@@ -6,6 +6,12 @@ window.getStackTrace = ->
            break
     trace.join("\n ○ ")
 
+window.open_external_url = (url) ->
+    if magic_unicorn?
+        magic_unicorn.open_in_external_browser(url)
+    else
+        window.open(url)
+
 app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
      "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages"])
@@ -36,23 +42,28 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
     editableThemes['default'].submitTpl = '<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-check fa-lg"></i></button>'
     editableThemes['default'].cancelTpl = '<button type="button" ng-click="$form.$cancel()" class="btn btn-sm btn-warning"><i class="fa fa-times fa-lg"></i></button>'
 
+    history_back_in_process = false
     $rootScope.$on "$stateChangeSuccess", (event, toState, toParams, fromState, fromParams) ->
-        app_history.push {state: fromState.name, params: fromState} if fromState.name
+        app_history.push {state: fromState.name, params: fromParams} if fromState.name and !history_back_in_process
+        $window.scrollTo(0,0)
 
     $rootScope.history_back = ->
-        return false if app_history.length == 0 or window.history.length == 0
-        history_counter = 0
+        return false if app_history.length == 0
         loop
-            history_counter += 1
             prev_page = app_history.pop()
             break unless prev_page
             break unless prev_page.state == "createwallet" or prev_page.state == "unlockwallet"
-        return false if window.history.length < history_counter
+        # return false if window.history.length < history_counter
+        # if prev_page
+        #     navigate_to(prev_page.state)
+        #     return true
+        # $window.history.go(0 - history_counter)
+        # return true
         if prev_page
-            navigate_to(prev_page.state)
-            return true
-        $window.history.go(0 - history_counter)
-        return true
+            history_back_in_process = true
+            $state.transitionTo(prev_page.state, prev_page.params).then (res) ->
+                history_back_in_process = false
+        return !!prev_page
 
     $rootScope.history_forward = ->
         $window.history.forward()
@@ -77,9 +88,13 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
             $rootScope.context_help.show = false
             $rootScope.context_help.file = ""
 
+    $rootScope.current_account = null
+
     $idle.watch()
 
-app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvider, $tooltipProvider) ->
+app.config ($idleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
+
+    $compileProvider.debugInfoEnabled(false);
 
     $tooltipProvider.options { appendToBody: true }
 
@@ -92,10 +107,13 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
       when "de", "de-DE", "de-de" then "de"
       when "ru", "ru-RU", "ru-ru" then "ru"
       when "it", "it-IT", "it-it" then "it"
+      when "ko", "ko-KR", "ko-kr" then "ko"
       else "en"
+
     moment.locale(lang)
 
     $translateProvider.preferredLanguage(lang)
+    .fallbackLanguage('en');
 
     $idleProvider.idleDuration(1776)
     $idleProvider.warningDuration(60)
@@ -277,8 +295,3 @@ app.config ($idleProvider, $stateProvider, $urlRouterProvider, $translateProvide
                 () ->
                     $state.go 'mail'
             )
-
-    sp.state "referral_code",
-        url: "/referral_code?faucet&code"
-        templateUrl: "referral_code.html"
-        controller: "ReferralCodeController"

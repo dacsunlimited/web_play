@@ -48,3 +48,17 @@ span.help-block {
 .md-actions .md-button:not(.md-fab) {
   min-width:8em;
 }
+.input-vgroup {
+	width: 100%;
+}
+
+.remove-btn {
+	color: #777;
+	height: 20px;
+	vertical-align: middle;
+	font-size: 20px;
+}
+
+.form-row-header {
+	margin-bottom: 6px;
+}

@@ -66,6 +66,18 @@
        </tr>
       </tbody>
     </table>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="header">
+                       <h3 class="header-title" translate>block.trx.title</h3>
+
+              <div class=" col-sm-12 pull-right p-inner">
+                  <span translate>tip.info_filter_by_op</span>:&nbsp;<input ng-model="operation_filter" type="text"/>
+              </div>
+             </div>
+        </div>
+    </div>
   </md-card-content>
 </md-card>
 
@@ -79,38 +91,35 @@
   </div>
 </div>
 
-<div id="transaction_summary">
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th translate>th.trx_id</th>
-        <th translate>th.withdraw_amount</th>
-        <th translate>th.deposit_amount</th>
-        <th translate>th.net_delegate_approval</th>
-        <th translate>th.operation_types</th>
-        <th translate>th.fee</th>
-      </tr>
-    </thead>
+
+   <div class="col-sm-12">
+       <div id="transaction_summary">
+       <table class="table table-striped">
+         <thead>
+         <tr>
+           <th translate>th.trx_id</th>
+           <th translate>th.withdraw_amount</th>
+           <th translate>th.deposit_amount</th>
+           <th translate>th.net_delegate_approval</th>
+           <th translate>th.operation_types</th>
+                <th translate>th.fee</th>
+         </tr>
+         </thead>
 
     <tbody>
       <tr ng-repeat="t in block.transactions" ng-if="t.operations | filterByOperations: operation_filter ">
-        <td><a href="#/tx/{{t.id}}">{{ t.id.substr(0,8) }}</a></td>
-        <td>
-          <div ng-repeat="withdraw in t.a_withdraws"><span>{{withdraw | formatAsset}}</span><br></div>
-        </td>
-        <td>
-          <div ng-repeat="deposit in t.a_deposits"><span>{{deposit | formatAsset}}</span><br></div>
-        </td>
-        <td>
-          <div ng-repeat="net_vote in t.net_delegate_votes | limitTo: 3">
-            <span><a href="#/accounts/{{ net_vote[3] }}">{{ net_vote[3] }}</a>:&nbsp; </span>
-            <span>{{ net_vote[2] | formatAsset }}</span><br>
-          </div>
-        </td>
-        <td>
-          <div ng-repeat="operation in t.operations"><span>-&nbsp;{{ operation.type | formatOperationType}}</span><br></div>
-        </td>
-        <td><div ng-repeat="b in t.balance"><span>{{ b[2] | formatAsset }}</span><br></div></td>
+                <td><a href="#/tx/{{t.id}}">{{ t.id.substr(0,8) }}</a></td>
+                <td>
+                    <div ng-repeat="withdraw in t.a_withdraws"><span>{{withdraw | formatAsset}}</span><br></div></td>
+                <td>
+                    <div ng-repeat="deposit in t.a_deposits"><span>{{deposit | formatAsset}}</span><br></div></td>
+                <td>
+                    <div ng-repeat="net_vote in t.net_delegate_votes | limitTo: 3">
+                        <span><a ui-sref="account.transactions({name: net_vote[3]})">{{ net_vote[3] }}</a>:&nbsp; </span>
+                        <span>{{ net_vote[2] | formatAsset }}</span><br></div></td>
+                <td>
+                    <div ng-repeat="operation in t.operations"><span>-&nbsp;{{ operation.type | formatOperationType}}</span><br></div></td>
+                <td><div ng-repeat="b in t.balance"><span>{{ b[2] | formatAsset }}</span><br></div></td>
       </tr>
       <tr ng-if=" block.transactions.length == 0 ">
         <td><span translate>tip.info_no_trx</span></td>

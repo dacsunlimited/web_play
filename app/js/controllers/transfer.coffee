@@ -1,4 +1,4 @@
-angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, Wallet, WalletAPI, Blockchain, Utils, Info, Growl, $mdDialog) ->
+angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, $filter, Wallet, WalletAPI, Blockchain, Utils, Info, Growl, $mdDialog) ->
     Info.refresh_info()
     $scope.utils = Utils
     $scope.balances = []
@@ -9,18 +9,13 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         $scope.account_from_name = account_from_name = $scope.account_name
     $scope.gravatar_account_name = null
 
-    $scope.memo_size_max = 19
+    $scope.memo_size_max = 51
     my_transfer_form = null
     tx_fee = null
     tx_fee_asset = null
     $scope.no_account = false
     $scope.model ||= {}
-    $scope.model.autocomplete = Wallet.autocomplete
-
-    $scope.$watch ->
-        Wallet.autocomplete
-    , ->
-        $scope.model.autocomplete = Wallet.autocomplete
+    $scope.add_to_address_book = {}
 
     if (!$scope.transfer_info)
         $scope.transfer_info =
@@ -28,7 +23,8 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             symbol: $stateParams.asset || Info.symbol
             payto : $stateParams.to
             memo :  $stateParams.memo
-            vote : 'vote_random'
+            show_vote_options: Wallet.default_vote == "vote_per_transfer"
+            vote : if Wallet.default_vote == "vote_per_transfer" then "vote_all" else Wallet.default_vote
 
     $scope.vote_options =
         vote_none: "vote_none"
@@ -65,8 +61,10 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
 
     #$scope.showLoadingIndicator(refresh_accounts_promise)
 
-    Blockchain.get_info().then (config) ->
-        $scope.memo_size_max = config.memo_size_max
+
+#    TODO: uncomment when 19->51 chars transition finish
+#    Blockchain.get_info().then (config) ->
+#        $scope.memo_size_max = config.memo_size_max
 
     $scope.setForm = (form) ->
         my_transfer_form = form
@@ -115,7 +113,8 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                 $scope.hot_check_send_amount()
 
     yesSend = ->
-        WalletAPI.transfer($scope.transfer_info.amount, $scope.transfer_info.symbol, account_from_name, $scope.transfer_info.payto, $scope.transfer_info.memo, $scope.transfer_info.vote).then (response) ->
+        vote = if Wallet.default_vote == "vote_per_transfer" then $scope.transfer_info.vote else Wallet.default_vote
+        WalletAPI.transfer($scope.transfer_info.amount, $scope.transfer_info.symbol, account_from_name, $scope.transfer_info.payto, $scope.transfer_info.memo, vote).then (response) ->
             $scope.transfer_info.payto = ""
             my_transfer_form.payto.$setPristine()
             $scope.transfer_info.amount = ""
@@ -123,23 +122,30 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             $scope.transfer_info.memo = ""
             Growl.notice "", "Transfer transaction broadcasted"
             $scope.model.t_active=true
-        ,
-        (error) ->
-            if (error.data.error.code==20005)
+        , (error) ->
+            if error.data.error.code == 20005
                 my_transfer_form.payto.error_message = "Unknown receive account"
-            if (error.data.error.code==20010)
+            else if error.data.error.code == 20010
                 my_transfer_form.amount.error_message = "Insufficient funds"
+            else
+                my_transfer_form.payto.error_message = Utils.formatAssertException(error.data.error.message)
 
     $scope.send = ->
         my_transfer_form.amount.error_message = null
         my_transfer_form.payto.error_message = null
+        payto = $scope.transfer_info.payto
         amount_asset = $scope.balances[$scope.transfer_info.symbol]
         transfer_amount = Utils.formatDecimal($scope.transfer_info.amount, amount_asset.precision)
         WalletAPI.get_transaction_fee($scope.transfer_info.symbol).then (tx_fee) ->
             transfer_asset = Blockchain.symbol2records[$scope.transfer_info.symbol]
             Blockchain.get_asset(tx_fee.asset_id).then (tx_fee_asset) ->
                 transaction_fee = Utils.formatAsset(Utils.asset(tx_fee.amount, tx_fee_asset))
-                trx = {to: $scope.transfer_info.payto, amount: transfer_amount + ' ' + $scope.transfer_info.symbol, fee: transaction_fee, memo: $scope.transfer_info.memo, vote: $scope.vote_options[$scope.transfer_info.vote]}
+                trx =
+                    to: payto
+                    amount: transfer_amount + ' ' + $scope.transfer_info.symbol
+                    fee: transaction_fee, memo: $scope.transfer_info.memo
+                    vote: $scope.vote_options[$scope.transfer_info.vote]
+                    is_favorite: !!Wallet.favorites[payto]
                 $modal.open
                     templateUrl: "dialog-transfer-confirmation.html"
                     controller: "DialogTransferConfirmationController"
@@ -149,10 +155,15 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                         transfer_type: ->
                             if $scope.transfer_asset.id is 0 then 'xts' else ''
 
+    # TODO: CONFLICT resolve needed
     $scope.newContactModal = ($event) ->
         $mdDialog.show
             templateUrl: "newcontactmodal.html"
             controller: "NewContactModalController"
+    # $scope.newContactModal = ->
+    #     $modal.open
+    #         templateUrl: "addressbookmodal.html"
+    #         controller: "AddressBookModalController"
             resolve:
                 contact_name: ->
                     $scope.transfer_info.payto
@@ -160,53 +171,35 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                     (contact)->
                         $scope.transfer_info.payto = contact
 
-    $scope.onSelect = ($item, $model, $label) ->
-        console.log('selected!',$item, $model, $label)
-        $scope.transfer_info.payto=$label.name
-        $scope.gravatar_account_name = $scope.transfer_info.payto
+    $scope.onSelect = (name) ->
+        $scope.transfer_info.payto = name
+        $scope.gravatar_account_name = name
 
     $scope.accountSuggestions = (input) ->
-        nItems=10
-        deferred = $q.defer()
-        ret = []
-        regHash={}
-        $scope.gravatar_account_name = ""
-        Blockchain.list_accounts(input, nItems).then (response) ->
-            angular.forEach response, (val) ->
-                if val.name.substring(0, input.length) == input
-                    regHash[val.name]=true
-                    if !Wallet.accounts[val.name]
-                        ret.push {'name': val.name}
-            angular.forEach Wallet.accounts, (val) ->
-                if val.name.substring(0, input.length) == input
-                    if (regHash[val.name])
-                        ret.push {'name': val.name, 'is_favorite': val.is_favorite, 'approved': val.approved}
+        $filter('filter')(Object.keys(Wallet.favorites),input)
+
+    $scope.addToAddressBook = (name) ->
+        error_handler = (error) ->
+            message = Utils.formatAssertException(error.data.error.message)
+            $scope.add_to_address_book.error = if message and message.length > 2 then message else "Unknown account"
+        WalletAPI.account_set_favorite(name, true, error_handler).then ->
+            account = Wallet.accounts[name]
+            if account
+                account.is_favorite = true
+                Wallet.favorites[name] = account
+                $scope.add_to_address_book.message = "Added to address book"
+            else
+                Wallet.refresh_account(name).then (account) ->
+                    if account
+                        account.is_favorite = true
+                        Wallet.favorites[name] = account
+                        $scope.add_to_address_book.message = "Added to address book"
                     else
-                        ret.push {'name': val.name, 'is_favorite': val.is_favorite, 'approved': val.approved, 'unregistered': true}
-            ret.sort(compare)
+                        $scope.add_to_address_book.error = "Unknown account"
+                , (error) ->
+                    $scope.add_to_address_book.error = "Unknown account"
 
-            deferred.resolve(ret)
-        return deferred.promise
-
-    compare = (a, b) ->
-        return -1  if a.name < b.name
-        return 1  if a.name > b.name
-        0
-
-    $scope.toggleVoteUpContact = (name) ->
-        newApproval=1
-        if ($scope.accounts[name] && $scope.accounts[name].approved>0)
-            newApproval=-1
-        if ($scope.accounts[name] && $scope.accounts[name].approved<0)
-            newApproval=0
-        Wallet.approve_account(name, newApproval).then (res)->
-            Wallet.refresh_account(name).then () ->
-                $scope.accounts=Wallet.accounts
-
-    $scope.toggleFavoriteContact = (name) ->
-        is_favorite=true
-        if (Wallet.accounts[name] && Wallet.accounts[name].is_favorite)
-            is_favorite=false
-        WalletAPI.account_set_favorite(name, is_favorite).then () ->
-            Wallet.refresh_account(name).then () ->
-                $scope.accounts=Wallet.accounts
+    $scope.payToChanged = ->
+        $scope.add_to_address_book.message = null
+        $scope.add_to_address_book.error = null
+        my_transfer_form?.payto.error_message = null

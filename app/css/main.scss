@@ -48,6 +48,7 @@ a:focus {
 
 a:hover, a:focus, {
 	color: #115176;
+	text-decoration: none !important;
 }
 
 .delegate-active-link{
@@ -101,6 +102,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.no-bottom-border {
+	border-bottom: none !important;
+}
+
 a.white:hover {
 	color: #000;
 	opacity: 0.4;
@@ -108,7 +113,7 @@ a.white:hover {
 
 .white-shadow {
 	color: #fff;
-	text-shadow: 0 1px 2px black;
+	/*text-shadow: 0 1px 2px black;*/
 }
 
 .green {
@@ -125,7 +130,7 @@ a.white:hover {
 }
 
 .primary {
-	color: #01bbf4;
+	color: #1B6FC1;
 }
 
 .bg-secondary {
@@ -137,7 +142,7 @@ a.white:hover {
 }
 
 .secondary {
-	color: #01bbf4;
+	color: #1B6FC1;
 }
 
 .bg-third {
@@ -153,6 +158,17 @@ a.white:hover {
 .m-top {
 	margin-top: 24px;
 }
+
+.no-top-space {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.no-bottom-space {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
 
 .m-bottom {
 	margin-bottom: 12px;
@@ -216,19 +232,19 @@ a.white:hover {
 }
 
 .sidebar .nav .active > a, .sidebar .nav .active > a:hover, .sidebar .nav .active > a:focus {
-	border-left: solid 3px #01bbf4;
+	border-left: solid 3px #1B6FC1;
 }
 
 /* Buttons & Elements */
 
 .btn-top-right {
-	margin: 32px 2px 0 0;
+	margin-top: 10px;
 }
 
 /* Header Section  */
 
 .head-bg {
-	background: #0c3146 url('../img/xt-background.jpg') no-repeat left top;
+	background: #3a5b7a url('../img/xt-background.jpg') no-repeat left top;
 	background-size: cover;
 }
 
@@ -237,7 +253,11 @@ a.white:hover {
 	background-size: cover;
 }
 
-.head-bg-delegate .primary {
+.head-bg-delegate .primary, .head-bg .primary {
+	color: #ddd;
+}
+
+.head-bg-delegate .primary:hover, .head-bg .primary:hover {
 	color: #fff;
 }
 
@@ -270,7 +290,7 @@ li.stat {
 	color: #fff;
 	font-weight: 100;
 	letter-spacing: 1px;
-	margin-top: 24px;
+	margin-bottom: 0;
 }
 
 .table-acc-balance td {
@@ -320,6 +340,19 @@ li.stat {
 .move-right-50px {
 	position: relative;
 	left: 50px;
+}
+
+.account-page .btn-primary {
+	background-color: transparent;
+	color: #ddd;
+	border: 1px solid #ddd;
+	transition: all 0.3s ease 0s;
+}
+
+.account-page .btn-primary:hover {
+	background-color: #ddd;
+	color: #000;
+	border: 1px solid #fff;
 }
 
 /* Directory  */
@@ -400,7 +433,7 @@ input.ng-dirty.ng-invalid {
 
 .pagination a.btn-primary, .pagination a.btn-primary:hover {
 	color: #fff !important;
-	background-color: #01bbf4 !important;
+	background-color: #1B6FC1 !important;
 }
 
 .alphabet > ul {
@@ -416,10 +449,6 @@ input.ng-dirty.ng-invalid {
 .transfer-amount-error {
 	position: relative;
 	top: -14px;
-}
-
-.no-bottom-border {
-	border-bottom: none;
 }
 
 .text-lighter {
@@ -448,4 +477,78 @@ input.ng-dirty.ng-invalid {
   .header-info {
     color: $subheader_color;
   }
+}
+.vote-tab-header {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.newcontact-modal-form {
+	padding: 18px 20px 0 20px;
+}
+
+.modal-content .avatar {
+	margin-top: 18px;
+}
+
+.list-group-item {
+}
+
+.list-group-item > img {
+	margin-right: 10px;
+	width: 32px;
+	height: 32px;
+}
+
+.list-group-item:hover {
+	background-color: #eef8ff;
+}
+
+.contacts-list {
+	max-height: 340px;
+	overflow-y: auto;
+}
+
+.remove-contact-btn {
+	padding: 4px;
+}
+
+/* outline buttons */
+.btn.outline {
+	background: none;
+	padding: 12px 22px;
+	transition: all 0.3s ease 0s;
+}
+
+
+.btn.off {
+	background: none;
+	transition: all 0.3s ease 0s;
+}
+
+.btn-sm, .btn-sm.outline {
+	padding: 4px 8px;
+	font-size: 90%;
+}
+
+.btn-primary.outline {
+	border: 1px solid #1b6fc1;
+	color: #1b6fc1;
+}
+
+.btn-primary.outline:hover, .btn-primary.outline:active {
+	color: #fff;
+	border-color: #1863ad;
+}
+
+.btn-primary.outline:focus {
+	color: #1b6fc1;
+}
+
+.btn-primary.outline:focus:hover {
+	color: #fff;
+}
+
+.icon-column {
+	width: 2em;
 }
