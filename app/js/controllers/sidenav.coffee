@@ -1,9 +1,9 @@
-angular.module("app").controller "SidenavController", ($scope, $location, $state) ->
+angular.module("app").controller "SidenavController", ($scope, $rootScope) ->
   $scope.back = ->
-    $scope.history_back()
+    $rootScope.history_back()
 
   $scope.forward = ->
-    $scope.history_forward()
+    $rootScope.history_forward()
 
   $scope.close = ->
-    # close sidenav
+    console.log 'to be implemented'
