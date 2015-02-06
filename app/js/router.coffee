@@ -1,18 +1,28 @@
 angular.module("app").config ($stateProvider, $urlRouterProvider) ->
 
-    $urlRouterProvider.otherwise('/accounts')
+    $urlRouterProvider.otherwise('/home')
 
     sp = $stateProvider
 
 
+    sp.state "home",
+        url: "/home"
+        templateUrl: "home.html"
+        controller: "HomeController"
+
+    sp.state "help",
+        url: "/help"
+        templateUrl: "help.html"
+        controller: "HelpController"
+
     sp.state "preferences",
         url: "/preferences"
-        templateUrl: "preferences.html"
+        templateUrl: "advanced/preferences.html"
         controller: "PreferencesController"
 
     sp.state "console",
         url: "/console"
-        templateUrl: "console.html"
+        templateUrl: "advanced/console.html"
         controller: "ConsoleController"
 
     sp.state "createaccount",
@@ -24,6 +34,19 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
         url: "/accounts"
         templateUrl: "accounts.html"
         controller: "AccountsController"
+
+    sp.state "directory",
+        url: "/directory"
+        templateUrl: "directory/directory.html"
+        controller: "DirectoryController"
+
+    sp.state "directory.favorites", { url: "/favorites", views: { 'directory-favorites': { templateUrl: 'directory/favorite.html', controller: 'FavoriteController' } } }
+
+    sp.state "directory.unregistered", { url: "/unregistered", views: { 'directory-unregistered': { templateUrl: 'contacts.html', controller: 'ContactsController' } } }
+
+    sp.state "directory.registered", { url: "/registered?letter", views: { 'directory-registered': { templateUrl: 'directory/registered.html' } } }
+
+    sp.state "directory.assets", { url: "/assets", views: { 'directory-assets': { templateUrl: 'directory/assets.html', controller: 'AssetsController' } } }
 
     sp.state "delegates",
         url: "/delegates"
@@ -56,6 +79,11 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
         templateUrl: "asset.html"
         controller: "AssetController"
 
+    sp.state "blocks",
+        url: "/blocks?withtrxs"
+        templateUrl: "blocks.html"
+        controller: "BlocksController"
+
     sp.state "createwallet",
         url: "/createwallet"
         templateUrl: "createwallet.html"
@@ -65,6 +93,11 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
         url: "/blocks/:number"
         templateUrl: "block.html"
         controller: "BlockController"
+
+    sp.state "blocksbyround",
+        url: "/blocks/round/:round?withtrxs"
+        templateUrl: "blocksbyround.html"
+        controller: "BlocksByRoundController"
 
     sp.state "transaction",
         url: "/tx/:id"
@@ -105,28 +138,28 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
         url: "/mail/:box"
         templateUrl: "mail.html"
         controller: "MailController"
-    
+
     sp.state "mail.compose",
         url: "/compose"
         onEnter: ($modal, $state) ->
             modal = $modal.open
                 templateUrl: "dialog-mail-compose.html"
                 controller: "ComposeMailController"
-                
+
             modal.result.then(
                 (result) ->
                     $state.go 'mail'
                 () ->
                     $state.go 'mail'
             )
-    
+
     sp.state "mail.show",
         url: "/show/:id"
         onEnter: ($modal, $state) ->
             modal = $modal.open
                 templateUrl: "dialog-mail-show.html"
                 controller: "ShowMailController"
-                
+
             modal.result.then(
                 (result) ->
                     $state.go 'mail'

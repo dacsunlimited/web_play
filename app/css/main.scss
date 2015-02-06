@@ -287,7 +287,7 @@ li.stat {
 	font-size: 2rem;
 	background: none;
 	border: none;
-	color: #fff;
+	color: #333;
 	font-weight: 100;
 	letter-spacing: 1px;
 	margin-bottom: 0;
@@ -312,6 +312,10 @@ li.stat {
 
 .table-acc-balance > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
 	background: none;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: none;
 }
 
 .account-from {

@@ -65,12 +65,9 @@ footer .blockchain-status > i {
 	position: relative;
 }
 
+footer .logo { width:50px; margin-right:10px; }
 footer .logo img {
-/*    height: 36px;
-    margin: 0 0 0 8px;
-    padding-right: 5px;
-*/
-    position:fixed; height:56px; bottom:0px; left:5px;
+    position:fixed; height:56px; bottom:0px; left:10px;
 }
 
 .connection { display: none; }
