@@ -119,7 +119,7 @@ class Wallet
                         @asset_balances[asset_id] = @asset_balances[asset_id] + amount
             angular.forEach @accounts, (acct) =>
                 #console.log "------ refresh_balances acct.name ------>", acct.name
-                if acct.is_my_account and !@balances[acct.name]
+                if !@balances[acct.name]
                     @balances[acct.name] = {}
                     @balances[acct.name][@main_asset.symbol] = @utils.asset(0, @main_asset)
             deffered.resolve(@balances)
@@ -182,20 +182,20 @@ class Wallet
     count_my_accounts: ->
         accounts = 0
         angular.forEach @accounts, (acct, name) ->
-            if acct.is_my_account
-                accounts += 1
+            accounts += 1
         return accounts
 
     count_my_delegates: ->
         delegates = 0
         angular.forEach @accounts, (acct, name) ->
-            if acct.is_my_account and acct.delegate_info != null
+            if acct.delegate_info != null
                 delegates += 1
         return delegates
 
     # turn raw rpc return value into nice object
     populate_account: (val) ->
         acct = val
+        acct.is_my_account = true
         acct.active_key = val.active_key_history[val.active_key_history.length - 1][1]
         acct.registered = val.registration_date and val.registration_date != "1970-01-01T00:00:00"
         #console.log "populate_account",acct.name
@@ -406,8 +406,7 @@ class Wallet
 #            if @transactions["*"].length > 0
 #                #@growl.notice "", "You just received a new transaction!"
 #                angular.forEach @accounts, (account, name) =>
-#                    if account.is_my_account
-#                        @refresh_transactions(name)
+#                    @refresh_transactions(name)
 #
 #    # TODO: search for all deposit_op_type with asset_id 0 and sum them to get amount
 #    # TODO: sort transactions, show the most recent ones on top
@@ -505,8 +504,7 @@ class Wallet
 
     get_first_account: ->
         for k,v of @accounts
-            if v.is_my_account
-                return v
+            return v
         return null
 
     get_current_or_first_account: ->
