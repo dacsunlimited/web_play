@@ -17,7 +17,7 @@ Install Node.js (<http://nodejs.org/download/>)
 
 Navigate to the web_wallet directory where `package.json` is located and run these commands:
 
-    $ npm install
+    $ npm install -g
     $ npm start
 
 Edit htdocs parameter in config.json  `AppData/Roaming/BitShares` to point to the `web_wallet/generated/` directory.  For example: ` "htdocs": "C:/bitshares/web_wallet/generated" `
