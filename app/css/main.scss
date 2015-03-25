@@ -51,6 +51,23 @@ a:hover, a:focus, {
 	text-decoration: none !important;
 }
 
+canvas, body.mac img, body.mac b.caret, body.mac span.caret, body.mac i.fa {
+	vertical-align: middle;
+}
+
+body.windows canvas, body.windows img, body.windows b.caret, body.windows span.caret, body.windows i.fa {
+	vertical-align: baseline !important;
+}
+
+body.windows b.caret, body.windows span.caret {
+	position: relative;
+	top: -2px;
+}
+
+.fa-check {
+	vertical-align: baseline !important;
+}
+
 .delegate-active-link{
 	font-family:"Georgia";
 	font-size:140%;
@@ -63,7 +80,6 @@ a:hover, a:focus, {
 }
 
 .my-account-link, .my-account-link:hover {
-	/*color:green;*/
 	text-decoration: none !important;
 }
 
@@ -341,9 +357,9 @@ li.stat {
 	font-weight: 100;
 }
 
-.move-right-50px {
-	position: relative;
-	left: 50px;
+.avatar-150-min-width {
+	min-width: 170px;
+
 }
 
 .account-page .btn-primary {
@@ -405,8 +421,13 @@ input.ng-dirty.ng-invalid {
 }
 
 .avatar-150 {
-	width: 150px;
-	margin: 0 auto;
+	width: 170px;
+	margin: 0 0 0 auto;
+	padding: 0 10px;
+}
+
+.avatar-150 h3 {
+	margin: 0;
 }
 
 .clickable {
@@ -495,16 +516,7 @@ input.ng-dirty.ng-invalid {
 	margin-top: 18px;
 }
 
-.list-group-item {
-}
-
-.list-group-item > img {
-	margin-right: 10px;
-	width: 32px;
-	height: 32px;
-}
-
-.list-group-item:hover {
+.contacts-list .list-group-item:hover {
 	background-color: #eef8ff;
 }
 
@@ -555,4 +567,21 @@ input.ng-dirty.ng-invalid {
 
 .icon-column {
 	width: 2em;
+}
+
+.delegates-title:hover {
+	color: #1B6FC1;
+}
+
+.delegates-filter {
+	padding:1em;
+}
+
+.delegates-filter .input-group-addon {
+	width: 40px;
+}
+
+.dropdown-menu.left {
+   left: auto !important;
+   right: 0px;
 }

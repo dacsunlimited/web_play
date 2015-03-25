@@ -13,19 +13,24 @@
 
     <md-button class="str-arrow fa {{descriptionCollapsed ? 'fa-sort-desc' : 'fa-sort-asc'}}" style="width:50px;" ng-click="descriptionCollapsed = !descriptionCollapsed"></md-button>
 
-  <div class="str-bottom">
-    <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
-    <form name="unlock_form" ng-submit="submitForm()" role="form" novalidate class="form-horizontal">
-
-      <md-input-container>
-        <label class="text-left" translate>unlock.spending_password</label>
-        <input ng-keydown='keydown()' ng-keypress="keypress($event)" ng-trim="false" ng-model="spending_password" name="sp"
-                type="password" tabindex="1" required focus autofocus ng-minlength="9"
-                ng-maxlength="255" class="full-width" ng-disabled>
-        <div ng-messages="unlock_form.sp.$error" ng-show="unlock_form.sp.$error && !unlock_form.sp.$pristine">
-          <div ng-message="required"><span translate>tip.required</span></div>
-          <div ng-message="md-maxlength"><span translate>tip.too_long</span></div>
-          <div ng-message="minlength"><span translate>tip.too_short</span></div>
+        <div class="str-bottom">
+          <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
+          <form ng-submit="submitForm()" role="form" novalidate>
+            <div class="form-group">
+              <input ng-model="spending_password" name="sp" type="password" class="form-control input"
+                     placeholder="Password" tabindex="1" autofocus focus
+                     ng-keydown="keydown($event)" ng-keypress="keypress($event)" ng-trim="false"/>
+              <button ng-disabled="!spending_password || loading_indicator.show" type="submit" tabindex="2" class="btn btn-primary" translate>
+                unlock.btn_unlock
+              </button>
+            </div>
+            <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label> <label
+              class="text-danger" ng-show="capsLockOn" translate> unlock.caps_lock_on </label>
+          </form>
+          <!--<img ng-if="theme==='default'" src="img/logo-ico-blue.svg" width="64" height="64"/> <img ng-if="theme==='flowers'"-->
+                                                                                              <!--src="img/logo-ico-blue.svg"-->
+                                                                                              <!--width="64" height="64"/>-->
+          <br/><br/> <span class="client-version" ng-class="theme">{{client_version}}</span>
         </div>
       </md-input-container>
 

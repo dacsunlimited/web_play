@@ -7,10 +7,15 @@
     <form class="form-horizontal" flex="50" role="form" name="pform" ng-submit="updatePreferences()"
           ng-class="{ 'has-error' : pform.wp.$invalid && !pform.wp.$pristine }" novalidate>
 
-      <md-input-container>
-        <label for="timeout" translate>pref.logout_timeout</label>
-        <input id="timeout" type="number" numonly autofocus ng-model="model.timeout" name="timeout" class="form-control" />
-      </md-input-container>
+          <!-- transaction fee -->
+          <div class="form-group row">
+            <label class="col-sm-offset-1 col-sm-3 control-label" for="transaction_fee" translate>pref.trx_fee</label>
+            <div class="col-sm-3 input-group">
+              <input id="transaction_fee" decimalonly ng-model="model.transaction_fee" name="transaction_fee"
+                     class="form-control" placeholder="Transaction Fee"
+                     ng-disabled="is_bitshares_js"/> <span class="input-group-addon">{{model.symbol}}</span>
+            </div>
+          </div>
 
       <md-input-container>
         <label for="transaction_fee" translate>pref.trx_fee</label>

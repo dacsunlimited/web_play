@@ -10,6 +10,8 @@ angular.module("app").controller "MarketsController", ($scope, $state, Wallet, B
 
     $scope.orderByField = "yield";
     $scope.reverseSort = true;
+    $scope.orderByFieldUIA = "symbol";
+    $scope.reverseSortUIA = false;
 
     promise = Wallet.get_current_or_first_account()
     promise.then (account)->
@@ -51,6 +53,7 @@ angular.module("app").controller "MarketsController", ($scope, $state, Wallet, B
                     td.market.base_symbol = bit + td.market.base_asset.symbol
                     td.market.price_precision = Math.max(td.market.quantity_precision, td.market.base_precision)
                 if order.type == "cover_order"
+                    td.market.base_asset = Blockchain.asset_records[order.market_index.order_price.quote_asset_id]
                     MarketHelper.cover_to_trade_data(order, td.market, inverted, td)
                 else
                     MarketHelper.order_to_trade_data(order, td.market.quantity_asset, td.market.base_asset, inverted, inverted, inverted, td)
@@ -70,6 +73,7 @@ angular.module("app").controller "MarketsController", ($scope, $state, Wallet, B
         $scope.featured_markets.push "BitBTC:#{main_asset.symbol}"
         $scope.featured_markets.push "BitGOLD:#{main_asset.symbol}"
         $scope.featured_markets.push "BitEUR:#{main_asset.symbol}"
+        $scope.featured_markets.push "BitSILVER:#{main_asset.symbol}"
 
         for key, asset of records
             asset.current_supply = Utils.newAsset(asset.current_share_supply, asset.symbol, asset.precision)
@@ -98,6 +102,7 @@ angular.module("app").controller "MarketsController", ($scope, $state, Wallet, B
         WalletAPI.get_transaction_fee(tx_fee_asset.symbol).then (tx_fee) ->
             $scope.tx_fee = Utils.formatDecimal(tx_fee.amount / tx_fee_asset.precision, tx_fee_asset.precision)
         list_open_orders()
+
         return null
 
     $scope.go_to_asset = (name) ->
@@ -107,3 +112,5 @@ angular.module("app").controller "MarketsController", ($scope, $state, Wallet, B
         WalletAPI.market_cancel_order(id).then (res) ->
             $scope.open_orders.splice(i, 1) for i, o of $scope.open_orders when o.id == id
 
+    $scope.removeRecent = (m) ->
+        $scope.recent_markets.splice m, 1

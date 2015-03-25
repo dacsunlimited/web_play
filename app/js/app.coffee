@@ -12,11 +12,15 @@ window.open_external_url = (url) ->
     else
         window.open(url)
 
+
 app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
      "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages"])
+     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "utils.autofocus",
+     "ui.grid.autoResize"])
 
 app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
+
     $templateCache.put 'ui-grid/uiGridViewport',
         '''<div class="ui-grid-viewport">
              <div class="ui-grid-canvas">
@@ -25,6 +29,11 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
                </div>
               </div>
            </div>'''
+
+    if magic_unicorn? and magic_unicorn.get_os_name
+        $rootScope.qt_os_name = magic_unicorn.get_os_name()
+    else
+        $rootScope.qt_os_name = "dev"
 
     $rootScope.context_help = {locale: "en", show: false, file: "", open: false}
     app_history = []
@@ -45,7 +54,9 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
     history_back_in_process = false
     $rootScope.$on "$stateChangeSuccess", (event, toState, toParams, fromState, fromParams) ->
         app_history.push {state: fromState.name, params: fromParams} if fromState.name and !history_back_in_process
-        $window.scrollTo(0,0)
+        from_page = fromState.name.split(".")[0]
+        to_page = toState.name.split(".")[0]
+        $window.scrollTo(0,0) unless from_page == to_page
 
     $rootScope.history_back = ->
         return false if app_history.length == 0
@@ -83,16 +94,16 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
     $rootScope.showContextHelp = (name) ->
         if name
             $rootScope.context_help.show = true
-            $rootScope.context_help.file = "context_help/#{$translate.preferredLanguage()}/#{name}.html"
+            $rootScope.context_help.file = "context_help/en/#{name}.html"
         else
             $rootScope.context_help.show = false
             $rootScope.context_help.file = ""
 
     $rootScope.current_account = null
 
-    $idle.watch()
 
-app.config ($idleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
+app.config ($idleProvider, $translateProvider, $tooltipProvider
+    $compileProvider, $locationProvider) ->
 
     $compileProvider.debugInfoEnabled(false);
 
@@ -112,8 +123,7 @@ app.config ($idleProvider, $translateProvider, $tooltipProvider, $compileProvide
 
     moment.locale(lang)
 
-    $translateProvider.preferredLanguage(lang)
-    .fallbackLanguage('en');
+    $translateProvider.preferredLanguage(lang).fallbackLanguage('en')
 
     $idleProvider.idleDuration(1776)
     $idleProvider.warningDuration(60)

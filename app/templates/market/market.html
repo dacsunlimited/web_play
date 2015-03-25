@@ -79,7 +79,7 @@
     <br>
 
     <div class="row">
-
+<span ng-hide="is_bitshares_js">
       <div id="order_tabs" class="col-md-5">
         <tabset>
           <tab ng-repeat="t in tabs" heading="{{t.heading | translate}} {{t.route == 'market.short' ? actual_market.base_symbol : market.quantity_symbol}}" ng-click="goto_tab(t.route)" active="t.active" class="{{t.class}}">
@@ -91,7 +91,7 @@
           </tab>
         </tabset>
       </div>
-
+</span>
       <div class="col-md-7">
           <orderbookchart
               bids-array="market.orderbook_chart_data.bids_array"
@@ -119,7 +119,7 @@
     </div>
 
     <br>
-
+<span ng-hide="is_bitshares_js">
     <div class="row">
         <div class="panel col-xs-12 col-sm-6">
             <div class="panel-heading">
@@ -156,14 +156,14 @@
             </div>
         </div>
     </div>
-
+</span>
     <div class="row">
       <div class="panel col-md-6">
         <div class="panel-heading">
           <h3 class="panel-title buy-orders-title">{{'market.buy_orders'|translate:'{value: market.quantity_symbol}'}}</h3>
         </div>
         <div class="panel-body">
-          <div ui-grid="listBuyGrid" class="market-grid" external-scopes="this"></div>
+          <div ui-grid="listBuyGrid" class="market-grid" external-scopes="this" ui-grid-auto-resize></div>
         </div>
       </div>
       <div class="panel col-md-6">
@@ -171,7 +171,7 @@
           <h3 class="panel-title sell-orders-title">{{'market.sell_orders'|translate:'{value: market.quantity_symbol}'}}</h3>
         </div>
         <div class="panel-body">
-          <div ui-grid="listSellGrid" class="market-grid" external-scopes="this"></div>
+          <div ui-grid="listSellGrid" class="market-grid" external-scopes="this" ui-grid-auto-resize></div>
         </div>
       </div>
     </div>
@@ -186,11 +186,11 @@
               ('market.short_orders'|translate:'{value: actual_market.base_symbol}')
             )
            }}
-           <span ng-show="market.inverted" class="help-popover" popover="{{'market.margin_orders_explain'|translate}}" popover-trigger="mouseenter"><i class="fa fa-question-circle"></i></span>
+           <span ng-show="market.inverted" class="help-popover" popover-placement="right" popover="{{'market.margin_orders_explain'|translate}}" popover-trigger="mouseenter"><i class="fa fa-question-circle"></i></span>
           </h3>
         </div>
         <div class="panel-body">
-          <div ui-grid="listShortsMarginsLeftGrid" class="market-grid" external-scopes="this"></div>
+          <div ui-grid="listShortsMarginsLeftGrid" class="market-grid" external-scopes="this" ui-grid-auto-resize></div>
         </div>
       </div>
       <div class="panel" ng-class="'col-md-6'">
@@ -206,7 +206,7 @@
           </h3>
         </div>
         <div class="panel-body">
-          <div ui-grid="listShortsMarginsRightGrid" class="market-grid" external-scopes="this"></div>
+          <div ui-grid="listShortsMarginsRightGrid" class="market-grid" external-scopes="this" ui-grid-auto-resize></div>
         </div>
       </div>
     </div>
@@ -218,7 +218,7 @@
             <h3 class="panel-title" translate>market.blockchain_orders_history</h3>
           </div>
           <div class="panel-body">
-            <div ui-grid="listBlockchainOrders" class="market-grid" external-scopes="this"></div>
+            <div ui-grid="listBlockchainOrders" class="market-grid" external-scopes="this" ui-grid-auto-resize></div>
           </div>
         </div>
       </div>
@@ -228,7 +228,7 @@
             <h3 class="panel-title" translate>market.account_orders_history</h3>
           </div>
           <div class="panel-body">
-            <div ui-grid="listAccountOrders" class="market-grid" external-scopes="this"></div>
+            <div ui-grid="listAccountOrders" class="market-grid" external-scopes="this" ui-grid-auto-resize></div>
           </div>
         </div>
       </div>

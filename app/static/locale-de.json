@@ -42,10 +42,8 @@
     "no_trxs": "Keine Transaktionen!",
     "updating_trx_history": "Aktualisiere Liste der Transaktionen ...",
     "partial_voting_info": "Dieses Konto hat verfügbare Stimmen. Nutzen Sie Ihr Recht und wählen Sie Ihre favorisierten Delegierten mit dem gesamten Kontostand.",
-    "client_update_available": "Eine neues zwingend Update ist verfügbar. Besuchen Sie bitte http://www.dacplay.org",
-    "required": "This is required",
-    "too_long": "This is too long",
-    "too_short": "This is too short"
+    "client_update_available": "Eine neues zwingend Update ist verfügbar. Besuchen Sie bitte http://www.bitshares-x.info",
+    "fake_accounts_warning": "Warnung! Betrüger erstellen häufig trügerische Kennungen um ihr Opfer dazu zu bewegen Ihr Vermögen falsch zu transferieren. Bitte überprüfen Sie das Konto!"
   },
   "th": {
     "date": "DATUM",
@@ -59,7 +57,7 @@
     "registered": "REGISTRIERT",
     "symbol": "SYMBOL",
     "desc": "BESCHREIBUNG",
-    "issue_account": "EMMISIONSKONTO",
+    "issue_account": "EMISSIONSKONTO",
     "precision": "NACHKOMMASTELLEN",
     "current_share_supply": "AKTUELLES ANTEILSANGEBOT",
     "maximum_share_supply": "MAXIMALES ANTEILSANGEBOT",
@@ -122,7 +120,7 @@
     "previous_secret": "Vorheriger Geheimschlüssel",
     "delegate_signature": "Signatur des Delegierten",
     "pending_trxs": "Anstehende Transaktionen",
-    "block_explorer": "Block Übersicht",
+    "block_explorer": "externe Block Übersicht (https://bitsharesblocks.com)",
     "missing_block": "Verpasster Block",
     "older": "Older",
     "newer": "Newer",
@@ -192,13 +190,13 @@
     "votes_obtained": "Stimmen gesamt",
     "version": "Version",
     "un_approve_all": "Alle Stimmen zurücknehmen",
-    "description": "Description",
-    "proposal": "Delegate bid",
-    "location": "Server location",
-    "handle": "BitsharesTalk username",
-    "ann": "Announcements",
-    "country": "Legal jurisdiction",
-    "role_0": "Development",
+    "description": "Beschreibung",
+    "proposal": "Delegate Vorschlag",
+    "location": "Ort des Servers",
+    "handle": "BitsharesTalk Benutzername",
+    "ann": "Ankündigung",
+    "country": "Rechtsraum",
+    "role_0": "Entwicklung",
     "role_1": "Marketing",
     "role_2": "Faucet",
     "role_3": "Backbone",
@@ -209,7 +207,7 @@
   },
   "market": {
     "title": "Marktübersicht",
-    "featured_markets": "Featured Märkte",
+    "featured_markets": "Empfohlene Märkte",
     "search_market": "Suche Markt",
     "market_name": "Market Name",
     "all_markets": "Alle Märkte",
@@ -279,14 +277,27 @@
       "sell_highest_bid" : "Der höchste Preis bei dem Ihre Verkaufsorder sofort durchgeführt werden soll.",
       "sell_total" : "Die Menge an {{base}} die auf Ihr Konto {{account}} durch diese Order gutgeschrieben werden wird.",
       "short_quantity": "Die Menge an {{value}} die Sie leihen und verkaufen möchten.",
-      "short_price_limit_direct": "Der höchste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{base}} zu leihen und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer größer ist.",
-      "short_price_limit_inverted": "Der niedrigste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{quantity}} zu leihen zu und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer niedriger ist.",
+      "short_collateral": "Die Menge an {{value}} die Sie bereits sind als Kollateral aufzugeben. Sie sollten die 3-fache Menge zurücklegen. 2x kommt von der Shortenden Partei und 1x vom Käufer.",
+      "short_price_limit_direct": "Der höchste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{base}} zu leihen und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer niedriger ist.",
+      "short_price_limit_inverted": "Der niedrigste Preis in {{base}} pro {{quantity}} zu dem Sie bereit sind {{quantity}} zu leihen und zu verkaufen. Shortorder werden ausschließlich am Preisfeed oder Preislimit ausgeführt, welches auch immer größer ist.",
       "short_feed_price": "Der Median des Handelspreis von externen Handelsplatformen gemäß der Delegierten Preis-Feeds.",
       "short_total": "Die benötigte Menge {{value}} für diese Order. Bestimmt als Quantität mal Kollateral-Ratio.",
       "short_interest_rate": "Der Zinssatz, den Sie zu zahlen bereit sind."
     },
     "days": "{{value}} Tage",
-    "percent_apr": "APR"
+    "percent_apr": "p.a.",
+    "rules": {
+        "title": "Market Rules Summary",
+        "conditions": "Short orders can only get filled under these conditions:",
+        "condition1": "There is someone willing to buy BitUSD at the price feed",
+        "condition2": "AND Your short order is the highest interest rate order",
+        "condition3": "AND Your price limit is lower than the feed (BTS per USD) or you didn't specify a price limit",
+        "condition4": "AND You have enough collateral to provide 2x backing at the trade price and quantity",
+        "condition5": "OR Your price limit is higher than the feed (BTS per USD) and someone is willing to buy at your price limit",
+        "short1": "Short orders are forced to cover after 30 days by taking the best offers at the time. No fee is charged.",
+        "short2":"Short orders are forced to cover when 75% of their collateral is required to cover, leaving the short with 25% of the collateral minus a 5% fee.",
+        "cover_fee":"The 5% fee is assessed as a percent of the collateral left over after covering."
+    }
   },
   "account": {
     "reg_pending": "Registrierung ausstehend",
@@ -326,8 +337,8 @@
     "email": "Email",
     "email_tip": "Email (Optional)",
     "active_delegate": "Aktive Delegierte",
-    "standby_delegate": "Bereitstehende Delegierte",
-    "rank": "Current rank",
+    "standby_delegate": "bereitstehende Delegierte",
+    "rank": "Aktueller Rang",
     "toggle": {
       "favorite": "Favorit",
       "approval": "Zustimmung"
@@ -342,10 +353,15 @@
       "vote_all": "Nach meinen persönlichen Präferenzen abstimmen.",
       "vote_none": "Gar nicht wählen!",
       "vote_random_subset": "Meine Stimmen zufällig verteilen.",
-      "vote_as_delegates_recommended": "basierend auf der Empfehlung der Delegierten abstimmen",
+      "vote_as_delegates_recommended": "Basierend auf der Empfehlung der Delegierten abstimmen.",
       "btn_update_vote": "erneut Abstimmen",
       "current_votes": "aktuelle Anzahl Ihrer Wahlstimmen",
-      "future_votes": "BEFÜRWORTEN (JA/NEUTRAL/NEIN)"
+      "future_votes": "BEFÜRWORTEN (JA/NEUTRAL/NEIN)",
+      "votes": "Präferenzen",
+      "approval": "Zustimmung",
+      "vote_confirmation_title": "Zustimmung Bestätigen",
+      "vote_confirmation_text": "Zustimmung für {{balance}} {{symbol}} abspeichern. Dieser Vorgang kostet eine Gebühr von {{fee}} {{fee_symbol}}.",
+      "no_balance": "Sie haben kein {{symbol}} Guthaben mit dem Sie abstimmen können."
     },
     "import_wif_key": "Importiere WIF Schlüssel",
     "import_from_wallet": "Importiere Schlüssel einer Kontensammlung (Wallet)",
@@ -365,15 +381,18 @@
     "rename_account_locally": "Konto lokal umbenennen",
     "public_info": "Öffentliche Informationen",
     "estimated_yield": "Voraussichtlicher Ertrag",
-    "wall" : {
-      "tab_title": "Wall",
-      "burn_records": "Burn Records",
-      "burn_post": "Burn/Post Message",
-      "message": "Message",
-      "post_message": "Post Message",
-      "burn_confirmation": "Burn/Post Message Confirmation",
-      "receiver": "Receiver",
-      "explain": "Burns given amount to {{account_name}}'s account. This will allow you to post message to this wall as a form of reputation."
+    "estimated_yield": "GESCHÄTZTER ERTRAG",
+    "wall": {
+      "tab_title": "Burn-Wall",
+      "burn_records": "Burn Beiträge",
+      "burn_post": "Burn/Schreibe Nachricht",
+      "message": "Nachricht",
+      "post_message": "Nachricht an Burn-Wall senden",
+      "burn_confirmation": "Burn/Nachricht überprüfen",
+      "receiver": "Empfänger",
+      "explain": "Bewerten Sie ein Konto in dem Sie dazu eine bestimmte Summe vernichten (Burn). Wählen Sie das zu bewertende Konto, den zu vernichtenden Betrag sowie eine Nachricht ein und wählen Sie ob es sich um eine positive oder negative Bewertung handelt.",
+      "for": "Positiv",
+      "against": "Negativ"
     },
     "transaction_details": "Details",
     "transaction_virtual": "Virtual",
@@ -382,10 +401,14 @@
     "reg_add_faucet": "Add Faucet",
     "update_public_data_tx_fee": "Update data transaction Fee: ",
     "new_balance": "New Balance",
-    "less_fee": "Less fee of"
+    "less_fee": "Less fee of",
+    "select_currency": "Select Currency",
+    "your_account": "Your Account",
+    "registered" : "Registered",
+    "pay_to": "Make a payment to"
   },
   "accounts": {
-    "create_account": "Konto erstellen",
+    "add_account": "Konto erstellen",
     "accounts": "Kontoübersicht",
     "info": "Wählen Sie ein Konto für weitere Aktionen.",
     "select_account": "Konto auswählen"
@@ -420,7 +443,6 @@
   },
   "directory": {
     "directory": "Verzeichnis",
-    "favorites": "Favoriten",
     "unregistered": "Unregistriert",
     "registered": "Registriert",
     "assets": "BitAssets"
@@ -434,8 +456,8 @@
     "public_key_tip": "Öffentlicher Schlüssel (Pflichtfeld)",
     "btn_add_contact": "Kontakt hinzufügen",
     "address_book": "Adressbuch",
-    "add_to_address_book": "Zum Adressnuch hinzufügen",
-    "not_in_address_book": "Not in address book"
+    "add_to_address_book": "Zum Adressbuch hinzufügen",
+    "not_in_address_book": "Nicht im Addressbuch vorhanden"
   },
   "pref": {
     "title": "Einstellungen",
@@ -445,8 +467,13 @@
     "autocomplete_info": "Zeigt bei Überweisungen automatisch alle möglichen Empfänger an.",
     "language": "Sprache",
     "theme": "Display entsperren Theme",
-    "default": "Default",
-    "flowers": "Blumen"
+    "default": "Standard",
+    "flowers": "Blumen",
+    "default_vote": "Standardmäßig abstimmen für",
+    "time_too_low": "User-input timeout was too low. It was increased to 15",
+    "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
+    "fee_too_low": "Transaction fee was too low. It was increased to 0.1 BTS",
+    "updated": "Preferences Updated"
   },
   "console": {
     "type_cmd_and_enter": "Wählen Sie ein Kommando und bestätigen Sie anschließend mit der Eingabetaste."
@@ -505,7 +532,17 @@
     "enable_trx_scan": "Aktiviere die Transaktionsüberprüfung",
     "up_to_date": "Der Datenstand ist aktuell. Letzter Block: {{value}}",
     "catching_up": "Der Datenstand wird aktualisiert: {{value1}} von {{value2}} Blöcken verarbeitet",
-    "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}"
+    "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}",
+    "testnet": "Testnetz",
+    "synced": "Blöcks sind synchronisiert",
+    "syncing": "Blöcke werden synchronisiert ...",
+    "not_connected": "Nicht verbunden",
+    "last_block": "Letzter Block wurde vor {{value}} synchronisiert",
+    "one_network_connection": "1 Netzwerkverbindung",
+    "n_network_connection": "{{value}} Netzwerkverbindungen",
+    "network_problems": "Netzwerkprobleme",
+    "severe_network_problems": "Schwerwiegende Netzwerkprobleme",
+    "delegate_participation_below": "Delegiertenbeteiligung liegt derzeit unter {{value}}, bitte stellen Sie (falls möglich) alle Überweisungen zurück bis das Netzwerk wieder 100% erreicht hat."
   },
   "utils": {
     "expired": "Abgelaufen",

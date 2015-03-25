@@ -1,5 +1,13 @@
-<div class="p-inner"><b translate>account.account_key</b>: {{account.active_key}}</div>
-<tabset ng-show="account.is_my_account" class="p-inner">
+<form class="form-horizontal" name="form">
+<div class="form-group">
+    <label class="col-sm-2 control-label" translate>account.account_key</label>
+    <div class="col-sm-10">
+        <pre>{{account.active_key}}</pre>
+    </div>
+</div>
+</form>
+
+<tabset ng-show="account.is_my_account && !is_bitshares_js" class="p-inner">
   <hr>
   <tab heading="{{'account.import_wif_key'|translate}}">
     <form name="import_key_form" class="form-horizontal" role="form" ng-submit="import_key()">
@@ -39,9 +47,9 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li><a ng-click="wallet_info.type = 'Bitcoin/PTS'; status.isopen = false">Bitcoin/PTS</a></li>
-              <li><a ng-click="wallet_info.type = 'Multibit'; status.isopen = false">Multibit</a></li>
+              <!--<li><a ng-click="wallet_info.type = 'Multibit'; status.isopen = false">Multibit</a></li>-->
               <li><a ng-click="wallet_info.type = 'Electrum'; status.isopen = false">Electrum</a></li>
-              <li><a ng-click="wallet_info.type = 'Armory'; status.isopen = false">Armory</a></li>
+              <!--<li><a ng-click="wallet_info.type = 'Armory'; status.isopen = false">Armory</a></li>-->
               <li><a ng-click="wallet_info.type = 'BitShares'; status.isopen = false">BitShares JSON</a></li>
             </ul>
           </div>
