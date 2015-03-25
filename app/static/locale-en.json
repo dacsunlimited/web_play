@@ -148,8 +148,8 @@
   "unlock": {
     "btn_unlock": "unlock",
     "caps_lock_on": "Caps Lock is on!",
-    "desc_title": "BitShares PLAY",
-    "desc_content_1": "BitShares PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
+    "desc_title": "DAC PLAY",
+    "desc_content_1": "DAC PLAY is an experimental a decentralized, autonomous game assets marketplace and game platform.",
     "desc_content_2": "",
     "spending_password": "Password",
     "wrong_pass": "Wrong Password.",
@@ -166,7 +166,7 @@
     "pwd_not_match": "Password fields do not match."
   },
   "index": {
-    "title": "BitShares Wallet",
+    "title": "PLAY Wallet",
     "overview": "Overview",
     "my_account": "My Accounts",
     "directory": "Directory",
@@ -196,7 +196,7 @@
     "description": "Description",
     "proposal": "Delegate bid",
     "location": "Server location",
-    "handle": "BitsharesTalk username",
+    "handle": "PlayTalk username",
     "ann": "Announcements",
     "country": "Legal jurisdiction",
     "role_0": "Development",
@@ -418,7 +418,7 @@
   },
   "privacy": {
     "email_warning1": "Your email address is only used for the purpose of identifying your",
-    "email_warning2": "account which can be tied to your BitShares account.  This helps you and others verify that your transactions are sending funds to the expected individual. ",
+    "email_warning2": "account which can be tied to your PLAY account.  This helps you and others verify that your transactions are sending funds to the expected individual. ",
     "email_warning3": "Your email is not shared with anyone and no one will be able to send you spam. "
   },
   "directory": {
