@@ -1,22 +1,17 @@
-<div class="account-page" ng-class="(account.delegate_info) ? 'row head-bg-delegate p-inner' : 'row head-bg p-inner'">
-  <div class="col-sm-2">
-    <div class="avatar-150">
-      <identicon account="{{account_name}}" size="150"/>
-    </div>
-    <br/>
-    <div ng-show="!account.delegate_info && !is_bitshares_js" class="text-center avatar-150">
-      <button ng-show="!account.is_address_book_contact && !add_to_address_book.error" ng-click="addToAddressBook(account_name)" class="btn btn-primary btn-sm">
-            <span translate>contact.add_to_address_book</span>
-      </button>
-      <span ng-show="add_to_address_book.error" class="text-danger">{{add_to_address_book.error}}</span>
-      <span ng-show="add_to_address_book.message" class="text-success">{{add_to_address_book.message}}</span>
-    </div>
-    <div ng-show="account.delegate_info && !is_bitshares_js" class="text-center avatar-150">
-      <button ng-show="!account.is_address_book_contact" ng-click="addToAddressBook()" class="btn btn-sm btn-link primary" tooltip="{{ 'contact.add_to_address_book' | translate }}">
-        <i class="fa fa-book fa-2x"></i>
-      </button>
-      <button ng-click="toggleVoteUp()" class="btn btn-sm btn-link primary"
-              tooltip="{{ 'account.toggle.approval' | translate }}">
+<md-card>
+
+  <div ng-class="(account.delegate_info) ? 'head-bg-delegate p-inner' : 'head-bg p-inner'">
+    <div class="col-sm-2">
+      <div class="avatar-150">
+        <img ng-src="http://robohash.org/set_1/{{account_name}}?size=150x150" height="150" width="150"/>
+      </div>
+      <br/>
+      <div class="text-center avatar-150">
+        <button ng-click="toggleFavorite()" class="btn btn-sm btn-link primary" tooltip="{{ 'account.toggle.favorite' | translate }}">
+          <i ng-class="(account.is_favorite) ? 'fa fa-star fa-2x' : 'fa fa-star-o fa-2x'"></i>
+        </button>
+        <button ng-click="toggleVoteUp()" class="btn btn-sm btn-link primary"
+        tooltip="{{ 'account.toggle.approval' | translate }}">
         <i ng-if="account.approved>0" class='fa fa-thumbs-up fa-2x'></i>
         <i ng-if="!account.approved || account.approved==0" class='fa fa-thumbs-o-up fa-2x'></i>
         <i ng-if="account.approved<0" class='fa fa-thumbs-down fa-2x'></i>
@@ -27,9 +22,6 @@
   <div class="col-sm-10">
 
     <div class="header p-inner white-shadow">
-      <div ng-if="current_account" class="pull-right">
-        &nbsp; <a class="btn btn-primary" ui-sref="transfer({from: current_account, to: account.name})"><span translate>account.pay_to</span> {{account.name}}</a>
-      </div>
       <div ng-switch on="account.registration_date">
         <div ng-switch-when="1970-01-01T00:00:00">
           <div ng-switch on="p.pendingRegistration">
@@ -40,7 +32,11 @@
             </div>
             <div ng-switch-default>
               <div class="pull-right">
-                <a href ng-show="account.is_my_account" ng-click='regDial()' class="btn btn-primary"><span translate>account.reg</span> {{account.name}}</a>
+                <a ng-show="account.is_my_account" style="margin-top: 4px;" type="submit" ng-click='regDial()' class="btn btn-primary"><i
+                  class="fa fa-credit-card fa-lg fa-fw"></i> {{'account.reg' | translate}} {{account.name}}</a>
+                </div>
+                <span class="account-name">{{account.name}}</span>
+                &nbsp;&nbsp; <span class="text-muted">{{"tip.not_reg_onchain" | translate}}</span>
               </div>
             </div>
           </div>
@@ -94,24 +90,44 @@
   </div>
 
   <div class="col-sm-5">
-  </div>
-
-  <div class="col-sm-2">
-    <div class="pull-right p-inner">
-      <table class="table table-acc-balance" ng-show="account.is_my_account">
-        <thead>
-          <tr>
-            <th><h3 class="header-title text-muted" translate>account.balances</h3></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="(symbol, asset) in balances">
-            <td>
-              {{asset | formatAsset}}
-            </td>
-          </tr>
-        </tbody>
+    <!--  TODO
+      <div class="pull-right p-inner">
+      <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
+      <thead>
+      <tr>
+      <th><h3 class="header-title text-muted" translate>IN OPEN ORDERS</h3></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="(symbol, asset) in open_orders_balances">
+      <td>
+      {{asset | formatAsset}}
+      </td>
+      </tr>
+      </tbody>
       </table>
+      </div>
+      -->
+    </div>
+
+
+    <div class="col-sm-2">
+      <div class="pull-right p-inner">
+        <table class="table table-striped table-acc-balance" ng-show="account.is_my_account">
+          <thead>
+            <tr>
+              <th><h3 class="header-title text-muted" translate>account.balances</h3></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(symbol, asset) in balances">
+              <td>
+                {{asset | formatAsset}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
 
@@ -153,16 +169,15 @@
       </tab>
 
       <!--delegate info tab -->
-      <tab ng-show="account.delegate_info && !is_bitshares_js" 
-            ng-click="goto_tab('account.delegate')" active="tabs[1].active">
-        <tab-heading><i class="fa fa-legal fa-fw fa-lg"></i> <span translate>account.delegate_info</span></tab-heading>
-        <div ui-view="account-delegate" autoscroll="false"></div>
+      <tab ng-show="account.delegate_info" ng-click="goto_tab('account.delegate')" active="tabs[1].active">
+        <tab-heading><i class="fa fa-legal fa-fw fa-lg"></i>{{ 'account.delegate_info' | translate }}</tab-heading>
+        <div ui-view="account-delegate"></div>
       </tab>
 
-      <!-- Assets tab -->
-      <tab ng-click="goto_tab('account.manageAssets')" active="tabs[2].active" ng-show="account.is_my_account && !is_bitshares_js" >
-        <tab-heading><i class="fa fa-renren fa-fw fa-lg"></i> <span translate>account.assets</span></tab-heading>
-        <div ui-view="account-manage-assets" autoscroll="false"></div>
+      <!-- transfer tab -->
+      <tab ng-click="goto_tab('account.transfer')" active="tabs[2].active" ng-show="account.is_my_account">
+        <tab-heading><i class="fa fa-sign-out fa-fw fa-lg"></i>{{ 'account.transfer' | translate }}</tab-heading>
+        <div ui-view="account-transfer" ng-if="account.is_my_account"></div>
       </tab>
 
       <!-- Assets tab -->
@@ -183,23 +198,22 @@
         <div ui-view="account-update-reg-account"></div>
       </tab>
 
-      <!-- Edit tab -->
-      <tab ng-hide="is_bitshares_js" ng-click="goto_tab('account.edit')" active="tabs[4].active">
-        <tab-heading><i class="fa fa-edit fa-fw fa-lg"></i> <span translate>btn.edit</span></tab-heading>
-        <div ui-view="account-edit" autoscroll="false"></div>
+      <!-- Edit tab (local) -->
+      <tab ng-click="goto_tab('account.editLocal')" active="tabs[6].active" ng-show='account.is_my_account && !utils.is_registered(account)'>
+        <tab-heading><i class="fa fa-edit fa-fw fa-lg"></i> {{ 'btn.edit' | translate }}</tab-heading>
+        <div ui-view="account-editlocal"></div>
       </tab>
 
       <!-- Vote tab -->
-      <tab ng-click="goto_tab('account.vote')" active="tabs[5].active" ng-if='account.is_my_account && !is_bitshares_js'>
-        <tab-heading><i class="fa fa-ticket fa-fw fa-lg"></i> <span translate>account.vote.tab_title</span></tab-heading>
-        <div ui-view="account-vote" autoscroll="false"></div>
+      <tab ng-click="goto_tab('account.vote')" active="tabs[7].active" ng-if='account.is_my_account'>
+        <tab-heading><i class="fa fa-ticket fa-fw fa-lg"></i>{{'account.vote.tab_title'|translate}}</tab-heading>
+        <div ui-view="account-vote"></div>
       </tab>
 
       <!-- Wall tab -->
-      <tab ng-show="account.registered && !is_bitshares_js" 
-        ng-click="goto_tab('account.wall')" active="tabs[6].active">
-        <tab-heading><i class="fa fa-comments-o fa-fw fa-lg"></i> <span translate>account.wall.tab_title</span></tab-heading>
-        <div ui-view="account-wall" autoscroll="false"></div>
+      <tab ng-click="goto_tab('account.wall')" active="tabs[8].active">
+        <tab-heading><i class="fa fa-comments-o fa-fw fa-lg"></i>{{'account.wall.tab_title'|translate}}</tab-heading>
+        <div ui-view="account-wall"></div>
       </tab>
 
     </tabset>

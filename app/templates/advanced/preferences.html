@@ -8,19 +8,19 @@
           ng-class="{ 'has-error' : pform.wp.$invalid && !pform.wp.$pristine }" novalidate>
 
           <!-- transaction fee -->
-          <div class="form-group row">
-            <label class="col-sm-offset-1 col-sm-3 control-label" for="transaction_fee" translate>pref.trx_fee</label>
+         <label class="col-sm-offset-1 col-sm-3 control-label" for="transaction_fee" translate>pref.trx_fee</label>
+
+         <md-input-container>
             <div class="col-sm-3 input-group">
               <input id="transaction_fee" decimalonly ng-model="model.transaction_fee" name="transaction_fee"
                      class="form-control" placeholder="Transaction Fee"
                      ng-disabled="is_bitshares_js"/> <span class="input-group-addon">{{model.symbol}}</span>
             </div>
-          </div>
-
-      <md-input-container>
+         </md-input-container>
+<!--
         <label for="transaction_fee" translate>pref.trx_fee</label>
         <input id="transaction_fee" type="number" decimalonly ng-model="model.transaction_fee" name="transaction_fee" class="form-control" />
-      </md-input-container>
+-->
 
       <!-- <md-input-container> -->
         <label for="autocomplete" tooltip="{{ 'pref.autocomplete_info' | translate }}" tooltip-placement="bottom" translate>pref.autocomplete_receiver</label>

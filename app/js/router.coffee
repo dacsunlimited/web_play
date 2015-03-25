@@ -21,12 +21,12 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
 
     sp.state "preferences",
         url: prefix + "/preferences"
-        templateUrl: "preferences.html"
+        templateUrl: "advanced/preferences.html"
         controller: "PreferencesController"
 
     sp.state "console",
         url: prefix + "/console"
-        templateUrl: "console.html"
+        templateUrl: "advanced/console.html"
         controller: "ConsoleController"
 
     sp.state "wallet",
@@ -210,7 +210,3 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
         url: prefix + "/advanced"
         templateUrl: "advanced/advanced.html"
         controller: "AdvancedController"
-
-    sp.state "advanced.preferences", { url: "/preferences", views: { 'advanced-preferences': { templateUrl: 'advanced/preferences.html', controller: 'PreferencesController' } } }
-    sp.state "advanced.console", { url: "/console", views: { 'advanced-console': { templateUrl: 'advanced/console.html', controller: 'ConsoleController' } } }
-    sp.state "advanced.wallet", { url: "/wallet", views: { 'wallet-console': { templateUrl: 'advanced/wallet.html', controller: 'WalletController' } } }

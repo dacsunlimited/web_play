@@ -15,8 +15,7 @@ window.open_external_url = (url) ->
 
 app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
-     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages"])
-     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "utils.autofocus",
+     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages", "utils.autofocus",
      "ui.grid.autoResize"])
 
 app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->

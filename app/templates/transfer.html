@@ -1,12 +1,12 @@
 <div ng-switch="no_account">
-<div ng-switch-when="true">
-  <div class="row">
-    <p class="no-account-selected-note" translate>tip.account_not_found</p>
-  </div>
-</div>
-<div ng-switch-default>
+   <md-card ng-switch-when="true">
+     <div class="row">
+       <p class="no-account-selected-note" translate>tip.account_not_found</p>
+     </div>
+   </md-card>
 
-<div class="row head-bg account-page">
+<md-card ng-switch-default>
+<div class="head-bg p-inner" ng-if="show_from_section">
   <div class="col-sm-2 avatar-150-min-width">
     <div class="avatar-150 text-center">
       <identicon account="{{account_from_name}}" size="150"/>
@@ -24,23 +24,6 @@
               <a ui-sref="transfer({from: account.name})">{{account.name}}</a>
             </li>
           </ul>
-        </div>
-      </div>
-      <div class="col-sm-5">
-        <div class="header p-inner ">
-          <div>
-
-            <span class="account-from">{{ 'account.from' | translate }}:</span>
-            <div class="btn-group" dropdown is-open="status.isopen1">
-              <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>{{account_from_name}} <span class="caret"></span></button>
-              <ul class="dropdown-menu" role="menu">
-                <li ng-repeat="account in my_accounts">
-                  <a ui-sref="transfer({from: '{{account.name}}'})">{{account.name}}</a>
-                </li>
-              </ul>
-            </div>
-
-          </div>
         </div>
       </div>
       <div class="col-sm-5">
@@ -62,8 +45,9 @@
         </div>
       </div>
     </div>
+</div>
 
-    <md-card-content>
+ <md-card-content>
 
 <div class="row m-top">
   <div class="col-sm-2 avatar-150-min-width">
@@ -170,7 +154,6 @@
                {{'account.new_balance' | translate }}: {{balance_after_transfer | formatDecimal: balance_precision}} {{transfer_asset.symbol}} ({{'account.less_fee' | translate }} {{ fee+ ' '+tx_fee_asset.symbol }})</span>
         </div>
       </div>
-    </div>
 
     </md-card-content>
   </div>

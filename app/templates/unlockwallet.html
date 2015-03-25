@@ -20,24 +20,22 @@
               <input ng-model="spending_password" name="sp" type="password" class="form-control input"
                      placeholder="Password" tabindex="1" autofocus focus
                      ng-keydown="keydown($event)" ng-keypress="keypress($event)" ng-trim="false"/>
-              <button ng-disabled="!spending_password || loading_indicator.show" type="submit" tabindex="2" class="btn btn-primary" translate>
-                unlock.btn_unlock
-              </button>
+            
             </div>
+            <div layout="row" layout-align="center">
+              <md-button flex="50" ng-disabled="!spending_password || loading_indicator.show" type="submit" tabindex="2" class="md-raised md-primary" translate > unlock.btn_unlock </md-button>
+            </div>
+
             <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label> <label
               class="text-danger" ng-show="capsLockOn" translate> unlock.caps_lock_on </label>
           </form>
           <!--<img ng-if="theme==='default'" src="img/logo-ico-blue.svg" width="64" height="64"/> <img ng-if="theme==='flowers'"-->
                                                                                               <!--src="img/logo-ico-blue.svg"-->
                                                                                               <!--width="64" height="64"/>-->
-          <br/><br/> <span class="client-version" ng-class="theme">{{client_version}}</span>
         </div>
       </md-input-container>
 
-      <div layout="row" layout-align="center">
-        <md-button flex="50" ng-disabled="loading_indicator.show" type="submit" tabindex="2" class="md-raised md-primary" translate > unlock.btn_unlock </md-button>
-      </div>
-
+      
       <div class="text-danger text-center mt" ng-show="wrongPass" translate> unlock.wrong_pass </div>
       <div class="text-danger text-center mt" ng-show="capsLockOn" translate> unlock.caps_lock_on </div>
     </form>
