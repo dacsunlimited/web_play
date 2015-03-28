@@ -3,17 +3,14 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
     $scope.bodyclass = "cover"
     $scope.currentPath = $location.path()
     $scope.theme = 'default'
-
+    $scope.is_bitshares_js = window.bts isnt undefined
+    
     $scope.current_path_includes = (str, params = null)->
         res = $state.current.name.indexOf(str) >= 0
         if res and params
             key = Object.keys(params)[0]
             res = $stateParams[key] == params[key]
         return res
-
-    Wallet.check_wallet_status().then ->
-        Info.watch_for_updates()
-        Wallet.refresh_accounts()
 
     $scope.started = false
 
@@ -55,6 +52,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
         closeModals()
         $idle.unwatch()
         $scope.started = false
+        Info.watch_for_updates shutdown=true
         return
 
     open_wallet = (mode) ->
@@ -85,7 +83,6 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
 #            $scope.unlockwallet = false
 #            Wallet.check_wallet_status()
 
-
     $scope.$watch ->
         Info.info.wallet_unlocked
     , (unlocked)->
@@ -94,9 +91,15 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
             #     console.log 'wallet_unlocked undefined'
             when on
                 Observer.registerObserver Wallet.observer_config()
+                Wallet.check_wallet_status().then ->
+                    Info.watch_for_updates()
+                    Wallet.refresh_accounts()
+
             when off
                 Observer.unregisterObserver Wallet.observer_config()
+        
         navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
+        ### mail is not used yet... Instead, a default mailserver may enable mail for everyone
         if unlocked
             console.log 'unlocked, scan for mail accounts..'
             WalletAPI.list_accounts().then (result) ->
@@ -106,15 +109,22 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
                         #console.log 'unlocked, mail account found..'
                         $scope.mail_enabled = on
                         break
+        ###
     , true
 
     $scope.clear_form_errors = (form) ->
         form.$error.message = null if form.$error.message
+        form.$dirty = false
+        form.$valid = true
+        form.$invalid= false
         for key of form
             continue if /^(\$|_)/.test key
             control = form[key]
-            control.$setPristine true
             control.clear_errors() if control && control.clear_errors
+            control.$setPristine true
+            control.$valid = true
 
     $scope.close_context_help = ->
         $scope.context_help.open = false
+
+    $scope.startIdleWatch()

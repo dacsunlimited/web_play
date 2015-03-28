@@ -1,35 +1,20 @@
 <md-card>
   <md-card-content>
-    <div class="header">
-      <h3 class="header-title" translate>delegate.title</h3>
-    </div>
-
-    <div class="col-sm-6">
-      <table style='width:100%' class="table table-hover">
-        <tr>
-          <td><b translate>delegate.max_pay_per_blk</b></td> <td><b>{{blockchain_delegate_pay_rate}}</b></td>
-        </tr>
-        <tr>
-          <td><b translate>delegate.avg_active_delegate_pay_rate</b> </td> <td> <b> {{avg_act_del_pay_rate | number:2}}</b> % </td>
-        </tr>
-      </table>
-    </div>
-
+  <div class="main-content">
     <div class="row">
-      <md-tabs md-selected="selectedIndex">
-        <md-tab label="{{ 'delegate.top_delegates' | translate }}">
-          <div ng-include src="'delegates/delegates_list_active.html'"></div>
-        </md-tab>
-
-        <md-tab label="{{ 'delegate.standby_delegates' | translate }}">
-          <div ng-include src="'delegates/delegates_list_standby.html'"></div>
-        </md-tab>
-
-        <md-tab label="{{ 'delegate.my_votes' | translate }}">
-          <div ng-include src="'delegates/voting.html'"></div>
-        </md-tab>
-      </md-tabs>
+      <div class="col-sm-12">
+          <tabset>
+            <tab ng-click="activeTab='all'">
+              <tab-heading translate>delegate.all_delegates</tab-heading>
+              <div ng-if="activeTab==='all'" ng-include src="'delegates/delegates_list.html'"></div>
+            </tab>
+             <tab ng-click="activeTab='votes'" ng-hide="is_bitshares_js">
+              <tab-heading translate>delegate.my_votes</tab-heading>
+              <div ng-if="activeTab === 'votes'" ng-include src="'delegates/voting.html'"></div>
+            </tab>
+          </tabset>
+      </div>
     </div>
-
+  </div>
   </md-card-content>
 </md-card>

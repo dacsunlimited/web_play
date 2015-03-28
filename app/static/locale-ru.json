@@ -26,7 +26,7 @@
     "no_assets": "Вы еще не создали ни одного актива.",
     "reg_to_create_asset": "Для создания и выпуска актива Ваш аккаунт должен быть зарегистрирован.&nbsp;Пожалуйста, зарегистрируйте свой аккаунт.",
     "error_parsing_wif_key": "Ошибка при разборе закрытого ключа WIF",
-    "vote_will_transfer_balance_to_self": "Все средства с аккаунта будут переведены назад на аккаунт (минус комиссия за транзакцию)",
+    "vote_will_transfer_balance_to_self": "Все средства с аккаунта будут отправлены на этот-же аккаунт (минус комиссия за транзакцию)",
     "canceling": "Отмена ...",
     "pending": "Ожидание ...",
     "rename_account_name_existed": "Аккаунт с именем {{value}} уже зарегистрирован в цепочке блоков.",
@@ -42,10 +42,8 @@
     "no_trxs": "Нет транзакций",
     "updating_trx_history": "Обновление истории транзакций...",
     "partial_voting_info": "This account is not voting with some of its stake. Consider updating your vote.",
-    "client_update_available": "There is a new mandatory client update available at dacplay.org",
-    "required": "This is required",
-    "too_long": "This is too long",
-    "too_short": "This is too short"
+    "client_update_available": "Внимание! Новая версия кошелька доступна на bitshares.org.",
+    "fake_accounts_warning": "Пожалуйста, тщательно проверьте правильность ввода имени - отправленную транзакцию невозможно отменить."
   },
   "th": {
     "date": "ДАТА",
@@ -282,10 +280,25 @@
       "sell_total" : "The number of {{base}} that will be deposited to {{account}} account after sell order is executed.",
       "short_quantity": "The number {{value}} that you would like to borrow and sell.",
       "short_collateral_ratio": "The number of {{quantity}} per {{base}} that you are willing to post as collateral. Short orders are matched in order of highest collateral ratio.",
-      "short_price_limit_direct": "The highest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{base}}. Short orders only match at the price feed or price limit, whichever is more.",
-      "short_price_limit_inverted": "The lowest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{quantity}}. Short orders only match at the price feed or price limit, whichever is less.",
+      "short_price_limit_direct": "The highest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{base}}. Short orders only match at the price feed or price limit, whichever is less.",
+      "short_price_limit_inverted": "The lowest price in {{base}} per {{quantity}} at which you are willing to borrow and sell {{quantity}}. Short orders only match at the price feed or price limit, whichever is more.",
       "short_feed_price": "The median exchange rate on external exchanges according to delegates.",
-      "short_total": "The amount {{value}} required to fund this order. Calculated as Quantity times Collateral Ratio."
+      "short_total": "The amount {{value}} required to fund this order. Calculated as Quantity times Collateral Ratio.",
+      "short_interest_rate": "Годовая доходность, которую вы можете заплатить"
+    },
+    "days": "{{value}} Дней",
+    "percent_apr": "%",
+    "rules": {
+        "title": "Market Rules Summary",
+        "conditions": "Short orders can only get filled under these conditions:",
+        "condition1": "There is someone willing to buy BitUSD at the price feed",
+        "condition2": "AND Your short order is the highest interest rate order",
+        "condition3": "AND Your price limit is lower than the feed (BTS per USD) or you didn't specify a price limit",
+        "condition4": "AND You have enough collateral to provide 2x backing at the trade price and quantity",
+        "condition5": "OR Your price limit is higher than the feed (BTS per USD) and someone is willing to buy at your price limit",
+        "short1": "Short orders are forced to cover after 30 days by taking the best offers at the time. No fee is charged.",
+        "short2":"Short orders are forced to cover when 75% of their collateral is required to cover, leaving the short with 25% of the collateral minus a 5% fee.",
+        "cover_fee":"The 5% fee is assessed as a percent of the collateral left over after covering."
     }
   },
   "account": {
@@ -338,14 +351,19 @@
     "self": "себе",
     "vote": {
       "tab_title": "Голосовать",
-      "vote_for": "Голосовать за",
-      "vote_all": "Голосовать за всех",
-      "vote_none": "Голосовать против всех",
-      "vote_random_subset": "Избрать депутатов случайным образом",
-      "vote_as_delegates_recommended": "Голосовать как рекомендуют мои делегаты",
-      "btn_update_vote": "Обновить выбор",
-      "current_votes": "Текущий выбор",
-      "future_votes": "Планируемый выбор"
+      "vote_for": "Голосовать",
+      "vote_all": "За всех",
+      "vote_none": "Против всех",
+      "vote_random_subset": "За случайную выборку",
+      "vote_as_delegates_recommended": "Как рекомендуют мои делегаты",
+      "vote_per_transfer": "Указывать при каждом переводе",
+      "btn_update_vote": "Проголосовать",
+      "current_votes": "Текущие голоса",
+      "votes": "Сумма",
+      "approval": "Одобрение",
+      "vote_confirmation_title": "Подтвердите голосование",
+      "vote_confirmation_text": "Проголосовать используя {{balance}} {{symbol}}? Комиссия за транзакцию составит {{fee}} {{fee_symbol}}.",
+      "no_balance": "У вас нет {{symbol}} для голосования"
     },
     "import_wif_key": "Импортировать WIF ключ",
     "import_from_wallet": "Импортировать ключи из бумажника",
@@ -380,12 +398,16 @@
     "reg_no_funds_note": "Если у вас еще нет BTS, ниже вы можете выбрать сервис, который зарегистрирует ваш аккаунт бесплатно.",
     "reg_subaccount_faucet_not_available": "Бесплатная регистрация не доступна для данного аккаунта. Имя аккаунта содержит символ '.' и является субаккаунтом. Пожалуйста выберите другое имя или переведите на свой счет 0.5 BTS - этого будет достаточно для регистрации аккаунта.",
     "reg_add_faucet": "Add Faucet",
-    "update_public_data_tx_fee": "Update data transaction Fee: ",
-    "new_balance": "New Balance",
-    "less_fee": "Less fee of"
+    "update_public_data_tx_fee": "Комиссия за изменение данных: ",
+    "new_balance": "Новый баланс",
+    "less_fee": "За минусом комиссии",
+    "select_currency": "Выберете валюту",
+    "your_account": "Аккаунт принадлежит вам",
+    "registered" : "Дата регистрации",
+    "pay_to": "Перевести средства"
   },
   "accounts": {
-    "create_account": "Создать новый аккаунт",
+    "add_account": "Добавить аккаунт",
     "accounts": "Аккаунты",
     "info": "Нажмите на имени аккаунта, чтобы получить больше информации.",
     "select_account": "Выбрать аккаунт"
@@ -420,7 +442,6 @@
   },
   "directory": {
     "directory": "Каталог",
-    "favorites": "Избранное",
     "unregistered": "Незарегистрированные",
     "registered": "Зарегистрированные",
     "assets": "Активы"
@@ -446,7 +467,12 @@
     "language": "Язык интерфейса",
     "theme": "Разблокировать экран Стиль",
     "default": "дефолт",
-    "flowers": "цветы"
+    "flowers": "цветы",
+    "default_vote": "По умолчанию голосовать за",
+    "time_too_low": "User-input timeout was too low. It was increased to 15",
+    "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
+    "fee_too_low": "Transaction fee was too low. It was increased to 0.1 BTS",
+    "updated": "Preferences Updated"
   },
   "console": {
     "type_cmd_and_enter": "Введите команду и нажмите Enter"

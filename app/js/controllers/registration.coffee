@@ -5,7 +5,6 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
     $scope.m.payrate = 50
     $scope.m.delegate = false
     $scope.available_faucets = [
-#        {id: 0, name: "", url: ""},
         {id: 1, name: "faucet.dacplay.org", url: "http://faucet.dacplay.org/"},
         {id: 1000, name: "Add faucet", url: "add"}
     ]
@@ -24,9 +23,9 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
 
     refresh_accounts = ->
         $scope.accounts = {}
-        angular.forEach Wallet.balances, (balances, name) ->
+        for name, balances of Wallet.balances
             bals = []
-            angular.forEach balances, (asset, symbol) ->
+            for symbol, asset of balances
                 bals.push asset if asset.amount
             $scope.accounts[name] = [name, bals] if bals.length
             $scope.m.payfrom = if $scope.accounts[$scope.account.name] then $scope.accounts[$scope.account.name] else $scope.accounts[Object.keys($scope.accounts)[0]]
@@ -39,7 +38,9 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
 
     $scope.register = ->
         if !$scope.m.payfrom and $scope.m.faucet?.url and $scope.m.faucet.url != 'add'
-            url = "#{$scope.m.faucet.url}?account_name=#{$scope.account.name}&account_key=#{$scope.account.active_key}"
+            app_id = "0"
+            app_id = magic_unicorn.get_app_id() if magic_unicorn? and magic_unicorn.get_app_id
+            url = "#{$scope.m.faucet.url}?account_name=#{$scope.account.name}&active_key=#{$scope.account.active_key}&owner_key=#{$scope.account.owner_key}&app_id=#{app_id}"
             open_external_url(url)
             $modalInstance.close("ok")
             return
