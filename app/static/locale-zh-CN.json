@@ -42,7 +42,7 @@
     "no_trxs": "没有交易!",
     "updating_trx_history": "正在更新交易记录...",
     "partial_voting_info": "账户尚有权益未使用投票权。请考虑行使投票权。",
-    "client_update_available": "发现客户端关键更新，请访问 https://bitshares.org/resources/downloads 获取。",
+    "client_update_available": "发现客户端关键更新，请访问 https://github.com/bitsuperlab/bitshares_play/releases 获取。",
     "fake_accounts_warning": "警示！诈骗者常常通过注册虚假/近似/容易混淆的账户名来引诱用户发送资金到错误的账户。请在输入账户名时再三确认。"
   },
   "th": {
@@ -146,8 +146,8 @@
   "unlock": {
     "btn_unlock": "解 锁",
     "caps_lock_on": "大写键已按下!",
-    "desc_title": "BitShares PLAY",
-    "desc_content_1": "BitShares PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
+    "desc_title": "DAC PLAY",
+    "desc_content_1": "DAC PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
     "desc_content_2": "",
     "spending_password": "密 码",
     "wrong_pass": "密码错误",
@@ -347,7 +347,7 @@
     "transfer": "转账",
     "transfer_authorization": "转账授权",
     "amount": "数量",
-    "from": "来自",
+    "from": "发自",
     "to": "发往",
     "new": "新建",
     "memo": "消息",
@@ -435,9 +435,9 @@
     "new_balance": "新的余额",
     "less_fee": "少于费用",
     "select_currency": "选择货币",
-    "your_account": "Your Account",
-    "registered" : "Registered",
-    "pay_to": "Make a payment to"
+    "your_account": "你的账户",
+    "registered" : "已注册",
+    "pay_to": "发送资金到"
   },
   "accounts": {
     "add_account": "创建新账户",
@@ -470,11 +470,12 @@
   },
   "privacy": {
     "email_warning1": "你的邮件地址只会被用来识别",
-    "email_warning2": "绑定你BitShares 账户的地址，这可以帮助其他人来识别你的交易并且发送交易给正确的人。",
+    "email_warning2": "绑定你DAC PLAY 账户的地址，这可以帮助其他人来识别你的交易并且发送交易给正确的人。",
     "email_warning3": "你的邮件地址不会被其他任何人知道，其他人也无法给你发送垃圾邮件。"
   },
   "directory": {
     "directory": "目录",
+    "favorites": "收藏",
     "unregistered": "非注册",
     "registered": "注册",
     "assets": "比特资产"

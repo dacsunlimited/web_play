@@ -444,6 +444,7 @@
   },
   "directory": {
     "directory": "Verzeichnis",
+    "favorites": "Favorites",
     "unregistered": "Unregistriert",
     "registered": "Registriert",
     "assets": "BitAssets"

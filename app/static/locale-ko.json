@@ -45,7 +45,7 @@
     "no_trxs": "트랜잭션 기록이 없습니다.",
     "updating_trx_history": "트랜잭션 기록을 업데이트합니다...",
     "partial_voting_info": "이 계정에는 아직 투표를 하지 않은 지분이 남아있습니다. 투표 완료를 권장합니다.",
-    "client_update_available": "지갑 필수 업데이트가 올라왔습니다. https://bitshares.org/resources/downloads 에서 다운로드 하십시오.",
+    "client_update_available": "지갑 필수 업데이트가 올라왔습니다. https://github.com/bitsuperlab/bitshares_play/releases 에서 다운로드 하십시오.",
     "fake_accounts_warning": "주의! 사기꾼들이 종종 가짜 계정을 만들어서 전송을 유도합니다. 입력하신 계정 이름을 철저히 확인해 주십시오."
   },
   "th": {
