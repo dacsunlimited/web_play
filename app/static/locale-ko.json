@@ -302,6 +302,7 @@
   "account": {
     "reg_pending": "등록 처리중입니다.",
     "reg": "등록",
+    "reg_fee": "등록 Fee",
     "reg_date": "등록일",
     "balances": "잔액",
     "open_orders": "오픈된 주문",

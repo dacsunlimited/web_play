@@ -342,6 +342,7 @@
   "account": {
     "reg_pending": "Registration pending",
     "reg": "Register",
+    "reg_fee": "Registration Fee",
     "reg_date": "Registration date",
     "balances": "BALANCES",
     "open_orders": "OPEN ORDERS",

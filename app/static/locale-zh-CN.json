@@ -336,6 +336,7 @@
   "account": {
     "reg_pending": "注册申请中",
     "reg": "注册",
+    "reg_fee": "注册费",
     "reg_date": "注册日期",
     "balances": "余额",
     "transactions": "交易",

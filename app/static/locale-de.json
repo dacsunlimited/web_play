@@ -302,6 +302,7 @@
   "account": {
     "reg_pending": "Registrierung ausstehend",
     "reg": "Registrieren",
+    "reg_fee": "Registrieren Fee",
     "reg_date": "Registrierungsdatum",
     "balances": "GUTHABEN",
     "open_orders": "OFFENE ORDER",

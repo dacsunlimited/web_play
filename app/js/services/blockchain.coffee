@@ -192,6 +192,25 @@ class Blockchain
                 @block_head_num = results.head_num
                 return @recent_blocks.last_block_round
 
+
+    get_account_reg_fee: (name) ->
+      return 'N/A' unless name
+
+      precision = 100000
+      fee = if name.length > 6
+        1 * precision
+      else
+        switch name.length
+          when 5,6
+            1000 * precision
+          when 2,3,4
+            10000 * precision
+          when 1
+            100000 * precision
+
+      return @utils.formatAsset(@utils.asset(fee, @asset_records[0]))
+
+
     ##
     # Delegates
 

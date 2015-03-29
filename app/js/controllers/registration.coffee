@@ -65,3 +65,6 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
         faucets.push new_faucet
         faucets.sort (a, b) -> a.id - b.id
         $scope.m.faucet = new_faucet
+
+    $scope.cal_reg_fee = (name) ->
+        return Blockchain.get_account_reg_fee(name)

@@ -301,6 +301,7 @@
   "account": {
     "reg_pending": "Registrazione Pendente",
     "reg": "Registra",
+    "reg_fee": "Registra Fee",
     "reg_date": "Data di Registrazione",
     "balances": "SALDO",
     "open_orders": "ORDINI APERTI",
