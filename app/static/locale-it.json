@@ -164,7 +164,7 @@
     "pwd_not_match": "Password fields do not match."
   },
   "index": {
-    "title": "BitShares Portafoglio",
+    "title": "DAC PLAY Portafoglio",
     "overview": "Sommario",
     "my_account": "Miei Conti",
     "directory": "Cartella",
@@ -193,7 +193,7 @@
     "description": "Description",
     "proposal": "Delegate bid",
     "location": "Server location",
-    "handle": "BitsharesTalk username",
+    "handle": "PlayTalk username",
     "ann": "Announcements",
     "country": "Legal jurisdiction",
     "role_0": "Development",

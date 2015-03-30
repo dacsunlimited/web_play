@@ -164,7 +164,7 @@
     "pwd_not_match": "Password fields do not match."
   },
   "index": {
-    "title": "BitShares Бумажник",
+    "title": "DAC PLAY Бумажник",
     "overview": "Обзор",
     "my_account": "Мои Аккаунты",
     "directory": "Каталог",
@@ -193,7 +193,7 @@
     "description": "Описание",
     "proposal": "Delegate bid",
     "location": "Разположение сервера",
-    "handle": "BitsharesTalk username",
+    "handle": "PlayTalk username",
     "ann": "Announcements",
     "country": "Legal jurisdiction",
     "role_0": "Development",

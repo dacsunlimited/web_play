@@ -164,7 +164,7 @@
     "pwd_not_match": "Password fields do not match."
   },
   "index": {
-    "title": "BitShares Wallet",
+    "title": "DAC PLAY Wallet",
     "overview": "Kontoauszug",
     "my_account": "Meine Konten",
     "directory": "Verzeichnis",
@@ -193,7 +193,7 @@
     "description": "Beschreibung",
     "proposal": "Delegate Vorschlag",
     "location": "Ort des Servers",
-    "handle": "BitsharesTalk Benutzername",
+    "handle": "PlayTalk Benutzername",
     "ann": "Ankündigung",
     "country": "Rechtsraum",
     "role_0": "Entwicklung",
