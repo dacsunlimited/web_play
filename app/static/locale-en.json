@@ -200,7 +200,7 @@
     "open":"Open"
   },
   "index": {
-    "title": "BitShares Wallet",
+    "title": "DAC PLAY Wallet",
     "overview": "Overview",
     "my_account": "My Accounts",
     "directory": "Directory",
@@ -232,7 +232,7 @@
     "description": "Description",
     "proposal": "Delegate bid",
     "location": "Server location",
-    "handle": "BitsharesTalk username",
+    "handle": "PlayTalk username",
     "ann": "Announcements",
     "country": "Legal jurisdiction",
     "role_0": "Development",

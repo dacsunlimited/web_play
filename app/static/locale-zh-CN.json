@@ -158,7 +158,7 @@
     "info": "请记住该密码，它将控制你的资金何时以及如何被花。 如果你忘记该密码，你将无法转账使用你的资金或股份。",
     "create_wallet": "创建钱包"
   },
-   "wallet_common":{
+  "wallet_common":{
     "pw_too_short":"密码长度必须超过9个字元。",
     "pw_too_long":"密码太长。",
     "pw_required":"密码是必须的。",
@@ -195,7 +195,7 @@
     "open":"开启"
   },
   "index": {
-    "title": "BitShares 钱包",
+    "title": "DAC PLAY 钱包",
     "overview": "概况",
     "my_account": "我的账户",
     "directory": "目录",
@@ -226,7 +226,7 @@
     "description": "描述",
     "proposal": "受托人提案",
     "location": "服务器地理位置",
-    "handle": "BitSharesTalk论坛用户名",
+    "handle": "PlayTalk论坛用户名",
     "ann": "公告",
     "country": "法定管辖权",
     "role_0": "技术开发",
