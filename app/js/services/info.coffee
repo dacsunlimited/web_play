@@ -5,7 +5,7 @@ class Info
 
     is_refreshing : false
 
-    expected_client_version: "0.0.3"
+    expected_client_version: "0.0.1"
 
     get : () ->
         if Object.keys(@info).length > 0
