@@ -21,6 +21,15 @@ body.fixed_header .wrapper {
   padding-top: 0;
 }
 
+.no-padding-vertical {
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+.no-padding-top {
+  padding-top:0px;
+}
+
 md-content.main-content {
   background-color: #eee;
 }

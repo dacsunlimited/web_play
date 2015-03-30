@@ -15,6 +15,10 @@ To start hacking on the GUI, first follow the directions to build the bitshares 
 
 Install Node.js (<http://nodejs.org/download/>)
 
+Install Compass
+
+    $ bundle install
+
 Navigate to the web_wallet directory where `package.json` is located and run these commands:
 
     $ npm install -g
