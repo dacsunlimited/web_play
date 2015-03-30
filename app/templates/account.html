@@ -1,3 +1,5 @@
+<md-card>
+<md-card-content class="no-padding-vertical">
 <div class="account-page" ng-class="(account.delegate_info) ? 'row head-bg-delegate p-inner' : 'row head-bg p-inner'">
   <div class="col-sm-2">
     <div class="avatar-150">
@@ -50,7 +52,7 @@
         <div ng-switch-default class="reg-date" style="" class="white-shadow">
           <span class="account-name">{{account.name}}</span> &nbsp;
           <i class="fa fa-fw fa-check text-success"></i> <span tooltip=" {{ 'account.reg_date' | translate }}: {{ account.registration_date | prettyDate }}" translate>directory.registered</span>
-          &nbsp; 
+          &nbsp;
           <br/>
           <a style="color:white;" ng-click="link(website)">{{ website }}</a>
           <div ng-if="delegate.role" style='color:white;font-size:150%'>Role: {{ delegate.role }}</div>
@@ -158,10 +160,12 @@
       </table>
     </div>
   </div>
-
-
 </div>
+</md-card-content>
+</md-card>
 
+<md-card>
+<md-card-content>
 <div class="main-content">
 <div class="row">
 
@@ -175,7 +179,7 @@
       </tab>
 
       <!--delegate info tab -->
-      <tab ng-show="account.delegate_info && !is_bitshares_js" 
+      <tab ng-show="account.delegate_info && !is_bitshares_js"
             ng-click="goto_tab('account.delegate')" active="tabs[1].active">
         <tab-heading><i class="fa fa-legal fa-fw fa-lg"></i> <span translate>account.delegate_info</span></tab-heading>
         <div ui-view="account-delegate" autoscroll="false"></div>
@@ -200,7 +204,7 @@
         <tab-heading><i class="fa fa-edit fa-fw fa-lg"></i> <span translate>btn.edit</span></tab-heading>
         <div ui-view="account-edit" autoscroll="false"></div>
       </tab>
-      
+
       <!-- Vote tab -->
       <tab ng-click="goto_tab('account.vote')" active="tabs[5].active" ng-if='account.is_my_account && !is_bitshares_js'>
         <tab-heading><i class="fa fa-ticket fa-fw fa-lg"></i> <span translate>account.vote.tab_title</span></tab-heading>
@@ -208,7 +212,7 @@
       </tab>
 
       <!-- Wall tab -->
-      <tab ng-show="account.registered && !is_bitshares_js" 
+      <tab ng-show="account.registered && !is_bitshares_js"
         ng-click="goto_tab('account.wall')" active="tabs[6].active">
         <tab-heading><i class="fa fa-comments-o fa-fw fa-lg"></i> <span translate>account.wall.tab_title</span></tab-heading>
         <div ui-view="account-wall" autoscroll="false"></div>
@@ -219,3 +223,5 @@
   </div>
 </div>
 </div>
+</md-card-content>
+</md-card>

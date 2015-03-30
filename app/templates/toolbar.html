@@ -1,9 +1,18 @@
 <ul class="nav navbar-nav left-panel">
-  <li class="back-button"><a class="pointer back-button" ng-click="back()" tooltip="Back" tooltip-placement="bottom"> &nbsp; <i class="fa fa-arrow-left"></i> &nbsp; </a></li>
+  <!-- <li class="back-button"><a class="pointer back-button" ng-click="back()" tooltip="Back" tooltip-placement="bottom"> &nbsp; <i class="fa fa-arrow-left"></i> &nbsp; </a></li>
   <li ui-sref-active="active"><a ui-sref="accounts"><i class="fa fa-dashboard fa-fw"></i><span translate>toolbar.dashboard</span></a></li>
   <li ui-sref-active="active" ng-if="current_account"><a ui-sref="transfer({from: current_account})" class="nav-transfer"><i class="fa fa-sign-out fa-fw fa-lg"></i><span translate>account.transfer</span></a></li>
+  -->
+  <md-button ui-sref="accounts">
+    <i class="fa fa-dashboard fa-fw"></i>{{ 'toolbar.dashboard' | translate }}
+  </md-button>
+  <md-button ui-sref="transfer({from: current_account})">
+    <i class="fa fa-sign-out fa-fw fa-lg"></i>{{ 'account.transfer' | translate }}
+  </md-button>
 </ul>
-  
+
+<span flex></span>
+
 <div class="md-toolbar-item">
   <ul class="nav navbar-nav">
     <li class="dropdown notification error-notifications" ng-show="errors.list.length > 0" ng-class="{'new-error': errors.new_error}" on-toggle="error_notifier_toggled(open)" style="display:block !important;">

@@ -301,6 +301,7 @@
   "account": {
     "reg_pending": "Registrazione Pendente",
     "reg": "Registra",
+    "reg_fee": "Registra Fee",
     "reg_date": "Data di Registrazione",
     "balances": "SALDO",
     "open_orders": "ORDINI APERTI",
@@ -433,11 +434,12 @@
   },
   "privacy": {
     "email_warning1": "Il tuo indirizzo email è usato al solo scopo di identificare",
-    "email_warning2": "il tuo conto che può essere legato al tuo conto BitShares. Questo aiuta te e gli altri a verificare che le tue transazioni stanno inviando i fondi agli individui attesi. account which can be tied to your BitShares XT account. This helps you and others verify that your transactions are sending funds to the expected individual. ",
+    "email_warning2": "il tuo conto che può essere legato al tuo conto DAC PLAY. Questo aiuta te e gli altri a verificare che le tue transazioni stanno inviando i fondi agli individui attesi. account which can be tied to your BitShares XT account. This helps you and others verify that your transactions are sending funds to the expected individual. ",
     "email_warning3": "La tua email non sarà ceduta a nessuno e non riceverai alcuna posta indesiderata "
   },
   "directory": {
     "directory": "Cartella",
+    "favorites": "Favorites",
     "unregistered": "Non Registrato",
     "registered": "Registrato",
     "assets": "Assets"

@@ -97,7 +97,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
 
             when off
                 Observer.unregisterObserver Wallet.observer_config()
-        
+
         navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
         ### mail is not used yet... Instead, a default mailserver may enable mail for everyone
         if unlocked

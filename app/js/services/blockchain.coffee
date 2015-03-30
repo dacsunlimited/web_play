@@ -10,7 +10,7 @@ class Blockchain
                     deferred.resolve(true)
             #notify: (data) ->
         ###
-                
+
     ###
     observer_each_block: ->
         #console.log 'blockchain refresh'
@@ -27,7 +27,7 @@ class Blockchain
 
         @q.all(promises)
     ###
-    
+
     # # # # #
     #  Blockchain Config
     config : {}
@@ -43,7 +43,7 @@ class Blockchain
                 @config.page_count = 20
                 return @config
 
-        
+
     list_accounts: (start_name, limit) ->
         @rpc.request('blockchain_list_accounts', [start_name, limit]).then (response) ->
             reg = []
@@ -55,7 +55,7 @@ class Blockchain
                     registration_date: val.registration_date
             reg
 
-    # # # # # 
+    # # # # #
     #  Asset Records
 
     asset_records: {}
@@ -170,7 +170,7 @@ class Blockchain
                 for i in [0...blocks.length]
                     blocks[i].delegate_name = signers[i]
                     blocks[i].timestamp = @utils.toDate(blocks[i].timestamp)
-                    blocks[i].latency = blocks[i].latency/1000000
+                    blocks[i].latency = blocks[i].latency / 1000000
                     for j in [0...missed[i].length]
                         timestamp = new Date(+blocks[i].timestamp - ((missed[i].length - j)) * (1000 * config.block_interval))
                         merged.push
@@ -191,6 +191,25 @@ class Blockchain
                 @recent_blocks.last_block_round = Math.floor((results.head_num - 1) / (results.config.page_count))
                 @block_head_num = results.head_num
                 return @recent_blocks.last_block_round
+
+
+    get_account_reg_fee: (name) ->
+      return 'N/A' unless name
+
+      precision = 100000
+      fee = if name.length > 6
+        1 * precision
+      else
+        switch name.length
+          when 5,6
+            1000 * precision
+          when 2,3,4
+            10000 * precision
+          when 1
+            100000 * precision
+
+      return @utils.formatAsset(@utils.asset(fee, @asset_records[0]))
+
 
     ##
     # Delegates
@@ -244,7 +263,7 @@ class Blockchain
                 @id_delegates[results.dels[i].id] = results.dels[i]
                 @delegate_active_hash_map[@active_delegates[i].name]=true
                 @avg_act_del_pay_rate+=@active_delegates[i].delegate_info.pay_rate
-            @avg_act_del_pay_rate=@avg_act_del_pay_rate/results.config.delegate_num
+            @avg_act_del_pay_rate=@avg_act_del_pay_rate / results.config.delegate_num
             for i in [results.config.delegate_num ... results.dels.length]
                 @inactive_delegates[i - results.config.delegate_num] = @populate_delegate(results.dels[i], false, i+1)
                 @id_delegates[results.dels[i].id] = results.dels[i]

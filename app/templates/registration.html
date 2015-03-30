@@ -7,6 +7,9 @@
       <div form-hgroup-value label="{{'transaction_fee'|translate}}" show-value="true">
         {{ transaction_fee }}
       </div>
+      <div form-hgroup-value label="{{'account.reg_fee'|translate}}" show-value="true">
+        {{ cal_reg_fee(account.name) }}
+      </div>
       <div class="form-group" ng-show="!m.payfrom && !m.subaccount">
         <div class="col-sm-offset-4" translate>account.reg_no_funds_note</div>
       </div>
