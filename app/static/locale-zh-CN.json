@@ -156,7 +156,12 @@
   "wallet": {
     "create_new_wallet": "创建新钱包",
     "info": "请记住该密码，它将控制你的资金何时以及如何被花。 如果你忘记该密码，你将无法转账使用你的资金或股份。",
-    "create_wallet": "创建钱包"
+    "create_wallet": "创建钱包",
+    "confirm_password": "确认密码",
+    "pwd_too_short": "密码太短，至少需要9位字符",
+    "pwd_too_long": "密码太长，不能超过255位字符",
+    "pwd_required": "密码必填",
+    "pwd_not_match": "两次输入的密码不相同"
   },
   "wallet_common":{
     "pw_too_short":"密码长度必须超过9个字元。",
