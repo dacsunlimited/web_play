@@ -5,6 +5,7 @@ class Wallet
 
     balances: {}
     bonuses: {}
+    vesting_balances: {}
     asset_balances : {}
 
     transactions: {"*": []}
@@ -38,19 +39,20 @@ class Wallet
     interface_theme = 'default'
 
     reset_gui_state:->
-        # Information may show after locking the wallet then using the 
+        # Information may show after locking the wallet then using the
         # back button.  Additionally, clear memory.
         clear=(map)-> delete map[k] for k in Object.keys map
         clear @accounts
         clear @contacts
         clear @balances
         clear @bonuses
+        clear @vesting_balances
         clear @asset_balances
         clear @transactions
         @transactions["*"]=[]
         clear @transactions_all_by_id
         clear @pendingRegistrations
-    
+
     observer_config:->
         name: "WalletEachBlockObserver"
         frequency: "each_block"
@@ -101,8 +103,9 @@ class Wallet
         @blockchain.refresh_asset_records().then =>
             @main_asset = @blockchain.asset_records[0]
             requests =
-                refresh_bonuses: @refresh_bonuses()
+                # refresh_bonuses: @refresh_bonuses()
                 account_balances : @wallet_api.account_balance("")
+                refresh_vesting_balances: @refresh_vesting_balances("")
             @q.all(requests).then (results) =>
                 for name_bal_pair in results.account_balances
                     name = name_bal_pair[0]
@@ -146,6 +149,35 @@ class Wallet
                     amount = asset_id_amt_pair[1]
                     @bonuses[name] = @bonuses[name] || {}
                     @bonuses[name][symbol] = @utils.newAsset(amount, symbol, @blockchain.symbol2records[symbol].precision)
+
+    refresh_vesting_balances_promise: null
+    refresh_vesting_balances: =>
+      @refresh_vesting_balances_promise = @wallet_api.account_vesting_balances("").then (response) =>
+        for name_balanes_pair in response
+          name = name_balanes_pair[0]
+          @vesting_balances[name] = name_balanes_pair[1]
+
+
+    vesting_balances_summary: (name) =>
+      return @vesting_balances_summary[name] if @vesting_balances_summary[name]
+      return 0 unless @vesting_balances[name]
+
+      available = 0; vested = 0; claimed = 0; original = 0
+      for record in @vesting_balances[name]
+          available += record["available_balance"]
+          vested += record["vested_balance"]
+          claimed += record["claimed_balance"]
+          original += record["original_balance"]
+
+      symbol = 'PLS'; precision = @blockchain.symbol2records[symbol].precision
+
+      return (
+          @vesting_balances_summary[name] =
+              available: @utils.newAsset available, symbol, precision
+              vested:    @utils.newAsset vested, symbol, precision
+              claimed:   @utils.newAsset claimed, symbol, precision
+              original:  @utils.newAsset original, symbol, precision
+      )
 
 
     # turn raw rpc return value into nice object

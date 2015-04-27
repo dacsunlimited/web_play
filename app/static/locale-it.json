@@ -401,7 +401,14 @@
     "select_currency": "Select Currency",
     "your_account": "Your Account",
     "registered" : "Registered",
-    "pay_to": "Make a payment to"
+    "pay_to": "Make a payment to",
+    "vesting": {
+      "original": "Locked Total",
+      "vested": "Vested",
+      "claimed": "Claimed",
+      "available": "Claimable",
+      "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
+    }
   },
   "accounts": {
     "add_account": "Crea Nuovo Conto",

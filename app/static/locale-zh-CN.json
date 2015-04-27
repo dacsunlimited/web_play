@@ -442,7 +442,14 @@
     "select_currency": "选择货币",
     "your_account": "你的账户",
     "registered" : "已注册",
-    "pay_to": "发送资金到"
+    "pay_to": "发送资金到",
+    "vesting": {
+      "original": "锁定总额",
+      "vested": "已解冻",
+      "claimed": "已领取",
+      "available": "可领取",
+      "tip": "锁定金额于2015年7月1日开始1年内线性解冻"
+    }
   },
   "accounts": {
     "add_account": "创建新账户",

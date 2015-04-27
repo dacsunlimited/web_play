@@ -405,7 +405,14 @@
     "select_currency": "Выберете валюту",
     "your_account": "Аккаунт принадлежит вам",
     "registered" : "Дата регистрации",
-    "pay_to": "Перевести средства"
+    "pay_to": "Перевести средства",
+    "vesting": {
+      "original": "Locked Total",
+      "vested": "Vested",
+      "claimed": "Claimed",
+      "available": "Claimable",
+      "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
+    }
   },
   "accounts": {
     "add_account": "Добавить аккаунт",
