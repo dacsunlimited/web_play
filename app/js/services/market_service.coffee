@@ -665,7 +665,7 @@ class MarketService
 #                self.blockchain_api.market_get_asset_collateral( actual_market.asset_base_symbol ).then (amount) =>
 #                    actual_market.collateral = amount / actual_market.quantity_precision
 #                    self.blockchain_api.get_asset( actual_market.base_asset.id ).then (record) =>
-#                        supply = record["current_share_supply"] / actual_market.base_precision
+#                        supply = record["current_supply"] / actual_market.base_precision
 #                        actual_market.collateralization = 100 * ((actual_market.collateral / actual_market.median_price) / supply)
 #                        deferred.resolve(true)
 #                , (error) ->

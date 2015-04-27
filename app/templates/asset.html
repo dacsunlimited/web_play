@@ -14,8 +14,8 @@
           <!--<th translate>Public Data</th>-->
           <th translate>th.issue_account</th>
           <th translate>th.precision</th>
-          <th translate>th.current_share_supply</th>
-          <th translate>th.maximum_share_supply</th>
+          <th translate>th.current_supply</th>
+          <th translate>th.maximum_supply</th>
           <th translate>th.collected_fees</th>
           <th translate>th.registration_date</th>
       </tr>
@@ -39,10 +39,10 @@
               {{ symbol2records[ticker].precision }}
           </td>
           <td>
-              {{ Utils.newAsset(symbol2records[ticker].current_share_supply, ticker, symbol2records[ticker].precision) | formatAsset }}
+              {{ Utils.newAsset(symbol2records[ticker].current_supply, ticker, symbol2records[ticker].precision) | formatAsset }}
           </td>
           <td>
-              {{ Utils.newAsset(symbol2records[ticker].maximum_share_supply, ticker, symbol2records[ticker].precision) | formatAsset }}
+              {{ Utils.newAsset(symbol2records[ticker].maximum_supply, ticker, symbol2records[ticker].precision) | formatAsset }}
           </td>
           <td>
               {{ Utils.newAsset(symbol2records[ticker].collected_fees, ticker, symbol2records[ticker].precision) | formatAsset }}

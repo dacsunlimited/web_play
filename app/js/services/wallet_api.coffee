@@ -557,13 +557,13 @@ class WalletAPI
   #   string `asset_name` - the name of the asset
   #   string `issuer_name` - the name of the issuer of the asset
   #   string `description` - a description of the asset
-  #   real_amount `maximum_share_supply` - the maximum number of shares of the asset
+  #   real_amount `maximum_supply` - the maximum number of shares of the asset
   #   uint64_t `precision` - defines where the decimal should be displayed, must be a power of 10
   #   json_variant `public_data` - arbitrary data attached to the asset
   #   bool `is_market_issued` - creation of a new BitAsset that is created by shorting
   # return_type: `transaction_record`
-  asset_create: (symbol, asset_name, issuer_name, description, maximum_share_supply, precision, public_data, is_market_issued, error_handler = null) ->
-    @rpc.request('wallet_asset_create', [symbol, asset_name, issuer_name, description, maximum_share_supply, precision, public_data, is_market_issued], error_handler).then (response) ->
+  asset_create: (symbol, asset_name, issuer_name, description, maximum_supply, precision, public_data, is_market_issued, error_handler = null) ->
+    @rpc.request('wallet_asset_create', [symbol, asset_name, issuer_name, description, maximum_supply, precision, public_data, is_market_issued], error_handler).then (response) ->
       response.result
 
   # Updates an existing user-issued asset; only the public_data can be updated if any shares of the asset exist
@@ -572,7 +572,7 @@ class WalletAPI
   #   optional_string `name` - the new name to give the asset; or null to keep the current name
   #   optional_string `description` - the new description to give the asset; or null to keep the current description
   #   optional_variant `public_data` - the new public_data to give the asset; or null to keep the current public_data
-  #   optional_double `maximum_share_supply` - the new maximum_share_supply to give the asset; or null to keep the current maximum_share_supply
+  #   optional_double `maximum_supply` - the new maximum_supply to give the asset; or null to keep the current maximum_supply
   #   optional_uint64_t `precision` - the new precision to give the asset; or null to keep the current precision
   #   share_type `issuer_transaction_fee` - an additional fee (denominated in issued asset) charged by the issuer on every transaction that uses this asset type
   #   real_amount `issuer_market_fee` - an additional fee (denominated in percent) charged by the issuer on every order that is matched
@@ -582,8 +582,8 @@ class WalletAPI
   #   uint32_t `required_sigs` - number of signatures from the authority required to control this asset record
   #   address_list `authority` - owner keys that control this asset record
   # return_type: `transaction_record`
-  asset_update: (symbol, name, description, public_data, maximum_share_supply, precision, issuer_transaction_fee, issuer_market_fee, flags, issuer_permissions, issuer_account_name, required_sigs, authority, error_handler = null) ->
-    @rpc.request('wallet_asset_update', [symbol, name, description, public_data, maximum_share_supply, precision, issuer_transaction_fee, issuer_market_fee, flags, issuer_permissions, issuer_account_name, required_sigs, authority], error_handler).then (response) ->
+  asset_update: (symbol, name, description, public_data, maximum_supply, precision, issuer_transaction_fee, issuer_market_fee, flags, issuer_permissions, issuer_account_name, required_sigs, authority, error_handler = null) ->
+    @rpc.request('wallet_asset_update', [symbol, name, description, public_data, maximum_supply, precision, issuer_transaction_fee, issuer_market_fee, flags, issuer_permissions, issuer_account_name, required_sigs, authority], error_handler).then (response) ->
       response.result
 
   # Issues new shares of a given asset type

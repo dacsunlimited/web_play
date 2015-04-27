@@ -14,7 +14,7 @@
         <span ng-switch on='del.votes_for/current_xts_supply<0.0001'
         tooltip="{{ 'delegate.votes_obtained' | translate }}: {{ del.votes_for | formatVotes}}">
         <span ng-switch-when='true'>&#60;0.01%</span>
-        <span ng-switch-default>{{ (del.votes_for)/current_xts_supply*100 | number:2 }}%</span></span>        
+        <span ng-switch-default>{{ (del.votes_for)/current_xts_supply*100 | number:2 }}%</span></span>
       </td>
       <td class='hideableCol'>{{ del.pay_rate }}%</td>
       <td>

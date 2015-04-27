@@ -76,11 +76,11 @@ angular.module("app").controller "MarketsController", ($scope, $state, Wallet, B
         $scope.featured_markets.push "BitSILVER:#{main_asset.symbol}"
 
         for key, asset of records
-            asset.current_supply = Utils.newAsset(asset.current_share_supply, asset.symbol, asset.precision)
-            asset.maximum_supply = Utils.newAsset(asset.maximum_share_supply, asset.symbol, asset.precision)
+            asset.current_supply = Utils.newAsset(asset.current_supply, asset.symbol, asset.precision)
+            asset.maximum_supply = Utils.newAsset(asset.maximum_supply, asset.symbol, asset.precision)
             asset.c_fees = Utils.newAsset(asset.collected_fees, asset.symbol, asset.precision)
             assets_with_unknown_issuer.push asset unless asset.account_name
-            asset.yield = if asset.current_share_supply==0 then 0 else 100 * asset.collected_fees / asset.current_share_supply
+            asset.yield = if asset.current_supply==0 then 0 else 100 * asset.collected_fees / asset.current_supply
             if asset.issuer_account_id > 0
                 scam = false;
                 for key2, asset2 of records
