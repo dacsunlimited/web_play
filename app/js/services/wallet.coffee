@@ -430,6 +430,8 @@ class Wallet
         @rpc.request('wallet_rename_account', [current_name, new_name]).then (response) =>
           @refresh_accounts().then =>
               @refresh_transactions()
+              # remove old name from cache
+              delete @accounts[current_name]
           response.result
 
     wallet_unlock: (password, error_handler)->
