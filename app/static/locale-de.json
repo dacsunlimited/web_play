@@ -413,13 +413,15 @@
       "claimed": "Claimed",
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
-    }
+    },
+    "public_data": "Public Data"
   },
   "accounts": {
     "add_account": "Konto erstellen",
     "accounts": "Kontoübersicht",
     "info": "Wählen Sie ein Konto für weitere Aktionen.",
-    "select_account": "Konto auswählen"
+    "select_account": "Konto auswählen",
+    "rename_account": "Rename"
   },
   "asset": {
     "title": "BitAssets",

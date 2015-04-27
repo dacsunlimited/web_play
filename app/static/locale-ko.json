@@ -413,7 +413,8 @@
       "claimed": "Claimed",
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
-    }
+    },
+    "public_data": "Public Data"
   },
   "accounts": {
     "add_account": "새 계정 생성",
