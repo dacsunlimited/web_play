@@ -8,8 +8,8 @@ angular.module("app").controller "AssetsController", ($scope, $location, Blockch
     assets_with_unknown_issuer = []
     Blockchain.refresh_asset_records().then (records)->
         for key, asset of records
-            asset.current_supply = Utils.newAsset(asset.current_share_supply, asset.symbol, asset.precision)
-            asset.maximum_supply = Utils.newAsset(asset.maximum_share_supply, asset.symbol, asset.precision)
+            asset.current_supply = Utils.newAsset(asset.current_supply, asset.symbol, asset.precision)
+            asset.maximum_supply = Utils.newAsset(asset.maximum_supply, asset.symbol, asset.precision)
             asset.c_fees = Utils.newAsset(asset.collected_fees, asset.symbol, asset.precision)
             assets_with_unknown_issuer.push asset unless asset.account_name
             if asset.issuer_account_id > 0

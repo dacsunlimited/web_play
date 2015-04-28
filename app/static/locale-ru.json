@@ -59,8 +59,8 @@
     "desc": "ОПИСАНИЕ",
     "issue_account": "ЭМИТИРОВАН",
     "precision": "ТОЧНОСТЬ",
-    "current_share_supply": "ТЕКУЩЕЕ КОЛИЧЕСТВО АКЦИЙ",
-    "maximum_share_supply": "МАКСИМАЛЬНОЕ КОЛИЧЕСТВО АКЦИЙ",
+    "current_supply": "ТЕКУЩЕЕ КОЛИЧЕСТВО АКЦИЙ",
+    "maximum_supply": "МАКСИМАЛЬНОЕ КОЛИЧЕСТВО АКЦИЙ",
     "share_supply": "КОЛИЧЕСТВО АКЦИЙ",
     "asset": "АКТИВ",
     "collected_fees": "СОБРАННАЯ КОМИССИЯ",
@@ -405,13 +405,22 @@
     "select_currency": "Выберете валюту",
     "your_account": "Аккаунт принадлежит вам",
     "registered" : "Дата регистрации",
-    "pay_to": "Перевести средства"
+    "pay_to": "Перевести средства",
+    "vesting": {
+      "original": "Locked Total",
+      "vested": "Vested",
+      "claimed": "Claimed",
+      "available": "Claimable",
+      "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
+    },
+    "public_data": "Public Data"
   },
   "accounts": {
     "add_account": "Добавить аккаунт",
     "accounts": "Аккаунты",
     "info": "Нажмите на имени аккаунта, чтобы получить больше информации.",
-    "select_account": "Выбрать аккаунт"
+    "select_account": "Выбрать аккаунт",
+    "rename_account": "Rename"
   },
   "asset": {
     "title": "Активы",
@@ -419,7 +428,7 @@
     "asset_name": "Название актива",
     "description": "Описание",
     "memo_data": "Публичная информация",
-    "maximum_share_supply": "Максимальное количество акций",
+    "maximum_supply": "Максимальное количество акций",
     "total_supply": "Всего эмитировано",
     "precision": "Точность",
     "issued_by": "Эмитирован",

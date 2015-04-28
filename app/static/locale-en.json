@@ -59,8 +59,8 @@
     "desc": "DESCRIPTION",
     "issue_account": "ISSUER",
     "precision": "PRECISION",
-    "current_share_supply": "CURRENT SHARE SUPPLY",
-    "maximum_share_supply": "MAXIMUM SHARE SUPPLY",
+    "current_supply": "CURRENT SHARE SUPPLY",
+    "maximum_supply": "MAXIMUM SHARE SUPPLY",
     "share_supply": "SHARE SUPPLY",
     "asset": "ASSET",
     "collected_fees": "COLLECTED FEES",
@@ -442,13 +442,22 @@
     "select_currency": "Select Currency",
     "your_account": "Your Account",
     "registered" : "Registered",
-    "pay_to": "Make a payment to"
+    "pay_to": "Make a payment to",
+    "vesting": {
+      "original": "Locked Total",
+      "vested": "Vested",
+      "claimed": "Claimed",
+      "available": "Claimable",
+      "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
+    },
+    "public_data": "Public Data"
   },
   "accounts": {
     "add_account": "Add Account",
     "accounts": "Accounts",
     "info": "Click on an account name to get more information about that account.",
-    "select_account": "Select Account"
+    "select_account": "Select Account",
+    "rename_account": "Rename"
   },
   "asset": {
     "title": "Assets",
@@ -456,7 +465,7 @@
     "asset_name": "Asset Name",
     "description": "Description",
     "memo_data": "Public Data",
-    "maximum_share_supply": "Maximum Share Supply",
+    "maximum_supply": "Maximum Share Supply",
     "total_supply": "Total Supply",
     "info_create_asset_fee": "Fees for creating a new asset",
     "precision": "Precision",

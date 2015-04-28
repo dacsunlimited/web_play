@@ -59,8 +59,8 @@
     "desc": "BESCHREIBUNG",
     "issue_account": "EMISSIONSKONTO",
     "precision": "NACHKOMMASTELLEN",
-    "current_share_supply": "AKTUELLES ANTEILSANGEBOT",
-    "maximum_share_supply": "MAXIMALES ANTEILSANGEBOT",
+    "current_supply": "AKTUELLES ANTEILSANGEBOT",
+    "maximum_supply": "MAXIMALES ANTEILSANGEBOT",
     "share_supply": "ANTEILSANGEBOT",
     "asset": "ASSET",
     "collected_fees": "EINGENOMMENE GEBÜHREN",
@@ -406,13 +406,22 @@
     "select_currency": "Select Currency",
     "your_account": "Your Account",
     "registered" : "Registered",
-    "pay_to": "Make a payment to"
+    "pay_to": "Make a payment to",
+    "vesting": {
+      "original": "Locked Total",
+      "vested": "Vested",
+      "claimed": "Claimed",
+      "available": "Claimable",
+      "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
+    },
+    "public_data": "Public Data"
   },
   "accounts": {
     "add_account": "Konto erstellen",
     "accounts": "Kontoübersicht",
     "info": "Wählen Sie ein Konto für weitere Aktionen.",
-    "select_account": "Konto auswählen"
+    "select_account": "Konto auswählen",
+    "rename_account": "Rename"
   },
   "asset": {
     "title": "BitAssets",
@@ -420,7 +429,7 @@
     "asset_name": "Bezeichnung",
     "description": "Beschreibung",
     "memo_data": "Verwendungszweck",
-    "maximum_share_supply": "Anzahl Anteile",
+    "maximum_supply": "Anzahl Anteile",
     "total_supply": "Gesamtangebot",
     "info_create_asset_fee": "Aktuelle Gebühr zum erstellen dieses BitAssets",
     "precision": "Präzision",

@@ -90,7 +90,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     #Wallet.refresh_account(name)
 
     Blockchain.get_asset(0).then (asset_type) =>
-        $scope.current_xts_supply = asset_type.current_share_supply
+        $scope.current_xts_supply = asset_type.current_supply
 
 #    $scope.$watch ->
 #        Wallet.accounts[name]
@@ -106,10 +106,14 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     , ->
         if Wallet.balances[name]
             $scope.balances = Wallet.balances[name]
+
 #        if Wallet.open_orders_balances[name]
 #            $scope.open_orders_balances = Wallet.open_orders_balances[name]
-        if Wallet.bonuses[name]
-            $scope.bonuses = Wallet.bonuses[name]
+        # if Wallet.bonuses[name]
+        #     $scope.bonuses = Wallet.bonuses[name]
+
+        if Wallet.vesting_balances[name]
+            $scope.vesting_balance = Wallet.vesting_balances_summary(name)
 
 #    $scope.$watchCollection ->
 #        Wallet.transactions["*"]
@@ -124,6 +128,12 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
         if acct.public_data?.delegate?.role >= 0
             $translate('delegate.role_' + acct.public_data.delegate.role).then (role) ->
                 $scope.delegate.role = role
+
+    $scope.vesting_balance_percentage = ->
+      if $scope.vesting_balance
+        ($scope.vesting_balance.available + $scope.vesting_balance.claimed) / $scope.vesting_balance.vested
+      else
+        0
 
     $scope.import_key = ->
         form = @import_key_form

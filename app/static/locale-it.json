@@ -59,8 +59,8 @@
     "desc": "DESCRIZIONE",
     "issue_account": "CONTO DI EMISSIONE",
     "precision": "PRECISIONE",
-    "current_share_supply": "QUOTE ATTUALMENTE DISPONIBILI",
-    "maximum_share_supply": "QUOTE MASSIME DISPONIBILI",
+    "current_supply": "QUOTE ATTUALMENTE DISPONIBILI",
+    "maximum_supply": "QUOTE MASSIME DISPONIBILI",
     "share_supply": "QUOTE DISPONIBILI",
     "asset": "ASSET",
     "collected_fees": "COMMISSIONI RACCOLTE",
@@ -401,13 +401,22 @@
     "select_currency": "Select Currency",
     "your_account": "Your Account",
     "registered" : "Registered",
-    "pay_to": "Make a payment to"
+    "pay_to": "Make a payment to",
+    "vesting": {
+      "original": "Locked Total",
+      "vested": "Vested",
+      "claimed": "Claimed",
+      "available": "Claimable",
+      "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
+    },
+    "public_data": "Public Data"
   },
   "accounts": {
     "add_account": "Crea Nuovo Conto",
     "accounts": "Conti",
     "info": "Clicca sul nome di un conto per avere più informazioini.",
-    "select_account": "Seleziona Conto"
+    "select_account": "Seleziona Conto",
+    "rename_account": "Rename"
   },
   "asset": {
     "title": "Assets",
@@ -415,7 +424,7 @@
     "asset_name": "Nome Asset",
     "description": "Descrizione",
     "memo_data": "Dati Memo",
-    "maximum_share_supply": "Quote Massime Disponibili",
+    "maximum_supply": "Quote Massime Disponibili",
     "total_supply": "Total Supply",
     "info_create_asset_fee": "Commissione per Creare un Nuovo Asset",
     "precision": "Precisione",

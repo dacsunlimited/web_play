@@ -51,12 +51,12 @@
             <tr>
               <th ng-click="orderByField='symbol'; reverseSort = !reverseSort" ><ng-sort-fa order-string="symbol" reverse-sort="{{reverseSort}}" order-by-field="{{orderByField}}"></ng-sort-fa><span translate>th.symbol</span></th>
               <th ng-click="orderByField='yield'; reverseSort = !reverseSort" ><ng-sort-fa order-string="yield" reverse-sort="{{reverseSort}}" order-by-field="{{orderByField}}"></ng-sort-fa><span translate>account.estimated_yield</span></th>
-              <th class="hidden-xs" class="" translate>th.current_share_supply</th>
+              <th class="hidden-xs" class="" translate>th.current_supply</th>
               <th translate>th.name</th>
             </tr>
           </thead>
           <tbody>
-            <tr tooltip-placement="right" tooltip="{{asset.description}}" ng-repeat="asset in market_peg_assets | orderBy: [orderByField,'current_share_supply', '-symbol']:reverseSort track by asset.id" ng-click="go_to_asset(asset.symbol)">
+            <tr tooltip-placement="right" tooltip="{{asset.description}}" ng-repeat="asset in market_peg_assets | orderBy: [orderByField,'current_supply', '-symbol']:reverseSort track by asset.id" ng-click="go_to_asset(asset.symbol)">
               <td>{{ asset.symbol }}</td>
               <td>{{ asset.yield | number:2 }}%</td>
               <td class="hidden-xs">{{ asset.current_supply | formatAsset }}</td>
@@ -86,7 +86,7 @@
         <thead>
           <tr>
             <th ng-click="orderByFieldUIA='symbol'; reverseSortUIA = !reverseSortUIA" ><ng-sort-fa order-string="symbol" reverse-sort="{{reverseSortUIA}}" order-by-field="{{orderByFieldUIA}}"></ng-sort-fa><span translate>th.symbol</span></th>
-            <th translate>th.current_share_supply</th>
+            <th translate>th.current_supply</th>
             <th ng-click="orderByFieldUIA='name'; reverseSortUIA = !reverseSortUIA" ><ng-sort-fa order-string="name" reverse-sort="{{reverseSortUIA}}" order-by-field="{{orderByFieldUIA}}"></ng-sort-fa><span translate>th.name</span></th>
           </tr>
         </thead>

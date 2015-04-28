@@ -59,8 +59,8 @@
     "desc": "描述",
     "issue_account": "发行人",
     "precision": "精度",
-    "current_share_supply": "当前供给数量",
-    "maximum_share_supply": "最大供给数量",
+    "current_supply": "当前供给数量",
+    "maximum_supply": "最大供给数量",
     "share_supply": "供给数量",
     "asset": "资产",
     "collected_fees": "已产生的交易费",
@@ -156,7 +156,12 @@
   "wallet": {
     "create_new_wallet": "创建新钱包",
     "info": "请记住该密码，它将控制你的资金何时以及如何被花。 如果你忘记该密码，你将无法转账使用你的资金或股份。",
-    "create_wallet": "创建钱包"
+    "create_wallet": "创建钱包",
+    "confirm_password": "确认密码",
+    "pwd_too_short": "密码太短，至少需要9位字符",
+    "pwd_too_long": "密码太长，不能超过255位字符",
+    "pwd_required": "密码必填",
+    "pwd_not_match": "两次输入的密码不相同"
   },
   "wallet_common":{
     "pw_too_short":"密码长度必须超过9个字元。",
@@ -437,13 +442,22 @@
     "select_currency": "选择货币",
     "your_account": "你的账户",
     "registered" : "已注册",
-    "pay_to": "发送资金到"
+    "pay_to": "发送资金到",
+    "vesting": {
+      "original": "锁定总额",
+      "vested": "已解冻",
+      "claimed": "已领取",
+      "available": "可领取",
+      "tip": "锁定金额于2015年7月1日开始1年内线性解冻"
+    },
+    "public_data": "公开信息"
   },
   "accounts": {
     "add_account": "创建新账户",
     "accounts": "账户",
     "info": "点击用户名获取更多账户信息",
-    "select_account": "选择账户"
+    "select_account": "选择账户",
+    "rename_account": "更名"
   },
   "asset": {
     "title": "比特资产",
@@ -451,7 +465,7 @@
     "asset_name": "比特资产名称",
     "description": "描述",
     "memo_data": "消息数据",
-    "maximum_share_supply": "最大股份供应",
+    "maximum_supply": "最大股份供应",
     "total_supply": "当前总供给量",
     "info_create_asset_fee": "创建比特资产手续费",
     "precision": "精度",

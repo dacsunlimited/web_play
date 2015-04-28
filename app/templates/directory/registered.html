@@ -42,7 +42,7 @@
             <tr ng-repeat="r in reg | filter:q | startFrom: p.currentPage * p.pageSize | limitTo : p.pageSize">
               <td style='width:1%;white-space:nowrap'>
                 <div class="avatar-40">
-                  <img ng-src="http://robohash.org/set_1/{{r.name}}?size=40x40" height="40" width="40"/>
+                  <identicon account="{{r.name}}" size="40"/>
                 </div>
               </td>
               <td style='width:1%;white-space:nowrap'>
