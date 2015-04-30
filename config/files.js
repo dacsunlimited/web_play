@@ -58,12 +58,12 @@ module.exports = function(lineman) {
     css: {
       vendor: [
         "vendor/bower/growl/stylesheets/jquery.growl.css",
-        "vendor/bower/angular-material/angular-material.css",
         "vendor/bower/angular-ui-grid/ui-grid.css",
         "vendor/bower/angular-xeditable/dist/css/xeditable.css",
         "vendor/css/bootstrap.css",
         "vendor/css/font-awesome.css",
-        "vendor/css/ark.css"
+        "vendor/css/ark.css",
+        "vendor/bower/angular-material/angular-material.css"
       ],
       app: [
         "app/css/*.css",
