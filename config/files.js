@@ -35,7 +35,7 @@ module.exports = function(lineman) {
         "vendor/js/angular-translate.js",
         "vendor/js/angular-translate-loader-static-files.js",
         "vendor/js/jsonpath.js",
-        "vendor/js/highstock.src.js",
+        // "vendor/js/highstock.src.js",
         "vendor/js/moment-with-locales.js",
         "vendor/js/bytebuffer.js",
         "vendor/js/sha256.js",
