@@ -105,6 +105,8 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
 app.config ($idleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
 
     $compileProvider.debugInfoEnabled(false);
+    # set this to false in production to gain performance boost
+    # use angular.reloadWithDebugInfo() to reload the page and obtain debug capability
 
     $tooltipProvider.options { appendToBody: true }
 
