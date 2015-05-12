@@ -15,8 +15,8 @@ window.open_external_url = (url) ->
 
 app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
-     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages", "utils.autofocus",
-     "ui.grid.autoResize"])
+     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages",
+     "ui.grid.autoResize", "ngAnimate", "anguFixedHeaderTable"])
 
 app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
 
@@ -114,12 +114,13 @@ app.config ($idleProvider, $translateProvider, $tooltipProvider, $compileProvide
         prefix: 'locale-',
         suffix: '.json'
 
-    lang = switch(window.navigator.language)
-      when "zh-CN", "zh-cn" then "zh-CN"
-      when "de", "de-DE", "de-de" then "de"
-      when "ru", "ru-RU", "ru-ru" then "ru"
-      when "it", "it-IT", "it-it" then "it"
-      when "ko", "ko-KR", "ko-kr" then "ko"
+    lang = switch(window.navigator.language.toLowerCase())
+      when "zh-cn" then "zh-CN"
+      when "de", "de-de" then "de"
+      when "ru", "ru-ru" then "ru"
+      when "it", "it-it" then "it"
+      when "ko", "ko-kr" then "ko"
+      when "es", "es-ar", "es-bo", "es-cl", "es-co", "es-cr", "es-do", "es-ec", "es-sv", "es-gt", "es-hn", "es-mx", "es-ni", "es-pa", "es-py", "es-pe", "es-pr", "es-es", "es-uy", "es-ve" then "es"
       else "en"
 
     moment.locale(lang)
@@ -128,3 +129,7 @@ app.config ($idleProvider, $translateProvider, $tooltipProvider, $compileProvide
 
     $idleProvider.idleDuration(1776)
     $idleProvider.warningDuration(60)
+
+    Highcharts.setOptions
+        global:
+            useUTC: false
