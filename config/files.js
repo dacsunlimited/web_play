@@ -13,31 +13,32 @@ module.exports = function(lineman) {
         "vendor/bower/jquery/dist/jquery.js",
         "vendor/bower/growl/javascripts/jquery.growl.js",
         "vendor/bower/stacktrace/dist/stacktrace.js",
-        "vendor/bower/angular/angular.js",
-        "vendor/bower/angular-messages/angular-messages.js",
         "vendor/js/bootstrap.js",
-        // angular-material
-        "vendor/bower/angular-animate/angular-animate.js",
-        "vendor/bower/angular-aria/angular-aria.js",
-        "vendor/bower/hammerjs/hammer.js",
-        "vendor/bower/angular-material/angular-material.js",
 
+        "vendor/bower/angular/angular.js",
+        // angular-material
+        "vendor/bower/angular-aria/angular-aria.js",
+        "vendor/bower/angular-animate/angular-animate.js",
+        "vendor/bower/angular-material/angular-material.js",
+        "vendor/bower/angular-messages/angular-messages.js",
+
+        "vendor/bower/hammerjs/hammer.js",
         "vendor/bower/angular-resource/angular-resource.js",
         "vendor/js/angular-ui-router.js",
         "vendor/bower/angular-pageslide-directive/dist/angular-pageslide-directive.js",
         "vendor/bower/angular-bootstrap/ui-bootstrap.js",
+        "vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js",
         "vendor/bower/moment/min/moment-with-locales.js",
-        "vendor/js/angular-animate.js",
-        "vendor/js/ui-bootstrap-tpls.js",
-        "vendor/js/ui-grid.js",
-        "vendor/js/angular-idle.js",
-        "vendor/js/validate.js",
-        "vendor/js/xeditable.js",
-        "vendor/js/angular-translate.js",
-        "vendor/js/angular-translate-loader-static-files.js",
-        "vendor/js/jsonpath.js",
 
-        "vendor/js/moment-with-locales.js",
+        "vendor/bower/angular-ui-grid/ui-grid.js",
+        "vendor/bower/ng-idle/angular-idle.js",
+        "vendor/bower/angular-ui-utils/validate.js",
+        "vendor/bower/angular-xeditable/dist/js/xeditable.js",
+        "vendor/bower/angular-translate/angular-translate.js",
+        "vendor/bower/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
+
+        "vendor/js/jsonpath.js",
+        "vendor/js/highstock.js",
         "vendor/js/bytebuffer.js",
         "vendor/js/sha256.js",
         "vendor/js/jdenticon.js",
@@ -45,7 +46,7 @@ module.exports = function(lineman) {
         "vendor/js/technical-indicators.src.js",
       ],
       app: [
-        "app/js/app.js",
+        // "app/js/app.js",
         "app/js/**/*.js"
       ]
     },
@@ -66,6 +67,7 @@ module.exports = function(lineman) {
         "vendor/css/bootstrap.css",
         "vendor/css/font-awesome.css",
         "vendor/css/ark.css",
+        // "vendor/bower/bootstrap-material-design/dist/css/material.min.css",
         "vendor/bower/angular-material/angular-material.css"
       ],
       app: [
