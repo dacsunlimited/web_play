@@ -11,7 +11,7 @@
       <p translate>unlock.desc_content_2</p>
     </div>
 
-    <md-button class="str-arrow fa {{descriptionCollapsed ? 'fa-sort-desc' : 'fa-sort-asc'}}" style="width:50px;" ng-click="descriptionCollapsed = !descriptionCollapsed"></md-button>
+    <md-button label="" class="str-arrow fa {{descriptionCollapsed ? 'fa-sort-desc' : 'fa-sort-asc'}}" style="width:50px;" ng-click="descriptionCollapsed = !descriptionCollapsed"></md-button>
 
         <div class="str-bottom">
           <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
@@ -20,7 +20,7 @@
               <input ng-model="spending_password" name="sp" type="password" class="form-control input"
                      placeholder="Password" tabindex="1" autofocus focus
                      ng-keydown="keydown($event)" ng-keypress="keypress($event)" ng-trim="false"/>
-            
+
             </div>
             <div layout="row" layout-align="center">
               <md-button flex="50" ng-disabled="!spending_password || loading_indicator.show" type="submit" tabindex="2" class="md-raised md-primary" translate > unlock.btn_unlock </md-button>
