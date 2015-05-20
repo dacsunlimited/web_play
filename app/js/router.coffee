@@ -211,3 +211,13 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
         url: prefix + "/advanced"
         templateUrl: "advanced/advanced.html"
         controller: "AdvancedController"
+
+    sp.state "notebooks",
+        url: prefix + '/notes'
+        templateUrl: 'notes/notebooks.html'
+        controller: "NotebooksController"
+
+    sp.state "notes",
+        url: prefix + '/note/:name'
+        templateUrl: 'notes/notes.html'
+        controller: "NotesController"

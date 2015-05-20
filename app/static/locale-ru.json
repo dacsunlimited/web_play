@@ -170,6 +170,7 @@
     "overview": "Обзор",
     "my_account": "Мои Аккаунты",
     "directory": "Каталог",
+    "notes": "Secret Notes",
     "delegates": "Делегаты",
     "market": "Рынок",
     "block_explorer": "Обозреватель блоков",
@@ -425,6 +426,21 @@
     "info": "Нажмите на имени аккаунта, чтобы получить больше информации.",
     "select_account": "Выбрать аккаунт",
     "rename_account": "Rename"
+  },
+  "notes": {
+    "title": "Journal Books",
+    "note": {
+      "title": "Title",
+      "body": "Journal Content",
+      "post_title": "Write Journal",
+      "explain": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
+      "from": "Notebook Account",
+      "amount": "Fee",
+      "fee_explain": "fee consists of transaction fee and journal fee.  (Each KB of journal content costs 5 {{symbol}} )",
+      "public": "Public",
+      "private": "Private",
+      "post": "Save Journal on Blockchain"
+    }
   },
   "asset": {
     "title": "Активы",

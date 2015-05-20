@@ -167,6 +167,7 @@
     "overview": "개요",
     "my_account": "내 계정",
     "directory": "디렉토리",
+    "notes": "Secret Notes",
     "delegates": "대표",
     "market": "마켓",
     "block_explorer": "블록 익스플로러",
@@ -425,6 +426,21 @@
     "info": "계정 이름을 클릭하면 상세 정보를 볼 수 있습니다.",
     "select_account": "계정 선택",
     "rename_account": "계정 이름 변경"
+  },
+  "notes": {
+    "title": "Journal Books",
+    "note": {
+      "title": "Title",
+      "body": "Journal Content",
+      "post_title": "Write Journal",
+      "explain": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
+      "from": "Notebook Account",
+      "amount": "Fee",
+      "fee_explain": "fee consists of transaction fee and journal fee.  (Each KB of journal content costs 5 {{symbol}} )",
+      "public": "Public",
+      "private": "Private",
+      "post": "Save Journal on Blockchain"
+    }
   },
   "asset": {
     "title": "자산",

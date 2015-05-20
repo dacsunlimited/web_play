@@ -207,6 +207,7 @@
     "my_account": "My Accounts",
     "directory": "Directory",
     "delegates": "Delegates",
+    "notes": "Secret Notes",
     "chips": "Game Assets",
     "games": "Games",
     "market": "Market",
@@ -480,6 +481,21 @@
     "info": "Click on an account name to get more information about that account.",
     "select_account": "Select Account",
     "rename_account": "Rename"
+  },
+  "notes": {
+    "title": "Journal Books",
+    "note": {
+      "title": "Title",
+      "body": "Journal Content",
+      "post_title": "Write Journal",
+      "explain": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
+      "from": "Notebook Account",
+      "amount": "Fee",
+      "fee_explain": "fee consists of transaction fee and journal fee.  (Each KB of journal content costs 5 {{symbol}} )",
+      "public": "Public",
+      "private": "Private",
+      "post": "Save Journal on Blockchain"
+    }
   },
   "asset": {
     "title": "Assets",

@@ -61,7 +61,7 @@ class Info
                     @info.income_per_block = data.max_delegate_pay_issued_per_block
                     @info.blockchain_delegate_pay_rate = @utils.formatAsset(@utils.asset(data.max_delegate_pay_issued_per_block, @wallet.main_asset))
                 @is_refreshing = false
-                @symbol = data.symbol
+                @info.symbol = @symbol = data.symbol
         , =>
             @is_refreshing = false
             @info.network_connections = 0

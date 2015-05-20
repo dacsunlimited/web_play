@@ -206,6 +206,7 @@
     "overview": "概况",
     "my_account": "我的账户",
     "directory": "目录",
+    "notes": "私密日志",
     "delegates": "受托人",
     "chips": "游戏资产",
     "games": "游戏",
@@ -462,6 +463,21 @@
     "info": "点击用户名获取更多账户信息",
     "select_account": "选择账户",
     "rename_account": "更名"
+  },
+  "notes": {
+    "title": "日志簿",
+    "note": {
+      "title": "标题",
+      "body": "日志正文",
+      "post_title": "撰写日志",
+      "explain": "你可以在区块链上保存公开或私密的日志。隐秘日志只有你自己才能打开阅读。",
+      "from": "日志簿",
+      "amount": "手续费",
+      "fee_explain": "手续费由交易手续费和日志手续费构成（日志内容每KB长度收取 5 {{symbol}} 费用）",
+      "public": "公开",
+      "private": "私密",
+      "post": "在区块链上保存"
+    }
   },
   "asset": {
     "title": "比特资产",
