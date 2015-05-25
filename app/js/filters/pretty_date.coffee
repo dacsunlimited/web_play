@@ -28,7 +28,7 @@ angular.module("app").filter "hoursAgo", (Utils)->
             date = Utils.toDate(date)
         diff = Date.now() - date
 
-        diff = Math.round(diff/1000/3600)
+        diff = Math.round(diff / 1000 / 3600)
         return diff
 
 angular.module("app").filter "secondsAgo", (Utils)->
@@ -44,7 +44,7 @@ angular.module("app").filter "secondsAgo", (Utils)->
       date = Utils.toDate(date)
     diff = Date.now() - date
 
-    Math.round(diff/1000)
+    Math.round(diff / 1000)
 
 angular.module("app").filter "formatSortableExpiration", (Utils)->
   (value) -> value.days

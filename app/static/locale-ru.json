@@ -429,6 +429,10 @@
   },
   "notes": {
     "title": "Journal Books",
+    "open": "Open",
+    "need_to_register": "You need to register this account on blockchain first",
+    "notes_not_found": "You don't have notes yet.  Do you know you can have free lucky draws if you write notes?",
+    "compose": "Compose",
     "note": {
       "title": "Title",
       "body": "Journal Content",

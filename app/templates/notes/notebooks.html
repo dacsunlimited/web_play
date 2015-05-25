@@ -1,17 +1,19 @@
 <md-card>
   <md-card-content>
-   <div class="col-md-12">
-      <div class="header">
-      <h3 class="header-title" translate>notes.title</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header">
+          <h3 class="header-title" translate>notes.title</h3>
+        </div>
       </div>
-   </div>
+    </div>
 
-   <div class="row">
-     <div class="col-sm-4 col-md-2 text-center"
-          ng-repeat="acct in account_names" ng-click="goto_book(acct)">
-       <div><i class="fa fa-book fa-5x"></i></div>
-       <div>{{acct}}</div>
-     </div>
-   </div>
+    <div class="row m-top">
+      <div class="col-sm-4 col-md-2 text-center"
+        ng-repeat="acct in account_names" ng-click="gotoBook(acct)" ng-class="{'text-muted': !acct.registered}" tooltip="{{(acct.registered ? 'notes.open' : 'notes.need_to_register') | translate}}">
+        <div><i class="fa fa-book fa-5x"></i></div>
+        <div>{{acct.name}}</div>
+      </div>
+    </div>
   </md-card-content>
 </md-card>

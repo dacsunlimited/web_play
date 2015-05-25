@@ -466,6 +466,10 @@
   },
   "notes": {
     "title": "日志簿",
+    "open": "打开",
+    "need_to_register": "你需要先在区块链上注册这个账号才能使用",
+    "notes_not_found": "你还没有日志。你知道吗？写日志也有机会中奖哦。",
+    "compose": "撰写日志",
     "note": {
       "title": "标题",
       "body": "日志正文",

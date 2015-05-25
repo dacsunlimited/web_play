@@ -1,0 +1,68 @@
+<md-dialog flex="80" aria-label="{{'notes.note.post_title'|translate}}">
+
+  <!-- <md-subheader class="md-sticky-no-effect">Mango (Fruit)</md-subheader> -->
+
+  <md-dialog-content>
+    <md-subheader class="md-primary md-default-theme" translate>
+      notes.note.post_title
+    </md-subheader>
+
+    <p translate translate-values="{account_name: account_name}">notes.note.explain</p>
+
+      <form name="note_form" class="form-horizontal" role="form" novalidate>
+
+        <div layout="column" layout-padding>
+          <!-- from -->
+            <md-select ng-model="note.from" placeholder="{{'notes.note.from'|translate}}">
+              <md-option ng-value="a" ng-repeat="a in note.accounts">{{'notes.note.from'|translate}}: {{a}}</md-option>
+            </md-select>
+
+          <!-- title -->
+          <md-input-container>
+            <label>{{'notes.note.title'|translate}}</label>
+            <input name="title" ng-model="note.title" ng-change="hot_check_send_amount();" required minlength="1">
+            <div ng-messages="note_form.title.$error" ng-show="note_form.title.$dirty">
+              <div ng-message="required">This is required!</div>
+              <div ng-message="minlength">That's too short!</div>
+              <div ng-message="generalError">{{note_form.title.$error.generalError}}</div>
+            </div>
+          </md-input-container>
+
+          <!-- body -->
+          <md-input-container>
+            <label>{{'notes.note.body'|translate}}</label>
+            <textarea name="body" ng-model="note.body" ng-change="hot_check_send_amount();" required minlength="1"></textarea>
+            <div ng-messages="note_form.body.$error" ng-show="note_form.body.$dirty">
+              <div ng-message="required">This is required!</div>
+              <div ng-message="minlength">That's too short!</div>
+            </div>
+          </md-input-container>
+
+          <!-- visibility -->
+          <!-- <md-switch class="md-primary" ng-model="note.type"
+            aria-label="{{'notes.note.private'|translate}}"
+            ng-true-value="'private'" ng-false-value="'public'">
+            {{ (note.type === 'private' ? 'notes.note.private' : 'notes.note.public') | translate }}
+          </md-switch> -->
+
+          <!-- amount -->
+          <md-input-container>
+            <label flex-order="1">{{'notes.note.amount'|translate}} ({{note.symbol}})</label>
+            <input flex-order="2" name="amount" ng-model="note.amount" disabled
+                   autocomplete="off" ng-change="hot_check_send_amount();">
+            <span flex-order="3" translate translate-values="{symbol: note.symbol}">notes.note.fee_explain</span>
+            <div ng-messages="note_form.body.$error" ng-show="note_form.body.$dirty">
+              <div ng-message="minlength">That's too short!</div>
+              <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
+            </div>
+          </md-input-container>
+        </div>
+      </form>
+    </md-dialog-content>
+
+    <!--Submit-->
+    <section class="md-actions" layout="row" layout-sm="column" layout-align="center center">
+      <md-button id="submitNoteBtn" class="md-primary" ng-click="doSend()" disabled="disabled" translate>notes.note.post</md-button>
+      <md-button class="" ng-click="cancel()">Cancel</md-button>
+    </section>
+</md-dialog>

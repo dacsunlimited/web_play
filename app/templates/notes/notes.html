@@ -1,90 +1,26 @@
+<nav mfb-menu position="br" effect="zoomin" label="{{'notes.compose'|translate}}"
+     active-icon="ion-edit" resting-icon="ion-plus-round"
+     toggling-method="hover" main-action="showComposeDialog()">
+</nav>
+
+
 <md-card>
   <md-content>
-    <md-list-item class="md-2-line" ng-repeat="r in note_records">
+    <md-list-item class="md-2-line" ng-repeat="r in note_records | orderBy:'-note.timestamp'">
       <div class="md-list-item-text">
-        <small class="pull-right">{{ r.note.timestamp }}</small>
+        <small class="pull-right">{{ r.note.timestamp | prettyDate }}</small>
         <h3>{{ r.note.title }}</h3>
         <p>{{ r.note.body }}</p>
       </div>
       <md-divider></md-divider>
     </md-list-item>
-
-    <md-button class="md-fab md-primary pull-right" aria-label="FAB">
-      <md-icon md-svg-src="../webfonts/Material-Design-Icons.svg"></md-icon>
-      <!-- <i class="fa fa-plus fa-lg"></i> -->
-    </md-button>
   </md-content>
-</md-card>
 
-<md-card>
-  <md-content>
-    <section>
-      <h2 class="md-primary md-subheader md-default-theme" sticky-state="next">
-        <div class="md-subheader-inner">
-          <span class="md-subheader-content"><span translate>notes.note.post_title</span></span>
-        </div>
-      </h2>
-    </section>
-
-      <div class="panel-heading">
-        <h6 translate translate-values="{account_name: account_name}">notes.note.explain</h6>
+  <md-card-content ng-show="note_records.length < 1">
+    <div class="row">
+      <div class="col-md-12">
+        <p translate>notes.notes_not_found</p>
       </div>
-
-      <form name="note_form" class="form-horizontal" role="form" ng-submit="dSend()" novalidate>
-        <div layout="column" layout-padding>
-          <!-- from -->
-            <md-select ng-model="note.from" placeholder="{{'notes.note.from'|translate}}">
-              <md-option ng-value="a" ng-repeat="a in note.accounts">{{'notes.note.from'|translate}}: {{a}}</md-option>
-            </md-select>
-
-          <!-- title -->
-          <md-input-container>
-            <label>{{'notes.note.title'|translate}}</label>
-            <input name="title" ng-model="note.title" ng-change="hot_check_send_amount();" required minlength="1">
-            <div ng-messages="note_form.title.$error" ng-show="note_form.title.$dirty">
-              <div ng-message="required">This is required!</div>
-              <div ng-message="minlength">That's too short!</div>
-              <div ng-message="generalError">{{note_form.title.$error.generalError}}</div>
-            </div>
-          </md-input-container>
-
-          <!-- body -->
-          <md-input-container>
-            <label>{{'notes.note.body'|translate}}</label>
-            <textarea name="body" ng-model="note.body" ng-change="hot_check_send_amount();" required minlength="1"></textarea>
-            <div ng-messages="note_form.body.$error" ng-show="note_form.body.$dirty">
-              <div ng-message="required">This is required!</div>
-              <div ng-message="minlength">That's too short!</div>
-            </div>
-          </md-input-container>
-
-          <!-- visibility -->
-          <!-- <md-switch class="md-primary" ng-model="note.type"
-            aria-label="{{'notes.note.private'|translate}}"
-            ng-true-value="'private'" ng-false-value="'public'">
-            {{ (note.type === 'private' ? 'notes.note.private' : 'notes.note.public') | translate }}
-          </md-switch> -->
-
-          <!-- amount -->
-          <md-input-container>
-            <label flex-order="1">{{'notes.note.amount'|translate}} ({{note.symbol}})</label>
-            <input flex-order="2" name="amount" ng-model="note.amount" disabled
-                   autocomplete="off" ng-change="hot_check_send_amount();">
-            <span flex-order="3" translate translate-values="{symbol: note.symbol}">notes.note.fee_explain</span>
-            <div ng-messages="note_form.body.$error" ng-show="note_form.body.$dirty">
-              <div ng-message="minlength">That's too short!</div>
-              <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
-            </div>
-          </md-input-container>
-
-          <!--Submit-->
-          <section layout="row" layout-sm="column" layout-align="center center">
-            <md-button class="md-primary" translate>notes.note.post</md-button>
-            <md-button class="" ng-click="cancel()">Cancel</md-button>
-          </section>
-
-        </div>
-      </form>
-
-  </md-content>
+    </div>
+  </md-card-content>
 </md-card>

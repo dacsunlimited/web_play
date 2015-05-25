@@ -1,4 +1,4 @@
-angular.module("app").controller "NotesController", ($scope, $modal, $stateParams, BlockchainAPI, Blockchain, Utils, Wallet, WalletAPI, $rootScope, RpcService, SecretNote, Info) ->
+angular.module("app").controller "NotesController", ($scope, $mdDialog, $stateParams, BlockchainAPI, Blockchain, Utils, Wallet, WalletAPI, $rootScope, RpcService, Info, SecretNote) ->
 
     $scope.account_name = $stateParams.name || $rootScope.current_account
     $scope.note_records = []
@@ -10,7 +10,7 @@ angular.module("app").controller "NotesController", ($scope, $modal, $stateParam
         symbol: null
         title: null
         body: null
-        type: 'private'
+        type: 'private_type'
     $scope.balances = {}
 
     tx_fee = null
@@ -24,7 +24,7 @@ angular.module("app").controller "NotesController", ($scope, $modal, $stateParam
             tx_fee = fee
             Blockchain.get_asset(tx_fee.asset_id).then (_tx_fee_asset) ->
                 tx_fee.precision = _tx_fee_asset.precision
-                $scope.hot_check_send_amount()
+                # $scope.hot_check_send_amount()
 
 
     BlockchainAPI.get_account_notes($scope.account_name).then (results) ->
@@ -48,9 +48,9 @@ angular.module("app").controller "NotesController", ($scope, $modal, $stateParam
             blk_nums = []
             for i in [0...trxs.length]
                 note = $scope.note_records[i].note
+                # debugger unless note?
                 note.tx_id      = trxs[i][0]
                 note.block_num  = trxs[i][1].chain_location.block_num
-                note.timestamp  = trxs[i][1].timestamp
 
                 blk_nums[i] = [note.block_num]
 
@@ -67,20 +67,31 @@ angular.module("app").controller "NotesController", ($scope, $modal, $stateParam
             $scope.note.accounts.push(account_name)
             $scope.balances[account_name] =  if value[$scope.note.symbol] then value[$scope.note.symbol].amount else 0
 
+
+    $scope.showComposeDialog = ->
+      $mdDialog.show
+          parent: angular.element document.body
+          scope: $scope
+          templateUrl: "notes/compose.html"
+
     yesSend = ->
         form = @note_form
         message = JSON.stringify(title:$scope.note.title, body:$scope.note.body)
         WalletAPI.note($scope.note.amount, $scope.note.symbol, $scope.note.from, message, $scope.note.type == 'private').then (response) =>
 
             $scope.note_records.push
-                title: $scope.title
-                body: $scope.note.body
+                note:
+                  title: $scope.note.title
+                  body: $scope.note.body
+                  type: $scope.note.type
+                  timestamp: "Just Now"
                 type: $scope.note.type
-                timestamp: "Just Now"
+                tx_id: null
 
             for elem in ['title', 'body', 'amount']
                 $scope.note[elem] = null
-                $scope.note[elem].$setPristine true
+                # $scope.note[elem].$setPristine true
+
         ,
         (error) ->
             error = error.response if error.response?
@@ -92,39 +103,30 @@ angular.module("app").controller "NotesController", ($scope, $modal, $stateParam
                 form.title.$error.generalError = if msg?.length > 2 then msg else errMsg
                 console.log form.title.$error
 
-    $scope.post = ->
-        form = @note_form
-        symbol = $scope.note.symbol
-        amount_asset = Wallet.balances[$scope.note.from][symbol]
-        $scope.transfer_amount = Utils.formatDecimal($scope.note.amount, amount_asset.precision) + ' ' + symbol
-
-
-        WalletAPI.get_transaction_fee(symbol).then (tx_fee) ->
-            transfer_asset = Blockchain.symbol2records[symbol]
-            Blockchain.get_asset(tx_fee.asset_id).then (tx_fee_asset) ->
-                transaction_fee = Utils.formatAsset(Utils.asset(tx_fee.amount, tx_fee_asset))
-                trx = {to: $scope.account_name, amount: $scope.transfer_amount, fee: transaction_fee, memo: $scope.note.message, vote: null}
-                $modal.open
-                    templateUrl: "dialog-transfer-confirmation.html"
-                    controller: "DialogTransferConfirmationController"
-                    resolve:
-                        title: -> "Burn/Post Message Confirmation"
-                        trx: -> trx
-                        action: -> yesSend
-                        transfer_type: ->
-                            'burn'
-
-
     $scope.cancel = ->
-        console.log 'save cancelled'
+        $mdDialog.cancel()
 
-    $scope.dSend = yesSend
+    $scope.hide = ->
+        $mdDialog.hide()
+
+    $scope.doSend = ->
+        yesSend()
+        $mdDialog.hide()
+
+    enableForm = (enable) ->
+      if enable
+        angular.element('#submitNoteBtn').removeAttr 'disabled'
+      else
+        angular.element('#submitNoteBtn').attr 'disabled', 'disabled'
+
+      enable
 
     # Validation and display prior to form submit
     $scope.hot_check_send_amount = ->
-        return unless tx_fee
-        return unless $scope.balances
-        return unless $scope.balances[$scope.account_name]
+        return enableForm(false) unless tx_fee?
+        return enableForm(false) unless $scope.balances?
+        return enableForm(false) unless $scope.balances[$scope.account_name]?
+        return enableForm(false) unless ($scope.note.title? && $scope.note.body?)
 
         message = title:$scope.note.title, body:$scope.note.body
         msgSize = Utils.byteLength( JSON.stringify(message) )
@@ -133,37 +135,10 @@ angular.module("app").controller "NotesController", ($scope, $modal, $stateParam
         $scope.note.amount = feeRequired
         balance = $scope.balances[$scope.account_name]
 
-        @note_form.$setValidity "amount", balance < feeRequired * tx_fee.precision
-        @note_form.amount.$error.insufficientFund = true
-
-
         console.log balance, feeRequired
+        if balance < feeRequired * tx_fee.precision
+          @note_form.$setValidity "amount", false
+          @note_form.amount.$error.insufficientFund = true
+          return enableForm(false)
 
-        return true
-
-        my_transfer_form.amount.error_message = null
-
-        if tx_fee.asset_id != $scope.tx_fee_asset.id
-            console.log "ERROR hot_check[_send_amount] encountered unlike transfer and fee assets"
-            return
-
-        fee=tx_fee.amount/$scope.tx_fee_asset.precision
-        transfer_amount=$scope.transfer_info.amount
-        _bal=$scope.balances[$scope.transfer_info.symbol]
-        balance = _bal.amount/_bal.precision
-        balance_after_transfer = balance - transfer_amount
-        #display "New Balance 999 (...)"
-        $scope.transfer_asset = Blockchain.symbol2records[$scope.transfer_info.symbol]
-
-        if tx_fee.asset_id is $scope.transfer_asset.id
-            balance_after_transfer -= fee
-
-        $scope.balance_after_transfer = balance_after_transfer
-        $scope.balance = balance
-        $scope.balance_precision = _bal.precision
-        #transfer_amount -> already available as $scope.transfer_info.amount
-        $scope.fee = fee
-
-        my_transfer_form.$setValidity "funds", balance_after_transfer >= 0
-        if balance_after_transfer < 0
-            my_transfer_form.amount.error_message = "Insufficient funds"
+        return enableForm(true)
