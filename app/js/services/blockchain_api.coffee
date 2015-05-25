@@ -124,6 +124,14 @@ class BlockchainAPI
     @rpc.request('blockchain_list_pending_transactions').then (response) ->
       response.result
 
+  # returns the reward record associated with an operation
+  # parameters:
+  #   operation_type `op_type` - the type of the operation to fetch the reward records for
+  # return_type: `optional_operation_reward_record`
+  get_operation_reward: (op_type, error_handler = null) ->
+    @rpc.request('blockchain_get_operation_reward', [op_type]).then (response) ->
+      response.result
+
   # Get detailed information about an in-wallet transaction
   # parameters:
   #   string `transaction_id_prefix` - the base58 transaction ID to return
@@ -246,87 +254,6 @@ class BlockchainAPI
   # return_type: `feed_entry_list`
   get_feeds_from_delegate: (delegate_name, error_handler = null) ->
     @rpc.request('blockchain_get_feeds_from_delegate', [delegate_name]).then (response) ->
-      response.result
-
-  # Returns the bid side of the order book for a given market
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   asset_symbol `base_symbol` - the item being bought in this market
-  #   uint32_t `limit` - the maximum number of items to return, -1 for all
-  # return_type: `market_order_array`
-  market_list_bids: (quote_symbol, base_symbol, limit, error_handler = null) ->
-    @rpc.request('blockchain_market_list_bids', [quote_symbol, base_symbol, limit]).then (response) ->
-      response.result
-
-  # Returns the ask side of the order book for a given market
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   asset_symbol `base_symbol` - the item being bought in this market
-  #   uint32_t `limit` - the maximum number of items to return, -1 for all
-  # return_type: `market_order_array`
-  market_list_asks: (quote_symbol, base_symbol, limit, error_handler = null) ->
-    @rpc.request('blockchain_market_list_asks', [quote_symbol, base_symbol, limit]).then (response) ->
-      response.result
-
-  # Returns the short side of the order book for a given market
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   uint32_t `limit` - the maximum number of items to return, -1 for all
-  # return_type: `market_order_array`
-  market_list_shorts: (quote_symbol, limit, error_handler = null) ->
-    @rpc.request('blockchain_market_list_shorts', [quote_symbol, limit]).then (response) ->
-      response.result
-
-  # Returns the covers side of the order book for a given market
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   asset_symbol `base_symbol` - the symbol name the market is collateralized in
-  #   uint32_t `limit` - the maximum number of items to return, -1 for all
-  # return_type: `market_order_array`
-  market_list_covers: (quote_symbol, base_symbol, limit, error_handler = null) ->
-    @rpc.request('blockchain_market_list_covers', [quote_symbol, base_symbol, limit]).then (response) ->
-      response.result
-
-  # Returns the total collateral for an asset of a given type
-  # parameters:
-  #   asset_symbol `symbol` - the symbol for the asset to count collateral for
-  # return_type: `share_type`
-  market_get_asset_collateral: (symbol, error_handler = null) ->
-    @rpc.request('blockchain_market_get_asset_collateral', [symbol]).then (response) ->
-      response.result
-
-  # Returns the long and short sides of the order book for a given market
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   asset_symbol `base_symbol` - the item being bought in this market
-  #   uint32_t `limit` - the maximum number of items to return, -1 for all
-  # return_type: `pair<market_order_array,market_order_array>`
-  market_order_book: (quote_symbol, base_symbol, limit, error_handler = null) ->
-    @rpc.request('blockchain_market_order_book', [quote_symbol, base_symbol, limit]).then (response) ->
-      response.result
-
-  # Returns a list of recently filled orders in a given market, in reverse order of execution.
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   asset_symbol `base_symbol` - the item being bought in this market
-  #   uint32_t `skip_count` - Number of transactions before head block to skip in listing
-  #   uint32_t `limit` - The maximum number of transactions to list
-  #   string `owner` - If present, only transactions belonging to this owner key will be returned
-  # return_type: `order_history_record_array`
-  market_order_history: (quote_symbol, base_symbol, skip_count, limit, owner, error_handler = null) ->
-    @rpc.request('blockchain_market_order_history', [quote_symbol, base_symbol, skip_count, limit, owner]).then (response) ->
-      response.result
-
-  # Returns historical data on orders matched within the given timeframe for the specified market
-  # parameters:
-  #   asset_symbol `quote_symbol` - the symbol name the market is quoted in
-  #   asset_symbol `base_symbol` - the item being bought in this market
-  #   timestamp `start_time` - The time to begin getting price history for
-  #   time_interval_in_seconds `duration` - The maximum time period to get price history for
-  #   market_history_key::time_granularity `granularity` - The frequency of price updates (each_block, each_hour, or each_day)
-  # return_type: `market_history_points`
-  market_price_history: (quote_symbol, base_symbol, start_time, duration, granularity, error_handler = null) ->
-    @rpc.request('blockchain_market_price_history', [quote_symbol, base_symbol, start_time, duration, granularity]).then (response) ->
       response.result
 
   # Returns a list of the current round's active delegates in signing order

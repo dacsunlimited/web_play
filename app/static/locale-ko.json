@@ -445,6 +445,9 @@
       "private": "Private",
       "post": "Save Journal on Blockchain"
     }
+    "pool": "Jackpot",
+    "my_winning_records": "My Winning Records",
+    "winning_not_found": "Not found"
   },
   "asset": {
     "title": "자산",

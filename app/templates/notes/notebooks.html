@@ -17,3 +17,24 @@
     </div>
   </md-card-content>
 </md-card>
+
+
+<md-card>
+  <md-card-content>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header">
+          <h3 class="header-title" translate>notes.pool</h3>
+        </div>
+      </div>
+    </div>
+    <p>每天区块链会从当日创建的日之中抽取幸运儿。</p>
+    <p>当前奖池金额： <span class="emphasis">{{pool|formatAsset}}</span></p>
+
+    <md-subheader class="md-primary md-default-theme m-top" translate>
+      notes.my_winning_records
+    </md-subheader>
+
+    <div translate>notes.wining_not_found</div>
+  </md-card-content>
+</md-card>

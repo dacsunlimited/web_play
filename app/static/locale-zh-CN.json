@@ -481,7 +481,10 @@
       "public": "公开",
       "private": "私密",
       "post": "在区块链上保存"
-    }
+    },
+    "pool": "奖池",
+    "my_winning_records": "我的中奖记录",
+    "winning_not_found": "暂无"
   },
   "asset": {
     "title": "比特资产",
