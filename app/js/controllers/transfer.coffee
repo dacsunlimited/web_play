@@ -1,4 +1,4 @@
-angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, $filter, Wallet, WalletAPI, Blockchain, BlockchainAPI, Utils, Info, Growl, Observer) ->
+angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, $filter, Wallet, WalletAPI, Blockchain, BlockchainAPI, Utils, Info, Growl, Observer, $translate) ->
     pubkey_regexp = ""
     Info.refresh_info().then ->
         pubkey_regexp = new RegExp("^#{Info.info.address_prefix}[a-zA-Z0-9]+")
@@ -111,7 +111,8 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
 
         my_transfer_form.$setValidity "funds", balance_after_transfer >= 0
         if balance_after_transfer < 0
-            my_transfer_form.amount.error_message = "Insufficient funds"
+            $translate('tip.insufficient_balances').then (val) ->
+                my_transfer_form.amount.error_message = val
 
     #call to initialize and on symbol change
     $scope.$watch ->
@@ -143,9 +144,11 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             $scope.model.t_active=true
         , (error) ->
             if error.data.error.code == 20005
-                my_transfer_form.payto.error_message = "Unknown receive account"
+                $translate('account.unknown').then (val) ->
+                    my_transfer_form.payto.error_message = val
             else if error.data.error.code == 20010
-                my_transfer_form.amount.error_message = "Insufficient funds"
+                $translate('tip.insufficient_balances').then (val) ->
+                    my_transfer_form.amount.error_message = val
             else
                 my_transfer_form.payto.error_message = Utils.formatAssertException(error.data.error.message)
 
@@ -189,13 +192,17 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                     (contact)->
                         $scope.gravatar_account_name = $scope.transfer_info.payto = contact
                         $scope.add_to_address_book.error = ""
-                        $scope.add_to_address_book.message = "Added to address book"
+                        $translate('contact.added').then (val) ->
+                            $scope.add_to_address_book.message = val
                         $scope.is_address_book_contact = true
                         my_transfer_form?.payto.error_message = ""
+
+                        $scope.checkAccount(contact)
 
     $scope.onSelect = (name) ->
         $scope.transfer_info.payto = name
         $scope.gravatar_account_name = name
+        $scope.payToChanged()
 
     $scope.accountSuggestions = (input) ->
         $filter('filter')(Object.keys(Wallet.contacts),input)
@@ -215,7 +222,8 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             WalletAPI.add_contact(name, name, error_handler).then (response) ->
                 Wallet.refresh_contacts()
                 $scope.is_address_book_contact = true
-                $scope.add_to_address_book.message = "Added to address book"
+                $translate('contact.added').then (val) ->
+                    $scope.add_to_address_book.message = val
 
 
 
@@ -229,15 +237,23 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         payto = $scope.transfer_info.payto
         return unless payto
 
-        $scope.address_type = if pubkey_regexp.exec(payto) then "pubkey" else "account"
+        $scope.checkAccount(payto)
 
+    $scope.checkAccount = (payto)->
         account = Wallet.accounts[payto] or Wallet.contacts[payto]
         if account
+            $scope.transfer_info.unknown_account = false
             $scope.gravatar_account_name = payto
             $scope.is_my_account = account.is_my_account
             $scope.is_address_book_contact = true
             $scope.account_registration_date = account.registration_date if account.registered
+            if Wallet.accounts[payto]
+              $scope.address_type = 'account'
+            else
+              $scope.address_type = if account.contact_type == 'account_name' then 'account' else 'pubkey'
         else
+            $scope.address_type = if pubkey_regexp.exec(payto) then "pubkey" else "account"
+
             BlockchainAPI.get_account(payto).then (result) ->
                 if result
                     $scope.account_registration_date = result.registration_date
@@ -250,4 +266,6 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                 else
                     $scope.gravatar_account_name = ""
                     $scope.transfer_info.unknown_account = $scope.address_type != "pubkey"
-                    my_transfer_form.payto.error_message = "Unknown account" if $scope.transfer_info.unknown_account
+                    if $scope.transfer_info.unknown_account
+                        $translate('account.unknown').then (val) ->
+                            my_transfer_form.payto.error_message = val

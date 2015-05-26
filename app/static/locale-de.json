@@ -414,7 +414,9 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
-    "public_data": "Public Data"
+    "public_data": "Public Data",
+    "unknown": "Unknown Account",
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
   },
   "accounts": {
     "add_account": "Konto erstellen",
@@ -468,7 +470,8 @@
     "btn_add_contact": "Kontakt hinzufügen",
     "address_book": "Adressbuch",
     "add_to_address_book": "Zum Adressbuch hinzufügen",
-    "not_in_address_book": "Nicht im Addressbuch vorhanden"
+    "not_in_address_book": "Nicht im Addressbuch vorhanden",
+    "added": "Added to address book"
   },
   "pref": {
     "title": "Einstellungen",

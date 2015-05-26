@@ -414,7 +414,9 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
-    "public_data": "Public Data"
+    "public_data": "Public Data",
+    "unknown": "Unknown Account",
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
   },
   "accounts": {
     "add_account": "새 계정 생성",
@@ -467,7 +469,8 @@
     "btn_add_contact": "연락처 추가하기",
     "address_book": "주소록",
     "add_to_address_book": "주소록에 추가",
-    "not_in_address_book": "주소록에 들어있지 않음"
+    "not_in_address_book": "주소록에 들어있지 않음",
+    "added": "Added to address book"
   },
   "pref": {
     "title": "환경 설정",

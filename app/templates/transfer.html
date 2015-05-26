@@ -140,8 +140,10 @@
         <label for="memo" class="col-sm-1 control-label" translate>account.memo</label>
         <div class="col-md-6 col-sm-10">
           <input ng-model="transfer_info.memo" name="memo" type="text" class="form-control"
+                 ng-disabled="my_transfer_form.payto.error_message || address_type != 'account'"
                  ui-validate="{valid_memo: 'utils.byteLength($value) <= memo_size_max'}" placeholder="{{ 'account.memo' | translate }}" id="memo"/>
           <span class="help-block text-danger" ng-show="my_transfer_form.memo.$invalid && my_transfer_form.memo.$dirty" translate translate-values="{value: memo_size_max}">tip.memo_size_exceeds</span>
+          <span class="help-block text-danger" ng-show="address_type != 'account'" translate >account.memo_tip_account_only</span>
         </div>
       </div>
       <!-- send -->
