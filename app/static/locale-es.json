@@ -451,10 +451,14 @@
       "public": "Public",
       "private": "Private",
       "post": "Save Journal on Blockchain"
+    },
+    "pot": {
+      "title": "Jackpot",
+      "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
+      "current_pot": "Current Pot",
+      "my_winning_records": "My Winning Records",
+      "winning_not_found": "Not found"
     }
-    "pool": "Jackpot",
-    "my_winning_records": "My Winning Records",
-    "winning_not_found": "Not found"
   },
   "asset": {
     "title": "Assets",

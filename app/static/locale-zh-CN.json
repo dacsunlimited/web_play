@@ -482,9 +482,13 @@
       "private": "私密",
       "post": "在区块链上保存"
     },
-    "pool": "奖池",
-    "my_winning_records": "我的中奖记录",
-    "winning_not_found": "暂无"
+    "pot": {
+      "title": "奖池",
+      "explain": "每天区块链会从当日创建的日志中抽取幸运儿。",
+      "current_pot": "",
+      "my_winning_records": "我的中奖记录",
+      "winning_not_found": "暂无"
+    }
   },
   "asset": {
     "title": "比特资产",
