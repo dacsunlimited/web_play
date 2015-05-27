@@ -17,7 +17,7 @@ angular.module("app").controller "AddressBookModalController", ($scope, $modalIn
         index = $scope.data.contacts.indexOf(name)
         if index >= 0
             $modalInstance.close("ok")
-            action(name) if action
+            action(name, $scope.contactValue(name)) if action
 
     $scope.removeContact = (name) ->
         index = $scope.data.contacts.indexOf(name)
@@ -32,6 +32,9 @@ angular.module("app").controller "AddressBookModalController", ($scope, $modalIn
 
     $scope.isMyAccount = (name) ->
         !!Wallet.accounts[name]
+
+    $scope.contactValue = (name) ->
+        Wallet.contacts[name].active_key
 
     $scope.ok = ->
         form = @newcontact

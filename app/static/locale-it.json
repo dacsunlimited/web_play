@@ -10,7 +10,8 @@
     "update": "Aggiorna",
     "cover": "Cover",
     "register": "Registra",
-    "close": "Close"
+    "close": "Close",
+    "remove": "Remove"
   },
   "tip": {
     "privacy_statement": "Privacy",
@@ -409,7 +410,9 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
-    "public_data": "Public Data"
+    "public_data": "Public Data",
+    "unknown": "Unknown Account",
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
   },
   "accounts": {
     "add_account": "Crea Nuovo Conto",
@@ -457,13 +460,18 @@
     "add_contact": "Aggiungi Contatto",
     "new_contact": "Nuovo Contatto",
     "contact_name": "Nome Contatto",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Nome (Necessario)",
     "public_key": "Key Pubblica",
     "public_key_tip": "Key Pubblica (Necessaria)",
     "btn_add_contact": "Aggiungi Contatto",
     "address_book": "Address Book",
     "add_to_address_book": "Add to address book",
-    "not_in_address_book": "Not in address book"
+    "not_in_address_book": "Not in address book",
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Preferenze",

@@ -10,7 +10,8 @@
     "update": "Update",
     "cover": "Cover",
     "register": "Register",
-    "close": "Close"
+    "close": "Close",
+    "remove": "Remove"
   },
   "tip": {
     "privacy_statement": "Privacy Statement",
@@ -450,7 +451,9 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
-    "public_data": "Public Data"
+    "public_data": "Public Data",
+    "unknown": "Unknown Account",
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
   },
   "accounts": {
     "add_account": "Add Account",
@@ -497,14 +500,19 @@
   "contact": {
     "add_contact": "Add Contact",
     "new_contact": "New Contact",
-    "contact_name": "Account Name or Public Key",
+    "contact_name": "Label",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Name (Required)",
-    "public_key": "Public Key",
+    "public_key": "Registered Account Name/Public Key/Address",
     "public_key_tip": "Public Key (Required)",
     "btn_add_contact": "Add Contact",
-    "address_book": "Address Book",
-    "add_to_address_book": "Add to address book",
-    "not_in_address_book": "Not in address book"
+    "address_book": "contacts",
+    "add_to_address_book": "Add to contacts",
+    "not_in_address_book": "Not in contacts",
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Preferences",

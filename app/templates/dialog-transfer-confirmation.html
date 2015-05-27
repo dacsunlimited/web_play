@@ -7,7 +7,7 @@
       <identicon account="{{trx.to}}" size="150"/>
       <span ng-show="!trx.is_address_book_contact" class="text-danger" translate>contact.not_in_address_book</span>
     </div>
-    <div class='col-sm-8'>
+    <div ng-class="{'col-sm-8': trx.address_type == 'account', 'col-sm-12': trx.address_type != 'account'}">
       <table class="table table-striped table-hover">
         <tr>
           <td>{{account_to}}</td><td>{{trx.to}}</td>

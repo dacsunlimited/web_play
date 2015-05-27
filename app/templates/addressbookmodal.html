@@ -15,8 +15,10 @@
 
           <li class="list-group-item clearfix" ng-repeat="name in data.contacts | filter:data.contact_name_filter" ng-click="selectAccount(name)">
             <div class="pull-right remove-contact-btn" ng-click="removeContact(name)"><i class="fa fa-times fa-fw" ng-hide="isMyAccount(name)" tooltip="{{'btn.remove'|translate}}"></i></div>
-            <identicon account="{{name}}" size="40"/>
-            <span class="name">{{name}}</span>
+            <identicon account="{{contactValue(name)}}" size="40"/>
+            <div class="name" style="display:inline-block; height:40px; vertical-align:middle;">
+              {{contactValue(name)}}<br /><span class="text-muted" translate translate-values="{contact_name: name}">contact.contact_name_of</span>
+            </div>
           </li>
         </ul>
 

@@ -10,7 +10,8 @@
     "update": "Обновить",
     "cover": "Покрыть",
     "register": "Зарегистрировать",
-    "close": "Закрыть"
+    "close": "Закрыть",
+    "remove": "Remove"
   },
   "tip": {
     "privacy_statement": "Заявление о конфиденциальности",
@@ -413,7 +414,9 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
-    "public_data": "Public Data"
+    "public_data": "Public Data",
+    "unknown": "Unknown Account",
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
   },
   "accounts": {
     "add_account": "Добавить аккаунт",
@@ -461,13 +464,18 @@
     "add_contact": "Добавить контакт",
     "new_contact": "Новый контакт",
     "contact_name": "Имя",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Имя контакта (обязательно)",
     "public_key": "Открытый ключ",
     "public_key_tip": "Открытый ключ контакта (обязательно)",
     "btn_add_contact": "Добавить контакт",
     "address_book": "Адресная книга",
     "add_to_address_book": "Добавить в адресную книгу",
-    "not_in_address_book": "Не из адресной книги"
+    "not_in_address_book": "Не из адресной книги",
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Настройки",
