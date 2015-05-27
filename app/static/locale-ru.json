@@ -10,7 +10,8 @@
     "update": "Обновить",
     "cover": "Покрыть",
     "register": "Зарегистрировать",
-    "close": "Закрыть"
+    "close": "Закрыть",
+    "remove": "Remove"
   },
   "tip": {
     "privacy_statement": "Заявление о конфиденциальности",

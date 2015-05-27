@@ -10,7 +10,8 @@
     "update": "Update",
     "cover": "Cover",
     "register": "Register",
-    "close": "Close"
+    "close": "Close",
+    "remove": "Remove"
   },
   "tip": {
     "privacy_statement": "Privacy Statement",

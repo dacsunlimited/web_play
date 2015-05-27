@@ -10,7 +10,8 @@
     "update": "更新",
     "cover": "平仓",
     "register": "注册",
-    "close": "关闭"
+    "close": "关闭",
+    "remove": "移除"
   },
   "tip": {
     "privacy_statement": "隐私申明",
