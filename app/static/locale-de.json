@@ -464,6 +464,8 @@
     "add_contact": "Kontakt hinzufügen",
     "new_contact": "Neuer Kontakt",
     "contact_name": "Name des Kontakts",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Name (Pflichtfeld)",
     "public_key": "Öffentlicher Schlüssel",
     "public_key_tip": "Öffentlicher Schlüssel (Pflichtfeld)",
@@ -471,7 +473,9 @@
     "address_book": "Adressbuch",
     "add_to_address_book": "Zum Adressbuch hinzufügen",
     "not_in_address_book": "Nicht im Addressbuch vorhanden",
-    "added": "Added to address book"
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Einstellungen",

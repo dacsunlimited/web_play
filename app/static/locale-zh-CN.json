@@ -499,15 +499,19 @@
   "contact": {
     "add_contact": "添加联系人",
     "new_contact": "新的联系人",
-    "contact_name": "标签",
-    "contact_name_tip": "标签（必填项）",
+    "contact_name": "备注",
+    "payto_placeholder": "收件人账户名、公钥、地址",
+    "contact_name_of": "备注：{{contact_name}}",
+    "contact_name_tip": "备注（必填项）",
     "public_key": "已注册账户名、公钥、或地址",
     "public_key_tip": "公钥（必填项）",
     "btn_add_contact": "添加联系人",
     "address_book": "联系人",
     "add_to_address_book": "加到联系人",
     "not_in_address_book": "不存在于联系人中",
-    "added": "已添加到联系人"
+    "added": "已添加到联系人",
+    "from_contact": "联系人: {{contact}}",
+    "from_registered": "已注册账户: {{contact}}"
   },
   "pref": {
     "title": "设置",

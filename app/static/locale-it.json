@@ -459,6 +459,8 @@
     "add_contact": "Aggiungi Contatto",
     "new_contact": "Nuovo Contatto",
     "contact_name": "Nome Contatto",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Nome (Necessario)",
     "public_key": "Key Pubblica",
     "public_key_tip": "Key Pubblica (Necessaria)",
@@ -466,7 +468,9 @@
     "address_book": "Address Book",
     "add_to_address_book": "Add to address book",
     "not_in_address_book": "Not in address book",
-    "added": "Added to address book"
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Preferenze",

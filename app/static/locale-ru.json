@@ -463,6 +463,8 @@
     "add_contact": "Добавить контакт",
     "new_contact": "Новый контакт",
     "contact_name": "Имя",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Имя контакта (обязательно)",
     "public_key": "Открытый ключ",
     "public_key_tip": "Открытый ключ контакта (обязательно)",
@@ -470,7 +472,9 @@
     "address_book": "Адресная книга",
     "add_to_address_book": "Добавить в адресную книгу",
     "not_in_address_book": "Не из адресной книги",
-    "added": "Added to address book"
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Настройки",

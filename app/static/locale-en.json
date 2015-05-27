@@ -500,6 +500,8 @@
     "add_contact": "Add Contact",
     "new_contact": "New Contact",
     "contact_name": "Label",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Name (Required)",
     "public_key": "Registered Account Name/Public Key/Address",
     "public_key_tip": "Public Key (Required)",
@@ -507,7 +509,9 @@
     "address_book": "contacts",
     "add_to_address_book": "Add to contacts",
     "not_in_address_book": "Not in contacts",
-    "added": "Added to address book"
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Preferences",

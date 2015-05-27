@@ -463,6 +463,8 @@
     "add_contact": "연락처 추가",
     "new_contact": "새로운 연락처",
     "contact_name": "이름",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "이름 (필수 항목)",
     "public_key": "공개키",
     "public_key_tip": "공개키 (필수 항목)",
@@ -470,7 +472,9 @@
     "address_book": "주소록",
     "add_to_address_book": "주소록에 추가",
     "not_in_address_book": "주소록에 들어있지 않음",
-    "added": "Added to address book"
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "환경 설정",
