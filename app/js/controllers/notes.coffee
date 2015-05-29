@@ -10,7 +10,7 @@ angular.module("app").controller "NotesController", ($scope, $mdDialog, $statePa
         symbol: null
         title: null
         body: null
-        type: 'private_type'
+        type: 'secret_type'
     $scope.balances = {}
 
     tx_fee = null
@@ -77,7 +77,7 @@ angular.module("app").controller "NotesController", ($scope, $mdDialog, $statePa
     yesSend = ->
         form = @note_form
         message = JSON.stringify(title:$scope.note.title, body:$scope.note.body)
-        WalletAPI.note($scope.note.amount, $scope.note.symbol, $scope.note.from, message, $scope.note.type == 'private').then (response) =>
+        WalletAPI.note($scope.note.amount, $scope.note.symbol, $scope.note.from, message, $scope.note.type == 'secret_type').then (response) =>
 
             $scope.note_records.push
                 note:
