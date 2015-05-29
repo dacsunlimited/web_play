@@ -51,8 +51,7 @@
             <input flex-order="2" name="amount" ng-model="note.amount" disabled
                    autocomplete="off" ng-change="hot_check_send_amount();">
             <span flex-order="3" translate translate-values="{symbol: note.symbol}">notes.note.fee_explain</span>
-            <div ng-messages="note_form.body.$error" ng-show="note_form.body.$dirty">
-              <div ng-message="minlength">That's too short!</div>
+            <div ng-messages="note_form.amount.$error" ng-show="note_form.$dirty">
               <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
             </div>
           </md-input-container>

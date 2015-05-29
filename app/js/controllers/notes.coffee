@@ -124,8 +124,8 @@ angular.module("app").controller "NotesController", ($scope, $mdDialog, $statePa
     # Validation and display prior to form submit
     $scope.hot_check_send_amount = ->
         return enableForm(false) unless tx_fee?
-        return enableForm(false) unless $scope.balances?
-        return enableForm(false) unless $scope.balances[$scope.account_name]?
+        # return enableForm(false) unless $scope.balances?
+        # return enableForm(false) unless $scope.balances[$scope.account_name]?
         return enableForm(false) unless ($scope.note.title? && $scope.note.body?)
 
         message = title:$scope.note.title, body:$scope.note.body
@@ -136,9 +136,9 @@ angular.module("app").controller "NotesController", ($scope, $mdDialog, $statePa
         balance = $scope.balances[$scope.account_name]
 
         console.log balance, feeRequired
-        if balance < feeRequired * tx_fee.precision
-          @note_form.$setValidity "amount", false
-          @note_form.amount.$error.insufficientFund = true
-          return enableForm(false)
+        if !balance or balance < feeRequired * tx_fee.precision
+            @note_form.$setValidity "amount", false
+            @note_form.amount.$error.insufficientFund = true
+            return enableForm(false)
 
         return enableForm(true)
