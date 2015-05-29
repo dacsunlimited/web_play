@@ -10,7 +10,8 @@
     "update": "更新",
     "cover": "平仓",
     "register": "注册",
-    "close": "关闭"
+    "close": "关闭",
+    "remove": "移除"
   },
   "tip": {
     "privacy_statement": "隐私申明",
@@ -455,7 +456,9 @@
       "available": "可领取",
       "tip": "锁定金额于2015年7月1日开始1年内线性解冻"
     },
-    "public_data": "公开信息"
+    "public_data": "公开信息",
+    "unknown": "未知账户名/联系人",
+    "memo_tip_account_only": "只有向注册账户名转账时可以附带消息"
   },
   "accounts": {
     "add_account": "创建新账户",
@@ -528,14 +531,19 @@
   "contact": {
     "add_contact": "添加联系人",
     "new_contact": "新的联系人",
-    "contact_name": "联系人名称或公钥",
-    "contact_name_tip": "联系人名称（必填项）",
-    "public_key": "公钥",
+    "contact_name": "备注",
+    "payto_placeholder": "收件人账户名、公钥、地址",
+    "contact_name_of": "备注：{{contact_name}}",
+    "contact_name_tip": "备注（必填项）",
+    "public_key": "已注册账户名、公钥、或地址",
     "public_key_tip": "公钥（必填项）",
     "btn_add_contact": "添加联系人",
-    "address_book": "地址簿",
-    "add_to_address_book": "加到地址簿",
-    "not_in_address_book": "不存在于地址簿中"
+    "address_book": "联系人",
+    "add_to_address_book": "加到联系人",
+    "not_in_address_book": "不存在于联系人中",
+    "added": "已添加到联系人",
+    "from_contact": "联系人: {{contact}}",
+    "from_registered": "已注册账户: {{contact}}"
   },
   "pref": {
     "title": "设置",

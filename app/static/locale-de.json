@@ -10,7 +10,8 @@
     "update": "Aktualisieren",
     "cover": "Cover",
     "register": "Registriere",
-    "close": "Close"
+    "close": "Close",
+    "remove": "Remove"
   },
   "tip": {
     "privacy_statement": "Datenschutzerklärung",
@@ -412,7 +413,7 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
-    "public_data": "Public Data"
+    "public_data": "Public Data",
     "reg_add_faucet": "Faucet hinzufügen",
     "update_public_data_tx_fee": "Überweisungsgebühren aktualisieren: ",
     "new_balance": "neuer Kontostand",
@@ -420,7 +421,9 @@
     "select_currency": "Währung auswählen",
     "your_account": "Mein Konto",
     "registered" : "Registriert am",
-    "pay_to": "Überweisung an"
+    "pay_to": "Überweisung an",
+    "unknown": "Unknown Account",
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
   },
   "accounts": {
     "add_account": "Konto erstellen",
@@ -494,13 +497,18 @@
     "add_contact": "Kontakt hinzufügen",
     "new_contact": "Neuer Kontakt",
     "contact_name": "Name des Kontakts",
+    "payto_placeholder": "Recipient account name, public key, address",
+    "contact_name_of": "Label: {{contact_name}}",
     "contact_name_tip": "Name (Pflichtfeld)",
     "public_key": "Öffentlicher Schlüssel",
     "public_key_tip": "Öffentlicher Schlüssel (Pflichtfeld)",
     "btn_add_contact": "Kontakt hinzufügen",
     "address_book": "Adressbuch",
     "add_to_address_book": "Zum Adressbuch hinzufügen",
-    "not_in_address_book": "Nicht im Addressbuch vorhanden"
+    "not_in_address_book": "Nicht im Addressbuch vorhanden",
+    "added": "Added to address book",
+    "from_contact": "Contact: {{contact}}",
+    "from_registered": "Registered Account: {{contact}}"
   },
   "pref": {
     "title": "Einstellungen",
