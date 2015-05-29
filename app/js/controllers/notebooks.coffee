@@ -3,6 +3,11 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, Blockch
     $scope.pool = {}
     $scope.formatAsset = Utils.formatAsset
 
+    $scope.account_transactions = Wallet.transactions['OP:NOTE']
+    $scope.pending_only = false
+    $scope.p = {currentPage : 0, pageSize : 20, numberOfPages : 0}
+    $scope.q = {}
+
     Wallet.refresh_accounts().then ->
         accounts = Wallet.accounts
         for item of Wallet.accounts
@@ -16,3 +21,7 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, Blockch
     $scope.gotoBook = (account) ->
         if account.registered
           $state.go( 'notes', { name: account.name } )
+
+    if !Wallet.transactions or Wallet.transactions['*']?.length == 0
+        Wallet.refresh_transactions().then ->
+            $scope.account_transactions = Wallet.transactions['OP:NOTE']

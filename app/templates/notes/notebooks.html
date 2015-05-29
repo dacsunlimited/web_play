@@ -35,6 +35,9 @@
       notes.pot.my_winning_records
     </md-subheader>
 
-    <div translate>notes.pot.wining_not_found</div>
+    <div ng-show="account_transactions.length == 0" translate>notes.pot.winning_not_found</div>
+    <div ng-show="account_transactions.length > 0" ng-include src="'transactions.html'"></div>
+
+
   </md-card-content>
 </md-card>
