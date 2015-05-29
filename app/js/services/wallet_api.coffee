@@ -267,16 +267,6 @@ class WalletAPI
     @rpc.request('wallet_approve', [name, approval], error_handler).then (response) ->
       response.result
 
-  # Authorizes a public key to control funds of a particular asset class.  Requires authority of asset issuer
-  # parameters:
-  #   account_name `paying_account` - the account that will pay the transaction fee
-  #   asset_symbol `symbol` - the asset granting authorization
-  #   string `address` - the address being granted permission, or the public key, or the account name
-  # return_type: `transaction_record`
-  asset_authorize_key: (paying_account, symbol, address, error_handler = null) ->
-    @rpc.request('wallet_asset_authorize_key', [paying_account, symbol, address], error_handler).then (response) ->
-      response.result
-
   # Burns given amount to the given account.  This will allow you to post message and +/- sentiment on someones account as a form of reputation.
   # parameters:
   #   string `amount_to_burn` - the amount of shares to burn
@@ -315,13 +305,13 @@ class WalletAPI
     @rpc.request('wallet_note', [amount_to_pay, asset_symbol, owner_account_name, message, encrypted], error_handler).then (response) ->
       response.result
 
-  # Get and decrypt specific secret note
+  # Fetch notes and decrypt it if it is a secret note
   # parameters:
   #   sending_account_name `owner_account_name` - the owner of the secret_note
   #   string `transaction_id` - the id of the transaction including the secret note
   # return_type: `string`
-  decrypt_secret_note: (owner_account_name, transaction_id, error_handler = null) ->
-    @rpc.request('wallet_decrypt_secret_note', [owner_account_name, transaction_id], error_handler).then (response) ->
+  fetch_note: (owner_account_name, transaction_id, error_handler = null) ->
+    @rpc.request('wallet_fetch_note', [owner_account_name, transaction_id], error_handler).then (response) ->
       response.result
 
   # Creates an address which can be used for a simple (non-TITAN) transfer.
@@ -339,8 +329,8 @@ class WalletAPI
   #   string `amount_to_transfer` - the amount of shares to transfer
   #   asset_symbol `asset_symbol` - the asset to transfer
   #   sending_account_name `from_account_name` - the source account to draw the shares from
-  #   string `recipient` - the account name, public key, address, or btc address which will receive the funds
-  #   string `memo_message` - a memo to store with the transaction
+  #   string `recipient` - the account name, public key, address, btc address, or contact label (prefixed by "label:") which will receive the funds
+  #   string `memo_message` - a memo to send if the recipient is an account
   #   vote_strategy `strategy` - enumeration [vote_none | vote_all | vote_random | vote_recommended]
   # return_type: `transaction_record`
   transfer: (amount_to_transfer, asset_symbol, from_account_name, recipient, memo_message, strategy, error_handler = null) ->
@@ -434,8 +424,8 @@ class WalletAPI
   #   account_name `pay_fee_with_account_name` - when releasing escrow a transaction fee must be paid by funds not in escrow, this account will pay the fee
   #   address `escrow_balance_id` - The balance id of the escrow to be released.
   #   account_name `released_by_account` - the account that is to perform the release.
-  #   real_amount `amount_to_sender` - Amount to release back to the sender.
-  #   real_amount `amount_to_receiver` - Amount to release to receiver.
+  #   string `amount_to_sender` - Amount to release back to the sender.
+  #   string `amount_to_receiver` - Amount to release to receiver.
   # return_type: `transaction_record`
   release_escrow: (pay_fee_with_account_name, escrow_balance_id, released_by_account, amount_to_sender, amount_to_receiver, error_handler = null) ->
     @rpc.request('wallet_release_escrow', [pay_fee_with_account_name, escrow_balance_id, released_by_account, amount_to_sender, amount_to_receiver], error_handler).then (response) ->
@@ -523,7 +513,7 @@ class WalletAPI
   #   account_name `pay_from_account` - the account from which fees will be paid
   #   json_variant `public_data` - public data about the account
   #   uint8_t `delegate_pay_rate` - -1 for non-delegates; otherwise the percent of delegate pay to accept per produced block
-  #   string `account_type` - titan_account | public_account - public accounts do not receive memos and all payments are made to the active key
+  #   string `account_type` - titan_account | public_account - public accounts receive memos too but all payments are made to the active key
   # return_type: `transaction_record`
   account_register: (account_name, pay_from_account, public_data, delegate_pay_rate, account_type, error_handler = null) ->
     @rpc.request('wallet_account_register', [account_name, pay_from_account, public_data, delegate_pay_rate, account_type], error_handler).then (response) ->
@@ -584,50 +574,54 @@ class WalletAPI
     @rpc.request('wallet_account_rename', [current_account_name, new_account_name], error_handler).then (response) ->
       response.result
 
-  # Creates a new user issued asset
+  # Create a new market-issued asset (BitAsset) on the blockchain. Warning: creation fees can be very high!
   # parameters:
-  #   asset_symbol `symbol` - the ticker symbol for the new asset
-  #   string `asset_name` - the name of the asset
-  #   string `issuer_name` - the name of the issuer of the asset
-  #   string `description` - a description of the asset
-  #   real_amount `maximum_supply` - the maximum number of shares of the asset
-  #   uint64_t `precision` - defines where the decimal should be displayed, must be a power of 10
-  #   json_variant `public_data` - arbitrary data attached to the asset
-  #   bool `is_market_issued` - creation of a new BitAsset that is created by shorting
+  #   string `payer_account` - The local account name that will pay the creation fee
+  #   asset_symbol `symbol` - A unique symbol that will represent the new asset. Short symbols are very expensive!
+  #   string `name` - A human-readable name for the new asset
+  #   string `description` - A human-readable description of the new asset
+  #   string `max_divisibility` - Choose the max share divisibility for the new asset. Must be an inverse power of ten. For example: 0.00001 or 1
   # return_type: `transaction_record`
-  asset_create: (symbol, asset_name, issuer_name, description, maximum_supply, precision, public_data, is_market_issued, error_handler = null) ->
-    @rpc.request('wallet_asset_create', [symbol, asset_name, issuer_name, description, maximum_supply, precision, public_data, is_market_issued], error_handler).then (response) ->
+  mia_create: (payer_account, symbol, name, description, max_divisibility, error_handler = null) ->
+    @rpc.request('wallet_mia_create', [payer_account, symbol, name, description, max_divisibility], error_handler).then (response) ->
       response.result
 
-  # Updates an existing user-issued asset; only the public_data can be updated if any shares of the asset exist
+  # Create a new game(chip)-issued asset (Chip Asset) on the blockchain. Warning: creation fees can be very high!
   # parameters:
-  #   asset_symbol `symbol` - the ticker symbol for the asset to update
-  #   optional_string `name` - the new name to give the asset; or null to keep the current name
-  #   optional_string `description` - the new description to give the asset; or null to keep the current description
-  #   optional_variant `public_data` - the new public_data to give the asset; or null to keep the current public_data
-  #   optional_double `maximum_supply` - the new maximum_supply to give the asset; or null to keep the current maximum_supply
-  #   optional_uint64_t `precision` - the new precision to give the asset; or null to keep the current precision
-  #   share_type `issuer_transaction_fee` - an additional fee (denominated in issued asset) charged by the issuer on every transaction that uses this asset type
-  #   real_amount `issuer_market_fee` - an additional fee (denominated in percent) charged by the issuer on every order that is matched
-  #   asset_permission_array `flags` - a set of flags set by the issuer (if they have permission to set them)
-  #   asset_permission_array `issuer_permissions` - a set of permissions an issuer retains
-  #   account_name `issuer_account_name` - used to transfer the asset to a new user
-  #   uint32_t `required_sigs` - number of signatures from the authority required to control this asset record
-  #   address_list `authority` - owner keys that control this asset record
+  #   string `payer_account` - The local account name that will pay the creation fee
+  #   string `game_name` - The name of the game that can issue to this asset
+  #   asset_symbol `symbol` - A unique symbol that will represent the new asset. Short symbols are very expensive!
+  #   string `name` - A human-readable name for the new asset
+  #   string `description` - A human-readable description of the new asset
+  #   string `max_divisibility` - Choose the max share divisibility for the new asset. Must be an inverse power of ten. For example: 0.00001 or 1
+  #   string `init_supply` - Choose the init share supply
+  #   string `init_collateral` - Choose the init share collateral
   # return_type: `transaction_record`
-  asset_update: (symbol, name, description, public_data, maximum_supply, precision, issuer_transaction_fee, issuer_market_fee, flags, issuer_permissions, issuer_account_name, required_sigs, authority, error_handler = null) ->
-    @rpc.request('wallet_asset_update', [symbol, name, description, public_data, maximum_supply, precision, issuer_transaction_fee, issuer_market_fee, flags, issuer_permissions, issuer_account_name, required_sigs, authority], error_handler).then (response) ->
+  gia_create: (payer_account, game_name, symbol, name, description, max_divisibility, init_supply, init_collateral, error_handler = null) ->
+    @rpc.request('wallet_gia_create', [payer_account, game_name, symbol, name, description, max_divisibility, init_supply, init_collateral], error_handler).then (response) ->
       response.result
 
-  # Issues new shares of a given asset type
+  # Create a new user-issued asset on the blockchain. Warning: creation fees can be very high!
   # parameters:
-  #   real_amount `amount` - the amount of shares to issue
-  #   asset_symbol `symbol` - the ticker symbol for asset
-  #   account_name `to_account_name` - the name of the account to receive the shares
-  #   string `memo_message` - the memo to send to the receiver
+  #   string `issuer_account` - The registered account name that will pay the creation fee and control the new asset
+  #   asset_symbol `symbol` - A unique symbol that will represent the new asset. Short symbols are very expensive!
+  #   string `name` - A human-readable name for the new asset
+  #   string `description` - A human-readable description of the new asset
+  #   string `max_supply_with_trailing_decimals` - Choose the max share supply and max share divisibility for the new asset. For example: 10000000000.00000 or 12345.6789
   # return_type: `transaction_record`
-  asset_issue: (amount, symbol, to_account_name, memo_message, error_handler = null) ->
-    @rpc.request('wallet_asset_issue', [amount, symbol, to_account_name, memo_message], error_handler).then (response) ->
+  uia_create: (issuer_account, symbol, name, description, max_supply_with_trailing_decimals, error_handler = null) ->
+    @rpc.request('wallet_uia_create', [issuer_account, symbol, name, description, max_supply_with_trailing_decimals], error_handler).then (response) ->
+      response.result
+
+  # Issue shares of a user-issued asset to the specified recipient
+  # parameters:
+  #   string `asset_amount` - the amount of shares of the asset to issue
+  #   asset_symbol `asset_symbol` - specify the unique symbol of the asset
+  #   string `recipient` - the account name, public key, address, btc address, or contact label (prefixed by "label:") which will receive the funds
+  #   string `memo_message` - a memo to send if the recipient is an account
+  # return_type: `transaction_record`
+  uia_issue: (asset_amount, asset_symbol, recipient, memo_message, error_handler = null) ->
+    @rpc.request('wallet_uia_issue', [asset_amount, asset_symbol, recipient, memo_message], error_handler).then (response) ->
       response.result
 
   # Issues new UIA shares to specific addresses.
@@ -635,8 +629,84 @@ class WalletAPI
   #   asset_symbol `symbol` - the ticker symbol for asset
   #   snapshot_map `addresses` - A map of addresses-to-amounts to transfer the new shares to
   # return_type: `transaction_record`
-  asset_issue_to_addresses: (symbol, addresses, error_handler = null) ->
-    @rpc.request('wallet_asset_issue_to_addresses', [symbol, addresses], error_handler).then (response) ->
+  uia_issue_to_addresses: (symbol, addresses, error_handler = null) ->
+    @rpc.request('wallet_uia_issue_to_addresses', [symbol, addresses], error_handler).then (response) ->
+      response.result
+
+  # Withdraw fees collected in the specified user-issued asset and deposit to the specified recipient
+  # parameters:
+  #   asset_symbol `asset_symbol` - specify the unique symbol of the asset
+  #   string `recipient` - the account name, public key, address, btc address, or contact label (prefixed by "label:") which will receive the funds
+  #   string `memo_message` - a memo to send if the recipient is an account
+  # return_type: `transaction_record`
+  uia_collect_fees: (asset_symbol, recipient, memo_message, error_handler = null) ->
+    @rpc.request('wallet_uia_collect_fees', [asset_symbol, recipient, memo_message], error_handler).then (response) ->
+      response.result
+
+  # Update the name, description, public data of the specified user-issue asset
+  # parameters:
+  #   account_name `paying_account` - the account that will pay the transaction fee
+  #   asset_symbol `asset_symbol` - the user-issued asset to update
+  #   string `name` - A human-readable name for the new asset
+  #   string `description` - A human-readable description of the new asset
+  #   variant `public_data` - Extra data to attach to the asset
+  # return_type: `transaction_record`
+  uia_update_description: (paying_account, asset_symbol, name, description, public_data, error_handler = null) ->
+    @rpc.request('wallet_uia_update_description', [paying_account, asset_symbol, name, description, public_data], error_handler).then (response) ->
+      response.result
+
+  # Update the max supply and max divisibility of the specified user-issued asset if permitted
+  # parameters:
+  #   account_name `paying_account` - the account that will pay the transaction fee
+  #   asset_symbol `asset_symbol` - the user-issued asset to update
+  #   string `max_supply_with_trailing_decimals` - Choose the max share supply and max share divisibility for the asset. For example: 10000000000.00000 or 12345.6789
+  # return_type: `transaction_record`
+  uia_update_supply: (paying_account, asset_symbol, max_supply_with_trailing_decimals, error_handler = null) ->
+    @rpc.request('wallet_uia_update_supply', [paying_account, asset_symbol, max_supply_with_trailing_decimals], error_handler).then (response) ->
+      response.result
+
+  # Update the transaction fee, market fee rate for the specified user-issued asset if permitted
+  # parameters:
+  #   account_name `paying_account` - the account that will pay the transaction fee
+  #   asset_symbol `asset_symbol` - the user-issued asset to update
+  #   string `withdrawal_fee` - the transaction fee for the asset in shares of the asset
+  #   string `market_fee_rate` - the market fee rate for the asset as a percentage between 0.01 and 100, or 0
+  # return_type: `transaction_record`
+  uia_update_fees: (paying_account, asset_symbol, withdrawal_fee, market_fee_rate, error_handler = null) ->
+    @rpc.request('wallet_uia_update_fees', [paying_account, asset_symbol, withdrawal_fee, market_fee_rate], error_handler).then (response) ->
+      response.result
+
+  # Activate or deactivate one of the special flags for the specified user-issued asset as permitted
+  # parameters:
+  #   account_name `paying_account` - the account that will pay the transaction fee
+  #   asset_symbol `asset_symbol` - the user-issued asset to update
+  #   asset_flag_enum `flag` - the special flag to enable or disable; one of {dynamic_max_supply, dynamic_fees, halted_markets, halted_withdrawals, retractable_balances, restricted_deposits}
+  #   bool `enable_instead_of_disable` - true to enable, or false to disable
+  # return_type: `transaction_record`
+  uia_update_active_flags: (paying_account, asset_symbol, flag, enable_instead_of_disable, error_handler = null) ->
+    @rpc.request('wallet_uia_update_active_flags', [paying_account, asset_symbol, flag, enable_instead_of_disable], error_handler).then (response) ->
+      response.result
+
+  # Update the authority's special flag permissions for the specified user-issued asset. Warning: If any shares have been issued, then revoked permissions cannot be restored!
+  # parameters:
+  #   account_name `paying_account` - the account that will pay the transaction fee
+  #   asset_symbol `asset_symbol` - the user-issued asset to update
+  #   asset_flag_enum `permission` - the special permission to enable or disable; one of {dynamic_max_supply, dynamic_fees, halted_markets, halted_withdrawals, retractable_balances, restricted_deposits}
+  #   bool `add_instead_of_remove` - True to add, or false to remove. Use with extreme caution!
+  # return_type: `transaction_record`
+  uia_update_authority_permissions: (paying_account, asset_symbol, permission, add_instead_of_remove, error_handler = null) ->
+    @rpc.request('wallet_uia_update_authority_permissions', [paying_account, asset_symbol, permission, add_instead_of_remove], error_handler).then (response) ->
+      response.result
+
+  # Add or remove the specified address or public key from the specified user-issued asset's whitelist
+  # parameters:
+  #   account_name `paying_account` - the account that will pay the transaction fee
+  #   asset_symbol `asset_symbol` - the user-issued asset that will have its whitelist updated
+  #   string `address_or_public_key` - the address or public key to add or remove from the whitelist
+  #   bool `add_to_whitelist` - true to add to whitelist, or false to remove
+  # return_type: `transaction_record`
+  uia_update_whitelist: (paying_account, asset_symbol, address_or_public_key, add_to_whitelist, error_handler = null) ->
+    @rpc.request('wallet_uia_update_whitelist', [paying_account, asset_symbol, address_or_public_key, add_to_whitelist], error_handler).then (response) ->
       response.result
 
   # Lists the total asset balances for all open escrows
@@ -707,7 +777,7 @@ class WalletAPI
 
   # Set the fee to add to new transactions
   # parameters:
-  #   real_amount `fee` - the wallet transaction fee to set
+  #   string `fee` - the wallet transaction fee to set
   # return_type: `asset`
   set_transaction_fee: (fee, error_handler = null) ->
     @rpc.request('wallet_set_transaction_fee', [fee], error_handler).then (response) ->
@@ -1012,7 +1082,7 @@ class WalletAPI
   # publishes a price feed for BitAssets, only active delegates may do this
   # parameters:
   #   account_name `delegate_account` - the delegate to publish the price under
-  #   real_amount `price` - the number of this asset per XTS
+  #   string `price` - the number of this asset per XTS
   #   asset_symbol `asset_symbol` - the type of asset being priced
   # return_type: `transaction_record`
   publish_price_feed: (delegate_account, price, asset_symbol, error_handler = null) ->
@@ -1030,7 +1100,7 @@ class WalletAPI
 
   # publishes a set of feeds for BitAssets for all active delegates, most useful for testnets
   # parameters:
-  #   price_map `symbol_to_price_map` - maps the BitAsset symbol to its price per share
+  #   string_map `symbol_to_price_map` - maps the BitAsset symbol to its price per share
   # return_type: `vector<std::pair<string, wallet_transaction_record>>`
   publish_feeds_multi_experimental: (symbol_to_price_map, error_handler = null) ->
     @rpc.request('wallet_publish_feeds_multi_experimental', [symbol_to_price_map], error_handler).then (response) ->
