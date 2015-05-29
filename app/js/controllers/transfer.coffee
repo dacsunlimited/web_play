@@ -111,7 +111,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
 
         my_transfer_form.$setValidity "funds", balance_after_transfer >= 0
         if balance_after_transfer < 0
-            $translate('tip.insufficient_balances').then (val) ->
+            $translate('market.tip.insufficient_balances').then (val) ->
                 my_transfer_form.amount.error_message = val
 
     #call to initialize and on symbol change
@@ -150,7 +150,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                 $translate('account.unknown').then (val) ->
                     my_transfer_form.payto.error_message = val
             else if error.data.error.code == 20010
-                $translate('tip.insufficient_balances').then (val) ->
+                $translate('market.tip.insufficient_balances').then (val) ->
                     my_transfer_form.amount.error_message = val
             else
                 my_transfer_form.payto.error_message = Utils.formatAssertException(error.data.error.message)
