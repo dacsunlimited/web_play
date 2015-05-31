@@ -76,6 +76,7 @@
                 type="text" class="form-control" placeholder="0.0" id="amount"
                 ui-validate="'$value > 0'" ng-change="hot_check_send_amount()"
                 autocomplete="off" required/>
+
             <!-- asset selector -->
             <div class="input-group-btn" dropdown is-open="status.isopen">
               <button type="button" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">
@@ -89,7 +90,15 @@
                 </li>
               </ul>
             </div>
+
+
+            <!-- <div class="input-group">
+
+            </div> -->
            </div>
+           <span class="help-block" ng-show="balance_after_transfer">
+                {{'account.new_balance' | translate }}: {{balance_after_transfer | formatDecimal: balance_precision}} {{transfer_asset.symbol}} ({{'account.less_fee' | translate }} {{ fee+ ' '+tx_fee_asset.symbol }})
+           </span>
         </div>
         <div class="col-sm-4" ng-if="!balances && refreshing_balances"><i class="fa fa-spinner fa-spin"></i></div>
         <div class="col-sm-4" ng-if="!balances && !refreshing_balances"><span class="cell text-danger" translate>market.tip.insufficient_balances</span></div>
@@ -155,9 +164,6 @@
           <button type="submit" class="btn btn-primary" ng-disabled="!my_transfer_form.$valid || !transfer_info.symbol || my_transfer_form.payto.error_message">
             &nbsp; <span translate>account.send</span> &nbsp;
           </button>
-          <span class="help-block" ng-show="balance_after_transfer">
-               {{'account.new_balance' | translate }}: {{balance_after_transfer | formatDecimal: balance_precision}} {{transfer_asset.symbol}} ({{'account.less_fee' | translate }} {{ fee+ ' '+tx_fee_asset.symbol }})
-          </span>
         </div>
       </div>
     </form>
