@@ -508,7 +508,13 @@
       "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
       "current_pot": "Current Pot",
       "my_winning_records": "My Winning Records",
-      "winning_not_found": "Not found"
+      "winning_not_found": "Not found",
+      "no_draw": "No drawing records",
+      "th": {
+        "winner": "Winner",
+        "amount": "Reward",
+        "drawing_block": "Drawing Block"
+      }
     }
   },
   "asset": {

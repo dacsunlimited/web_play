@@ -31,12 +31,24 @@
     <p translate>notes.pot.explain</p>
     <p>{{'notes.pot.current_pot'|translate}}: <span class="emphasis">{{pool|formatAsset}}</span></p>
 
-    <md-subheader class="md-primary md-default-theme m-top" translate>
-      notes.pot.my_winning_records
-    </md-subheader>
 
-    <div ng-show="account_transactions.length == 0" translate>notes.pot.winning_not_found</div>
-    <div ng-show="account_transactions.length > 0" ng-include src="'transactions.html'"></div>
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab>
+          <md-tab-label>{{'notes.pot.my_winning_records' | translate}}</md-tab-label>
+          <md-tab-body>
+            <div ng-show="account_transactions.length == 0" translate>notes.pot.winning_not_found</div>
+            <div ng-show="account_transactions.length > 0" ng-include src="'transactions.html'"></div>
+          </md-tab-body>
+        </md-tab>
+
+        <md-tab md-on-select="getRecentWinners()">
+          <md-tab-label>最近一周幸运儿</md-tab-label>
+          <md-tab-body>
+            <div ng-show="recent_winners.length == 0" translate>no winners</div>
+            <div ng-show="recent_winners.length > 0" ng-include src="'recent_winners.html'"></div>
+          </md-tab-body>
+        </md-tab>
+    </md-tabs>
 
 
   </md-card-content>

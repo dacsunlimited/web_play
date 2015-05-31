@@ -490,7 +490,13 @@
       "explain": "每天区块链会从当日创建的日志中抽取幸运儿。",
       "current_pot": "当前奖池",
       "my_winning_records": "我的中奖记录",
-      "winning_not_found": "暂无"
+      "winning_not_found": "暂无",
+      "no_draw": "无中奖记录",
+      "th": {
+        "winner": "幸运儿",
+        "amount": "奖金",
+        "drawing_block": "开奖块"
+      }
     }
   },
   "asset": {

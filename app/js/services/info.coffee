@@ -8,6 +8,7 @@ class Info
     expected_client_version: "0.0.3"
 
     FULL_SYNC_SECS: 600
+    BLOCKS_PER_DAY: 8640
 
     get : () ->
         if Object.keys(@info).length > 0
