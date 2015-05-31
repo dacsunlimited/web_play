@@ -225,6 +225,7 @@ class Blockchain
     avg_act_del_pay_rate = 0
 
     # TODO: finish this mapping, may be in some config or settings
+    # https://github.com/bitsuperlab/bitshares_play/blob/develop/libraries/blockchain/include/bts/blockchain/operations.hpp
     type_name_map :
         withdraw_op_type : "Withdraw Operation"
         deposit_op_type : "Deposit Operation"
