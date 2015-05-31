@@ -340,6 +340,14 @@ class BlockchainAPI
     @rpc.request('blockchain_list_market_transactions', [block_number]).then (response) ->
       response.result
 
+  # Returns a list of operation reward transactions executed on a given block.
+  # parameters:
+  #   uint32_t `block_number` - Block to get operation reward operations for.
+  # return_type: `operation_reward_transaction_array`
+  list_operation_reward_transactions: (block_number, error_handler = null) ->
+    @rpc.request('blockchain_list_operation_reward_transactions', [block_number]).then (response) ->
+      response.result
+
   # Returns the status of a particular market, including any trading errors.
   # parameters:
   #   asset_symbol `quote_symbol` - quote symbol
