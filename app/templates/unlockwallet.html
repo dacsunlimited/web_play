@@ -5,13 +5,10 @@
       <img src="/img/play-logo-h-white-shadow.png"/>
     </div>
 
-    <div class="str-content" ng-click="descriptionCollapsed = !descriptionCollapsed"></div>
-    <div class="description" ng-class="theme" collapse="descriptionCollapsed">
+    <div class="description" ng-class="theme" collapse="false">
       <p translate>unlock.desc_content_1</p>
       <p translate>unlock.desc_content_2</p>
     </div>
-
-    <md-button label="" class="str-arrow fa {{descriptionCollapsed ? 'fa-sort-desc' : 'fa-sort-asc'}}" style="width:50px;" ng-click="descriptionCollapsed = !descriptionCollapsed"></md-button>
 
         <div class="str-bottom">
           <div ng-show="update_available" class="danger" translate>tip.client_update_available</div>
