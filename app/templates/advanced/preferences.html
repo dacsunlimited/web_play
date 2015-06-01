@@ -18,19 +18,19 @@
             </div>
          </md-input-container>
 
-      <md-input-container>
-        <label for="language" translate>pref.language</label>
-        <div class="btn-group" dropdown is-open="status2.isopen">
-          <button type="button" class="btn dropdown-toggle" dropdown-toggle>
-            {{model.language_name}} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="(k, v) in model.languages">
-              <a ng-click="model.language_locale=k; model.language_name=v; status2.isopen=false">{{v}}</a>
-            </li>
-          </ul>
-        </div>
-      </md-input-container>
+        <label class="col-sm-offset-1 col-sm-3 control-label" for="language" translate>pref.language</label>
+        <md-input-container>
+          <div class="col-sm-3 input-group" dropdown is-open="status2.isopen">
+            <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+              {{model.language_name}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-repeat="(k, v) in model.languages">
+                <a ng-click="model.language_locale=k; model.language_name=v; status2.isopen=false">{{v}}</a>
+              </li>
+            </ul>
+          </div>
+        </md-input-container>
 
       <!-- <md-input-container>
         <label translate>pref.theme</label>
@@ -48,7 +48,7 @@
         </div>
       </md-input-container> -->
 
-      <md-button type="submit" class="md-primary md-raised" translate>btn.update</md-button>
+      <md-button type="submit" class="md-primary md-raised col-sm-offset-4" translate>btn.update</md-button>
 
     </form>
   </md-card-content>
