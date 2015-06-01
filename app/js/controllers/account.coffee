@@ -11,19 +11,33 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
 
     # tabs
     $scope.tabs = []
-    $scope.tabs.push { heading: "account.transactions", route: "account.transactions", active: true }
-    $scope.tabs.push { heading: "account.delegate", route: "account.delegate", active: false }
-    $scope.tabs.push { heading: "account.manageAssets", route: "account.manageAssets", active: false }
-    $scope.tabs.push { heading: "account.keys", route: "account.keys", active: false }
-    $scope.tabs.push { heading: "account.edit", route: "account.edit", active: false }
-    $scope.tabs.push { heading: "account.vote", route: "account.vote", active: false }
-    $scope.tabs.push { heading: "account.wall", route: "account.wall", active: false }
+    $scope.tabs.push { heading: "account.transactions", route: "account.transactions", active: true, icon: 'fa-list' }
+    if $scope.account?.delegate_info
+        $scope.tabs.push { heading: "account.delegate_info", route: "account.delegate", active: false, icon: 'fa-legal' }
+    # $scope.tabs.push { heading: "account.manageAssets", route: "account.manageAssets", active: false, icon: 'fa-renren' }
+    $scope.tabs.push { heading: "account.keys", route: "account.keys", active: false, icon: 'fa-key' }
+    $scope.tabs.push { heading: "btn.edit", route: "account.edit", active: false, icon: 'fa-edit' }
+    $scope.tabs.push { heading: "account.vote.tab_title", route: "account.vote", active: false, icon: 'fa-ticket' }
+    $scope.tabs.push { heading: "account.wall.tab_title", route: "account.wall", active: false, icon: 'fa-comments-o' }
+
+    $scope.getActiveTab = ->
+        for i in [0...$scope.tabs.length]
+            return i if $state.is $scope.tabs[i].route
+
+        return 0
+
     $scope.goto_tab = (route) ->
         $state.go route
     $scope.active_tab = (route) -> $state.is route
+
+    $scope.$watch 'selectedIndex', (cur_index, old_index) ->
+      cur_index = cur_index or 0
+
+      tab = $scope.tabs[cur_index]
+      $scope.goto_tab(tab.route)
+
     $scope.$on "$stateChangeSuccess", ->
-        $scope.tabs.forEach (tab) ->
-            tab.active = $scope.active_tab(tab.route)
+        $scope.selectedIndex = $scope.getActiveTab()
 
     # $scope.transfer_info =
     #     amount : null

@@ -194,10 +194,24 @@
 
 <md-card>
 <md-card-content>
-<div class="main-content">
 <div class="row">
 
   <div class="col-sm-12">
+    <md-tabs class="md-no-transition" md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+      <md-tab ng-repeat="tab in tabs">
+        <md-tab-label>
+          <i class="fa {{tab.icon}}"></i> {{ tab.heading | translate }}
+        </md-tab-label>
+        <md-tab-body class="md-no-transition">
+          <md-content class="md-padding">
+            <div ui-view="{{tab.route.replace('.','-')}}" flex></div>
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </div>
+
+  <div class="col-sm-12" ng-show="false">
     <tabset>
 
       <!--recent transactions tab -->
@@ -249,7 +263,6 @@
     </tabset>
 
   </div>
-</div>
 </div>
 </md-card-content>
 </md-card>
