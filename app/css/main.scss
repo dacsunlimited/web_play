@@ -655,3 +655,8 @@ a.delegate-link {
   text-shadow: none;
 }
 
+
+// disable tab switching transition
+[role="tabpanel"] {
+    transition: none;
+}
