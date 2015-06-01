@@ -10,6 +10,12 @@ angular.module("app").controller "DirectoryController", ($scope, $state, $locati
       # { heading: "directory.assets", route: "directory.assets", active: false, icon: "fa-renren" }
     ]
 
+    $scope.getDefaultTab = ->
+        for i in [0...$scope.tabs.length]
+            return i if $state.is $scope.tabs[i].route
+
+        return 0
+
     $scope.goto_tab = (route) ->
         params = {letter: $scope.first_letter}
         $state.go route, params
@@ -25,8 +31,7 @@ angular.module("app").controller "DirectoryController", ($scope, $state, $locati
     $scope.$on "$stateChangeSuccess", ->
         if $state.current.name == "directory.registered"
             $scope.first_letter = $state.params.letter or "a"
-        $scope.tabs.forEach (tab) ->
-            tab.active = $scope.active_tab(tab.route)
+        $scope.selectedIndex = $scope.getDefaultTab()
 
     $scope.$watch ->
         $scope.first_letter

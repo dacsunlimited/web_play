@@ -6,13 +6,14 @@
       <p class="header-info">&nbsp;</p>
 
       <div class="row">
-        <md-tabs md-selected="selectedIndex">
+        <md-tabs class="md-no-transition" md-selected="selectedIndex" md-dynamic-height md-border-bottom>
           <md-tab ng-repeat="tab in tabs">
             <md-tab-label>
-              <h3><i class="fa {{tab.icon}} fa-lg"></i> {{ tab.heading | translate }}</h3>
+              <i class="fa {{tab.icon}}"></i> {{ tab.heading | translate }}
             </md-tab-label>
-
-            <div ui-view="{{tab.route.replace('.','-')}}" flex></div>
+            <md-tab-body class="md-no-transition">
+              <div ui-view="{{tab.route.replace('.','-')}}" flex></div>
+            </md-tab-body>
           </md-tab>
         </md-tabs>
       </div>
