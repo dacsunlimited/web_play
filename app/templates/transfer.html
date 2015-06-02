@@ -59,9 +59,12 @@
         <button ng-show="transfer_info.payto && !transfer_info.unknown_account && !is_address_book_contact && !add_to_address_book.error" ng-click="addToAddressBook()" class="add-to-address-book btn btn-primary btn-sm outline">
           <span translate>contact.add_to_address_book</span>
         </button>
-        <span ng-show="add_to_address_book.error" class="text-danger">{{add_to_address_book.error}}</span>
-        <span ng-show="add_to_address_book.message" class="text-success">{{add_to_address_book.message}}</span>
-        <span ng-show="is_my_account" class="text-success" translate>account.your_account</span>
+        <div>
+          <span ng-show="add_to_address_book.error" class="text-danger">{{add_to_address_book.error}}</span>
+          <span ng-show="add_to_address_book.message" class="text-success">{{add_to_address_book.message}}</span>
+          <span ng-show="is_my_account" class="text-success" translate>account.your_account</span>
+          <span ng-show="my_transfer_form.payto.$dirty && !is_my_account && !is_address_book_contact" class="text-danger" translate>contact.not_in_address_book</span>
+        </div>
     </div>
   </div>
   <div class="col-sm-10" id="transfer-form">
@@ -91,10 +94,6 @@
               </ul>
             </div>
 
-
-            <!-- <div class="input-group">
-
-            </div> -->
            </div>
            <span class="help-block" ng-show="balance_after_transfer">
                 {{'account.new_balance' | translate }}: {{balance_after_transfer | formatDecimal: balance_precision}} {{transfer_asset.symbol}} ({{'account.less_fee' | translate }} {{ fee+ ' '+tx_fee_asset.symbol }})
