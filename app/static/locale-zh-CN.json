@@ -376,7 +376,7 @@
     "new_account": "新的账户",
     "name": "账户名称",
     "id": "Account Id",
-    "unregistered": "[unregistered]",
+    "unregistered": "[账户未注册]",
     "website": "网站地址",
     "website_tip": "网站地址（可选项）",
     "email": "电子邮件",
