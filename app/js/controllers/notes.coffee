@@ -68,11 +68,13 @@ angular.module("app").controller "NotesController", ($scope, $mdDialog, $statePa
             $scope.balances[account_name] =  if value[$scope.note.symbol] then value[$scope.note.symbol].amount else 0
 
 
-    $scope.showComposeDialog = ->
+    $scope.showComposeDialog = (evt) ->
       $mdDialog.show
           parent: angular.element document.body
           scope: $scope
+          preserveScope: true
           templateUrl: "notes/compose.html"
+          targetEvent: evt
 
     yesSend = ->
         form = @note_form
