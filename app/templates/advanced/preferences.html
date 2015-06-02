@@ -7,6 +7,15 @@
     <form class="form-horizontal" flex="50" role="form" name="pform" ng-submit="updatePreferences()"
           ng-class="{ 'has-error' : pform.wp.$invalid && !pform.wp.$pristine }" novalidate>
 
+          <!-- wallet lock timeout -->
+          <label class="col-sm-offset-1 col-sm-3 control-label" for="timeout" translate>pref.logout_timeout</label>
+          <md-input-container>
+             <div class="col-sm-3 input-group">
+               <input id="timeout" numonly autofocus ng-model="model.timeout" name="timeout" class="form-control" />
+                <span class="input-group-addon">{{ 'utils.seconds' | translate}}</span>
+             </div>
+          </md-input-container>
+
           <!-- transaction fee -->
          <label class="col-sm-offset-1 col-sm-3 control-label" for="transaction_fee" translate>pref.trx_fee</label>
 
@@ -18,6 +27,25 @@
             </div>
          </md-input-container>
 
+         <!-- voting options -->
+         <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.default_vote</label>
+         <md-input-container>
+           <div class="col-sm-3 no-lr-padding">
+             <div class="btn-group" dropdown is-open="status3.isopen">
+               <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+                 {{ ('account.vote.' + voting.vote_options[voting.default_vote]) | translate }} <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu" role="menu">
+                 <li ng-repeat="(k, v) in voting.vote_options">
+                   <a ng-click="voting.default_vote=k; status3.isopen=false">{{ ('account.vote.' + v) | translate }}</a>
+                 </li>
+               </ul>
+             </div>
+           </div>
+         </md-input-container>
+
+
+        <!-- interface language -->
         <label class="col-sm-offset-1 col-sm-3 control-label" for="language" translate>pref.language</label>
         <md-input-container>
           <div class="col-sm-3 input-group" dropdown is-open="status2.isopen">
@@ -48,7 +76,9 @@
         </div>
       </md-input-container> -->
 
-      <md-button type="submit" class="md-primary md-raised col-sm-offset-4" translate>btn.update</md-button>
+        <div class="col-sm-offset-4">
+          <md-button type="submit" class="md-primary md-raised" translate>btn.update</md-button>
+        </div>
 
     </form>
   </md-card-content>
