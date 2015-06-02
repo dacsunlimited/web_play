@@ -98,6 +98,7 @@
     </div>
     </div>
     <span class="account-key" ng-show="account.registration_date === '1970-01-01T00:00:00'"><span translate>account.account_key</span>: {{account.active_key}}</span>
+    <span class="account-key" ng-show="account.id"><span translate>account.id</span>: {{account.id}}</span>
   </div>
 
   <!-- <div class="col-sm-5">
@@ -127,10 +128,10 @@
       <table class="table table-acc-balance" ng-show="account.is_my_account" tooltip="{{'account.vesting.tip'|translate}}">
         <thead>
           <tr>
-            <th><h3 class="header-title text-muted" translate>account.vesting.claimed</h3></th>
-            <th><h3 class="header-title text-muted" translate>account.vesting.vested</h3></th>
-            <th><h3 class="header-title text-muted" translate>account.vesting.available</h3></th>
-            <th><h3 class="header-title text-muted" translate>account.vesting.original</h3></th>
+            <th><h5 class="header-title text-muted" translate>account.vesting.claimed</h5></th>
+            <th><h5 class="header-title text-muted" translate>account.vesting.vested</h5></th>
+            <th><h5 class="header-title text-muted" translate>account.vesting.available</h5></th>
+            <th><h5 class="header-title text-muted" translate>account.vesting.original</h5></th>
           </tr>
         </thead>
         <tbody>
@@ -154,7 +155,7 @@
       <table class="table table-acc-balance" ng-show="account.is_my_account">
         <thead>
           <tr>
-            <th><h3 class="header-title text-muted" translate>account.balances</h3></th>
+            <th><h5 class="header-title text-muted" translate>account.balances</h5></th>
           </tr>
         </thead>
         <tbody>
@@ -193,10 +194,24 @@
 
 <md-card>
 <md-card-content>
-<div class="main-content">
 <div class="row">
 
   <div class="col-sm-12">
+    <md-tabs class="md-no-transition" md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+      <md-tab ng-repeat="tab in tabs">
+        <md-tab-label>
+          <i class="fa {{tab.icon}}"></i> {{ tab.heading | translate }}
+        </md-tab-label>
+        <md-tab-body class="md-no-transition">
+          <md-content class="md-padding">
+            <div ui-view="{{tab.route.replace('.','-')}}" flex></div>
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </div>
+
+  <div class="col-sm-12" ng-show="false">
     <tabset>
 
       <!--recent transactions tab -->
@@ -248,7 +263,6 @@
     </tabset>
 
   </div>
-</div>
 </div>
 </md-card-content>
 </md-card>

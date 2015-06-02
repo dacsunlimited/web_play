@@ -4,6 +4,7 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
     $scope.model.symbol = ''
     $scope.model.languages =
         "en": "English"
+        "es": "Español"
         "zh-CN": "简体中文"
         "de": "Deutsch"
         "ru": "Русский"
@@ -90,7 +91,7 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
         pf = $scope.model.transaction_fee
         calls = [
                 Wallet.set_setting('timeout', $scope.model.timeout),
-                WalletAPI.set_transaction_fee(Number(pf).toFixed(2)),
+                WalletAPI.set_transaction_fee(pf),
                 Wallet.set_setting('interface_locale', $scope.model.language_locale)
                 Wallet.set_setting('interface_theme', $scope.model.theme)
                 Wallet.set_setting('default_vote', $scope.voting.default_vote)

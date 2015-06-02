@@ -19,6 +19,8 @@
             <div class="name" style="display:inline-block; height:40px; vertical-align:middle;">
               {{contactValue(name)}}<br /><span class="text-muted" translate translate-values="{contact_name: name}">contact.contact_name_of</span>
             </div>
+            <span class="address-book-account-id" ng-show="data.contact_accounts[name].id">#{{data.contact_accounts[name].id}}</span>
+            <span class="address-book-account-id" ng-show="!data.contact_accounts[name].id" translate>account.unregistered</span>
           </li>
         </ul>
 

@@ -1,0 +1,26 @@
+<nav mfb-menu position="br" effect="zoomin" label="{{'notes.compose'|translate}}"
+     active-icon="ion-edit" resting-icon="ion-plus-round"
+     toggling-method="hover" main-action="showComposeDialog()">
+</nav>
+
+
+<md-card>
+  <md-content>
+    <md-list-item class="md-2-line" ng-repeat="r in note_records | orderBy:'-note.timestamp'">
+      <div class="md-list-item-text">
+        <small class="pull-right">{{ r.note.timestamp | prettyDate }}</small>
+        <h3>{{ r.note.title }}</h3>
+        <p>{{ r.note.body }}</p>
+      </div>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-content>
+
+  <md-card-content ng-show="note_records.length < 1">
+    <div class="row">
+      <div class="col-md-12">
+        <p translate>notes.notes_not_found</p>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>

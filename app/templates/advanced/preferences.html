@@ -13,34 +13,24 @@
          <md-input-container>
             <div class="col-sm-3 input-group">
               <input id="transaction_fee" decimalonly ng-model="model.transaction_fee" name="transaction_fee"
-                     class="form-control" placeholder="Transaction Fee"
-                     ng-disabled="is_bitshares_js"/> <span class="input-group-addon">{{model.symbol}}</span>
+                     class="form-control" ng-disabled="is_bitshares_js"/>
+              <span class="input-group-addon">{{model.symbol}}</span>
             </div>
          </md-input-container>
-<!--
-        <label for="transaction_fee" translate>pref.trx_fee</label>
-        <input id="transaction_fee" type="number" decimalonly ng-model="model.transaction_fee" name="transaction_fee" class="form-control" />
--->
 
-      <!-- <md-input-container> -->
-        <label for="autocomplete" tooltip="{{ 'pref.autocomplete_info' | translate }}" tooltip-placement="bottom" translate>pref.autocomplete_receiver</label>
-        <!-- <input id="autocomplete" type="number" decimalonly ng-model="model.autocomplete" name="autocomplete" class="form-control" /> -->
-        <md-switch ng-model="model.autocomplete" aria-label="{{ 'pref.autocomplete_receiver' | translate }}" ></md-switch>
-      <!-- </md-input-container> -->
-
-      <md-input-container>
-        <label for="language" translate>pref.language</label>
-        <div class="btn-group" dropdown is-open="status2.isopen">
-          <button type="button" class="btn dropdown-toggle" dropdown-toggle>
-            {{model.language_name}} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="(k, v) in model.languages">
-              <a ng-click="model.language_locale=k; model.language_name=v; status2.isopen=false">{{v}}</a>
-            </li>
-          </ul>
-        </div>
-      </md-input-container>
+        <label class="col-sm-offset-1 col-sm-3 control-label" for="language" translate>pref.language</label>
+        <md-input-container>
+          <div class="col-sm-3 input-group" dropdown is-open="status2.isopen">
+            <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+              {{model.language_name}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-repeat="(k, v) in model.languages">
+                <a ng-click="model.language_locale=k; model.language_name=v; status2.isopen=false">{{v}}</a>
+              </li>
+            </ul>
+          </div>
+        </md-input-container>
 
       <!-- <md-input-container>
         <label translate>pref.theme</label>
@@ -58,7 +48,7 @@
         </div>
       </md-input-container> -->
 
-      <md-button type="submit" class="md-primary md-raised" translate>btn.update</md-button>
+      <md-button type="submit" class="md-primary md-raised col-sm-offset-4" translate>btn.update</md-button>
 
     </form>
   </md-card-content>

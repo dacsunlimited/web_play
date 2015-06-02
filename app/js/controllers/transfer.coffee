@@ -7,20 +7,18 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
     $scope.balances = null
     $scope.currencies = null
     $scope.show_from_section = true
-    $scope.account_from_name = account_from_name = $stateParams.from
+    $scope.account_from = { name: $stateParams.from, id: 0 }
     $scope.gravatar_account_name = null
     $scope.address_type = "account"
     $scope.refreshing_balances = true
     $scope.is_address_book_contact = false
-
-
+    $scope.balance_after_transfer = null
 
     $scope.memo_size_max = 51
     my_transfer_form = null
     tx_fee = null
     $scope.tx_fee_asset = null
     $scope.no_account = false
-    $scope.model ||= {}
     $scope.add_to_address_book = {}
 
     $scope.transfer_info =
@@ -31,6 +29,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         show_vote_options: Wallet.default_vote == "vote_per_transfer"
         vote : if Wallet.default_vote == "vote_per_transfer" then "vote_all" else Wallet.default_vote
         unknown_account: false
+        payto_account_id: 0
 
     $scope.vote_options =
         vote_none: "vote_none"
@@ -54,8 +53,9 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         name: "account_balances_observer"
         frequency: "each_block"
         update: (data, deferred) ->
-            Wallet.refresh_account($scope.account_from_name).then ->
-                $scope.balances = Wallet.balances[$scope.account_from_name]
+            Wallet.refresh_account($scope.account_from.name).then (account) ->
+                $scope.account_from.id = account.id
+                $scope.balances = Wallet.balances[$scope.account_from.name]
                 $scope.currencies = if $scope.balances then Object.keys($scope.balances) else []
                 $scope.currencies.unshift("") if  $scope.currencies.length > 1
                 unless $scope.transfer_info.symbol
@@ -111,7 +111,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
 
         my_transfer_form.$setValidity "funds", balance_after_transfer >= 0
         if balance_after_transfer < 0
-            $translate('tip.insufficient_balances').then (val) ->
+            $translate('market.tip.insufficient_balances').then (val) ->
                 my_transfer_form.amount.error_message = val
 
     #call to initialize and on symbol change
@@ -131,7 +131,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         payto = $scope.transfer_info.payto
         payto_account = Wallet.contacts[payto]
         payto = payto_account.data if payto_account?.contact_type == "public_key"
-        transfer_promise = WalletAPI.transfer($scope.transfer_info.amount, $scope.transfer_info.symbol, account_from_name, payto, $scope.transfer_info.memo, vote)
+        transfer_promise = WalletAPI.transfer($scope.transfer_info.amount, $scope.transfer_info.symbol, $scope.account_from.name, payto, $scope.transfer_info.memo, vote)
         transfer_promise.then (response) ->
             $scope.transfer_info.payto = ""
             my_transfer_form.payto.$setPristine()
@@ -145,13 +145,12 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             my_transfer_form?.payto.tip_registered = ""
             $scope.account_registration_date = ""
             Growl.notice "", "Transfer transaction broadcasted"
-            $scope.model.t_active=true
         , (error) ->
             if error.data.error.code == 20005
                 $translate('account.unknown').then (val) ->
                     my_transfer_form.payto.error_message = val
             else if error.data.error.code == 20010
-                $translate('tip.insufficient_balances').then (val) ->
+                $translate('market.tip.insufficient_balances').then (val) ->
                     my_transfer_form.amount.error_message = val
             else
                 my_transfer_form.payto.error_message = Utils.formatAssertException(error.data.error.message)
@@ -174,6 +173,8 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                     vote: $scope.vote_options[$scope.transfer_info.vote]
                     is_address_book_contact: $scope.is_address_book_contact
                     address_type: $scope.address_type
+                    to_id: $scope.transfer_info.payto_account_id
+                    to_registration_date: $scope.account_registration_date
                 $modal.open
                     templateUrl: "dialog-transfer-confirmation.html"
                     controller: "DialogTransferConfirmationController"
@@ -202,6 +203,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                             $scope.add_to_address_book.message = val
                         $scope.is_address_book_contact = true
                         my_transfer_form?.payto.error_message = ""
+                        $scope.payToChanged()
 
                         $scope.checkAccount(active_key)
 
@@ -231,14 +233,13 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                 $translate('contact.added').then (val) ->
                     $scope.add_to_address_book.message = val
 
-
-
     $scope.payToChanged = ->
         $scope.is_my_account = false
         $scope.is_address_book_contact = false
         $scope.account_registration_date = ""
         $scope.add_to_address_book.message = ""
         $scope.add_to_address_book.error = ""
+        $scope.transfer_info.payto_account_id = 0
         my_transfer_form?.payto.error_message = ""
         my_transfer_form?.payto.tip_contact = ""
         my_transfer_form?.payto.tip_registered = ""

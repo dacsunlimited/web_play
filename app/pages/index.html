@@ -17,16 +17,16 @@
     <script type="text/javascript" src="/js/app.js"></script>
     <!--<base href="/pre_release" />-->
   </head>
-  <body class="cover fixed_header" ng-class="{splashpage: splashpage, windows: qt_os_name === 'windows'}" ng-controller="RootController">
-    <pageslide ps-open="context_help.open" ps-size="460px">
+<body class="cover fixed_header" ng-class="{splashpage: splashpage, windows: qt_os_name === 'windows'}" ng-controller="RootController">
+  <pageslide ps-open="context_help.open" ps-size="460px">
     <div id="context-help">
       <a class="close-help-link" ng-click="close_context_help()"><span translate>btn.close</span> <i class="fa fa-angle-double-right fa-fw"></i></a>
       <div class="context-help-content" ng-include src="context_help.file"></div>
     </div>
-    </pageslide>
+  </pageslide>
     <div class="wrapper" flex layout="row" ng-class="theme" layout-fill>
       <!-- SIDEBAR -->
-      <md-sidenav class="md-sidenav-left md-whiteframe-z2 sidebar" md-component-id="sidenav" md-is-locked-open="$media('gt-sm')">
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2 sidebar" md-component-id="sidenav" md-is-locked-open="$mdMedia('gt-sm')">
         <div ng-include src="'sidenav.html'"></div>
       </md-sidenav>
 

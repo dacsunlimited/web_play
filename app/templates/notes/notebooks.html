@@ -1,0 +1,55 @@
+<md-card>
+  <md-card-content>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header">
+          <h3 class="header-title" translate>notes.title</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="row m-top">
+      <div class="col-sm-4 col-md-2 text-center"
+        ng-repeat="acct in account_names" ng-click="gotoBook(acct)" ng-class="{'text-muted': !acct.registered}" tooltip="{{(acct.registered ? 'notes.open' : 'notes.need_to_register') | translate}}">
+        <div><i class="fa fa-book fa-5x"></i></div>
+        <div>{{acct.name}}</div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>
+
+
+<md-card>
+  <md-card-content>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="header">
+          <h3 class="header-title" translate>notes.pot.title</h3>
+        </div>
+      </div>
+    </div>
+    <p translate>notes.pot.explain</p>
+    <p>{{'notes.pot.current_pot'|translate}}: <span class="emphasis">{{pool|formatAsset}}</span></p>
+
+
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab>
+          <md-tab-label>{{'notes.pot.my_winning_records' | translate}}</md-tab-label>
+          <md-tab-body>
+            <div ng-show="account_transactions.length == 0" translate>notes.pot.winning_not_found</div>
+            <div ng-show="account_transactions.length > 0" ng-include src="'transactions.html'"></div>
+          </md-tab-body>
+        </md-tab>
+
+        <md-tab md-on-select="getRecentWinners()">
+          <md-tab-label>最近一周幸运儿</md-tab-label>
+          <md-tab-body>
+            <div ng-show="recent_winners.length == 0" translate>no winners</div>
+            <div ng-show="recent_winners.length > 0" ng-include src="'recent_winners.html'"></div>
+          </md-tab-body>
+        </md-tab>
+    </md-tabs>
+
+
+  </md-card-content>
+</md-card>

@@ -18,7 +18,7 @@
     "warning": "Attenzione",
     "validate_symbol": "Il Simbolo deve contenere 3-8 caratteri maiuscoli",
     "validate_precision": "Precision deve essere sia maggiore di 0 che una potenza di 10 (o 1)",
-    "pay_with_info": "Registrarsi costa BTS, Paga con",
+    "pay_with_info": "Registrarsi costa PLS, Paga con",
     "reg_as_delegate": "Registrato come delegato",
     "reg_delegate_tip": "Registrarsi come delegato costa molti XTS",
     "reg_pending": "Registrazione pendente. Non ancora registrato",
@@ -105,7 +105,9 @@
     "received": "RICEVUTO",
     "expiration": "SCADENZA",
     "interest_rate": "Interest Rate (APR)",
-    "message": "Message"
+    "message": "Message",
+    "market": "Market",
+    "id": "Id"
   },
   "block": {
     "title": "Blocco",
@@ -169,6 +171,7 @@
     "overview": "Sommario",
     "my_account": "Miei Conti",
     "directory": "Cartella",
+    "notes": "Secret Notes",
     "delegates": "Delegati",
     "market": "Mercato",
     "block_explorer": "Block Explorer",
@@ -231,8 +234,8 @@
     "blockchain_orders_history": "Cronologia Ordini Blockchain",
     "account_orders_history": "Cronologia Ordini Conto",
     "margin_orders": "Ordini Margin Call",
-    "margin_orders_explain" : "Un Margin Call sarà eseguito ogni volta che il più basso ordine di acquisto (ask) è minore del 110% della media A margin call will be executed any time the lowest ask is less than 110% of the moving average and the lowest ask is more than the call price. The initial call price is 150% of the short price (ie: BTS 45.00 for a short entered at BTSX 30.00). This is the price at which 75% of the collateral would be required to buy back the USD necessary to cover the position. If a margin call is executed and there is any collateral left over, then 5% is kept as network fees and 95% is returned to the owner. ",
-    "margin_call_price_explain": "The initial call price is 150% of the short price (ie: BTSX 45.00 for a short entered at BTS 30.00). This is the price at which 75% of the collateral would be required to buy back the USD necessary to cover the position.",
+    "margin_orders_explain" : "Un Margin Call sarà eseguito ogni volta che il più basso ordine di acquisto (ask) è minore del 110% della media A margin call will be executed any time the lowest ask is less than 110% of the moving average and the lowest ask is more than the call price. The initial call price is 150% of the short price (ie: PLS 45.00 for a short entered at PLSX 30.00). This is the price at which 75% of the collateral would be required to buy back the USD necessary to cover the position. If a margin call is executed and there is any collateral left over, then 5% is kept as network fees and 95% is returned to the owner. ",
+    "margin_call_price_explain": "The initial call price is 150% of the short price (ie: PLSX 45.00 for a short entered at PLS 30.00). This is the price at which 75% of the collateral would be required to buy back the USD necessary to cover the position.",
     "flip_market": "Inverti Indice",
     "buy_orders": "Buy {{value}} Orders",
     "sell_orders": "Sell {{value}} Orders",
@@ -291,9 +294,9 @@
         "conditions": "Short orders can only get filled under these conditions:",
         "condition1": "There is someone willing to buy BitUSD at the price feed",
         "condition2": "AND Your short order is the highest interest rate order",
-        "condition3": "AND Your price limit is lower than the feed (BTS per USD) or you didn't specify a price limit",
+        "condition3": "AND Your price limit is lower than the feed (PLS per USD) or you didn't specify a price limit",
         "condition4": "AND You have enough collateral to provide 2x backing at the trade price and quantity",
-        "condition5": "OR Your price limit is higher than the feed (BTS per USD) and someone is willing to buy at your price limit",
+        "condition5": "OR Your price limit is higher than the feed (PLS per USD) and someone is willing to buy at your price limit",
         "short1": "Short orders are forced to cover after 30 days by taking the best offers at the time. No fee is charged.",
         "short2":"Short orders are forced to cover when 75% of their collateral is required to cover, leaving the short with 25% of the collateral minus a 5% fee.",
         "cover_fee":"The 5% fee is assessed as a percent of the collateral left over after covering."
@@ -333,6 +336,8 @@
     "rescan_blockchain": "Ri-scansiona la blockchain",
     "new_account": "Nuovo Conto",
     "name": "Nome Conto",
+    "id": "Account Id",
+    "unregistered": "[unregistered]",
     "website": "Sito Web",
     "website_tip": "Sito Web (Opzionale)",
     "email": "Email",
@@ -393,8 +398,8 @@
     },
     "transaction_details": "Details",
     "transaction_virtual": "Virtual",
-    "reg_no_funds_note": "If you don't have any BTS yet, you can select a faucet to pay this fee for you.",
-    "reg_subaccount_faucet_not_available": "Free faucet registration is not available for this account name. Account names containing a '.' are sub accounts and may not be registered using the faucet. Please choose a different account name or add BTS to pay for the registration fee.",
+    "reg_no_funds_note": "If you don't have any PLS yet, you can select a faucet to pay this fee for you.",
+    "reg_subaccount_faucet_not_available": "Free faucet registration is not available for this account name. Account names containing a '.' are sub accounts and may not be registered using the faucet. Please choose a different account name or add PLS to pay for the registration fee.",
     "reg_add_faucet": "Add Faucet",
     "update_public_data_tx_fee": "Update data transaction Fee: ",
     "new_balance": "New Balance",
@@ -420,6 +425,38 @@
     "info": "Clicca sul nome di un conto per avere più informazioini.",
     "select_account": "Seleziona Conto",
     "rename_account": "Rename"
+  },
+  "notes": {
+    "title": "Journal Books",
+    "open": "Open",
+    "need_to_register": "You need to register this account on blockchain first",
+    "notes_not_found": "You don't have notes yet.  Do you know you can have free lucky draws if you write notes?",
+    "compose": "Compose",
+    "note": {
+      "title": "Title",
+      "body": "Journal Content",
+      "post_title": "Write Journal",
+      "explain": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
+      "from": "Notebook Account",
+      "amount": "Fee",
+      "fee_explain": "fee consists of transaction fee and journal fee.  (Each KB of journal content costs 5 {{symbol}} )",
+      "public": "Public",
+      "private": "Private",
+      "post": "Save Journal on Blockchain"
+    },
+    "pot": {
+      "title": "Jackpot",
+      "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
+      "current_pot": "Current Pot",
+      "my_winning_records": "My Winning Records",
+      "winning_not_found": "Not found",
+      "no_draw": "No drawing records",
+      "th": {
+        "winner": "Winner",
+        "amount": "Reward",
+        "drawing_block": "Drawing Block"
+      }
+    }
   },
   "asset": {
     "title": "Assets",
@@ -486,7 +523,7 @@
     "default_vote": "By Default Vote For",
     "time_too_low": "User-input timeout was too low. It was increased to 15",
     "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
-    "fee_too_low": "Transaction fee was too low. It was increased to 0.1 BTS",
+    "fee_too_low": "Transaction fee was too low. It was increased to 0.1 PLS",
     "updated": "Preferences Updated"
   },
   "console": {

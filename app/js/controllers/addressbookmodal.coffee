@@ -7,6 +7,7 @@ angular.module("app").controller "AddressBookModalController", ($scope, $modalIn
         $scope.account = {name: contact_name, key: ''}
     $scope.data = {}
     $scope.data.add_contact_mode = add_contact_mode
+    $scope.data.contact_accounts = Wallet.contacts
     $scope.data.contacts = Object.keys(Wallet.contacts)
     $scope.data.contact_name_filter = ""
 
@@ -34,7 +35,11 @@ angular.module("app").controller "AddressBookModalController", ($scope, $modalIn
         !!Wallet.accounts[name]
 
     $scope.contactValue = (name) ->
-        Wallet.contacts[name].active_key
+        contact = Wallet.contacts[name]
+        if contact.registered
+          contact.name
+        else
+          contact.active_key
 
     $scope.ok = ->
         form = @newcontact
@@ -47,6 +52,6 @@ angular.module("app").controller "AddressBookModalController", ($scope, $modalIn
             message = Utils.formatAssertException(error.data.error.message)
             form.account_key.$error.message = if message and message.length > 2 then message else "Not valid public key"
         WalletAPI.add_contact($scope.account.key, $scope.account.name, error_handler).then ->
-            Wallet.refresh_contacts()
-            $modalInstance.close("ok")
-            action($scope.account.name) if action
+            Wallet.refresh_contacts().then ->
+                $modalInstance.close("ok")
+                action($scope.account.name) if action

@@ -1,0 +1,20 @@
+<div id="transaction_history">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th translate>notes.pot.th.winner</th>
+        <th translate>notes.pot.th.amount</th>
+        <th translate>notes.pot.th.drawing_block</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="w in recent_winners track by $index">
+        <td ng-if="w">{{w.reward_owner}}</td>
+        <td ng-if="w">{{w.reward | formatAsset}}</td>
+        <td ng-if="w">{{w.block_num}}</td>
+
+        <td ng-if="!w" colspan="3" style="text-align:left;" translate>notes.pot.no_draw</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

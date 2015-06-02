@@ -20,9 +20,9 @@
     "warning": "경고",
     "validate_symbol": "1차 기호는 3-8 글자의 대문자만 허용됩니다. 2차 기호는 3-8 글자의 대문자가 허용되며 마침표(.)를 사용해 구분할 수 있습니다. 이 때, 해당되는 1차 기호가 존재해야 합니다. 마침표 기호 포함 최대 12글자 까지 허용됩니다. 1차 기호에 'BIT'은 사용할 수 없습니다.",
     "validate_precision": "1과 같거나 큰 10의 지수를 입력하십시오.",
-    "pay_with_info": "등록비는 BTS로 지불해야 합니다. 결제 수단 ",
+    "pay_with_info": "등록비는 PLS로 지불해야 합니다. 결제 수단 ",
     "reg_as_delegate": "대표자로 등록 되었습니다.",
-    "reg_delegate_tip": "대표자 등록은 다량의 BTS가 필요할 수 있습니다.",
+    "reg_delegate_tip": "대표자 등록은 다량의 PLS가 필요할 수 있습니다.",
     "reg_pending": "등록 절차 진행중",
     "not_reg_onchain": "블록체인에 등록되지 않았습니다.",
     "add_account_name_existed": "연락에 추가할 수 없습니다. 사용중인 계정명입니다.",
@@ -108,7 +108,8 @@
     "expiration": "만기일",
     "interest_rate": "이자율 (연이율)",
     "message": "메시지",
-    "market": "마켓"
+    "market": "마켓",
+    "id": "Id"
   },
   "block": {
     "title": "블록",
@@ -166,6 +167,7 @@
     "overview": "개요",
     "my_account": "내 계정",
     "directory": "디렉토리",
+    "notes": "Secret Notes",
     "delegates": "대표",
     "market": "마켓",
     "block_explorer": "블록 익스플로러",
@@ -229,8 +231,8 @@
     "blockchain_orders_history": "블록체인 주문 기록",
     "account_orders_history": "내 주문 기록",
     "margin_orders": "마진 콜 주문",
-    "margin_orders_explain": "최저 판매가가 이동평균의 110% 보다 낮음과 동시에 콜 가격보다 높을 때 마진 콜이 실행됩니다. 최초 콜 가격은 숏 가격의 150% 입니다. (예: BTS 30.00 에서의 숏은 BTS 45.00 에서). 이것은 포지션을 커버하는데 필요한 USD가 담보의 75%와 같아지는 가격입니다. 마진 콜이 실행되었는데 담보가 남게 되면, 5%는 네트워크 수수료로 보존되고 95%는 주인에게 돌아갑니다.",
-    "margin_call_price_explain": "최초 콜 가격은 숏 가격의 150% 입니다. (예: BTS 30.00 에서의 숏은 BTS 45.00 에서). 이것은 포지션을 커버하는데 필요한 USD가 담보의 75%와 같아지는 가격입니다.",
+    "margin_orders_explain": "최저 판매가가 이동평균의 110% 보다 낮음과 동시에 콜 가격보다 높을 때 마진 콜이 실행됩니다. 최초 콜 가격은 숏 가격의 150% 입니다. (예: PLS 30.00 에서의 숏은 PLS 45.00 에서). 이것은 포지션을 커버하는데 필요한 USD가 담보의 75%와 같아지는 가격입니다. 마진 콜이 실행되었는데 담보가 남게 되면, 5%는 네트워크 수수료로 보존되고 95%는 주인에게 돌아갑니다.",
+    "margin_call_price_explain": "최초 콜 가격은 숏 가격의 150% 입니다. (예: PLS 30.00 에서의 숏은 PLS 45.00 에서). 이것은 포지션을 커버하는데 필요한 USD가 담보의 75%와 같아지는 가격입니다.",
     "flip_market": "전환",
     "buy_orders": "{{value}} 매수주문",
     "sell_orders": "{{value}} 매도주문",
@@ -291,9 +293,9 @@
         "conditions": "Short orders can only get filled under these conditions:",
         "condition1": "There is someone willing to buy BitUSD at the price feed",
         "condition2": "AND Your short order is the highest interest rate order",
-        "condition3": "AND Your price limit is lower than the feed (BTS per USD) or you didn't specify a price limit",
+        "condition3": "AND Your price limit is lower than the feed (PLS per USD) or you didn't specify a price limit",
         "condition4": "AND You have enough collateral to provide 2x backing at the trade price and quantity",
-        "condition5": "OR Your price limit is higher than the feed (BTS per USD) and someone is willing to buy at your price limit",
+        "condition5": "OR Your price limit is higher than the feed (PLS per USD) and someone is willing to buy at your price limit",
         "short1": "Short orders are forced to cover after 30 days by taking the best offers at the time. No fee is charged.",
         "short2":"Short orders are forced to cover when 75% of their collateral is required to cover, leaving the short with 25% of the collateral minus a 5% fee.",
         "cover_fee":"The 5% fee is assessed as a percent of the collateral left over after covering."
@@ -333,6 +335,8 @@
     "rescan_blockchain": "블록체인 리스캔",
     "new_account": "새로운 계정",
     "name": "계정 이름",
+    "id": "Account Id",
+    "unregistered": "[unregistered]",
     "website": "웹사이트",
     "website_tip": "웹사이트 (선택사항)",
     "email": "이메일",
@@ -397,8 +401,8 @@
     },
     "transaction_details": "자세히",
     "transaction_virtual": "가상",
-    "reg_no_funds_note": "아직 BTS 가 없다면, faucet을 선택하여 수수료를 대신 지불하도록 할 수 있습니다.",
-    "reg_subaccount_faucet_not_available": "무료 faucet을 이용한 계정 등록이 실패했습니다. '.' 를 포함하는 계정 이름은 서브계정이며 faucet 등록에서는 사용할 수 없습니다. 다른 계정 이름을 입력하거나 등록수수료를 지불하기 위한 BTS를 준비해 주십시오.",
+    "reg_no_funds_note": "아직 PLS 가 없다면, faucet을 선택하여 수수료를 대신 지불하도록 할 수 있습니다.",
+    "reg_subaccount_faucet_not_available": "무료 faucet을 이용한 계정 등록이 실패했습니다. '.' 를 포함하는 계정 이름은 서브계정이며 faucet 등록에서는 사용할 수 없습니다. 다른 계정 이름을 입력하거나 등록수수료를 지불하기 위한 PLS를 준비해 주십시오.",
     "reg_add_faucet": "Faucet 추가",
     "update_public_data_tx_fee": "데이터 업데이트 수수료 : ",
     "new_balance": "새로운 잔액",
@@ -424,6 +428,38 @@
     "info": "계정 이름을 클릭하면 상세 정보를 볼 수 있습니다.",
     "select_account": "계정 선택",
     "rename_account": "계정 이름 변경"
+  },
+  "notes": {
+    "title": "Journal Books",
+    "open": "Open",
+    "need_to_register": "You need to register this account on blockchain first",
+    "notes_not_found": "You don't have notes yet.  Do you know you can have free lucky draws if you write notes?",
+    "compose": "Compose",
+    "note": {
+      "title": "Title",
+      "body": "Journal Content",
+      "post_title": "Write Journal",
+      "explain": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
+      "from": "Notebook Account",
+      "amount": "Fee",
+      "fee_explain": "fee consists of transaction fee and journal fee.  (Each KB of journal content costs 5 {{symbol}} )",
+      "public": "Public",
+      "private": "Private",
+      "post": "Save Journal on Blockchain"
+    },
+    "pot": {
+      "title": "Jackpot",
+      "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
+      "current_pot": "Current Pot",
+      "my_winning_records": "My Winning Records",
+      "winning_not_found": "Not found",
+      "no_draw": "No drawing records",
+      "th": {
+        "winner": "Winner",
+        "amount": "Reward",
+        "drawing_block": "Drawing Block"
+      }
+    }
   },
   "asset": {
     "title": "자산",
@@ -489,7 +525,7 @@
     "default_vote": "기본 투표값",
     "time_too_low": "사용자 입력 타임아웃 값이 너무 작습니다. 값이 15로 조정되었습니다.",
     "time_too_high": "사용자 입력 타임아웃 값이 너무 큽니다. 값이 99999999로 조정되었습니다.",
-    "fee_too_low": "사용자 입력 수수료 값이 너무 작습니다. 0.1 BTS로 조정되었습니다.",
+    "fee_too_low": "사용자 입력 수수료 값이 너무 작습니다. 0.1 PLS로 조정되었습니다.",
     "updated": "환경설정을 적용했습니다"
   },
   "console": {

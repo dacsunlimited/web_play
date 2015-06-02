@@ -21,6 +21,13 @@
   li.disabled {
     a {
       cursor: not-allowed; color: #ccc;
+      &:hover {
+        background-color: transparent;
+        padding-left: 12px;
+        border-left: none;
+        color: #ccc;
+
+      }
     }
   }
 }
