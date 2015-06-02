@@ -76,7 +76,6 @@ module.exports = function(lineman) {
         "vendor/bower/ionicons/css/ionicons.css"
       ],
       app: [
-        "app/css/*.css",
         "app/css/main.scss"
       ]
     }
