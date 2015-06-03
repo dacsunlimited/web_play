@@ -126,7 +126,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
         # if Wallet.bonuses[name]
         #     $scope.bonuses = Wallet.bonuses[name]
 
-        if Wallet.vesting_balances[name]
+        if Wallet.vesting_balances?[name]
             $scope.vesting_balance = Wallet.vesting_balances_summary(name)
 
 #    $scope.$watchCollection ->

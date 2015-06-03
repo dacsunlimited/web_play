@@ -9,7 +9,7 @@
       <td><b translate>delegate.max_pay_per_blk</b></td> <td><b>{{blockchain_delegate_pay_rate}}</b></td>
     </tr>
     <tr>
-      <td><b translate>delegate.avg_active_delegate_pay_rate</b> </td> <td tooltip-placement="right" tooltip="{{ (delegate_pay_rate * avg_act_del_pay_rate / 100 ) | number:2 }} BTS"> <b> {{avg_act_del_pay_rate | number:2}}</b> % </td>
+      <td><b translate>delegate.avg_active_delegate_pay_rate</b> </td> <td tooltip-placement="right" tooltip="{{ (delegate_pay_rate * avg_act_del_pay_rate / 100 ) | number:2 }} {{symbol}}"> <b> {{avg_act_del_pay_rate | number:2}}</b> % </td>
     </tr>
   </table>
 </div>

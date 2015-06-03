@@ -284,6 +284,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
         BlockchainAPI.get_account(payto).then (result) ->
             if result
                 $scope.account_registration_date = result.registration_date
+                $scope.transfer_info.payto_account_id = result.name
                 $scope.transfer_info.unknown_account = false
                 if $scope.address_type == "pubkey"
                     $scope.gravatar_account_name = result.name

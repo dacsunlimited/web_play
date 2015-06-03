@@ -57,7 +57,7 @@ angular.module("app").controller "AccountVoteController", ($scope, $translate, W
 
     $scope.updateVotes = ->
         myBal = $scope.balances[Info.symbol]
-        balMinusFee = myBal.amount / myBal.precision - Wallet.info.transaction_fee.amount / myBal.precision
+        balMinusFee = parseInt(myBal.amount / myBal.precision - Wallet.info.transaction_fee.amount / myBal.precision)
         $modal.open
             templateUrl: "dialog-confirmation.html"
             controller: "DialogConfirmationController"

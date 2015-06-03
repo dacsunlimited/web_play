@@ -7,7 +7,7 @@
     <div ng-if="trx.address_type === 'account'" class="col-sm-4 text-center">
       <identicon account="{{trx.to}}" size="150"/>
       <account-name-with-id name="trx.to" account-id="trx.to_id" registration-date="trx.to_registration_date"></account-name-with-id>
-      <span ng-show="!trx.is_address_book_contact" class="text-danger" translate>contact.not_in_address_book</span>
+      <span ng-show="my_transfer_form.payto.$dirty && !trx.is_my_account && !trx.is_address_book_contact" class="text-danger" translate>contact.not_in_address_book</span>
     </div>
     <div ng-class="{'col-sm-8': trx.address_type == 'account', 'col-sm-12': trx.address_type != 'account'}">
       <table class="table table-striped table-hover">

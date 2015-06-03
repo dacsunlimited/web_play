@@ -36,10 +36,14 @@ angular.module("app").controller "AddressBookModalController", ($scope, $modalIn
 
     $scope.contactValue = (name) ->
         contact = Wallet.contacts[name]
-        if contact.registered
-          contact.name
+        if $scope.isRegistered(contact)
+          contact.name or contact.data
         else
           contact.active_key
+
+    $scope.isRegistered = (contact) ->
+        contact.registered or contact.contact_type == 'account_name'
+
 
     $scope.ok = ->
         form = @newcontact

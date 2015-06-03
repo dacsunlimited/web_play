@@ -48,12 +48,12 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, RpcServ
         # fetch meta
         RpcService.request("batch", ["blockchain_list_operation_reward_transactions", $scope.drawing_block_nums]).then (response) ->
             for i in [0...response.result.length]
-                data = response.result[i][0]
-                if data
-                    data.block_num = $scope.drawing_block_nums[i][0]
-                    data.reward.precision = 100000
-                    data.reward.symbol = Info.info.symbol
-                $scope.recent_winners[i] = data
+                winners = response.result[i]
+                for winner in winners
+                    winner.block_num = $scope.drawing_block_nums[i][0]
+                    winner.reward.precision = 100000
+                    winner.reward.symbol = Info.info.symbol
+                $scope.recent_winners[i] = winners
             console.log 'recent_winners', $scope.recent_winners
 
     $scope.getRecentWinners()
