@@ -1,6 +1,6 @@
 {
   "name": "bitshares-play-gui",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "dependencies": {
     "lineman-angular": "0.3.x",
     "lineman": "0.34.x"
