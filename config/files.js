@@ -73,7 +73,7 @@ module.exports = function(lineman) {
         // "vendor/bower/bootstrap-material-design/dist/css/material.min.css",
         "vendor/bower/angular-material/angular-material.css",
         "vendor/bower/ng-mfb/mfb/dist/mfb.css",
-        "vendor/bower/ionicons/css/ionicons.css"
+        "vendor/css/ionicons.css"
       ],
       app: [
         "app/css/main.scss"
