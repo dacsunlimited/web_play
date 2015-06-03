@@ -7,8 +7,8 @@
         <th translate>notes.pot.th.drawing_block</th>
       </tr>
     </thead>
-    <tbody>
-      <tr ng-repeat="w in recent_winners track by $index">
+    <tbody ng-repeat="ws in recent_winners track by $index">
+      <tr ng-repeat="w in ws track by $index">
         <td ng-if="w">{{w.reward_owner}}</td>
         <td ng-if="w">{{w.reward | formatAsset}}</td>
         <td ng-if="w">{{w.block_num}}</td>
