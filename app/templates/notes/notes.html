@@ -6,7 +6,7 @@
 
 <md-card>
   <md-content>
-    <md-list-item class="md-2-line" ng-repeat="r in note_records | orderBy:'-note.timestamp'">
+    <md-list-item class="md-2-line" ng-repeat="r in note_records | orderBy:'-note.block_num'">
       <div class="md-list-item-text">
         <small class="pull-right">{{ r.note.timestamp | prettyDate }}</small>
         <h3>{{ r.note.title }}</h3>
