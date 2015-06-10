@@ -50,9 +50,9 @@
             <td ng-hide="is_bitshares_js">
               <div class="btn-group">
                 <button ng-click="toggleVoteUp(del.name)" class="btn btn-sm btn-link primary" tooltip="{{ 'account.toggle.approval' | translate }}">
-                  <i ng-if="accounts[del.name].approved>0" class='fa fa-thumbs-up fa-2x'></i>
-                  <i ng-if="!accounts[del.name].approved || account.approved==0" class='fa fa-thumbs-o-up fa-2x'></i>
-                  <i ng-if="accounts[del.name].approved<0" class='fa fa-thumbs-down fa-2x'></i>
+                  <i ng-if="approvals[del.name].approval>0" class='fa fa-thumbs-up fa-2x'></i>
+                  <i ng-if="!approvals[del.name].approval || account.approval==0" class='fa fa-thumbs-o-up fa-2x'></i>
+                  <i ng-if="approvals[del.name].approval<0" class='fa fa-thumbs-down fa-2x'></i>
                 </button>
               </div>
             </td>
