@@ -462,7 +462,8 @@
       "th": {
         "winner": "Winner",
         "amount": "Reward",
-        "drawing_block": "Drawing Block"
+        "drawing_block": "Drawing Block",
+        "latest_winner": "Last {{days}} Days Winners"
       }
     }
   },
