@@ -488,7 +488,7 @@
     },
     "pot": {
       "title": "奖池",
-      "explain": "每天区块链会从当日创建的日志中抽取幸运儿。",
+      "explain": "每天区块链会从当日创建的日志中抽取8名幸运儿分享1/14当前奖池的奖金。一等奖1名分享40%；二等奖2名分享30%；三等奖5名分享40%。",
       "current_pot": "当前奖池",
       "my_winning_records": "我的中奖记录",
       "winning_not_found": "暂无",
@@ -497,7 +497,9 @@
         "winner": "幸运儿",
         "amount": "奖金",
         "drawing_block": "开奖块",
-        "latest_winner": "最近{{days}}日幸运儿"
+        "latest_winner": "最近{{days}}日幸运儿",
+        "next_draw_time": "下次开奖时间(预计)",
+        "next_draw_block": "下次开奖块"
       }
     }
   },
