@@ -496,7 +496,8 @@
       "th": {
         "winner": "幸运儿",
         "amount": "奖金",
-        "drawing_block": "开奖块"
+        "drawing_block": "开奖块",
+        "latest_winner": "最近{{days}}日幸运儿"
       }
     }
   },

@@ -16,7 +16,7 @@
               <td class="avatar-40">
                 <identicon account="{{a.name}}" size="40"/>
               </td>
-              <td>         
+              <td>
                  <b>{{a.name}}</b>
                  <span ng-show="a.not_lightwallet_compatible">
                      <i class="fa fa-warning fa-fw fa-lg"></i>
@@ -30,6 +30,16 @@
             </td>
             <td>{{a.registration_date | prettyDate}}</td>
             <td>{{a.id ? a.id : "-"}}</td>
+        </tr>
+        <tr style="border-top:3px solid #eee;">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <div ng-repeat="(symbol, asset) in balance_sum">{{asset | formatAsset}}</div>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
 
     </tbody>
