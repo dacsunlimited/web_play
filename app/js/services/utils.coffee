@@ -143,11 +143,11 @@ servicesModule.factory "Utils", ($translate,$q) ->
         else if diff <= 60
             $translate("utils.seconds", {value: Math.round(diff)})
         else if diff <= 3600 # 1 hour
-            $translate("utils.minutes", {value: Math.round(diff/60.0)})
+            $translate("utils.minutes", {value: Math.round(diff / 60.0)})
         else if diff <= 24 * 3600
-            $translate("utils.hours", {value: Math.round(diff/3600.0)})
+            $translate("utils.hours", {value: Math.round(diff / 3600.0)})
         else if diff <= 30 * 24 * 3600
-            $translate("utils.days", {value: Math.round(diff/3600.0/24)})
+            $translate("utils.days", {value: Math.round(diff / 3600.0 / 24)})
         else
             null
 
@@ -197,6 +197,13 @@ servicesModule.factory "Utils", ($translate,$q) ->
             for key, val of query
                 match += 1 if item[key] is val
             if match is hit then true else false
+
+    unique_array: (a) ->
+        return a.reduce (p, c) ->
+            if p.indexOf(c) < 0
+              p.push c
+            return p
+        , []
 
     pad: (num, size = 3) ->
         s = num + ""

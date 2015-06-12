@@ -1,20 +1,38 @@
 <div id="transaction_history">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th translate>notes.pot.th.winner</th>
-        <th translate>notes.pot.th.amount</th>
-        <th translate>notes.pot.th.drawing_block</th>
-      </tr>
-    </thead>
-    <tbody ng-repeat="ws in recent_winners track by $index">
-      <tr ng-repeat="w in ws track by $index">
-        <td ng-if="w">{{w.reward_owner}}</td>
-        <td ng-if="w">{{w.reward | formatAsset}}</td>
-        <td ng-if="w">{{w.block_num}}</td>
+  <div ng-repeat="block_winners in recent_winners track by $index">
+    <h5 class="text-right">{{'notes.pot.th.drawing_block' | translate}}: {{ drawing_block_nums[$index][0] }}</h5>
 
-        <td ng-if="!w" colspan="3" style="text-align:left;" translate>notes.pot.no_draw</td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="row notes-winner">
+      <div ng-repeat="w in block_winners track by $index"
+           ng-class="{
+             'level1 col-md-offset-1': $index == 0, 'level2 col-md-offset-1': $index == 1, 'level3 col-md-offset-1': $index == 3
+           }" class="col-md-2">
+
+        <div class="trophy l1" data-level="1" ng-if="$index == 0 && w">
+          <i class="fa fa-trophy fa-5x"></i> <em>1</em>
+          <div class="text-center info">
+            {{w.reward_owner}} <br /> {{w.reward | formatAsset}}
+          </div>
+        </div>
+
+
+        <div class="trophy l2" data-level="2" ng-if="$index >= 1 && $index <= 2 && w">
+          <i class="fa fa-trophy fa-5x"></i> <em>2</em>
+          <div class="text-center info">
+            {{w.reward_owner}} <br /> {{w.reward | formatAsset}}
+          </div>
+        </div>
+
+        <div class="trophy l3" data-level="3" ng-if="$index > 2 && w">
+          <i class="fa fa-trophy fa-5x"></i> <em>3</em>
+          <div class="text-center info">
+            {{w.reward_owner}} <br /> {{w.reward | formatAsset}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <md-divider style="margin:1rem 0px;" class="md-default-theme"></md-divider>
+  </div>
 </div>

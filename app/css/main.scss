@@ -8,6 +8,8 @@ $header_color: #000;
 $subheader_color: #333;
 $body_color: #333;
 
+$default_blue: #3f51b5;
+
 //@import '*.css';
 @import 'bootstrap_overrides';
 @import 'brainwallet';
@@ -19,6 +21,7 @@ $body_color: #333;
 @import 'toolbar';
 @import 'footer';
 @import 'spinner';
+@import 'notes';
 @import 'theme';
 
 /* Fonts  */
