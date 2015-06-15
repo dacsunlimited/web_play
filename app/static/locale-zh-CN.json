@@ -634,7 +634,7 @@
     "syncing": "正在同步区块 ...",
     "not_connected": "无连接",
     "last_block": "最后的区块已经在 {{value}} 之前同步",
-    "one_network_connection": "1个网络连f接",
+    "one_network_connection": "1个网络连接",
     "n_network_connection": "{{value}} 个网络连接",
     "network_problems": "网络问题",
     "severe_network_problems": "严重网络问题",

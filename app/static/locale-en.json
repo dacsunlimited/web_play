@@ -647,7 +647,17 @@
     "up_to_date": "Up to date, processed {{value}} blocks",
     "catching_up": "Catching up.. processed {{value1}} out of {{value2}} blocks",
     "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}",
-    "testnet": "TestNet"
+    "testnet": "TestNet",
+    "synced": "Blockchain synchronized",
+    "syncing": "Blockchain synchronizing ...",
+    "not_connected": "Not connected",
+    "last_block": "Last block is synchronized {{value}} ago",
+    "one_network_connection": "1 network connection",
+    "n_network_connection": "{{value}} network connections",
+    "network_problems": "Network problem",
+    "severe_network_problems": "Severe network problem",
+    "delegate_participation_below": "Delegate participation rate below {{value}}, please postpone transactions until it returns to 100%."
+
   },
   "utils": {
     "expired": "Expired",
