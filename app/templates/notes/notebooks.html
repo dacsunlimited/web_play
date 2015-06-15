@@ -65,7 +65,7 @@
         </md-tab>
 
         <md-tab md-on-select="getRecentWinners()">
-          <md-tab-label>{{'notes.pot.th.latest_winner' | translate:'{days:1}'}}</md-tab-label>
+          <md-tab-label>{{'notes.pot.th.latest_winner' | translate:'{days:7}'}}</md-tab-label>
           <md-tab-body>
             <div ng-show="recent_winners.length == 0" translate>no winners</div>
             <div ng-show="recent_winners.length > 0" ng-include src="'recent_winners.html'"></div>

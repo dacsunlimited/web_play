@@ -44,7 +44,7 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, RpcServ
     next_drawing_time()
 
     # fetch last 7 round winners
-    $scope.getRecentWinners = (rounds = 1) ->
+    $scope.getRecentWinners = (rounds = 7) ->
         # console.log 'getRecentWinners'
         blocks_per_day = Info.BLOCKS_PER_DAY
         blocks_per_day = 40 if Info.info.symbol == 'XTS'
