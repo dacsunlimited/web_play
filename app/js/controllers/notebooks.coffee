@@ -41,8 +41,6 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, RpcServ
         # console.log time
         $scope.next_drawing_time = time
 
-    next_drawing_time()
-
     # fetch last 7 round winners
     $scope.getRecentWinners = (rounds = 7) ->
         # console.log 'getRecentWinners'
@@ -99,6 +97,11 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, RpcServ
                             if key_maps[winner.reward_owner]
                               winner.reward_owner = key_maps[winner.reward_owner]
 
-        # console.log 'recent_winners', $scope.recent_winners
+    init = ->
+      next_drawing_time()
+      $scope.getRecentWinners()
 
-    $scope.getRecentWinners()
+    unless Info.symbol != ""
+      Info.refresh_info().then -> init()
+    else
+      init()
