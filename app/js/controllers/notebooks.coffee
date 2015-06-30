@@ -2,7 +2,6 @@ angular.module("app").controller "NotebooksController", ($scope, Wallet, RpcServ
 
     $scope.account_names = []
     $scope.pool = {}
-    $scope.formatAsset = Utils.formatAsset
 
     $scope.account_transactions = Wallet.transactions['OP:NOTE']
     $scope.pending_only = false

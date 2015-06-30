@@ -38,3 +38,13 @@
     &.l3 { color: burlywood; }
   }
 }
+
+.md-2-line.note-entry > .md-list-item-text {
+  & > .note-title {
+    font-weight:500; font-size:18px;
+  }
+  & > .note-para {
+    margin-top:1em;
+    p { margin-bottom:1em; }
+  }
+}

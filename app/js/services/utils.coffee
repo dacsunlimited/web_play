@@ -1,6 +1,6 @@
 servicesModule = angular.module("app.services")
 
-servicesModule.factory "Utils", ($translate,$q) ->
+servicesModule.factory "Utils", ($translate,$q,$sce) ->
     asset: (amount, asset_type) ->
         amount: amount
         symbol: if asset_type then asset_type.symbol else "NA"
@@ -225,3 +225,19 @@ servicesModule.factory "Utils", ($translate,$q) ->
             a=((a<<5)-a)+b.charCodeAt(0)
             return a&a
         ,0
+
+    simpleFormatRE1: /\r\n?/g
+    simpleFormatRE2: /\n\n+/g
+    simpleFormatRE3: /([^\n]\n)(?=[^\n])/g
+    # TODO: this skips sanitizer as trusted html
+    # use with caution, simpleFormat is simply used by displaying one's own note
+    # therefore this possible XSS attack won't be immediate threat
+    # but still need to come back and improve this
+    simpleFormat: (str) ->
+        return '' if not str
+
+        fstr = str.replace(this.simpleFormatRE1, "\n") # \r\n and \r -> \n
+                  .replace(this.simpleFormatRE2, "</p>\n\n<p>") # 2+ newline  -> paragraph
+                  .replace(this.simpleFormatRE3, "$1<br/>") # 1 newline   -> br
+
+        return $sce.trustAsHtml("<p>#{fstr}</p>")
