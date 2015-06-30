@@ -11,7 +11,8 @@
     "cover": "平仓",
     "register": "注册",
     "close": "关闭",
-    "remove": "移除"
+    "remove": "移除",
+    "learn_more": "了解详情"
   },
   "tip": {
     "privacy_statement": "隐私申明",
@@ -655,5 +656,8 @@
     "delegates": "受托人",
     "account_details": "账户细节",
     "advanced": "进阶选项"
+  },
+  "ad": {
+    "promo": "推广"
   }
 }

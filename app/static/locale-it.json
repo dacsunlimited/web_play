@@ -11,7 +11,8 @@
     "cover": "Cover",
     "register": "Registra",
     "close": "Close",
-    "remove": "Remove"
+    "remove": "Remove",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "Privacy",
@@ -613,5 +614,8 @@
     "delegates": "Delegates",
     "account_details": "Account Details",
     "advanced": "Advanced"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }

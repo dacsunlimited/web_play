@@ -11,6 +11,7 @@ $body_color: #333;
 $default_blue: #3f51b5;
 
 //@import '*.css';
+@import 'mixins';
 @import 'bootstrap_overrides';
 @import 'brainwallet';
 @import 'help';
@@ -23,6 +24,7 @@ $default_blue: #3f51b5;
 @import 'spinner';
 @import 'notes';
 @import 'theme';
+@import 'ad';
 
 /* Fonts  */
 

@@ -1,0 +1,37 @@
+.ad {
+  display:block;
+  border:1px solid #eee;
+  @include border-radius(5px);
+
+  &.ad-text {
+    padding:5px;
+    color:black;
+
+    &:hover {
+      background-color:#eee;
+      text-decoration:none;
+    }
+
+    p {
+      text-align:center;
+      position: relative;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+  }
+
+  &.ad-image {
+    overflow:hidden;
+
+    &:hover {
+      background-color:#eee;
+      text-decoration:none;
+    }
+
+    img {
+      width:100%; height:100%;
+    }
+  }
+}

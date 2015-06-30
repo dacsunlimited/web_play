@@ -7,7 +7,7 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
     $locationProvider.html5Mode(true) if prefix
 
     sp = $stateProvider
-    $urlRouterProvider.otherwise prefix + '/accounts'
+    $urlRouterProvider.otherwise prefix + '/home'
 
     sp.state "home",
         url: "/home"

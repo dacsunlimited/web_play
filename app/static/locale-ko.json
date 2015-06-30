@@ -13,7 +13,8 @@
     "register": "등록",
     "close": "닫기",
     "remove": "삭제",
-    "update_data": "데이터 업데이트"
+    "update_data": "데이터 업데이트",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "개인 정보 취급 방침",
@@ -615,5 +616,8 @@
     "delegates": "대표자",
     "account_details": "계정 상세정보",
     "advanced": "고급"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }

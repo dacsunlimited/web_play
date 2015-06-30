@@ -13,7 +13,8 @@
     "register": "Registrar",
     "close": "Cerrar",
     "remove": "Remover",
-    "update_data": "Datos Actualizados"
+    "update_data": "Datos Actualizados",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "Declaración de Privacidad",
@@ -630,5 +631,8 @@
     "delegates": "Delegados",
     "account_details": "Detalles de la Cuenta",
     "advanced": "Avanzado"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }

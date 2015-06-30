@@ -11,7 +11,8 @@
     "cover": "Покрыть",
     "register": "Зарегистрировать",
     "close": "Закрыть",
-    "remove": "Remove"
+    "remove": "Remove",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "Заявление о конфиденциальности",
@@ -617,5 +618,8 @@
     "delegates": "Делегаты",
     "account_details": "Текущий аккаунт",
     "advanced": "Настройки"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }
