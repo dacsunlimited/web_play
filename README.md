@@ -1,19 +1,28 @@
 [![Stories in Ready](https://badge.waffle.io/bitsuperlab/web_play.png?label=ready&title=Ready)](https://waffle.io/bitsuperlab/web_play)
-# BitShares GUI (web wallet)
+# DAC PLAY GUI (web wallet)
 
-This repository holds the BitShares graphical user interface, also
+This repository holds the DAC PLAY graphical user interface, also
 known as the web wallet.  The web wallet is wrapped by the Qt client
-and released as part of the platform-specific BitShares binaries.
+and released as part of the platform-specific DAC PLAY binaries.
 
 ## Hacking
 
-To start hacking on the GUI, first follow the directions to build the bitshares client.
+To start hacking on the GUI, first follow the directions to build the DAC PLAY client.
 
-* Windows <https://github.com/BitShares/bitshares/blob/master/BUILD_WIN32.md>
-* OSX <https://github.com/BitShares/bitshares/blob/master/BUILD_OSX.md>
-* Ubuntu <https://github.com/BitShares/bitshares/blob/master/BUILD_UBUNTU.md>
+* Windows <https://github.com/dacsununlimited/bitshares/blob/master/BUILD_WIN32.md>
+* OSX <https://github.com/dacsununlimited/bitshares/blob/master/BUILD_OSX.md>
+* Ubuntu <https://github.com/dacsununlimited/bitshares/blob/master/BUILD_UBUNTU.md>
 
 Install Node.js (<http://nodejs.org/download/>)
+
+Install Ruby (if you don't have one installed yet)
+
+    $ sudo apt-get update
+    $ sudo apt-get install ruby-full rubygems #ubuntu
+
+or
+
+    $ \curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled #install latest ruby via rvm
 
 Install Compass
 
@@ -21,15 +30,15 @@ Install Compass
 
 Navigate to the web_wallet directory where `package.json` is located and run these commands:
 
-    $ npm install -g
+    $ npm install
     $ npm start
 
-Edit htdocs parameter in config.json  `AppData/Roaming/BitShares` to point to the `web_wallet/generated/` directory.  For example: ` "htdocs": "C:/bitshares/web_wallet/generated" `
+Edit htdocs parameter in config.json  `AppData/Roaming/DAC PLAY` to point to the `web_wallet/generated/` directory.  For example: ` "htdocs": "C:/dac play/web_wallet/generated" `
 
 Start another shell, navigate to `/bin/programs/client/RelWithDebInfo` directory, and start
 the BitShares client:
 
-    $ ./bitshares_client --server \
+    $ ./play_client --server \
         --rpcuser=test --rpcpassword=test \
         --httpdendpoint=127.0.0.1:5000
 (You could also achieve this by changing these parameters in your config file.)
