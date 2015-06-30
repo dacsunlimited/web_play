@@ -56,19 +56,6 @@ svg {
 	height: auto;
 }
 
-a, * {
- cursor: default !important;
-}
-
-a:focus {
-  outline: 0;
-}
-
-a:hover, a:focus, {
-	color: #115176;
-	text-decoration: none !important;
-}
-
 canvas, body.mac img, body.mac b.caret, body.mac span.caret, body.mac i.fa {
 	vertical-align: middle;
 }
@@ -327,10 +314,16 @@ li.stat {
 	margin-bottom: 0;
 }
 
-.table-acc-balance td {
-	font-size: 1.4rem;
-	letter-spacing: 1px;
-	font-weight: 100;
+.table-acc-balance {
+  th {
+    text-align:center;
+  }
+  td {
+  	font-size: 1.4rem;
+  	letter-spacing: 1px;
+  	font-weight: 100;
+    text-align:center;
+  }
 }
 
 .table-acc-balance > tbody > tr > td {

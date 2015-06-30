@@ -138,7 +138,12 @@
           <tr>
             <td>{{vesting_balance.claimed | formatAsset}}</td>
             <td>{{vesting_balance.vested | formatAsset}}</td>
-            <td>{{vesting_balance.available | formatAsset}}</td>
+            <td>
+              {{vesting_balance.available | formatAsset}}
+              <div ng-if="vesting_balance.available > 0">
+                <md-button class="md-cornered md-raised" ng-click="collect_vested_balance()">领取</md-button>
+              </div>
+            </td>
             <td>{{vesting_balance.original | formatAsset}}</td>
           </tr>
         </tbody>

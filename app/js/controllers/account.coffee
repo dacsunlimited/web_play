@@ -149,6 +149,20 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
       else
         0
 
+    $scope.collect_vested_balance = ->
+      if $scope.vesting_balance and $scope.vesting_balance.available? > 0
+        WalletAPI.collect_vested_balances($scope.account.name).then (response) ->
+          Wallet.refresh_balances()
+          $translate('account.collect_available_fund').then (val) ->
+              Growl.notice "", val
+        , (error) ->
+          if (error.response.data.error.code == 20010)
+              $translate('market.tip.insufficient_balances').then (val) ->
+                  Growl.notice "", val
+          else
+              msg = Utils.formatAssertException(error.data.error.message)
+              Growl.notcie "", (if msg?.length > 2 then msg else error.data.error.message)
+
     $scope.import_key = ->
         form = @import_key_form
         form.key.$invalid = false
