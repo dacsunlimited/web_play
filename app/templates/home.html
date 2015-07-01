@@ -30,18 +30,3 @@
     trollbox
   </md-card-content>
 </md-card>
-
-<md-card>
-  <md-card-content>
-    <div class="header">
-      <md-button class="md-primary md-raised pull-right" ui-sref="accounts">
-        <i class="fa fa-bank fa-fw"></i> {{ 'index.my_account' | translate }}
-      </md-button>
-      <h3 class="header-title" translate>account.recent_trxs</h3>
-      <p class="header-info" translate>account.recent_trxs_info</p>
-    </div>
-    <div class="panel-body">
-      <div ng-controller="TransactionsController" ng-include src="'transactions.html'"></div>
-    </div>
-  </md-card-content>
-</md-card>
