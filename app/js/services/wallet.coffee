@@ -161,7 +161,7 @@ class Wallet
              @vesting_balances[name] = name_balanes_pair[1]
 
     vesting_balances_summary: (name) =>
-        return @vesting_balances_summary[name] if @vesting_balances_summary[name]
+        # return @vesting_balances_summary[name] if @vesting_balances_summary[name]
         return 0 unless @vesting_balances[name]
 
         available = 0; vested = 0; claimed = 0; original = 0

@@ -417,6 +417,7 @@
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
     "collect_available_fund": "Claim",
+    "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "unknown": "Unknown Account",
     "memo_tip_account_only": "Memo is available only when recipient is a registered account"

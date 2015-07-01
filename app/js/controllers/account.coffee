@@ -145,23 +145,23 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
 
     $scope.vesting_balance_percentage = ->
       if $scope.vesting_balance
-        ($scope.vesting_balance.available + $scope.vesting_balance.claimed) / $scope.vesting_balance.vested
+        ($scope.vesting_balance.available.amount + $scope.vesting_balance.claimed.amount) / $scope.vesting_balance.vested.amount
       else
         0
 
     $scope.collect_vested_balance = ->
-      if $scope.vesting_balance and $scope.vesting_balance.available? > 0
+      if $scope.vesting_balance and $scope.vesting_balance.available?.amount > 0
         WalletAPI.collect_vested_balances($scope.account.name).then (response) ->
           Wallet.refresh_balances()
-          $translate('account.collect_available_fund').then (val) ->
+          $translate('account.claimed', {amount: $scope.vesting_balance.available.amount, symbol: $scope.vesting_balance.available.symbol}).then (val) ->
               Growl.notice "", val
         , (error) ->
           if (error.response.data.error.code == 20010)
               $translate('market.tip.insufficient_balances').then (val) ->
                   Growl.notice "", val
           else
-              msg = Utils.formatAssertException(error.data.error.message)
-              Growl.notcie "", (if msg?.length > 2 then msg else error.data.error.message)
+              msg = Utils.formatAssertException(error.message)
+              Growl.notice "", (if msg?.length > 2 then msg else error.message)
 
     $scope.import_key = ->
         form = @import_key_form

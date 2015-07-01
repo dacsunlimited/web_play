@@ -415,6 +415,7 @@
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
     "collect_available_fund": "Claim",
+    "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "reg_add_faucet": "Faucet hinzufügen",
     "update_public_data_tx_fee": "Überweisungsgebühren aktualisieren: ",

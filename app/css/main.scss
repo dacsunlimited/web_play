@@ -375,18 +375,31 @@ li.stat {
 
 }
 
-.account-page .btn-primary {
-	background-color: transparent;
-	color: #ddd;
-	border: 1px solid #ddd;
-	transition: all 0.3s ease 0s;
+.account-page {
+  .btn-primary {
+  	background-color: transparent;
+  	color: #ddd;
+  	border: 1px solid #ddd;
+  	transition: all 0.3s ease 0s;
+  }
+
+  .btn-primary:hover {
+  	background-color: #ddd;
+  	color: #000;
+  	border: 1px solid #fff;
+  }
+
+  .progress {
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color:transparent;
+    box-shadow: inset;
+  }
 }
 
-.account-page .btn-primary:hover {
-	background-color: #ddd;
-	color: #000;
-	border: 1px solid #fff;
-}
+
+
+
 
 /* Directory  */
 
