@@ -38,15 +38,6 @@ class BlockchainAPI
     @rpc.request('blockchain_calculate_supply', [asset]).then (response) ->
       response.result
 
-  # Calculate the total amount of a market-issued asset that is owed to the network by open short positions
-  # parameters:
-  #   string `asset` - asset ticker symbol or ID to calculate debt for
-  #   bool `include_interest` - true to include current outstanding interest and false otherwise
-  # return_type: `asset`
-  calculate_debt: (asset, include_interest, error_handler = null) ->
-    @rpc.request('blockchain_calculate_debt', [asset, include_interest]).then (response) ->
-      response.result
-
   # Returns the current head block number
   # parameters:
   # return_type: `uint32_t`
@@ -61,6 +52,15 @@ class BlockchainAPI
   # return_type: `account_record_array`
   list_accounts: (first_account_name, limit, error_handler = null) ->
     @rpc.request('blockchain_list_accounts', [first_account_name, limit]).then (response) ->
+      response.result
+
+  # Returns registered accounts sorted by rp starting from a given position upto the limit provided
+  # parameters:
+  #   uint32_t `first` -
+  #   uint32_t `count` -
+  # return_type: `account_record_array`
+  list_accounts_by_rp: (first, count, error_handler = null) ->
+    @rpc.request('blockchain_list_accounts_by_rp', [first, count]).then (response) ->
       response.result
 
   # Returns a list of recently updated accounts
@@ -104,17 +104,19 @@ class BlockchainAPI
   # returns all ad records associated with an account
   # parameters:
   #   account_name `account_name` - the name of the account to fetch the ad records for
+  #   uint32_t `limit` - max number of ads to return
   # return_type: `ad_records`
-  get_account_ads: (account_name, error_handler = null) ->
-    @rpc.request('blockchain_get_account_ads', [account_name]).then (response) ->
+  get_account_ads: (account_name, limit, error_handler = null) ->
+    @rpc.request('blockchain_get_account_ads', [account_name, limit]).then (response) ->
       response.result
 
   # returns all note records associated with an account
   # parameters:
   #   account_name `account_name` - the name of the account to fetch the note records for
+  #   uint32_t `limit` - max number of notes to return
   # return_type: `note_records`
-  get_account_notes: (account_name, error_handler = null) ->
-    @rpc.request('blockchain_get_account_notes', [account_name]).then (response) ->
+  get_account_notes: (account_name, limit, error_handler = null) ->
+    @rpc.request('blockchain_get_account_notes', [account_name, limit]).then (response) ->
       response.result
 
   # Return a list of transactions that are not yet in a block.
