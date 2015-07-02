@@ -45,7 +45,9 @@
     "updating_trx_history": "Aggiornamento cronologia transazioni...",
     "partial_voting_info": "Questo conto non sta votando con alcuni dei suoi stake. Considera di aggiornare il tuo voto.",
     "client_update_available": "C'è una nuova versione obbligatoria su bitshares-x.info",
-    "fake_accounts_warning": "Transfers are irreversible, please triple-check the name you have entered."
+    "fake_accounts_warning": "Transfers are irreversible, please triple-check the name you have entered.",
+    "you_are_idle": "You are idle.",
+    "will_be_logged_out": "You will be logged out in"
   },
   "th": {
     "date": "DATA",

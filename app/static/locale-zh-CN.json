@@ -45,7 +45,9 @@
     "updating_trx_history": "正在更新交易记录...",
     "partial_voting_info": "账户尚有权益未使用投票权。请考虑行使投票权。",
     "client_update_available": "发现客户端关键更新，请访问 https://github.com/bitsuperlab/bitshares_play/releases 获取。",
-    "fake_accounts_warning": "警示！诈骗者常常通过注册虚假/近似/容易混淆的账户名来引诱用户发送资金到错误的账户。请在输入账户名时再三确认。"
+    "fake_accounts_warning": "警示！诈骗者常常通过注册虚假/近似/容易混淆的账户名来引诱用户发送资金到错误的账户。请在输入账户名时再三确认。",
+    "you_are_idle": "你离开了么？",
+    "will_be_logged_out": "本次会话即将注销"
   },
   "th": {
     "date": "日期",

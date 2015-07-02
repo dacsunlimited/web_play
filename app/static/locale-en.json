@@ -45,7 +45,9 @@
     "updating_trx_history": "Updating transaction history...",
     "partial_voting_info": "This account is not voting with some of its stake. Consider updating your vote.",
     "client_update_available": "There is a new mandatory client update available at bitshares-x.info",
-    "fake_accounts_warning": "Transfers are irreversible, please triple-check the name you have entered."
+    "fake_accounts_warning": "Transfers are irreversible, please triple-check the name you have entered.",
+    "you_are_idle": "You are idle.",
+    "will_be_logged_out": "You will be logged out in"
   },
   "th": {
     "date": "DATE",

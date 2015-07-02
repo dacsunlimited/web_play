@@ -45,7 +45,9 @@
     "updating_trx_history": "Aktualisiere Liste der Transaktionen ...",
     "partial_voting_info": "Dieses Konto hat verfügbare Stimmen. Nutzen Sie Ihr Recht und wählen Sie Ihre favorisierten Delegierten mit dem gesamten Kontostand.",
     "client_update_available": "Eine neues zwingend Update ist verfügbar. Besuchen Sie bitte http://www.bitshares-x.info",
-    "fake_accounts_warning": "Warnung! Betrüger erstellen häufig trügerische Kennungen um ihr Opfer dazu zu bewegen Ihr Vermögen falsch zu transferieren. Bitte überprüfen Sie das Konto!"
+    "fake_accounts_warning": "Warnung! Betrüger erstellen häufig trügerische Kennungen um ihr Opfer dazu zu bewegen Ihr Vermögen falsch zu transferieren. Bitte überprüfen Sie das Konto!",
+    "you_are_idle": "You are idle.",
+    "will_be_logged_out": "You will be logged out in"
   },
   "th": {
     "date": "DATUM",
