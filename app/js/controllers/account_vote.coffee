@@ -51,9 +51,9 @@ angular.module("app").controller "AccountVoteController", ($scope, $translate, W
             $scope.t_active = true
         , (error) ->
             if (error.data.error.code == 20005)
-                Growl.error "Unknown receive account", ""
+                Growl.error "", "Unknown receive account"
             if (error.data.error.code == 20010)
-                Growl.error "Insufficient funds", ""
+                Growl.error "", "Insufficient funds"
 
     $scope.updateVotes = ->
         myBal = $scope.balances[Info.symbol]

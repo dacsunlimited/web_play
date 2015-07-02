@@ -11,8 +11,7 @@ class SecretNote
         catch error
             {title: '', body: message_json}
 
-        type: type
-        title: json.title
-        body: json.body
+        json.type = type
+        return json
 
 angular.module("app").service("SecretNote", [SecretNote])

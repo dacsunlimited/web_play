@@ -244,6 +244,7 @@ class Blockchain
         cover_op_type : "Cover Operation"
         add_collateral_op_type : "Add Collateral Operation"
         remove_collateral_op_type : "Remove Collateral Operation"
+        note_op_type: "Create Secret Note"
 
     # TODO
     populate_delegate: (record, active, rank) ->

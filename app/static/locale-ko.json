@@ -13,7 +13,8 @@
     "register": "등록",
     "close": "닫기",
     "remove": "삭제",
-    "update_data": "데이터 업데이트"
+    "update_data": "데이터 업데이트",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "개인 정보 취급 방침",
@@ -418,6 +419,8 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
+    "collect_available_fund": "Claim",
+    "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "unknown": "Unknown Account",
     "memo_tip_account_only": "Memo is available only when recipient is a registered account"
@@ -449,7 +452,7 @@
     },
     "pot": {
       "title": "Jackpot",
-      "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
+      "explain": "Blockchain will draw 8 winners from secret note composers on daily basis to share 1/14 of current pot.  Level1: 1 winner for 40% of pot; Level2: 2 winners for 30% of pot; Level3: 5 winners for 40% of pot.",
       "current_pot": "Current Pot",
       "my_winning_records": "My Winning Records",
       "winning_not_found": "Not found",
@@ -458,7 +461,9 @@
         "winner": "Winner",
         "amount": "Reward",
         "drawing_block": "Drawing Block",
-        "latest_winner": "Last {{days}} Days Winners"
+        "latest_winner": "Last {{days}} Days Winners",
+        "next_draw_time": "Next Draw Time(est.)",
+        "next_draw_block": "Next Draw Block"
       }
     }
   },
@@ -612,5 +617,8 @@
     "delegates": "대표자",
     "account_details": "계정 상세정보",
     "advanced": "고급"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }

@@ -1,0 +1,50 @@
+.notes-winner {
+  .level1 {
+    clear:left;
+  }
+
+  .level2 {
+    clear:left;
+  }
+
+  .level3 {
+    clear:left;
+  }
+
+  .trophy {
+    text-align: center;
+    width: 86px; margin:auto;
+    position: relative;
+    padding: 10px;
+    display: inline-block;
+    //  margin-right: 10px;
+
+    em {
+      color: white;
+      position: absolute;
+      font-size: 1.7em;
+      left: 37px;
+      top: 14px;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    .info {
+      white-space:nowrap;
+    }
+
+    &.l1 { color: gold; }
+    &.l2 { color: silver; }
+    &.l3 { color: burlywood; }
+  }
+}
+
+.md-2-line.note-entry > .md-list-item-text {
+  & > .note-title {
+    font-weight:500; font-size:18px;
+  }
+  & > .note-para {
+    margin-top:1em;
+    p { margin-bottom:1em; }
+  }
+}

@@ -8,7 +8,10 @@ $header_color: #000;
 $subheader_color: #333;
 $body_color: #333;
 
+$default_blue: #3f51b5;
+
 //@import '*.css';
+@import 'mixins';
 @import 'bootstrap_overrides';
 @import 'brainwallet';
 @import 'help';
@@ -19,7 +22,9 @@ $body_color: #333;
 @import 'toolbar';
 @import 'footer';
 @import 'spinner';
+@import 'notes';
 @import 'theme';
+@import 'ad';
 
 /* Fonts  */
 
@@ -51,19 +56,6 @@ svg {
 	display: inline;
 	width: auto;
 	height: auto;
-}
-
-a, * {
- cursor: default !important;
-}
-
-a:focus {
-  outline: 0;
-}
-
-a:hover, a:focus, {
-	color: #115176;
-	text-decoration: none !important;
 }
 
 canvas, body.mac img, body.mac b.caret, body.mac span.caret, body.mac i.fa {
@@ -324,10 +316,16 @@ li.stat {
 	margin-bottom: 0;
 }
 
-.table-acc-balance td {
-	font-size: 1.4rem;
-	letter-spacing: 1px;
-	font-weight: 100;
+.table-acc-balance {
+  th {
+    text-align:center;
+  }
+  td {
+  	font-size: 1.4rem;
+  	letter-spacing: 1px;
+  	font-weight: 100;
+    text-align:center;
+  }
 }
 
 .table-acc-balance > tbody > tr > td {
@@ -377,18 +375,31 @@ li.stat {
 
 }
 
-.account-page .btn-primary {
-	background-color: transparent;
-	color: #ddd;
-	border: 1px solid #ddd;
-	transition: all 0.3s ease 0s;
+.account-page {
+  .btn-primary {
+  	background-color: transparent;
+  	color: #ddd;
+  	border: 1px solid #ddd;
+  	transition: all 0.3s ease 0s;
+  }
+
+  .btn-primary:hover {
+  	background-color: #ddd;
+  	color: #000;
+  	border: 1px solid #fff;
+  }
+
+  .progress {
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color:transparent;
+    box-shadow: inset;
+  }
 }
 
-.account-page .btn-primary:hover {
-	background-color: #ddd;
-	color: #000;
-	border: 1px solid #fff;
-}
+
+
+
 
 /* Directory  */
 

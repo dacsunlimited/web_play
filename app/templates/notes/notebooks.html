@@ -29,7 +29,30 @@
       </div>
     </div>
     <p translate>notes.pot.explain</p>
-    <p>{{'notes.pot.current_pot'|translate}}: <span class="emphasis">{{pool|formatAsset}}</span></p>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">
+        <div class="ibox gadget">
+          <div class="ibox-title" translate>notes.pot.current_pot</div>
+          <div class="ibox-content">{{pool|formatAsset}}</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="ibox gadget">
+          <div class="ibox-title" translate>notes.pot.th.next_draw_time</div>
+          <div class="ibox-content">{{next_drawing_time}}</div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="ibox gadget">
+          <div class="ibox-title" translate>notes.pot.th.next_draw_block</div>
+          <div class="ibox-content">{{next_drawing_block}}</div>
+        </div>
+      </div>
+
+    </div>
 
 
     <md-tabs md-dynamic-height md-border-bottom>

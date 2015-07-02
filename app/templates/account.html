@@ -125,7 +125,7 @@
 
   <div class="col-sm-6 col-sm-offset-3">
     <div class="pull-right p-inner">
-      <table class="table table-acc-balance" ng-show="account.is_my_account" tooltip="{{'account.vesting.tip'|translate}}">
+      <table class="table table-acc-balance" ng-show="account.is_my_account && vesting_balance.original.amount > 0" tooltip="{{'account.vesting.tip'|translate}}">
         <thead>
           <tr>
             <th><h5 class="header-title text-muted" translate>account.vesting.claimed</h5></th>
@@ -138,7 +138,12 @@
           <tr>
             <td>{{vesting_balance.claimed | formatAsset}}</td>
             <td>{{vesting_balance.vested | formatAsset}}</td>
-            <td>{{vesting_balance.available | formatAsset}}</td>
+            <td>
+              {{vesting_balance.available | formatAsset}}
+              <div ng-if="vesting_balance.available.amount > 0">
+                <md-button class="md-cornered md-raised" ng-click="collect_vested_balance()">领取</md-button>
+              </div>
+            </td>
             <td>{{vesting_balance.original | formatAsset}}</td>
           </tr>
         </tbody>

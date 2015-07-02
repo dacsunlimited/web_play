@@ -11,7 +11,8 @@
     "cover": "平仓",
     "register": "注册",
     "close": "关闭",
-    "remove": "移除"
+    "remove": "移除",
+    "learn_more": "了解详情"
   },
   "tip": {
     "privacy_statement": "隐私申明",
@@ -457,6 +458,8 @@
       "available": "可领取",
       "tip": "锁定金额于2015年7月1日开始1年内线性解冻"
     },
+    "collect_available_fund": "领取",
+    "claimed": "已领取 {{amount}} {{symbol}}",
     "public_data": "公开信息",
     "unknown": "未知账户名/联系人",
     "memo_tip_account_only": "只有向注册账户名转账时可以附带消息"
@@ -488,7 +491,7 @@
     },
     "pot": {
       "title": "奖池",
-      "explain": "每天区块链会从当日创建的日志中抽取幸运儿。",
+      "explain": "每天区块链会从当日创建的日志中抽取8名幸运儿分享1/14当前奖池的奖金。一等奖1名独享40%；二等奖2名分享30%；三等奖5名分享40%。",
       "current_pot": "当前奖池",
       "my_winning_records": "我的中奖记录",
       "winning_not_found": "暂无",
@@ -497,7 +500,9 @@
         "winner": "幸运儿",
         "amount": "奖金",
         "drawing_block": "开奖块",
-        "latest_winner": "最近{{days}}日幸运儿"
+        "latest_winner": "最近{{days}}日幸运儿",
+        "next_draw_time": "下次开奖时间(预计)",
+        "next_draw_block": "下次开奖块"
       }
     }
   },
@@ -632,7 +637,7 @@
     "syncing": "正在同步区块 ...",
     "not_connected": "无连接",
     "last_block": "最后的区块已经在 {{value}} 之前同步",
-    "one_network_connection": "1个网络连f接",
+    "one_network_connection": "1个网络连接",
     "n_network_connection": "{{value}} 个网络连接",
     "network_problems": "网络问题",
     "severe_network_problems": "严重网络问题",
@@ -652,5 +657,8 @@
     "delegates": "受托人",
     "account_details": "账户细节",
     "advanced": "进阶选项"
+  },
+  "ad": {
+    "promo": "推广"
   }
 }

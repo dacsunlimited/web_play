@@ -1,44 +1,40 @@
-<ul class="nav navbar-nav left-panel">
-  <!--
-  <li style="padding-left:1.5em;padding-bottom:3px;padding-top:3px;"><img src="img/bitsharesIcon.png" height="30px"></li>
-  <li class="back-button"><a class="pointer back-button" ng-click="back()" tooltip="Back" tooltip-placement="bottom"> &nbsp; <i class="fa fa-arrow-left"></i> &nbsp; </a></li>
-  <li ui-sref-active="active"><a ui-sref="accounts"><i class="fa fa-dashboard fa-fw"></i><span translate>toolbar.dashboard</span></a></li>
-  <li ui-sref-active="active" ng-if="current_account"><a ui-sref="transfer({from: current_account})" class="nav-transfer"><i class="fa fa-sign-out fa-fw fa-lg"></i><span translate>account.transfer</span></a></li>
-  -->
+<div class="md-toolbar-tools">
   <md-button ui-sref="accounts">
     <i class="fa fa-dashboard fa-fw"></i>{{ 'toolbar.dashboard' | translate }}
   </md-button>
   <md-button ui-sref="transfer({from: current_account})">
     <i class="fa fa-sign-out fa-fw fa-lg"></i>{{ 'account.transfer' | translate }}
   </md-button>
-</ul>
 
-<span flex></span>
+  <span flex></span>
 
-<div class="md-toolbar-item">
-  <ul class="nav navbar-nav">
-    <li class="dropdown notification error-notifications" ng-show="errors.list.length > 0" ng-class="{'new-error': errors.new_error}" on-toggle="error_notifier_toggled(open)" style="display:block !important;">
-      <md-button class="dropdown-toggle count-info" dropdown-toggle data-toggle="dropdown">
-        <i class="fa fa-bell"></i> <span class="label label-danger pull-right">{{errors.num_errors}}</span>
-      </md-button>
-      <ul class="dropdown-menu pull-right">
-        <li ng-repeat="e in errors.list">
-           <span class="time">{{e.time}}</span>
-           <p>
-             <span class="badge badge-warning" ng-show="e.counter > 1">{{e.counter}}</span>
-             {{e.text}} <a ng-click="e.details = e.stack" ng-show="!e.details">[show details]</a>
-            </p>
-           <pre class="error-stack" ng-show="e.details" ng-click="$event.stopPropagation();">{{e.details}}<hr/>{{e.toolkit_error}}<br/><br/><a ng-click="e.details = null">[hide details]</a></pre>
-        </li>
-      </ul>
-    </li>
-  </ul>
+  <div class="md-toolbar-item">
+    <ul class="nav navbar-nav">
+      <li class="dropdown notification error-notifications" ng-show="errors.list.length > 0" ng-class="{'new-error': errors.new_error}" on-toggle="error_notifier_toggled(open)" style="display:block !important;">
+        <md-button class="dropdown-toggle count-info" dropdown-toggle data-toggle="dropdown">
+          <i class="fa fa-bell"></i> <span class="label label-danger pull-right">{{errors.num_errors}}</span>
+        </md-button>
+        <ul class="dropdown-menu pull-right">
+          <li ng-repeat="e in errors.list">
+             <span class="time">{{e.time}}</span>
+             <p>
+               <span class="badge badge-warning" ng-show="e.counter > 1">{{e.counter}}</span>
+               {{e.text}} <a ng-click="e.details = e.stack" ng-show="!e.details">[show details]</a>
+              </p>
+             <pre class="error-stack" ng-show="e.details" ng-click="$event.stopPropagation();">{{e.details}}<hr/>{{e.toolkit_error}}<br/><br/><a ng-click="e.details = null">[hide details]</a></pre>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
-  <md-button ng-click="lock()">
-    <i class="fa fa-lock fa-fw"></i>{{ 'index.lock' | translate }}
-  </md-button>
+    <md-button ng-click="lock()">
+      <i class="fa fa-lock fa-fw"></i>{{ 'index.lock' | translate }}
+    </md-button>
 
-  <md-button ng-show="context_help.show" class="context-help" ng-click="open_context_help()">
-    {{'help.title'|translate}}<i class="fa fa-angle-double-left fa-fw"/>
-  </md-button>
+    <md-button ng-show="context_help.show" class="context-help" ng-click="open_context_help()">
+      {{'help.title'|translate}}<i class="fa fa-angle-double-left fa-fw"/>
+    </md-button>
+  </div>
+
 </div>
+

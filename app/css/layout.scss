@@ -47,3 +47,59 @@ md-tabs.md-default-theme .md-header { background-color: white; border-bottom:1px
 md-tabs.md-default-theme md-tab.active { color: $header_color; }
 md-tabs.md-default-theme md-tab { color: $body_color; }
 md-tabs.md-default-theme md-tabs-ink-bar { background: $lgreen; }
+
+// ibox
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+}
+
+.ibox.gadget .ibox-title {
+    border: none;
+    color: white;
+    background-color: $default_blue;
+
+    h5 {
+        font-weight: normal;
+        color: white;
+    }
+}
+
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: white;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    height: 48px;
+
+    h5 {
+        display: inline-block;
+        font-size: 14px;
+        margin: 0 0 7px;
+        padding: 0;
+        text-overflow: ellipsis;
+        float: left;
+    }
+}
+
+.ibox-content {
+    background-color: rgba($default_blue,0.1);
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+    overflow: hidden;
+}
+

@@ -11,7 +11,8 @@
     "cover": "Cover",
     "register": "Registriere",
     "close": "Close",
-    "remove": "Remove"
+    "remove": "Remove",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "Datenschutzerklärung",
@@ -413,6 +414,8 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
+    "collect_available_fund": "Claim",
+    "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "reg_add_faucet": "Faucet hinzufügen",
     "update_public_data_tx_fee": "Überweisungsgebühren aktualisieren: ",
@@ -452,7 +455,7 @@
     },
     "pot": {
       "title": "Jackpot",
-      "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
+      "explain": "Blockchain will draw 8 winners from secret note composers on daily basis to share 1/14 of current pot.  Level1: 1 winner for 40% of pot; Level2: 2 winners for 30% of pot; Level3: 5 winners for 40% of pot.",
       "current_pot": "Current Pot",
       "my_winning_records": "My Winning Records",
       "winning_not_found": "Not found",
@@ -616,5 +619,8 @@
     "delegates": "Delegierte",
     "account_details": "Kontodetails",
     "advanced": "Einstellungen"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }

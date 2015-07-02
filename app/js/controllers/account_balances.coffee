@@ -29,12 +29,9 @@ angular.module("app").controller "AccountBalancesController", ($scope, $location
       sum = {}
       for acct, balance of $scope.balances
         for symbol, asset of balance
-          if sum[asset]
+          if sum[symbol]
             sum[symbol].amount += asset.amount
           else
             sum[symbol] = asset
 
       $scope.balance_sum = sum
-
-
-    refresh_balance_sum()

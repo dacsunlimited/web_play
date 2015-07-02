@@ -105,7 +105,7 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
 app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
     $mdThemingProvider.theme('default').primaryPalette('indigo')
 
-    $compileProvider.debugInfoEnabled true
+    $compileProvider.debugInfoEnabled false
     # set this to false in production to gain performance boost
     # use angular.reloadWithDebugInfo() to reload the page and obtain debug capability
 

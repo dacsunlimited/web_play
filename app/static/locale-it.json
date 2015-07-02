@@ -11,7 +11,8 @@
     "cover": "Cover",
     "register": "Registra",
     "close": "Close",
-    "remove": "Remove"
+    "remove": "Remove",
+    "learn_more": "Learn more"
   },
   "tip": {
     "privacy_statement": "Privacy",
@@ -415,6 +416,8 @@
       "available": "Claimable",
       "tip": "Locked PLS will be vested linearly within 1 year starting from 2015-07-01"
     },
+    "collect_available_fund": "Claim",
+    "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "unknown": "Unknown Account",
     "memo_tip_account_only": "Memo is available only when recipient is a registered account"
@@ -446,7 +449,7 @@
     },
     "pot": {
       "title": "Jackpot",
-      "explain": "Blockchain will draw a winner from secret note composers on daily basis.",
+      "explain": "Blockchain will draw 8 winners from secret note composers on daily basis to share 1/14 of current pot.  Level1: 1 winner for 40% of pot; Level2: 2 winners for 30% of pot; Level3: 5 winners for 40% of pot.",
       "current_pot": "Current Pot",
       "my_winning_records": "My Winning Records",
       "winning_not_found": "Not found",
@@ -455,7 +458,9 @@
         "winner": "Winner",
         "amount": "Reward",
         "drawing_block": "Drawing Block",
-        "latest_winner": "Last {{days}} Days Winners"
+        "latest_winner": "Last {{days}} Days Winners",
+        "next_draw_time": "Next Draw Time(est.)",
+        "next_draw_block": "Next Draw Block"
       }
     }
   },
@@ -584,7 +589,17 @@
     "enable_trx_scan": "Avvia Scansione Transazioni",
     "up_to_date": "Aggiornato, processati {{value}} blocchi",
     "catching_up": "In aggiornamento.. processati {{value1}} di {{value2}}",
-    "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}"
+    "version_warning": "Warning! This GUI version expects toolkit version {{expected_client_version}} or newer, got {{client_version}}",
+    "testnet": "Testnet",
+    "synced": "Blockchain synchronized",
+    "syncing": "Blockchain synchronizing ...",
+    "not_connected": "Not connected",
+    "last_block": "Last block is synchronized {{value}} ago",
+    "one_network_connection": "1 network connection",
+    "n_network_connection": "{{value}} network connections",
+    "network_problems": "Network problem",
+    "severe_network_problems": "Severe network problem",
+    "delegate_participation_below": "Delegate participation rate below {{value}}, please postpone transactions until it returns to 100%."
   },
   "utils": {
     "expired": "Scaduto",
@@ -600,5 +615,8 @@
     "delegates": "Delegates",
     "account_details": "Account Details",
     "advanced": "Advanced"
+  },
+  "ad": {
+    "promo": "Promo"
   }
 }

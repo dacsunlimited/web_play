@@ -6,11 +6,11 @@
 
 <md-card>
   <md-content>
-    <md-list-item class="md-2-line" ng-repeat="r in note_records | orderBy:'-note.block_num'">
+    <md-list-item class="md-2-line note-entry" ng-repeat="r in note_records | orderBy:'-note.block_num'">
       <div class="md-list-item-text">
         <small class="pull-right">{{ r.note.timestamp | prettyDate }}</small>
-        <h3>{{ r.note.title }}</h3>
-        <p>{{ r.note.body }}</p>
+        <h3 class="note-title">{{ r.note.title }}</h3>
+        <div class="note-para" ng-bind-html="r.note.body | simpleFormat"></div>
       </div>
       <md-divider></md-divider>
     </md-list-item>

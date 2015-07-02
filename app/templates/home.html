@@ -1,14 +1,32 @@
+<div class="alert alert-{{ann.level}} alert-dismissible" role="alert" ng-repeat="ann in announcements">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 ng-if="ann.title">{{ann.title}}</h4>
+  <p layout="row">
+    <span>{{ann.message}}</span>
+    <span flex></span>
+    <md-button class="md-raised" href="{{ann.url}}" target="_blank" ng-if="ann.url">{{'btn.learn_more'|translate}}</md-button>
+  </p>
+</div>
+
 <md-card>
   <md-card-content>
-    <div class="header">
-      <md-button class="md-primary md-raised pull-right" ui-sref="accounts">
-        <i class="fa fa-bank fa-fw"></i> {{ 'index.my_account' | translate }}
-      </md-button>
-      <h3 class="header-title" translate>account.recent_trxs</h3>
-      <p class="header-info" translate>account.recent_trxs_info</p>
+    <p translate>ad.promo</p>
+    <div class="col-md-4" ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
+      <a ng-switch-when="text" href="{{ad.creative.url}}" target="_blank"
+           class="ad ad-text" style="width:{{ad.width}};height:{{ad.height}}">
+        <p>{{ad.creative.creative.text}}</p>
+      </a>
+
+      <a ng-switch-when="image" href="{{ad.creative.url}}" target="_blank"
+           class="ad ad-image" style="width:{{ad.width}};height:{{ad.height}}">
+        <img src="{{ad.creative.creative.image}}" />
+      </a>
     </div>
-    <div class="panel-body">
-      <div ng-controller="TransactionsController" ng-include src="'transactions.html'"></div>
-    </div>
+  </md-card-content>
+
+  <md-divider></md-divider>
+
+  <md-card-content>
+    trollbox
   </md-card-content>
 </md-card>

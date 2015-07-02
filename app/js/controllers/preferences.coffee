@@ -31,7 +31,7 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
                 $scope.model.themes =
                     "default": result["pref.default"]
                     "flowers": result["pref.flowers"]
-                $scope.warnings = 
+                $scope.warnings =
                     "time_too_low": result["pref.time_too_low"]
                     "time_too_high": result["pref.time_too_high"]
                     "fee_too_low": result["pref.fee_too_low"]
@@ -100,11 +100,11 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
             $translate.use($scope.model.language_locale)
             moment.locale($scope.model.language_locale)
             Wallet.default_vote = $scope.voting.default_vote
-            Growl.notice $scope.warnings.updated, ""
+            Growl.notice "", $scope.warnings.updated
 
     $scope.blockchain_last_block_num = 111
     $scope.translationData = {value: 111}
 
     $rootScope.$on '$translateLoadingSuccess', () ->
       getTranslations()
-    
+
