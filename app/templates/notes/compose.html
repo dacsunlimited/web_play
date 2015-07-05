@@ -22,8 +22,8 @@
             <label>{{'notes.note.title'|translate}}</label>
             <input name="title" ng-model="note.title" ng-change="hot_check_send_amount();" required minlength="1">
             <div ng-messages="note_form.title.$error" ng-show="note_form.title.$dirty">
-              <div ng-message="required">This is required!</div>
-              <div ng-message="minlength">That's too short!</div>
+              <div ng-message="required">{{'tip.required'|translate}}</div>
+              <div ng-message="minlength">{{'tip.too_short'|translate}}</div>
               <div ng-message="generalError">{{note_form.title.$error.generalError}}</div>
             </div>
           </md-input-container>
@@ -33,8 +33,8 @@
             <label>{{'notes.note.body'|translate}}</label>
             <textarea name="body" ng-model="note.body" ng-change="hot_check_send_amount();" required minlength="1"></textarea>
             <div ng-messages="note_form.body.$error" ng-show="note_form.body.$dirty">
-              <div ng-message="required">This is required!</div>
-              <div ng-message="minlength">That's too short!</div>
+              <div ng-message="required">{{'tip.required'|translate}}</div>
+              <div ng-message="minlength">{{'tip.too_short'|translate}}</div>
             </div>
           </md-input-container>
 
@@ -62,6 +62,6 @@
     <!--Submit-->
     <section class="md-actions" layout="row" layout-sm="column" layout-align="center center">
       <md-button id="submitNoteBtn" class="md-primary" ng-click="doSend()" disabled="disabled" translate>notes.note.post</md-button>
-      <md-button class="" ng-click="hide()">Cancel</md-button>
+      <md-button class="" ng-click="hide()" translate>btn.cancel</md-button>
     </section>
 </md-dialog>
