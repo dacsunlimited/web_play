@@ -12,7 +12,8 @@
     "register": "Зарегистрировать",
     "close": "Закрыть",
     "remove": "Remove",
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "send": "Send"
   },
   "tip": {
     "privacy_statement": "Заявление о конфиденциальности",
@@ -47,7 +48,9 @@
     "client_update_available": "Внимание! Новая версия кошелька доступна на bitshares.org.",
     "fake_accounts_warning": "Пожалуйста, тщательно проверьте правильность ввода имени - отправленную транзакцию невозможно отменить.",
     "you_are_idle": "You are idle.",
-    "will_be_logged_out": "You will be logged out in"
+    "will_be_logged_out": "You will be logged out in",
+    "required": "This is required",
+    "too_short": "Too short"
   },
   "th": {
     "date": "ДАТА",
@@ -623,6 +626,7 @@
     "advanced": "Настройки"
   },
   "ad": {
-    "promo": "Promo"
+    "promo": "Promo",
+    "write_sth": "Write something"
   }
 }

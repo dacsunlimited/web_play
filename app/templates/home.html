@@ -8,10 +8,12 @@
   </p>
 </div>
 
-<md-card>
+<md-card style="margin-bottom:3em;">
   <md-card-content>
     <p translate>ad.promo</p>
-    <div class="col-md-4" ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
+
+
+    <div class="ad-item col-md-4" ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
       <a ng-switch-when="text" href="{{ad.creative.url}}" target="_blank"
            class="ad ad-text" style="width:{{ad.width}};height:{{ad.height}}">
         <p>{{ad.creative.creative.text}}</p>
@@ -22,11 +24,12 @@
         <img src="{{ad.creative.creative.image}}" />
       </a>
     </div>
+
+
   </md-card-content>
 
   <md-divider></md-divider>
 
-  <md-card-content>
-    trollbox
-  </md-card-content>
+  <md-card-content class="trollbox-container" ng-controller="TrollboxController" ng-include src="'trollbox.html'"></md-card-content>
+
 </md-card>

@@ -1,0 +1,55 @@
+.trollbox-container{
+  margin-bottom:3em;
+
+  .troll-box {
+    height: 400px;
+    overflow:scroll;
+    padding-right: 20px;
+    margin-bottom: 2em;
+
+    & > ul {
+      padding-left:0;
+
+      & > li {
+        display:block;
+        list-style: none;
+      }
+    }
+
+    .troll-item {
+      margin-bottom:10px;
+
+      .username {
+        display:block;
+      }
+
+      .message-container {
+        padding:10px 20px; display:inline-block;
+        @include border-radius(5px);
+        background-color: #ccc;
+
+      }
+
+      &.my-message { text-align:right; }
+//      &:nth-child(even) {
+//        text-align:right;
+//      }
+    }
+  }
+
+  .chatbox {
+    margin-top:1em;
+
+    .full-width {
+      width:100%;
+    }
+
+    .input-group .input-group-btn {
+      vertical-align:top;
+    }
+
+    .input-group-btn .hint {
+      display:table-cell;
+    }
+  }
+}

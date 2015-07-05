@@ -12,7 +12,8 @@
     "register": "Registra",
     "close": "Close",
     "remove": "Remove",
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "send": "Send"
   },
   "tip": {
     "privacy_statement": "Privacy",
@@ -47,7 +48,9 @@
     "client_update_available": "C'è una nuova versione obbligatoria su bitshares-x.info",
     "fake_accounts_warning": "Transfers are irreversible, please triple-check the name you have entered.",
     "you_are_idle": "You are idle.",
-    "will_be_logged_out": "You will be logged out in"
+    "will_be_logged_out": "You will be logged out in",
+    "required": "This is required",
+    "too_short": "Too short"
   },
   "th": {
     "date": "DATA",
@@ -619,6 +622,7 @@
     "advanced": "Advanced"
   },
   "ad": {
-    "promo": "Promo"
+    "promo": "Promo",
+    "write_sth": "Write something"
   }
 }

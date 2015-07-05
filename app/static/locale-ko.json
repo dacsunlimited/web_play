@@ -14,7 +14,8 @@
     "close": "닫기",
     "remove": "삭제",
     "update_data": "데이터 업데이트",
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "send": "Send"
   },
   "tip": {
     "privacy_statement": "개인 정보 취급 방침",
@@ -49,7 +50,9 @@
     "client_update_available": "지갑 필수 업데이트가 올라왔습니다. https://github.com/bitsuperlab/bitshares_play/releases 에서 다운로드 하십시오.",
     "fake_accounts_warning": "주의! 사기꾼들이 종종 가짜 계정을 만들어서 전송을 유도합니다. 입력하신 계정 이름을 철저히 확인해 주십시오.",
     "you_are_idle": "You are idle.",
-    "will_be_logged_out": "You will be logged out in"
+    "will_be_logged_out": "You will be logged out in",
+    "required": "This is required",
+    "too_short": "Too short"
   },
   "th": {
     "date": "날짜",
@@ -621,6 +624,7 @@
     "advanced": "고급"
   },
   "ad": {
-    "promo": "Promo"
+    "promo": "Promo",
+    "write_sth": "Write something"
   }
 }

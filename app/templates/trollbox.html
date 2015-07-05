@@ -1,0 +1,63 @@
+  <p>Trollbox</p>
+
+  <div class="troll-box">
+    <ul>
+      <li class="troll-item" ng-repeat="message in messages" ng-class="{'my-message': message.is_mine}">
+        <span class="username" data-id="{{message.userid}}">{{message.username}}:</span>
+        <div class="message-container">{{message.message}}</div>
+      </li>
+    </ul>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="chatbox">
+    <form name="chat_form" class="form-horizontal" role="form" ng-submit="post()" novalidate>
+
+        <div layout="row" layout-align="center center" ng-init="setForm(chat_form)">
+          <md-select ng-model="from.account" placeholder="{{from.account.account_name}}">
+            <md-option ng-value="a" ng-repeat="a in accounts">{{a.account_name}}: {{a.balance | formatAsset }}</md-option>
+          </md-select>
+
+          <md-input-container flex>
+            <label>{{'ad.write_sth'|translate}}</label>
+            <input name="message" ng-model="chatBid.creative.creative.text" ng-change="checkFee();" required minlength="1">
+            <div ng-messages="chat_form.message.$error" ng-show="chat_form.message.$dirty">
+              <div ng-message="required">{{'tip.required'|translate}}</div>
+              <div ng-message="minlength">{{'tip.too_short'|translate}}</div>
+              <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
+              <div ng-message="generalError">{{chat_form.message.$error.generalError}}</div>
+            </div>
+            <div class="hint text-muted" style="order:5;text-align:right;" ng-show="chatBid.creative.creative.text">{{feeRequired}} {{symbol}}</div>
+          </md-input-container>
+
+          <md-button class="md-primary md-mini">{{'btn.send'|translate}}</md-button>
+        </div>
+
+        <!--
+    <div class="input-group" ng-init="setForm(chat_form)">
+      <div class="input-group-btn" dropdown is-open="from.isopen">
+        <button type="button" class="btn dropdown-toggle" dropdown-toggle>{{from.account}} <span class="caret"></span></button>
+        <ul class="dropdown-menu scrollable-menu-short" role="menu">
+          <li ng-repeat="a in accounts">
+            <a ng-click="from.account = a; from.isopen = false">{{a}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="input-group-btn full-width">
+        <input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-validator ng-invalid-required" ng-model="chatBid.creative.creative.text" name="message" type="text" placeholder="Write something" id="message" ng-change="checkFee()" autocomplete="off" required="true" tabindex="0" aria-required="true" aria-invalid="true" autofocus>
+        <div class="hint text-muted" ng-show="chatBid.creative.creative.text">{{feeRequired}} {{symbol}}</div>
+        <div class="hint" ng-show="chat_form.message.$error"></div>
+      </div>
+
+      <div class="input-group-btn">
+        <button type="button" class="btn">
+          <span aria-hidden="false">Submit</span>
+        </button>
+      </div>
+
+    </div>
+          -->
+    </form>
+  </div>
