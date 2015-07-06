@@ -12,7 +12,8 @@
     "register": "Зарегистрировать",
     "close": "Закрыть",
     "remove": "Remove",
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "send": "Send"
   },
   "tip": {
     "privacy_statement": "Заявление о конфиденциальности",
@@ -45,7 +46,11 @@
     "updating_trx_history": "Обновление истории транзакций...",
     "partial_voting_info": "This account is not voting with some of its stake. Consider updating your vote.",
     "client_update_available": "Внимание! Новая версия кошелька доступна на bitshares.org.",
-    "fake_accounts_warning": "Пожалуйста, тщательно проверьте правильность ввода имени - отправленную транзакцию невозможно отменить."
+    "fake_accounts_warning": "Пожалуйста, тщательно проверьте правильность ввода имени - отправленную транзакцию невозможно отменить.",
+    "you_are_idle": "You are idle.",
+    "will_be_logged_out": "You will be logged out in",
+    "required": "This is required",
+    "too_short": "Too short"
   },
   "th": {
     "date": "ДАТА",
@@ -621,6 +626,7 @@
     "advanced": "Настройки"
   },
   "ad": {
-    "promo": "Promo"
+    "promo": "Promo",
+    "write_sth": "Write something"
   }
 }

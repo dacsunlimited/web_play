@@ -12,7 +12,8 @@
     "register": "注册",
     "close": "关闭",
     "remove": "移除",
-    "learn_more": "了解详情"
+    "learn_more": "了解详情",
+    "send": "发送"
   },
   "tip": {
     "privacy_statement": "隐私申明",
@@ -45,7 +46,11 @@
     "updating_trx_history": "正在更新交易记录...",
     "partial_voting_info": "账户尚有权益未使用投票权。请考虑行使投票权。",
     "client_update_available": "发现客户端关键更新，请访问 https://github.com/bitsuperlab/bitshares_play/releases 获取。",
-    "fake_accounts_warning": "警示！诈骗者常常通过注册虚假/近似/容易混淆的账户名来引诱用户发送资金到错误的账户。请在输入账户名时再三确认。"
+    "fake_accounts_warning": "警示！诈骗者常常通过注册虚假/近似/容易混淆的账户名来引诱用户发送资金到错误的账户。请在输入账户名时再三确认。",
+    "you_are_idle": "你离开了么？",
+    "will_be_logged_out": "本次会话即将注销",
+    "required": "必填项",
+    "too_short": "太短"
   },
   "th": {
     "date": "日期",
@@ -659,6 +664,7 @@
     "advanced": "进阶选项"
   },
   "ad": {
-    "promo": "推广"
+    "promo": "推广",
+    "write_sth": "聊点什么吧"
   }
 }

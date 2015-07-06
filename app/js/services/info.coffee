@@ -2,6 +2,7 @@ class Info
     info : {}
 
     symbol : ""
+    PRECISION: 100000
 
     is_refreshing : false
 
@@ -9,6 +10,10 @@ class Info
 
     FULL_SYNC_SECS: 600
     BLOCKS_PER_DAY: 8640
+
+    ANNOUNCEMENT_ACCT: "ann.dacplay"
+    HOME_AD_POSITION_ACCT: ['a.alice', 'b.alice', 'c.alice']
+    CHAT_ADD_POSITION_ACCT: "chat.dacplay"
 
     get : () ->
         if Object.keys(@info).length > 0

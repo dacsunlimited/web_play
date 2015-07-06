@@ -519,6 +519,19 @@ class WalletAPI
     @rpc.request('wallet_account_register', [account_name, pay_from_account, public_data, delegate_pay_rate, account_type], error_handler).then (response) ->
       response.result
 
+  # Updates the data published about a given account
+  # parameters:
+  #   account_name `account_name` - the account that will be updated
+  #   public_key `account_key` - the key associated with this registered account
+  #   account_name `pay_from_account` - the account from which fees will be paid
+  #   json_variant `public_data` - public data about the account
+  #   uint8_t `delegate_pay_rate` - -1 for non-delegates; otherwise the percent of delegate pay to accept per produced block
+  #   string `account_type` - titan_account | public_account - public accounts receive memos too but all payments are made to the active key
+  # return_type: `transaction_record`
+  account_register_with_key: (account_name, account_key, pay_from_account, public_data, delegate_pay_rate, account_type, error_handler = null) ->
+    @rpc.request('wallet_account_register_with_key', [account_name, account_key, pay_from_account, public_data, delegate_pay_rate, account_type], error_handler).then (response) ->
+      response.result
+
   # Overwrite the local custom data for an account, contact, or approval
   # parameters:
   #   wallet_record_type `type` - specify one of {account_record_type, contact_record_type, approval_record_type}
@@ -831,30 +844,6 @@ class WalletAPI
     @rpc.request('wallet_market_submit_ask', [from_account_name, sell_quantity, sell_quantity_symbol, ask_price, ask_price_symbol, allow_stupid_ask], error_handler).then (response) ->
       response.result
 
-  # Used to place a request to short sell a quantity of assets at a price specified
-  # parameters:
-  #   account_name `from_account_name` - the account that will provide funds for the ask
-  #   string `short_collateral` - the amount of collateral you wish to fund this short with
-  #   asset_symbol `collateral_symbol` - the type of asset collateralizing this short (i.e. XTS)
-  #   string `interest_rate` - the APR you wish to pay interest at (0.0% to 1000.0%)
-  #   asset_symbol `quote_symbol` - the asset to short sell (i.e. USD)
-  #   string `short_price_limit` - maximim price (USD per XTS) that the short will execute at, if 0 then no limit will be applied
-  # return_type: `transaction_record`
-  market_submit_short: (from_account_name, short_collateral, collateral_symbol, interest_rate, quote_symbol, short_price_limit, error_handler = null) ->
-    @rpc.request('wallet_market_submit_short', [from_account_name, short_collateral, collateral_symbol, interest_rate, quote_symbol, short_price_limit], error_handler).then (response) ->
-      response.result
-
-  # Used to place a request to cover an existing short position
-  # parameters:
-  #   account_name `from_account_name` - the account that will provide funds for the ask
-  #   string `quantity` - the quantity of asset you would like to cover
-  #   asset_symbol `quantity_symbol` - the type of asset you are covering (ie: USD)
-  #   order_id `cover_id` - the order ID you would like to cover
-  # return_type: `transaction_record`
-  market_cover: (from_account_name, quantity, quantity_symbol, cover_id, error_handler = null) ->
-    @rpc.request('wallet_market_cover', [from_account_name, quantity, quantity_symbol, cover_id], error_handler).then (response) ->
-      response.result
-
   # Cancel and/or create many market orders in a single transaction.
   # parameters:
   #   order_ids `cancel_order_ids` - Order IDs of all market orders to cancel in this transaction.
@@ -863,16 +852,6 @@ class WalletAPI
   # return_type: `transaction_record`
   market_batch_update: (cancel_order_ids, new_orders, sign, error_handler = null) ->
     @rpc.request('wallet_market_batch_update', [cancel_order_ids, new_orders, sign], error_handler).then (response) ->
-      response.result
-
-  # Add collateral to a short position
-  # parameters:
-  #   account_name `from_account_name` - the account that will provide funds for the ask
-  #   order_id `cover_id` - the ID of the order to recollateralize
-  #   string `real_quantity_collateral_to_add` - the quantity of collateral of the base asset to add to the specified position
-  # return_type: `transaction_record`
-  market_add_collateral: (from_account_name, cover_id, real_quantity_collateral_to_add, error_handler = null) ->
-    @rpc.request('wallet_market_add_collateral', [from_account_name, cover_id, real_quantity_collateral_to_add], error_handler).then (response) ->
       response.result
 
   # List an order list of a specific market

@@ -1,7 +1,7 @@
-angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote, $window) ->
+angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote) ->
     $scope.announcements = []
-    annoucement_account = 'bob'
-    ad_accounts = ['a.alice', 'b.alice', 'c.alice']
+    annoucement_account = Info.ANNOUNCEMENT_ACCT
+    ad_accounts = Info.HOME_AD_POSITION_ACCT
     $scope.ads = []
 
     # Info.refresh_info().then ->
@@ -55,6 +55,3 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
               pds[i].ad
             catch err
               null
-
-    $scope.openAd = (url) ->
-        $window.open(url);

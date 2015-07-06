@@ -14,7 +14,8 @@
     "close": "Cerrar",
     "remove": "Remover",
     "update_data": "Datos Actualizados",
-    "learn_more": "Learn more"
+    "learn_more": "Learn more",
+    "send": "Send"
   },
   "tip": {
     "privacy_statement": "Declaración de Privacidad",
@@ -47,7 +48,11 @@
     "updating_trx_history": "Actualizando historial de transacciones...",
     "partial_voting_info": "Esta cuenta no esta votando con algunos de sus fondos. Considera actualizar tu voto.",
     "client_update_available": "hay una actualización de cliente obligatoria disponible en bitshares-x.info",
-    "fake_accounts_warning": "Las transferencias son irreversibles, por favor revisa 3 veces el nombre que pusiste."
+    "fake_accounts_warning": "Las transferencias son irreversibles, por favor revisa 3 veces el nombre que pusiste.",
+    "you_are_idle": "You are idle.",
+    "will_be_logged_out": "You will be logged out in",
+    "required": "This is required",
+    "too_short": "Too short"
   },
   "th": {
     "date": "FECHA",
@@ -634,6 +639,7 @@
     "advanced": "Avanzado"
   },
   "ad": {
-    "promo": "Promo"
+    "promo": "Promo",
+    "write_sth": "Write something"
   }
 }
