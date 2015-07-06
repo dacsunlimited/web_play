@@ -3,7 +3,8 @@
 
   .troll-box {
     height: 400px;
-    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:scroll;
     padding-right: 20px;
     margin-bottom: 2em;
 

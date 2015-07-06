@@ -665,6 +665,11 @@
   },
   "ad": {
     "promo": "推广",
-    "write_sth": "聊点什么吧"
+    "trollbox": "大厅",
+    "write_sth": "聊点什么吧",
+    "select_account": "请选择账户(已注册)",
+    "tip": {
+      "reg_acct_required": "请选择注册账户进行聊天"
+    }
   }
 }
