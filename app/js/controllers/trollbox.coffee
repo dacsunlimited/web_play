@@ -1,4 +1,4 @@
-angular.module("app").controller "TrollboxController", ($scope, $modal, $log, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer) ->
+angular.module("app").controller "TrollboxController", ($scope, $modal, $log, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout) ->
   chatAdPositionAcct  = Info.CHAT_ADD_POSITION_ACCT
   chatAdPricingID     = "plain1m"
   chatListLimit       = 50
@@ -27,6 +27,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
   $scope.messages = []
   message_trx = []
+  $scope.staged_messages = []
   form = null
   skip_once = true
 
@@ -114,11 +115,20 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
           # if parsing successfully
           # and fresh (not included yet)
           if bid and message_trx.indexOf(trx_id) < 0
+            mine = is_mine(message.publisher_id, my_account_ids)
+
+            # if it's my message, find it in staged message and clear it
+            if mine and $scope.staged_messages.length > 0
+              fp = Utils.hashString bid.creative.creative.text
+              foundIndex = ($scope.staged_messages.map (m) -> m.fp).indexOf(fp)
+              if foundIndex > -1
+                $scope.staged_messages.splice foundIndex, 1
+
             new_messages.push
               userid:   message.publisher_id,
               username: message.publisher_id
               message:  bid.creative.creative.text
-              is_mine:  is_mine(message.publisher_id, my_account_ids)
+              is_mine:  mine
 
             message_trx.push trx_id
 
@@ -131,7 +141,9 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
             # concat messages to $scope.messages
             Array::push.apply $scope.messages, new_messages
 
-        keep_chat_down()
+        $timeout ->
+          keep_chat_down()
+        , 300
 
   checkMessageFee = (message) ->
     msgSize = Utils.byteLength JSON.stringify(message.message)
@@ -172,10 +184,18 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
     console.log public_message
     WalletAPI.buy_ad($scope.feeRequired, $scope.symbol, $scope.from.account.account_name, chatAdPositionAcct, public_message).then (response) ->
 
+      # notify staging
+      angular.element('.troll-staging').removeClass('hide')
+      $scope.staged_messages.push
+        fp: Utils.hashString($scope.chatBid.creative.creative.text),
+        message: $scope.chatBid.creative.creative.text
+
+      # reset form
       $scope.chatBid.creative.creative.text = ''
       form.message.$pristine = true
       form.$pristine = true
       # console.log "buy success"
+
     , (error) ->
         if (error.response.data.error.code == 20010)
             $translate('market.tip.insufficient_balances').then (val) ->

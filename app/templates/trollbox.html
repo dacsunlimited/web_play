@@ -1,12 +1,20 @@
-  <p class="text-muted text-right" translate>ad.trollbox</p>
+  <div class="troll-panel">
+    <p class="text-muted text-right" translate>ad.trollbox</p>
 
-  <div class="troll-box" id="troll_box">
-    <ul>
-      <li class="troll-item" ng-repeat="message in messages" ng-class="{'my-message': message.is_mine}">
-        <span class="username" data-id="{{message.userid}}">{{message.username}}:</span>
-        <div class="message-container">{{message.message}}</div>
-      </li>
-    </ul>
+    <div class="troll-box" id="troll_box">
+      <ul>
+        <li class="troll-item" ng-repeat="message in messages" ng-class="{'my-message': message.is_mine}">
+          <span class="username" data-id="{{message.userid}}">{{message.username}}:</span>
+          <div class="message-container">{{message.message}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="troll-staging alert alert-warning hide"
+         ng-class="{'slidedUp': staged_messages.length > 0, 'slidedDown': staged_messages.length == 0}">
+      <span class="label label-warning">{{'tip.pending'|translate}}</span>
+      {{staged_messages[staged_messages.length - 1].message | limitTo:35}}
+      <span class="badge pull-right">{{staged_messages.length}}</span>
+    </div>
   </div>
 
   <md-divider></md-divider>

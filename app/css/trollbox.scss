@@ -1,12 +1,39 @@
+@keyframes slideInUp {
+  0% {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutDown {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .trollbox-container{
   margin-bottom:3em;
+
+  .troll-panel {
+    position:relative;z-index:10;
+  }
 
   .troll-box {
     height: 400px;
     overflow-x:hidden;
     overflow-y:scroll;
     padding-right: 20px;
-    margin-bottom: 2em;
+//    margin-bottom: 0.1em;
+    position:relative;
 
     & > ul {
       padding-left:0;
@@ -38,8 +65,36 @@
     }
   }
 
+  .troll-staging {
+    width:30%; height:50px;
+    margin:auto;
+    position:absolute;
+    bottom:-53px;
+    left:0; right:0;
+
+    @include box-shadow(1px, 1px, 2px, rgba(86, 96, 117, 0.7));
+
+    .badge { background-color: #d97572; }
+
+    &.slidedUp {
+      bottom:-1px;
+      animation-name: slideInUp;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    &.slidedDown {
+      bottom:-53px;
+      animation-name: slideOutDown;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+  }
+
   .chatbox {
-    margin-top:1em;
+    padding-top:1em;
+    position:relative; z-index:20;
+    background-color:white;
 
     .full-width {
       width:100%;
