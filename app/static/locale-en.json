@@ -684,6 +684,11 @@
   },
   "ad": {
     "promo": "Promo",
-    "write_sth": "Write something"
+    "trollbox": "Chat",
+    "write_sth": "Write something",
+    "select_account": "Select account (registered)",
+    "tip": {
+      "reg_acct_required": "Please select registered account to chat"
+    }
   }
 }

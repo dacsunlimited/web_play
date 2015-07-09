@@ -9,23 +9,30 @@
 </div>
 
 <md-card style="margin-bottom:3em;">
-  <md-card-content>
-    <p translate>ad.promo</p>
+  <md-card-content ng-show="ads.length > 0">
+    <p class="text-muted text-right" translate>ad.promo</p>
 
+    <div class="ads-container">
+      <ul rn-carousel
+          rn-carousel-index="currentIndex"
+          rn-carousel-transition="hexagon"
+          rn-carousel-buffered
+          rn-carousel-controls
+          rn-carousel-auto-slide
+          rn-carousel-controls-allow-loop
+      >
+        <li ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
+          <a ng-href="{{ad.creative.link}}" title="{{ad.creative.title}}">
+            <div ng-switch-when="image" ng-style="{'background-image': 'url('+ad.creative.creative.image+')'}"  class="bgimage">
+            </div>
 
-    <div class="ad-item col-md-4" ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
-      <a ng-switch-when="text" href="{{ad.creative.url}}" target="_blank"
-           class="ad ad-text" style="width:{{ad.width}};height:{{ad.height}}">
-        <p>{{ad.creative.creative.text}}</p>
-      </a>
-
-      <a ng-switch-when="image" href="{{ad.creative.url}}" target="_blank"
-           class="ad ad-image" style="width:{{ad.width}};height:{{ad.height}}">
-        <img src="{{ad.creative.creative.image}}" />
-      </a>
+            <div ng-switch-when="text" class="ad ad-text">
+              <p>{{ ad.creative.creative.text }}</p>
+            </div>
+          </a>
+        </li>
+      </ul>
     </div>
-
-
   </md-card-content>
 
   <md-divider></md-divider>

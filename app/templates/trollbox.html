@@ -1,12 +1,20 @@
-  <p>Trollbox</p>
+  <div class="troll-panel">
+    <p class="text-muted text-right" translate>ad.trollbox</p>
 
-  <div class="troll-box">
-    <ul>
-      <li class="troll-item" ng-repeat="message in messages" ng-class="{'my-message': message.is_mine}">
-        <span class="username" data-id="{{message.userid}}">{{message.username}}:</span>
-        <div class="message-container">{{message.message}}</div>
-      </li>
-    </ul>
+    <div class="troll-box" id="troll_box">
+      <ul>
+        <li class="troll-item" ng-repeat="message in messages" ng-class="{'my-message': message.is_mine}">
+          <span class="username" data-id="{{message.userid}}">{{message.username}}:</span>
+          <div class="message-container">{{message.message}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="troll-staging alert alert-warning hide"
+         ng-class="{'slidedUp': staged_messages.length > 0, 'slidedDown': staged_messages.length == 0}">
+      <span class="label label-warning">{{'tip.pending'|translate}}</span>
+      {{staged_messages[staged_messages.length - 1].message | limitTo:35}}
+      <span class="badge pull-right">{{staged_messages.length}}</span>
+    </div>
   </div>
 
   <md-divider></md-divider>
@@ -15,7 +23,8 @@
     <form name="chat_form" class="form-horizontal" role="form" ng-submit="post()" novalidate>
 
         <div layout="row" layout-align="center center" ng-init="setForm(chat_form)">
-          <md-select ng-model="from.account" placeholder="{{from.account.account_name}}">
+          <md-select name="chatter" ng-model="from.account">
+            <!-- <md-select-label>{{'ad.select_account'|translate}}</md-select-label> -->
             <md-option ng-value="a" ng-repeat="a in accounts">{{a.account_name}}: {{a.balance | formatAsset }}</md-option>
           </md-select>
 
@@ -26,6 +35,7 @@
               <div ng-message="required">{{'tip.required'|translate}}</div>
               <div ng-message="minlength">{{'tip.too_short'|translate}}</div>
               <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
+              <div ng-message="reg_acct_required">{{'ad.tip.reg_acct_required'|translate}}</div>
               <div ng-message="generalError">{{chat_form.message.$error.generalError}}</div>
             </div>
             <div class="hint text-muted" style="order:5;text-align:right;" ng-show="chatBid.creative.creative.text">{{feeRequired}} {{symbol}}</div>

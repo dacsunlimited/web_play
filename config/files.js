@@ -47,6 +47,8 @@ module.exports = function(lineman) {
         "vendor/js/jdenticon.js",
         "vendor/js/angu-fixed-header-table.js",
         "vendor/js/technical-indicators.src.js",
+        "vendor/bower/angular-touch/angular-touch.min.js",
+        "vendor/bower/angular-carousel/dist/angular-carousel.min.js"
       ],
       app: [
         // "app/js/app.js",
@@ -67,6 +69,7 @@ module.exports = function(lineman) {
         "vendor/bower/growl/stylesheets/jquery.growl.css",
         "vendor/bower/angular-ui-grid/ui-grid.css",
         "vendor/bower/angular-xeditable/dist/css/xeditable.css",
+        "vendor/bower/angular-carousel/dist/angular-carousel.css",
         "vendor/css/bootstrap.css",
         "vendor/css/font-awesome.css",
         "vendor/css/ark.css",

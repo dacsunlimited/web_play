@@ -26,8 +26,8 @@ angular.module("app").controller "NotesController", ($scope, $mdDialog, $statePa
                 tx_fee.precision = _tx_fee_asset.precision
                 # $scope.hot_check_send_amount()
 
-
-    BlockchainAPI.get_account_notes($scope.account_name).then (results) ->
+    # TODO: pagination
+    BlockchainAPI.get_account_notes($scope.account_name, 100).then (results) ->
         $scope.note_records.splice(0, $scope.note_records.length)
         tx_ids = []
         for r in results
