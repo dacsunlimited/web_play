@@ -12,7 +12,7 @@ class Info
     BLOCKS_PER_DAY: 8640
 
     ANNOUNCEMENT_ACCT: "ann.dacplay"
-    HOME_AD_POSITION_ACCT: ['a.alice', 'b.alice', 'c.alice']
+    HOME_AD_POSITION_ACCT: "ad.dacplay"
     CHAT_ADD_POSITION_ACCT: "chat.dacplay"
 
     get : () ->
