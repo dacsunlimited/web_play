@@ -1,7 +1,7 @@
 angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote, $timeout) ->
     $scope.announcements = []
     annoucement_account = Info.ANNOUNCEMENT_ACCT
-    ad_accounts = Info.HOME_AD_POSITION_ACCT
+    ad_account = Info.HOME_AD_POSITION_ACCT
     $scope.ads = []
 
     hlAd = (index) ->
@@ -39,21 +39,37 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
 
     # get ads
     # get ad settings
-    RpcService.request("batch", ["blockchain_get_account", (ad_accounts.map (a) -> [a])]).then (response) ->
-        pds = response.result.map (acct) ->
-          try
-            angular.fromJson(acct.public_data)
-          catch err
-            null
-
-        for i in [0...pds.length]
-            $scope.ads[i] = try
-              pds[i].ad.creative = pds[i].ad.default_creative
-              pds[i].ad
-            catch err
-              null
-
-        if pds.length > 0
-            $timeout ->
-                hlAd(0)
-            , 300
+    # RpcService.request("batch", ["blockchain_get_account", (ad_accounts.map (a) -> [a])]).then (response) ->
+    # BlockchainAPI.get_account(ad_account).then (response) ->
+    #     pd = try
+    #         angular.fromJson(response.public_data)
+    #       catch err
+    #         null
+    #
+    #     return false unless pd
+    #
+    #     # set default creative
+    #     for i in [0...3]
+    #         $scope.ads[i] = try
+    #           pd.ad.creative = Utils.copy pd.ad.default_creative
+    #           debugger
+    #
+    #           # fill tmp creative
+    #           console.log i, "http://dacplay.org/ad/play#{i+1}.jpg"
+    #           pd.ad.creative.creative.image = "http://dacplay.org/ad/play#{i+1}.jpg"
+    #
+    #           pd.ad
+    #         catch err
+    #           null
+    #
+    #
+    #     console.log $scope.ads
+    #
+    #     # get slide ad bids
+    #     # BlockchainAPI.get_account_ads(ad_account, 20).then (response) ->
+    #
+    #
+    #     if $scope.ads.length > 0
+    #         $timeout ->
+    #             hlAd(0)
+    #         , 300
