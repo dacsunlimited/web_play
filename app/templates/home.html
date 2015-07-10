@@ -22,7 +22,7 @@
           rn-carousel-controls-allow-loop
       >
         <li ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
-          <a ng-href="{{ad.creative.link}}" title="{{ad.creative.title}}">
+          <a ng-href="{{ad.creative.link}}" title="{{ad.creative.title}}" target="_blank">
             <div ng-switch-when="image" ng-style="{'background-image': 'url('+ad.creative.creative.image+')'}"  class="bgimage">
             </div>
 
