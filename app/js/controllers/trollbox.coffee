@@ -14,7 +14,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
   $scope.precision  = Info.PRECISION
 
   $scope.chatBid =
-    bidid: "#{chatAdPositionAcct}/#{chatAdPricingID}"
+    bidid: "#{chatAdPricingID}"
     asset:
       symbol: null
       price: 0
