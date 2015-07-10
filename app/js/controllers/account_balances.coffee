@@ -7,18 +7,17 @@ angular.module("app").controller "AccountBalancesController", ($scope, $location
     $scope.go_to_account = (name) ->
         $state.go("account.transactions", {name: name})
 
-#    Wallet.refresh_accounts(true).then ->
-#        $scope.accounts = Wallet.accounts
-#        $scope.balances = Wallet.balances
-#
+    refresh_balances = ->
+      Wallet.refresh_accounts(true).then (result) ->
+          $scope.accounts = Wallet.accounts
+          $scope.balances = Wallet.balances
+          refresh_balance_sum()
+
     accounts_balance_observer =
         name: "accounts_balance_observer"
         frequency: "each_block"
         update: (data, deferred) ->
-            Wallet.refresh_accounts(true).then (result) ->
-                $scope.accounts = Wallet.accounts
-                $scope.balances = Wallet.balances
-                refresh_balance_sum()
+            refresh_balances()
             deferred.resolve(true)
     Observer.registerObserver(accounts_balance_observer)
 
@@ -35,3 +34,6 @@ angular.module("app").controller "AccountBalancesController", ($scope, $location
             sum[symbol] = asset
 
       $scope.balance_sum = sum
+
+    # init
+    refresh_balances()
