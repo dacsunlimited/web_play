@@ -357,7 +357,7 @@ class Wallet
                     used_balance_symbols[asset.symbol] = true
             t.ledger_entries.push
                 from: entry.from_account
-                to: entry.to_account
+                to: if entry.to_account == 'chat.dacplay' then 'CHAT_OP' else entry.to_account
                 amount: entry.amount.amount
                 amount_asset : @utils.asset(entry.amount.amount, @blockchain.asset_records[entry.amount.asset_id])
                 memo: entry.memo

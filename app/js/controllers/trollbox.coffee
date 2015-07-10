@@ -4,6 +4,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
   chatListLimit       = 50
 
   adSpec = null
+  pricing = null
   $scope.accounts = []
   $scope.registered_accounts = {}
   $scope.from =
@@ -15,9 +16,6 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
   $scope.chatBid =
     bidid: "#{chatAdPricingID}"
-    asset:
-      symbol: null
-      price: 0
     creative:
       version: 0.1
       type: 'text'
@@ -87,9 +85,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
         adSpec = ad_spec
 
         plain1m = ad_spec.ad.pricing.filter (p) -> p.id == chatAdPricingID
-        if pricing = plain1m[0]
-          $scope.chatBid.asset.symbol = pricing.asset
-          $scope.chatBid.asset.price = pricing.price
+        pricing = plain1m[0]
 
 
   is_mine = (id, myids) ->
@@ -147,7 +143,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
   checkMessageFee = (message) ->
     msgSize = Utils.byteLength JSON.stringify(message.message)
-    feeRequired = ($scope.chatBid.asset.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+    feeRequired = (pricing.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
     return message.amount.amount / Info.PRECISION >= feeRequired
 
   $scope.setForm = (frm) -> form = frm
@@ -163,7 +159,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       form.message.$error.reg_acct_required = true
 
     msgSize = Utils.byteLength JSON.stringify($scope.chatBid)
-    $scope.feeRequired = ($scope.chatBid.asset.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+    $scope.feeRequired = (pricing.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
 
     if $scope.feeRequired > $scope.from.account.balance.amount / $scope.precision
       form.$setValidity "message", false

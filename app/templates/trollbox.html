@@ -23,8 +23,7 @@
     <form name="chat_form" class="form-horizontal" role="form" ng-submit="post()" novalidate>
 
         <div layout="row" layout-align="center center" ng-init="setForm(chat_form)">
-          <md-select name="chatter" ng-model="from.account">
-            <!-- <md-select-label>{{'ad.select_account'|translate}}</md-select-label> -->
+          <md-select name="chatter" ng-model="from.account" aria-label="{{'ad.select_account'|translate}}">
             <md-option ng-value="a" ng-repeat="a in accounts">{{a.account_name}}: {{a.balance | formatAsset }}</md-option>
           </md-select>
 
@@ -44,30 +43,5 @@
           <md-button class="md-primary md-mini">{{'btn.send'|translate}}</md-button>
         </div>
 
-        <!--
-    <div class="input-group" ng-init="setForm(chat_form)">
-      <div class="input-group-btn" dropdown is-open="from.isopen">
-        <button type="button" class="btn dropdown-toggle" dropdown-toggle>{{from.account}} <span class="caret"></span></button>
-        <ul class="dropdown-menu scrollable-menu-short" role="menu">
-          <li ng-repeat="a in accounts">
-            <a ng-click="from.account = a; from.isopen = false">{{a}}</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="input-group-btn full-width">
-        <input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-validator ng-invalid-required" ng-model="chatBid.creative.creative.text" name="message" type="text" placeholder="Write something" id="message" ng-change="checkFee()" autocomplete="off" required="true" tabindex="0" aria-required="true" aria-invalid="true" autofocus>
-        <div class="hint text-muted" ng-show="chatBid.creative.creative.text">{{feeRequired}} {{symbol}}</div>
-        <div class="hint" ng-show="chat_form.message.$error"></div>
-      </div>
-
-      <div class="input-group-btn">
-        <button type="button" class="btn">
-          <span aria-hidden="false">Submit</span>
-        </button>
-      </div>
-
-    </div>
-          -->
     </form>
   </div>
