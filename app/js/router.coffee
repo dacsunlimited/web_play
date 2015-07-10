@@ -83,11 +83,6 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
 
     sp.state "account.wall", { url: "/account_wall", views: { 'account-wall': { templateUrl: 'account_wall.html', controller: 'AccountWallController' } } }
 
-    sp.state "asset",
-        url: prefix + "/assets/:ticker"
-        templateUrl: "asset.html"
-        controller: "AssetController"
-
     sp.state "blocks",
         url: "/blocks?withtrxs"
         templateUrl: "blocks.html"
@@ -143,22 +138,6 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
         templateUrl: "brainwallet.html"
         controller: "BrainWalletController"
 
-    sp.state "markets",
-        url: prefix + "/markets"
-        templateUrl: "market/markets.html"
-        controller: "MarketsController"
-
-    sp.state "market",
-        abstract: true
-        url: prefix + "/market/:name/:account"
-        templateUrl: "market/market.html"
-        controller: "MarketController"
-
-    sp.state "market.buy", { url: "/buy", templateUrl: "market/buy.html" }
-    sp.state "market.sell", { url: "/sell", templateUrl: "market/sell.html" }
-    sp.state "market.short", { url: "/short", templateUrl: "market/short.html" }
-    sp.state "market.cover", { url: "/cover", templateUrl: "market/open_margin.html" }
-
     sp.state "transfer",
         url: prefix + "/transfer?from&to&amount&memo&asset"
         templateUrl: "transfer.html"
@@ -168,44 +147,6 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
         url: prefix + "/newcontact?name&key"
         templateUrl: "newcontact.html"
         controller: "NewContactController"
-
-    sp.state "mail",
-        url: "/mail/:box"
-        templateUrl: "mail.html"
-        controller: "MailController"
-
-    sp.state "mail.compose",
-        url: "/compose"
-        onEnter: ($modal, $state) ->
-            modal = $modal.open
-                templateUrl: "dialog-mail-compose.html"
-                controller: "ComposeMailController"
-
-            modal.result.then(
-                (result) ->
-                    $state.go 'mail'
-                () ->
-                    $state.go 'mail'
-            )
-
-    sp.state "mail.show",
-        url: "/show/:id"
-        onEnter: ($modal, $state) ->
-            modal = $modal.open
-                templateUrl: "dialog-mail-show.html"
-                controller: "ShowMailController"
-
-            modal.result.then(
-                (result) ->
-                    $state.go 'mail'
-                () ->
-                    $state.go 'mail'
-            )
-
-    sp.state "referral_code",
-        url: prefix + "/referral_code?faucet&code"
-        templateUrl: "referral_code.html"
-        controller: "ReferralCodeController"
 
     sp.state "advanced",
         url: prefix + "/advanced"

@@ -41,12 +41,12 @@ module.exports = function(lineman) {
         "vendor/bower/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
 
         "vendor/js/jsonpath.js",
-        "vendor/js/highstock.js",
+        // "vendor/js/highstock.js",
+        // "vendor/js/technical-indicators.src.js",
+        // "vendor/js/angu-fixed-header-table.js",
         "vendor/js/bytebuffer.js",
         "vendor/js/sha256.js",
         "vendor/js/jdenticon.js",
-        "vendor/js/angu-fixed-header-table.js",
-        "vendor/js/technical-indicators.src.js",
         "vendor/bower/angular-touch/angular-touch.min.js",
         "vendor/bower/angular-carousel/dist/angular-carousel.min.js"
       ],
