@@ -135,3 +135,6 @@ app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvi
     Highcharts.setOptions
         global:
             useUTC: false
+
+# define app.services module
+angular.module("app.services", [])

@@ -1,6 +1,4 @@
-servicesModule = angular.module("app.services")
-
-servicesModule.factory "Utils", ($translate,$q,$sce) ->
+angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
     asset: (amount, asset_type) ->
         amount: amount
         symbol: if asset_type then asset_type.symbol else "NA"

@@ -1,4 +1,4 @@
-servicesModule = angular.module("app.services", [])
+servicesModule = angular.module("app.services")
 
 RpcException = (@message, @response) ->
     @name = "RPC Server Error"

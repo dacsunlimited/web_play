@@ -1,6 +1,5 @@
-servicesModule = angular.module("app.services")
+angular.module("app.services").factory "Shared", ->
 
-servicesModule.factory "Shared", ->
     contactName: null
     message: ""
     errors:
