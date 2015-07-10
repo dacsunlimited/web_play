@@ -38,7 +38,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
             account_name: account_name,
             balance: balance,
             account_id: $scope.registered_accounts[account_name].id
-      $scope.from.account = $scope.accounts[0] if $scope.accounts.length > 0
+      $scope.from.account ||= $scope.accounts[0] if $scope.accounts.length > 0
 
       if skip_once
         skip_once = false

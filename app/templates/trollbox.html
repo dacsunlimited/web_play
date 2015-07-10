@@ -24,7 +24,11 @@
 
         <div layout="row" layout-align="center center" ng-init="setForm(chat_form)">
           <md-select name="chatter" ng-model="from.account" aria-label="{{'ad.select_account'|translate}}">
-            <md-option ng-value="a" ng-repeat="a in accounts">{{a.account_name}}: {{a.balance | formatAsset }}</md-option>
+            <md-option ng-value="a"
+                       ng-repeat="a in accounts"
+                       ng-selected="{{from.account.account_name  == a.account_name}}">
+                       {{a.account_name}}: {{a.balance | formatAsset }}
+            </md-option>
           </md-select>
 
           <md-input-container flex>
