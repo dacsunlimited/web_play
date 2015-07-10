@@ -4,7 +4,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
     $scope.currentPath = $location.path()
     $scope.theme = 'default'
     $scope.is_bitshares_js = window.bts isnt undefined
-    
+
     $scope.current_path_includes = (str, params = null)->
         res = $state.current.name.indexOf(str) >= 0
         if res and params
@@ -99,17 +99,6 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
                 Observer.unregisterObserver Wallet.observer_config()
 
         navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
-        ### mail is not used yet... Instead, a default mailserver may enable mail for everyone
-        if unlocked
-            console.log 'unlocked, scan for mail accounts..'
-            WalletAPI.list_accounts().then (result) ->
-                for account in result
-                    continue unless account.is_my_account
-                    if account.public_data?.mail_servers
-                        #console.log 'unlocked, mail account found..'
-                        $scope.mail_enabled = on
-                        break
-        ###
     , true
 
     $scope.clear_form_errors = (form) ->
