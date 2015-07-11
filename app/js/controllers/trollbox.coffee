@@ -141,9 +141,13 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
           keep_chat_down()
         , 300
 
+  getRequiredFee = (msgSize) ->
+    (pricing?.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+
   checkMessageFee = (message) ->
-    msgSize = Utils.byteLength JSON.stringify(message.message)
-    feeRequired = (pricing.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+    msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
+    feeRequired = getRequiredFee(msgSize)
+
     return message.amount.amount / Info.PRECISION >= feeRequired
 
   $scope.setForm = (frm) -> form = frm
@@ -159,7 +163,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       form.message.$error.reg_acct_required = true
 
     msgSize = Utils.byteLength JSON.stringify($scope.chatBid)
-    $scope.feeRequired = (pricing.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+    $scope.feeRequired = getRequiredFee(msgSize + 10) # deail with marginal length problem
 
     if $scope.feeRequired > $scope.from.account.balance.amount / $scope.precision
       form.$setValidity "message", false
@@ -205,8 +209,6 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
     $scope.chatBid.starts_at = Utils.formatUTCDate(new Date())
 
     $scope.doSend()
-
-
 
   if !$scope.symbol and Info.symbol == ''
     Info.refresh_info().then ->
