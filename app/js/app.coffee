@@ -17,7 +17,7 @@ app = angular.module("app",
     ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
      "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid",
      "ngMaterial", "utils.autofocus", "ngMessages", "ui.grid.autoResize", "ngAnimate",
-     "anguFixedHeaderTable", "ng-mfb", "angular-carousel"])
+    "ng-mfb", "angular-carousel"])
 
 app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
 
@@ -132,6 +132,5 @@ app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvi
     $idleProvider.idleDuration(1776)
     $idleProvider.warningDuration(60)
 
-    Highcharts.setOptions
-        global:
-            useUTC: false
+# define app.services module
+angular.module("app.services", [])

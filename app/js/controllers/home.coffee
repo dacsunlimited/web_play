@@ -1,7 +1,8 @@
-angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote, $timeout) ->
-    $scope.announcements = []
+angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote, $timeout, AD) ->
     annoucement_account = Info.ANNOUNCEMENT_ACCT
     ad_account = Info.HOME_AD_POSITION_ACCT
+
+    $scope.announcements = []
     $scope.ads = []
 
     hlAd = (index) ->
@@ -40,36 +41,36 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
     # get ads
     # get ad settings
     # RpcService.request("batch", ["blockchain_get_account", (ad_accounts.map (a) -> [a])]).then (response) ->
-    # BlockchainAPI.get_account(ad_account).then (response) ->
-    #     pd = try
-    #         angular.fromJson(response.public_data)
-    #       catch err
-    #         null
-    #
-    #     return false unless pd
-    #
-    #     # set default creative
-    #     for i in [0...3]
-    #         $scope.ads[i] = try
-    #           pd.ad.creative = Utils.copy pd.ad.default_creative
-    #           debugger
-    #
-    #           # fill tmp creative
-    #           console.log i, "http://dacplay.org/ad/play#{i+1}.jpg"
-    #           pd.ad.creative.creative.image = "http://dacplay.org/ad/play#{i+1}.jpg"
-    #
-    #           pd.ad
-    #         catch err
-    #           null
-    #
-    #
-    #     console.log $scope.ads
-    #
-    #     # get slide ad bids
-    #     # BlockchainAPI.get_account_ads(ad_account, 20).then (response) ->
-    #
-    #
-    #     if $scope.ads.length > 0
-    #         $timeout ->
-    #             hlAd(0)
-    #         , 300
+    BlockchainAPI.get_account(ad_account).then (response) ->
+        # if it has no ad position set up, skip
+        pd = try
+            angular.fromJson(response.public_data)
+          catch err
+            null
+
+        return false unless pd
+
+        # get slide ad bids
+        BlockchainAPI.get_account_ads(ad_account, 20).then (results) ->
+
+          i = 0
+          for bid in results
+            if creative = AD.isValidBid(bid, pd.ad)
+              p = Utils.clone(pd)
+              p.ad.creative = creative.creative
+              $scope.ads[i] = p.ad
+              i++
+
+          # if less than 3 valid ads, add default creative
+          unless i >= 3
+            for j in [i...3]
+                $scope.ads[j] = try
+                  pd.ad.creative = pd.ad.default_creative
+                  pd.ad
+                catch err
+                  null
+
+          if $scope.ads.length > 0
+              $timeout ->
+                  hlAd(0)
+              , 300
