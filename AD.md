@@ -71,7 +71,7 @@ bid on ad.dacplay
       "starts_at": "2015-07-08T00:00:00"
     }
     
-    wallet_buy_ad 1000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play1","type":"image","creative":{"image":"http://dacplay.org/ad/play1.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-08T00:00:00"}'
+    wallet_buy_ad 10000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play1","type":"image","creative":{"image":"http://dacplay.org/ad/play1.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-08T00:00:00"}'
     
     {
       "bid": "1w",
@@ -87,9 +87,9 @@ bid on ad.dacplay
       "starts_at": "2015-07-08T00:00:00"
     }
 
-    wallet_buy_ad 1000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play2","type":"image","creative":{"image":"http://dacplay.org/ad/play2.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-10T00:00:00"}'
-    wallet_buy_ad 1000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play3","type":"image","creative":{"image":"http://dacplay.org/ad/play3.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-10T00:00:00"}'
-    wallet_buy_ad 1000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play4","type":"image","creative":{"image":"http://dacplay.org/ad/play4.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-10T00:00:00"}'
+    wallet_buy_ad 10000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play2","type":"image","creative":{"image":"http://dacplay.org/ad/play2.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-10T00:00:00"}'
+    wallet_buy_ad 10000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play3","type":"image","creative":{"image":"http://dacplay.org/ad/play3.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-10T00:00:00"}'
+    wallet_buy_ad 10000.5 XTS advertiser ad.dacplay '{"bid":"1w","asset":{"symbol":"PLS","price":100000000},"creative":{"version":1,"title":"play4","type":"image","creative":{"image":"http://dacplay.org/ad/play4.jpg"},"link":"http://dacplay.org/"},"starts_at":"2015-07-10T00:00:00"}'
     
 # sample
 
@@ -194,26 +194,26 @@ bid on ad.dacplay
         {
           "id": "1d",
           "duration": "1d",
-          "price": 15000000,
+          "price": 150000000,
           "asset": "XTS"
         },
         {
           "id": "1w",
           "duration": "1w",
-          "price": 100000000,
+          "price": 1000000000,
           "asset": "XTS"
         },
         {
           "id": "1m",
           "duration": "1m",
-          "price": 2800000000,
+          "price": 28000000000,
           "asset": "XTS"
         }
         ]
       }
     }
 
-    wallet_account_update_registration ad.dacplay dacplay "{\"ad\":{\"desc\":\"display at wallet home page\",\"detail_link\":\"http://dacplay.org/\",\"width\":\"400px\",\"height\":\"200px\",\"default_creative\":{\"version\":1,\"title\":\"default add 1\",\"type\":\"text\",\"creative\":{\"text\":\"Work Hard, PLAY Hard\",\"image\":\"\"},\"link\":\"http://dacplay.org/\"},\"pricing\":[{\"id\":\"1d\",\"duration\":\"1d\",\"price\":15000000,\"asset\":\"XTS\"},{\"id\":\"1w\",\"duration\":\"1w\",\"price\":100000000,\"asset\":\"XTS\"},{\"id\":\"1m\",\"duration\":\"1m\",\"price\":2800000000,\"asset\":\"XTS\"}]}}"
+    wallet_account_update_registration ad.dacplay dacplay "{\"ad\":{\"desc\":\"display at wallet home page\",\"detail_link\":\"http://dacplay.org/\",\"width\":\"400px\",\"height\":\"200px\",\"default_creative\":{\"version\":1,\"title\":\"default add 1\",\"type\":\"text\",\"creative\":{\"text\":\"Work Hard, PLAY Hard\",\"image\":\"\"},\"link\":\"http://dacplay.org/\"},\"pricing\":[{\"id\":\"1d\",\"duration\":\"1d\",\"price\":150000000,\"asset\":\"XTS\"},{\"id\":\"1w\",\"duration\":\"1w\",\"price\":1000000000,\"asset\":\"XTS\"},{\"id\":\"1m\",\"duration\":\"1m\",\"price\":28000000000,\"asset\":\"XTS\"}]}}"
     
     # image type
     {
@@ -236,26 +236,26 @@ bid on ad.dacplay
         {
           "id": "1d",
           "duration": "1d",
-          "price": 15000000,
+          "price": 150000000,
           "asset": "XTS"
         },
         {
           "id": "1w",
           "duration": "1w",
-          "price": 100000000,
+          "price": 1000000000,
           "asset": "XTS"
         },
         {
           "id": "1m",
           "duration": "1m",
-          "price": 2800000000,
+          "price": 28000000000,
           "asset": "XTS"
         }
         ]
       }
     }
     
-    wallet_account_update_registration ad.dacplay dacplay "{\"ad\":{\"desc\":\"display at wallet home page\",\"detail_link\":\"http://dacplay.org/\",\"width\":\"400px\",\"height\":\"200px\",\"default_creative\":{\"version\":1,\"title\":\"default add 1\",\"type\":\"image\",\"creative\":{\"text\":\"Work Hard, PLAY Hard\",\"image\":\"http://dacplay.org/ad/play1.jpg\"},\"link\":\"http://dacplay.org/\"},\"pricing\":[{\"id\":\"1d\",\"duration\":\"1d\",\"price\":15000000,\"asset\":\"XTS\"},{\"id\":\"1w\",\"duration\":\"1w\",\"price\":100000000,\"asset\":\"XTS\"},{\"id\":\"1m\",\"duration\":\"1m\",\"price\":2800000000,\"asset\":\"XTS\"}]}}"
+    wallet_account_update_registration ad.dacplay dacplay "{\"ad\":{\"desc\":\"display at wallet home page\",\"detail_link\":\"http://dacplay.org/\",\"width\":\"400px\",\"height\":\"200px\",\"default_creative\":{\"version\":1,\"title\":\"default add 1\",\"type\":\"image\",\"creative\":{\"text\":\"Work Hard, PLAY Hard\",\"image\":\"http://dacplay.org/ad/play1.jpg\"},\"link\":\"http://dacplay.org/\"},\"pricing\":[{\"id\":\"1d\",\"duration\":\"1d\",\"price\":150000000,\"asset\":\"XTS\"},{\"id\":\"1w\",\"duration\":\"1w\",\"price\":1000000000,\"asset\":\"XTS\"},{\"id\":\"1m\",\"duration\":\"1m\",\"price\":28000000000,\"asset\":\"XTS\"}]}}"
     
 # TrollBox Ad Position
 1PLS per bid + 1 PLS * (message size / 400 bytes + 1) (transaction fee)
