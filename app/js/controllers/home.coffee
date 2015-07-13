@@ -70,6 +70,8 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
                 catch err
                   null
 
+          Utils.shuffleArray $scope.ads
+
           if $scope.ads.length > 0
               $timeout ->
                   hlAd(0)

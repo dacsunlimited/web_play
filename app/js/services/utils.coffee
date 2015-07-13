@@ -203,6 +203,22 @@ angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
             return p
         , []
 
+    # // -> Fisher–Yates shuffle algorithm
+    shuffleArray: (array) ->
+      m = array.length
+
+      # // While there remain elements to shuffle
+      while (m)
+        # // Pick a remaining element…
+        i = Math.floor(Math.random() * m--)
+
+        # // And swap it with the current element.
+        t = array[m]
+        array[m] = array[i]
+        array[i] = t
+
+      return array
+
     pad: (num, size = 3) ->
         s = num + ""
         s = "0" + s while s.length < size
