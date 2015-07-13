@@ -29,6 +29,9 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
   form = null
   skip_once = true
 
+  trollbox_ui = '#troll_box'
+  current_scrollHeight = 0 # message panel height
+
   refresh_balance = ->
     Wallet.refresh_balances().then (balances) ->
       $scope.accounts.splice(0, $scope.accounts.length)
@@ -46,8 +49,25 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
         fetchChatMessages(chatListLimit)
 
   keep_chat_down = ->
-    elem = angular.element('.troll-box')
-    elem.scrollTop (elem.get(0).scrollHeight + 550)
+    elem = angular.element( trollbox_ui )
+    elem_dom = elem.get(0)
+    clientHeight = elem_dom.clientHeight
+    current_scrollTop = elem.data 'current_scrollTop'
+
+    # initially delta should be treated as zero
+    if current_scrollHeight == 0
+      deltaSH = 0
+    else
+      deltaSH = elem_dom.scrollHeight - current_scrollHeight
+
+    # if user is viewing last few lines, we show new contents
+    position2bottom = current_scrollHeight - clientHeight - current_scrollTop
+    if !current_scrollTop || position2bottom < 160 #average line_item height ((60+20) * 2)
+        checkpoint = elem_dom.scrollHeight - clientHeight - (if deltaSH < clientHeight then 0 else deltaSH)
+        elem_dom.scrollTop = checkpoint
+
+    elem.data 'current_scrollTop', elem_dom.scrollTop if elem_dom.scrollTop > current_scrollTop
+    current_scrollHeight  = elem_dom.scrollHeight if elem_dom.scrollHeight > current_scrollHeight
 
 
   chat_block_observer =
@@ -58,8 +78,9 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       deferred.resolve true
 
   Observer.registerObserver chat_block_observer
-  $scope.$on "$destroy", -> Observer.unregisterObserver(chat_block_observer)
-
+  $scope.$on "$destroy", ->
+    Observer.unregisterObserver(chat_block_observer)
+    angular.element( trollbox_ui ).off 'scroll'
 
   $scope.$watchCollection ->
       Wallet.accounts
@@ -74,6 +95,10 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
 
   init = ->
+    angular.element( trollbox_ui ).on 'scroll', (evt) ->
+      elem = angular.element( trollbox_ui )
+      elem.data 'current_scrollTop', elem.get(0).scrollTop
+
     # get ad position spec
     BlockchainAPI.get_account(chatAdPositionAcct).then (response) ->
       ad_spec = try

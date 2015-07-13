@@ -39,13 +39,21 @@
       padding-left:0;
 
       & > li {
-        display:block;
         list-style: none;
       }
     }
 
     .troll-item {
-      margin-bottom:10px;
+      margin-bottom:20px;
+
+      .identicon {
+        margin-left:0px;
+        margin-right:10px;
+      }
+
+      .troll-item-can {
+
+      }
 
       .username {
         display:block;
@@ -54,14 +62,18 @@
       .message-container {
         padding:10px 20px; display:inline-block;
         @include border-radius(5px);
-        background-color: #ccc;
+        background-color: #eee; font-size:14px;
 
       }
 
-      &.my-message { text-align:right; }
-//      &:nth-child(even) {
-//        text-align:right;
-//      }
+      &.my-message {
+        text-align:right;
+
+        .identicon {
+          margin-right:0px;
+          margin-left:10px;
+        }
+      }
     }
   }
 
