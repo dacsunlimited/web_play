@@ -9,6 +9,10 @@ angular.module("app.services").factory "AD", (Utils) ->
       when 'w' then parseInt(num) * 7
       when 'm' then parseInt(num) * 30
 
+  getMessageFee: (message) ->
+    msgSize = Utils.byteLength JSON.stringify(message + 10) # deal with marginal length problem
+    (parseInt( msgSize / 400 ) + 1)
+
   isValidBid: (bid, spec) ->
     valid = true
     # match pricing
@@ -21,8 +25,10 @@ angular.module("app.services").factory "AD", (Utils) ->
       null
     return false unless message
 
+    message_fee = @getMessageFee(bid)
+
     for pricing in spec.pricing
-      if pricing.id == message.bid and bid.amount.amount > pricing.price && bid.amount.asset_id == 0
+      if pricing.id == message.bid and bid.amount.amount >= (pricing.price + message_fee) && bid.amount.asset_id == 0
         duration = pricing.duration
         pricing_valid = true
         break

@@ -1,4 +1,4 @@
-angular.module("app").controller "TrollboxController", ($scope, $modal, $log, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout) ->
+angular.module("app").controller "TrollboxController", ($scope, $modal, $log, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, AD) ->
   chatAdPositionAcct  = Info.CHAT_ADD_POSITION_ACCT
   chatAdPricingID     = "plain1m"
   chatListLimit       = 50
@@ -166,12 +166,12 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
           keep_chat_down()
         , 300
 
-  getRequiredFee = (msgSize) ->
-    (pricing?.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+  getRequiredFee = (message_str) ->
+    (pricing?.price + AD.getMessageFee(message_str) * Info.PRECISION) / Info.PRECISION
 
   checkMessageFee = (message) ->
-    msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
-    feeRequired = getRequiredFee(msgSize)
+    # msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
+    feeRequired = getRequiredFee(message.message)
 
     return message.amount.amount / Info.PRECISION >= feeRequired
 
@@ -187,8 +187,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       form.$setValidity "message", false
       form.message.$error.reg_acct_required = true
 
-    msgSize = Utils.byteLength JSON.stringify($scope.chatBid)
-    $scope.feeRequired = getRequiredFee(msgSize + 10) # deail with marginal length problem
+    $scope.feeRequired = getRequiredFee($scope.chatBid)
 
     if $scope.feeRequired > $scope.from.account.balance.amount / $scope.precision
       form.$setValidity "message", false
@@ -206,7 +205,6 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
     # do api call
     public_message = JSON.stringify( $scope.chatBid )#.replace(/"/g,'\\\"')
-    console.log public_message
     WalletAPI.buy_ad($scope.feeRequired, $scope.symbol, $scope.from.account.account_name, chatAdPositionAcct, public_message).then (response) ->
 
       # notify staging
