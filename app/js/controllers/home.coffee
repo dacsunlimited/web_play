@@ -71,6 +71,7 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
                 catch err
                   null
 
+          # shuffle ads, display randomly
           Utils.shuffleArray $scope.ads
 
           if $scope.ads.length > 0

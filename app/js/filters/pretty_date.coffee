@@ -51,3 +51,7 @@ angular.module("app").filter "formatSortableExpiration", (Utils)->
 
 angular.module("app").filter "formatSortableTime", (Utils)->
   (value) -> value.pretty_time
+
+angular.module("app").filter "localTime", (Utils)->
+    (date) ->
+        date

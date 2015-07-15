@@ -46,6 +46,12 @@
     .troll-item {
       margin-bottom:20px;
 
+      .chat-sep {
+        display:block;
+        width:100%; text-align:center;
+        color: #ccc; margin-bottom:10px;
+      }
+
       .identicon {
         margin-left:0px;
         margin-right:10px;

@@ -1,7 +1,8 @@
 angular.module("app").controller "TrollboxController", ($scope, $modal, $log, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, AD) ->
-  chatAdPositionAcct  = Info.CHAT_ADD_POSITION_ACCT
-  chatAdPricingID     = "plain1m"
-  chatListLimit       = 50
+  chatAdPositionAcct    = Info.CHAT_ADD_POSITION_ACCT
+  chatAdPricingID       = "plain1m"
+  chatListLimit         = 50
+  chatSepBlockInterval  = 120 # 2 minutes
 
   adSpec = null
   pricing = null
@@ -124,7 +125,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       if response.length > 0
         my_account_ids = $scope.accounts.map (acct) -> acct.account_id
         # min amount is 200000
-        for message in (response.filter (r) -> r.amount.amount >= 200000 and checkMessageFee(r)).reverse()
+        for message in (response.filter (r) -> checkMessageFee(r)).reverse()
           bid = try angular.fromJson(message.message.replace(/\\\"/g,'\"'))
           catch err
             null
@@ -149,7 +150,12 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
               userid:   message.publisher_id,
               username: message.publisher_id
               message:  bid.creative.creative.text
+              timestamp: bid.starts_at
               is_mine:  mine
+              txid:     trx_id
+              block_num: null
+              trx_num:  0
+              is_fresh: false
 
             message_trx.push trx_id
 
@@ -159,12 +165,27 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
             for i in [0...new_messages.length]
               new_messages[i].username = response.result[i].name
 
-            # concat messages to $scope.messages
-            Array::push.apply $scope.messages, new_messages
+            RpcService.request("batch", [ "blockchain_get_transaction", (new_messages.map (m)-> [m.txid]) ]).then (response) ->
+              for i in [0...new_messages.length]
+                chain = response.result[i][1].chain_location
+                new_messages[i].block_num = chain.block_num
+                new_messages[i].trx_num  = chain.trx_num
 
-        $timeout ->
-          keep_chat_down()
-        , 300
+                if i == 0 or (i > 0 and chain.block_num - new_messages[i-1].block_num > chatSepBlockInterval)
+                  new_messages[i].is_fresh = true
+
+              # sort message by block_num, trx_num
+              new_messages
+
+              # push timestamp seperate line
+              # $scope.messages.push
+              # concat messages to $scope.messages
+
+              Array::push.apply $scope.messages, new_messages
+
+              $timeout ->
+                keep_chat_down()
+              , 300
 
   getRequiredFee = (message_str) ->
     (pricing?.price + AD.getMessageFee(message_str) * Info.PRECISION) / Info.PRECISION

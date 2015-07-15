@@ -3,13 +3,16 @@
 
     <div class="troll-box" id="troll_box">
       <ul>
-        <li layout="row" alyout-align="start start" class="troll-item" ng-repeat="message in messages" ng-class="{'my-message': message.is_mine}">
-          <identicon account="{{message.username}}" size="60" class="identicon" flex-order="{{message.is_mine ? 3 : 1}}" />
-          <div flex flex-order="2" class="troll-item-can">
-            <span class="username" data-id="{{message.userid}}">{{message.username}}:</span>
-            <div class="message-container">{{message.message}}</div>
+        <li layout="column" class="troll-item" ng-repeat="message in messages track by message.txid" ng-class="{'my-message': message.is_mine}">
+          <div class="chat-sep" ng-if="message.is_fresh" flex="100">{{message.timestamp | localTime}}</div>
+          <div layout="row" layout-align="start start">
+            <identicon account="{{message.username}}" size="60" class="identicon" flex-order="{{message.is_mine ? 3 : 1}}" />
+            <div flex flex-order="2" class="troll-item-can">
+              <span class="username" data-id="{{message.userid}}">{{message.username}}</span>
+              <div class="message-container">{{message.message}}</div>
+            </div>
+            <div flex="25" flex-order="{{message.is_mine ? 1 : 3}}"></div>
           </div>
-          <div flex="25" flex-order="{{message.is_mine ? 1 : 3}}"></div>
         </li>
       </ul>
     </div>

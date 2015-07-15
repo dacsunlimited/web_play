@@ -86,6 +86,10 @@ angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
             i++
         Date.UTC(nums[0], nums[1] - 1, nums[2], nums[3], nums[4], nums[5])
 
+
+    toLocalTime: (t) ->
+      t
+
     #advance time according to interval in seconds
     advance_interval: (t, interval, j) ->
         @formatUTCDate(new Date(@toUTCDate(t) + j * interval * 1000))
