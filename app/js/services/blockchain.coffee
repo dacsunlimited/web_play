@@ -156,11 +156,15 @@ class Blockchain
                 return def.promise
             if first_block + blocks_to_fetch > head_block
                 blocks_to_fetch = head_block - first_block
+
+            block_nums = []
+            block_nums.push [i] for i in [first_block...first_block-blocks_to_fetch]
             requests =
                 blocks: @blockchain_api.list_blocks(first_block, blocks_to_fetch)
-                signers: @rpc.request("batch", ["blockchain_get_block_signee", [i] for i in [first_block...first_block+blocks_to_fetch]])
-                missed: @rpc.request("batch", ["blockchain_list_missing_block_delegates", [i] for i in [first_block...first_block+blocks_to_fetch]])
+                signers: @rpc.request("batch", ["blockchain_get_block_signee", block_nums])
+                missed: @rpc.request("batch", ["blockchain_list_missing_block_delegates", block_nums])
                 config: @get_info()
+
             @q.all(requests).then (results) =>
                 blocks = results.blocks
                 missed = results.missed.result
