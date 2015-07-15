@@ -249,6 +249,10 @@ class Blockchain
         add_collateral_op_type : "Add Collateral Operation"
         remove_collateral_op_type : "Remove Collateral Operation"
         note_op_type: "Create Secret Note"
+        ad_op_type: "AD Operation"
+        game_op_type: "Game Operation"
+        buy_chips_type: "Buy Chip Operation"
+        create_game_operation_type: "Create Game Operation"
 
     # TODO
     populate_delegate: (record, active, rank) ->
