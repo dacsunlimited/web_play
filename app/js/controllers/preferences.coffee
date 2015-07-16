@@ -23,6 +23,10 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
         vote_per_transfer: "vote_per_transfer"
 
     $scope.model.themes = {}
+    $scope.model.timezone = Wallet.timezone
+
+    $scope.timezone_names = moment.tz.names()
+    $scope.search_text = ""
 
     getTranslations = () ->
         $translate.use($scope.model.language_locale).then () ->
@@ -69,11 +73,21 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
         $scope.model.language_name = $scope.model.languages[value]
 
     $scope.$watch ->
+        Wallet.timezone
+    , (value) ->
+        return if value == null
+        $scope.model.timezone = value
+
+    $scope.$watch ->
         Wallet.interface_theme
     , (value) ->
         return if value == null
         $scope.model.theme = value
         $scope.model.theme_name = $scope.model.themes[value]
+
+    $scope.queryTimezones = ->
+      $scope.timezone_names.filter (n) ->
+        n.toLowerCase().indexOf($scope.search_text.toLowerCase()) != -1
 
     $scope.updatePreferences = ->
         getTranslations()
@@ -87,6 +101,7 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
             $scope.model.transaction_fee = 0.1
             Growl.notice "", $scope.warnings.fee_too_low
         Wallet.timeout = $scope.model.timeout
+        Wallet.timezone = $scope.model.timezone
         $idle._options().idleDuration = Wallet.timeout
         pf = $scope.model.transaction_fee
         calls = [
@@ -95,10 +110,12 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
                 Wallet.set_setting('interface_locale', $scope.model.language_locale)
                 Wallet.set_setting('interface_theme', $scope.model.theme)
                 Wallet.set_setting('default_vote', $scope.voting.default_vote)
+                Wallet.set_setting('timezone', $scope.model.timezone)
         ]
         $q.all(calls).then (r) ->
             $translate.use($scope.model.language_locale)
             moment.locale($scope.model.language_locale)
+            moment.tz.setDefault($scope.model.timezone)
             Wallet.default_vote = $scope.voting.default_vote
             Growl.notice "", $scope.warnings.updated
 

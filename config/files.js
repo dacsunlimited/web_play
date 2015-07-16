@@ -32,6 +32,7 @@ module.exports = function(lineman) {
         "vendor/bower/angular-bootstrap/ui-bootstrap.js",
         "vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js",
         "vendor/bower/moment/min/moment-with-locales.js",
+        "vendor/bower/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
 
         "vendor/bower/angular-ui-grid/ui-grid.js",
         "vendor/bower/ng-idle/angular-idle.js",

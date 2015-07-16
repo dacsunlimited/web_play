@@ -22,6 +22,7 @@ class Wallet
 
     # set in constructor
     timeout: null
+    timezone: 'UTC'
 
     default_vote: 'vote_all'
 
@@ -89,6 +90,10 @@ class Wallet
                 @get_setting('interface_theme').then (result) =>
                     if result and result.value
                         @interface_theme = result.value
+                @get_setting('timezone').then (result) =>
+                    if result and result.value
+                        @timezone = result.value
+                        moment.tz.setDefault(result.value)
             , (error) ->
                 deferred.reject(error)
         , (error) ->
@@ -516,5 +521,6 @@ class Wallet
     constructor: (@q, @log, @location, @translate, @growl, @rpc, @blockchain, @utils, @wallet_api, @blockchain_api, @RpcService, @interval, @idle) ->
         @wallet_name = ""
         @timeout = @idle._options().idleDuration
+        @timezone = moment.defaultZone.name
 
 angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "$idle", Wallet])
