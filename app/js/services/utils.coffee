@@ -86,9 +86,14 @@ angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
             i++
         Date.UTC(nums[0], nums[1] - 1, nums[2], nums[3], nums[4], nums[5])
 
+    getMoment: (dt) ->
+      m = if typeof(dt) == 'string' and !dt.match(/\+/)
+        moment("#{dt}+0000")
+      else
+        moment(dt)
 
-    toLocalTime: (t) ->
-      t
+    toLocalDateTime: (dt, decorator = 'LT', zone = 'UTC') ->
+      @getMoment(dt).tz(zone).format(decorator)
 
     #advance time according to interval in seconds
     advance_interval: (t, interval, j) ->

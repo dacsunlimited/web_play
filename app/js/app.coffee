@@ -116,16 +116,17 @@ app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvi
         prefix: 'locale-',
         suffix: '.json'
 
-    lang = switch(window.navigator.language.toLowerCase())
-      when "zh-cn" then "zh-CN"
-      when "de", "de-de" then "de"
-      when "ru", "ru-ru" then "ru"
-      when "it", "it-it" then "it"
-      when "ko", "ko-kr" then "ko"
-      when "es", "es-ar", "es-bo", "es-cl", "es-co", "es-cr", "es-do", "es-ec", "es-sv", "es-gt", "es-hn", "es-mx", "es-ni", "es-pa", "es-py", "es-pe", "es-pr", "es-es", "es-uy", "es-ve" then "es"
-      else "en"
+    [lang,zone] = switch(window.navigator.language.toLowerCase())
+      when "zh-cn" then ["zh-CN","Asia/Shanghai"]
+      when "de", "de-de" then ["de","Europe/Berlin"]
+      when "ru", "ru-ru" then ["ru","Europe/Moscow"]
+      when "it", "it-it" then ["it","Europe/Rome"]
+      when "ko", "ko-kr" then ["ko","Asia/Seoul"]
+      when "es", "es-ar", "es-bo", "es-cl", "es-co", "es-cr", "es-do", "es-ec", "es-sv", "es-gt", "es-hn", "es-mx", "es-ni", "es-pa", "es-py", "es-pe", "es-pr", "es-es", "es-uy", "es-ve" then ["es","UTC"]
+      else ["en","UTC"]
 
     moment.locale(lang)
+    moment.tz.setDefault(zone)
 
     $translateProvider.preferredLanguage(lang).fallbackLanguage('en')
 
