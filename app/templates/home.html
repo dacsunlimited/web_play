@@ -4,7 +4,7 @@
   <p layout="row">
     <span>{{ann.message}}</span>
     <span flex></span>
-    <md-button class="md-raised" href="{{ann.url}}" target="_blank" ng-if="ann.url">{{'btn.learn_more'|translate}}</md-button>
+    <md-button class="md-raised" href="{{ann.url}}" ng-if="ann.url">{{'btn.learn_more'|translate}}</md-button>
   </p>
 </div>
 
@@ -22,7 +22,7 @@
           rn-carousel-controls-allow-loop
       >
         <li ng-repeat="ad in ads track by $index" ng-switch="ad.creative.type">
-          <a ng-href="{{ad.creative.link}}" title="{{ad.creative.title}}" target="_blank">
+          <a ng-href="{{ad.creative.link}}" title="{{ad.creative.title}}" >
             <div ng-switch-when="image" ng-style="{'background-image': 'url('+ad.creative.creative.image+')'}"  class="bgimage">
             </div>
 
