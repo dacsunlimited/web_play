@@ -539,7 +539,8 @@
     "time_too_low": "Die Zeitüberschreitung für Benutzereingaben wurde auf erhöht auf 15",
     "time_too_high": "Die Zeitüberschreitung für Benutzereingaben wurde auf auf 99999999 verringert.",
     "fee_too_low": "Die Transaktionsgebühren wurden auf den Minimalwert von 0.1 PLS erhöht.",
-    "updated": "Präferenzen aktualisiert"
+    "updated": "Präferenzen aktualisiert",
+    "timezone": "Time Zone"
   },
   "console": {
     "type_cmd_and_enter": "Wählen Sie ein Kommando und bestätigen Sie anschließend mit der Eingabetaste."

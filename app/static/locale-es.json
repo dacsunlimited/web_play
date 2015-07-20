@@ -552,7 +552,8 @@
     "time_too_low": "User-input timeout was too low. It was increased to 15",
     "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
     "fee_too_low": "Tasa de transferencia demasiado pequeña. A sido incrementada a 0.1 PLS",
-    "updated": "Preferencias Actualizadas"
+    "updated": "Preferencias Actualizadas",
+    "timezone": "Time Zone"
   },
   "console": {
     "type_cmd_and_enter": "Escribe un comando y pulsa Enter"

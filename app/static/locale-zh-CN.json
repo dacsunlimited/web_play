@@ -577,7 +577,8 @@
     "time_too_low": "输入的秒数太短。 已经增加到15",
     "time_too_high": "输入的秒数太长。 已经减少到99999999",
     "fee_too_low": "手续费太低。 已经增加到0.1 PLS",
-    "updated": "设置已经更新"
+    "updated": "设置已经更新",
+    "timezone": "时区"
   },
   "console": {
     "type_cmd_and_enter": "输入命令并回车"

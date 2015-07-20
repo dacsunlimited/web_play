@@ -595,7 +595,8 @@
     "time_too_low": "User-input timeout was too low. It was increased to 15",
     "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
     "fee_too_low": "Transaction fee was too low. It was increased to 0.1 PLS",
-    "updated": "Preferences Updated"
+    "updated": "Preferences Updated",
+    "timezone": "Time Zone"
   },
   "console": {
     "type_cmd_and_enter": "Type a command and hit Enter"
