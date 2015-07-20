@@ -646,7 +646,8 @@
     "n_network_connection": "{{value}} 个网络连接",
     "network_problems": "网络问题",
     "severe_network_problems": "严重网络问题",
-    "delegate_participation_below": "受托人参与率低于{{value}}， 请暂缓所有交易直到参与率回到100%。 "
+    "delegate_participation_below": "受托人参与率低于{{value}}， 请暂缓所有交易直到参与率回到100%。 ",
+    "sync_progress": "区块链同步进度"
   },
   "utils": {
     "expired": "超时",

@@ -608,7 +608,8 @@
     "n_network_connection": "{{value}} Netzwerkverbindungen",
     "network_problems": "Netzwerkprobleme",
     "severe_network_problems": "Schwerwiegende Netzwerkprobleme",
-    "delegate_participation_below": "Delegiertenbeteiligung liegt derzeit unter {{value}}, bitte stellen Sie (falls möglich) alle Überweisungen zurück bis das Netzwerk wieder 100% erreicht hat."
+    "delegate_participation_below": "Delegiertenbeteiligung liegt derzeit unter {{value}}, bitte stellen Sie (falls möglich) alle Überweisungen zurück bis das Netzwerk wieder 100% erreicht hat.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "Abgelaufen",

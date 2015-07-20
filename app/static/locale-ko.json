@@ -606,7 +606,8 @@
     "n_network_connection": "{{value}} 네트워크 연결",
     "network_problems": "네트워크 오류",
     "severe_network_problems": "심각한 네트워크 오류",
-    "delegate_participation_below": "대표자 참여율이 {{value}} 에 못미치므로, 100% 가 되기 전까지는 모든 전송을 미루어 두시기를 권합니다."
+    "delegate_participation_below": "대표자 참여율이 {{value}} 에 못미치므로, 100% 가 되기 전까지는 모든 전송을 미루어 두시기를 권합니다.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "만료",

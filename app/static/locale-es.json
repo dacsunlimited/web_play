@@ -621,7 +621,8 @@
     "n_network_connection": "{{value}} conexiones de red",
     "network_problems": "Problemas en la Red",
     "severe_network_problems": "Problemas Severos en la Red",
-    "delegate_participation_below": "El ratio de participacion de los Delegados esta por debajo de {{value}}, por favor considera posponer las transacciones hasta que este ratio ascienda al 100%."
+    "delegate_participation_below": "El ratio de participacion de los Delegados esta por debajo de {{value}}, por favor considera posponer las transacciones hasta que este ratio ascienda al 100%.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "Caducado",

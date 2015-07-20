@@ -604,7 +604,8 @@
     "n_network_connection": "{{value}} network connections",
     "network_problems": "Network problem",
     "severe_network_problems": "Severe network problem",
-    "delegate_participation_below": "Delegate participation rate below {{value}}, please postpone transactions until it returns to 100%."
+    "delegate_participation_below": "Delegate participation rate below {{value}}, please postpone transactions until it returns to 100%.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "Scaduto",
