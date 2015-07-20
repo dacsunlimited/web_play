@@ -431,7 +431,8 @@
     "registered" : "Registriert am",
     "pay_to": "Überweisung an",
     "unknown": "Unknown Account",
-    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account",
+    "wait_to_synchronize": "The wallet needs to be fully synchronized with the blockchain in order to create an account. Please be patient."
   },
   "accounts": {
     "add_account": "Konto erstellen",

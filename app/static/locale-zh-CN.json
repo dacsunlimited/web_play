@@ -467,7 +467,8 @@
     "claimed": "已领取 {{amount}} {{symbol}}",
     "public_data": "公开信息",
     "unknown": "未知账户名/联系人",
-    "memo_tip_account_only": "只有向注册账户名转账时可以附带消息"
+    "memo_tip_account_only": "只有向注册账户名转账时可以附带消息",
+    "wait_to_synchronize": "钱包需要与区块链完全同步后才能创建账户，请耐心等待。"
   },
   "accounts": {
     "add_account": "创建新账户",
