@@ -156,11 +156,15 @@ class Blockchain
                 return def.promise
             if first_block + blocks_to_fetch > head_block
                 blocks_to_fetch = head_block - first_block
+
+            block_nums = []
+            block_nums.push [i] for i in [first_block...first_block-blocks_to_fetch]
             requests =
                 blocks: @blockchain_api.list_blocks(first_block, blocks_to_fetch)
-                signers: @rpc.request("batch", ["blockchain_get_block_signee", [i] for i in [first_block...first_block+blocks_to_fetch]])
-                missed: @rpc.request("batch", ["blockchain_list_missing_block_delegates", [i] for i in [first_block...first_block+blocks_to_fetch]])
+                signers: @rpc.request("batch", ["blockchain_get_block_signee", block_nums])
+                missed: @rpc.request("batch", ["blockchain_list_missing_block_delegates", block_nums])
                 config: @get_info()
+
             @q.all(requests).then (results) =>
                 blocks = results.blocks
                 missed = results.missed.result
@@ -245,6 +249,10 @@ class Blockchain
         add_collateral_op_type : "Add Collateral Operation"
         remove_collateral_op_type : "Remove Collateral Operation"
         note_op_type: "Create Secret Note"
+        ad_op_type: "AD Operation"
+        game_op_type: "Game Operation"
+        buy_chips_type: "Buy Chip Operation"
+        create_game_operation_type: "Create Game Operation"
 
     # TODO
     populate_delegate: (record, active, rank) ->
@@ -271,44 +279,5 @@ class Blockchain
                 @inactive_delegates[i - results.config.delegate_num] = @populate_delegate(results.dels[i], false, i+1)
                 @id_delegates[results.dels[i].id] = results.dels[i]
                 @delegate_inactive_hash_map[@inactive_delegates[i-results.config.delegate_num].name]=true
-
-    price_history: (quote_symbol, base_symbol, start_time, duration, granularity) ->
-        #@blockchain_api.market_price_history(quote_symbol, base_symbol, start_time, duration, granularity).then (result) ->
-        #    console.log 'price_history -----', result
-        json = '''
-        [[
-        "20200101T175300",{
-          "highest_bid": {
-            "ratio": "0.045",
-            "quote_asset_id": 1,
-            "base_asset_id": 0
-          },
-          "lowest_ask": {
-            "ratio": "0.0656",
-            "quote_asset_id": 1,
-            "base_asset_id": 0
-          },
-          "volume": 1
-        }
-        ],
-        "20200101T175400",{
-          "highest_bid": {
-            "ratio": "0.045",
-            "quote_asset_id": 1,
-            "base_asset_id": 0
-          },
-          "lowest_ask": {
-            "ratio": "0.0656",
-            "quote_asset_id": 1,
-            "base_asset_id": 0
-          },
-          "volume": 1
-        }
-        ]
-        '''
-        deferred = @q.defer()
-        deferred.resolve(JSON.parse(json))
-        return deferred.promise
-
 
 angular.module("app").service("Blockchain", ["Client", "NetworkAPI", "RpcService", "BlockchainAPI", "Utils", "$q", "$interval", Blockchain])

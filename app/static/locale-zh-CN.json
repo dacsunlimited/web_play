@@ -467,7 +467,8 @@
     "claimed": "已领取 {{amount}} {{symbol}}",
     "public_data": "公开信息",
     "unknown": "未知账户名/联系人",
-    "memo_tip_account_only": "只有向注册账户名转账时可以附带消息"
+    "memo_tip_account_only": "只有向注册账户名转账时可以附带消息",
+    "wait_to_synchronize": "钱包需要与区块链完全同步后才能创建账户，请耐心等待。"
   },
   "accounts": {
     "add_account": "创建新账户",
@@ -577,7 +578,8 @@
     "time_too_low": "输入的秒数太短。 已经增加到15",
     "time_too_high": "输入的秒数太长。 已经减少到99999999",
     "fee_too_low": "手续费太低。 已经增加到0.1 PLS",
-    "updated": "设置已经更新"
+    "updated": "设置已经更新",
+    "timezone": "时区"
   },
   "console": {
     "type_cmd_and_enter": "输入命令并回车"
@@ -646,7 +648,8 @@
     "n_network_connection": "{{value}} 个网络连接",
     "network_problems": "网络问题",
     "severe_network_problems": "严重网络问题",
-    "delegate_participation_below": "受托人参与率低于{{value}}， 请暂缓所有交易直到参与率回到100%。 "
+    "delegate_participation_below": "受托人参与率低于{{value}}， 请暂缓所有交易直到参与率回到100%。 ",
+    "sync_progress": "区块链同步进度"
   },
   "utils": {
     "expired": "超时",

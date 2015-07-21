@@ -1,13 +1,10 @@
 date_params = {timeZone:"UTC",  weekday: undefined, year: "numeric", month: "numeric",  day: "numeric", hour: "numeric", minute: "numeric"}
 
-angular.module("app").filter "prettyDate", (Utils)->
+angular.module("app").filter "prettyDate", (Utils, Wallet)->
     (date, format) ->
         return "-" if !date or date.valueOf() == "1970-01-01T00:00:00"
         format_str = if format == "short" then "L" else "L LT"
-        if angular.isDate(date)
-            return moment(date).format(format_str)
-        else
-            return moment(Utils.toDate(date)).format(format_str)
+        Utils.toLocalDateTime date, format_str, Wallet.timezone
 
 angular.module("app").filter "prettySortableTime", (Utils)->
     (time) ->
@@ -51,3 +48,14 @@ angular.module("app").filter "formatSortableExpiration", (Utils)->
 
 angular.module("app").filter "formatSortableTime", (Utils)->
   (value) -> value.pretty_time
+
+angular.module("app").filter "localTime", (Wallet, Utils)->
+    (date) ->
+        s = moment().startOf('day')
+        e = moment().endOf('day')
+        m = Utils.getMoment(date)
+        format_str = if m < s or m > e
+            'L LT'
+          else
+            'LT'
+        Utils.toLocalDateTime(m, format_str, Wallet.timezone)

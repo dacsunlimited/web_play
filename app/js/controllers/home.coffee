@@ -20,7 +20,7 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
       hlAd(index)
 
     # get annoucements
-    BlockchainAPI.get_account_notes(annoucement_account).then (results) ->
+    BlockchainAPI.get_account_notes(annoucement_account, 10).then (results) ->
         $scope.announcements.splice(0, $scope.announcements.length)
         tx_ids = if results
           (results.filter (m) -> m.message.type == 'public_type').map (m) -> m.index.transaction_id
@@ -33,6 +33,7 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
             messages = response.result
             for i in [0...messages.length]
                 note = SecretNote.decode( 'public_type', messages[i] )
+
                 if note.starts_at and note.expires_at and
                 Utils.toDate(note.starts_at) < new Date() and
                 Utils.toDate(note.expires_at) > new Date()
@@ -69,6 +70,9 @@ angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log
                   pd.ad
                 catch err
                   null
+
+          # shuffle ads, display randomly
+          Utils.shuffleArray $scope.ads
 
           if $scope.ads.length > 0
               $timeout ->

@@ -447,7 +447,8 @@
     "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "unknown": "Unknown Account",
-    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account",
+    "wait_to_synchronize": "The wallet needs to be fully synchronized with the blockchain in order to create an account. Please be patient."
   },
   "accounts": {
     "create_account": "Crear nueva Cuenta",
@@ -552,7 +553,8 @@
     "time_too_low": "User-input timeout was too low. It was increased to 15",
     "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
     "fee_too_low": "Tasa de transferencia demasiado pequeña. A sido incrementada a 0.1 PLS",
-    "updated": "Preferencias Actualizadas"
+    "updated": "Preferencias Actualizadas",
+    "timezone": "Time Zone"
   },
   "console": {
     "type_cmd_and_enter": "Escribe un comando y pulsa Enter"
@@ -621,7 +623,8 @@
     "n_network_connection": "{{value}} conexiones de red",
     "network_problems": "Problemas en la Red",
     "severe_network_problems": "Problemas Severos en la Red",
-    "delegate_participation_below": "El ratio de participacion de los Delegados esta por debajo de {{value}}, por favor considera posponer las transacciones hasta que este ratio ascienda al 100%."
+    "delegate_participation_below": "El ratio de participacion de los Delegados esta por debajo de {{value}}, por favor considera posponer las transacciones hasta que este ratio ascienda al 100%.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "Caducado",

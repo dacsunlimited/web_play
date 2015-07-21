@@ -86,6 +86,15 @@ angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
             i++
         Date.UTC(nums[0], nums[1] - 1, nums[2], nums[3], nums[4], nums[5])
 
+    getMoment: (dt) ->
+      m = if typeof(dt) == 'string' and !dt.match(/\+/)
+        moment("#{dt}+0000")
+      else
+        moment(dt)
+
+    toLocalDateTime: (dt, decorator = 'LT', zone = 'UTC') ->
+      @getMoment(dt).tz(zone).format(decorator)
+
     #advance time according to interval in seconds
     advance_interval: (t, interval, j) ->
         @formatUTCDate(new Date(@toUTCDate(t) + j * interval * 1000))
@@ -202,6 +211,22 @@ angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
               p.push c
             return p
         , []
+
+    # // -> Fisher–Yates shuffle algorithm
+    shuffleArray: (array) ->
+      m = array.length
+
+      # // While there remain elements to shuffle
+      while (m)
+        # // Pick a remaining element…
+        i = Math.floor(Math.random() * m--)
+
+        # // And swap it with the current element.
+        t = array[m]
+        array[m] = array[i]
+        array[i] = t
+
+      return array
 
     pad: (num, size = 3) ->
         s = num + ""

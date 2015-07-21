@@ -30,7 +30,7 @@
          <!-- voting options -->
          <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.default_vote</label>
          <md-input-container>
-           <div class="col-sm-3 no-lr-padding">
+           <div class="col-sm-3 input-group">
              <div class="btn-group" dropdown is-open="status3.isopen">
                <button type="button" class="btn dropdown-toggle" dropdown-toggle>
                  {{ ('account.vote.' + voting.vote_options[voting.default_vote]) | translate }} <span class="caret"></span>
@@ -60,6 +60,25 @@
           </div>
         </md-input-container>
 
+        <!-- timezone -->
+        <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.timezone</label>
+        <md-autocomplete class="col-sm-3 input-group"
+                  md-search-text-change="searchTextChange()"
+                  md-selected-item="model.timezone"
+                  md-search-text="search_text"
+                  md-selected-item-change="selectedItemChange(item)"
+                  md-items="item in queryTimezones()"
+                  md-item-text="item"
+                  md-min-length="1"
+                  placeholder="Input your timezone">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
+            </md-item-template>
+            <md-not-found>
+              No matches found for "{{searchText}}".
+            </md-not-found>
+        </md-autocomplete>
+
       <!-- <md-input-container>
         <label translate>pref.theme</label>
         <div class="col-sm-3 no-lr-padding">
@@ -75,6 +94,8 @@
           </div>
         </div>
       </md-input-container> -->
+
+        <md-divider style="margin:1rem 0px;"></md-divider>
 
         <div class="col-sm-offset-4">
           <md-button type="submit" class="md-primary md-raised" translate>btn.update</md-button>

@@ -1,4 +1,4 @@
-angular.module("app").filter "reverse", ->
+angular.module("app").filter "reverse", ()->
   (items) ->
     if not items
         return items
@@ -13,3 +13,10 @@ angular.module("app").filter "reverse", ->
 #            a = a[attribute]
 #            b = b[attribute]
 #            b - a
+
+angular.module("app").filter "shuffle", (Utils)->
+  (items) ->
+    if not items
+        return items
+
+    Utils.shuffleArray items

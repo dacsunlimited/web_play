@@ -1,7 +1,8 @@
-angular.module("app").controller "TrollboxController", ($scope, $modal, $log, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout) ->
-  chatAdPositionAcct  = Info.CHAT_ADD_POSITION_ACCT
-  chatAdPricingID     = "plain1m"
-  chatListLimit       = 50
+angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, AD) ->
+  chatAdPositionAcct    = Info.CHAT_ADD_POSITION_ACCT
+  chatAdPricingID       = "plain1m"
+  chatListLimit         = 50
+  chatSepBlockInterval  = 120 # 2 minutes
 
   adSpec = null
   pricing = null
@@ -29,6 +30,9 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
   form = null
   skip_once = true
 
+  trollbox_ui = '#troll_box'
+  current_scrollHeight = 0 # message panel height
+
   refresh_balance = ->
     Wallet.refresh_balances().then (balances) ->
       $scope.accounts.splice(0, $scope.accounts.length)
@@ -46,8 +50,25 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
         fetchChatMessages(chatListLimit)
 
   keep_chat_down = ->
-    elem = angular.element('.troll-box')
-    elem.scrollTop (elem.get(0).scrollHeight + 550)
+    elem = angular.element( trollbox_ui )
+    elem_dom = elem.get(0)
+    clientHeight = elem_dom.clientHeight
+    current_scrollTop = elem.data 'current_scrollTop'
+
+    # initially delta should be treated as zero
+    if current_scrollHeight == 0
+      deltaSH = 0
+    else
+      deltaSH = elem_dom.scrollHeight - current_scrollHeight
+
+    # if user is viewing last few lines, we show new contents
+    position2bottom = current_scrollHeight - clientHeight - current_scrollTop
+    if !current_scrollTop || position2bottom < 160 #average line_item height ((60+20) * 2)
+        checkpoint = elem_dom.scrollHeight - clientHeight - (if deltaSH < clientHeight then 0 else deltaSH)
+        elem_dom.scrollTop = checkpoint
+
+    elem.data 'current_scrollTop', elem_dom.scrollTop if elem_dom.scrollTop > current_scrollTop
+    current_scrollHeight  = elem_dom.scrollHeight if elem_dom.scrollHeight > current_scrollHeight
 
 
   chat_block_observer =
@@ -58,8 +79,9 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       deferred.resolve true
 
   Observer.registerObserver chat_block_observer
-  $scope.$on "$destroy", -> Observer.unregisterObserver(chat_block_observer)
-
+  $scope.$on "$destroy", ->
+    Observer.unregisterObserver(chat_block_observer)
+    angular.element( trollbox_ui ).off 'scroll'
 
   $scope.$watchCollection ->
       Wallet.accounts
@@ -74,6 +96,10 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
 
   init = ->
+    angular.element( trollbox_ui ).on 'scroll', (evt) ->
+      elem = angular.element( trollbox_ui )
+      elem.data 'current_scrollTop', elem.get(0).scrollTop
+
     # get ad position spec
     BlockchainAPI.get_account(chatAdPositionAcct).then (response) ->
       ad_spec = try
@@ -99,7 +125,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       if response.length > 0
         my_account_ids = $scope.accounts.map (acct) -> acct.account_id
         # min amount is 200000
-        for message in (response.filter (r) -> r.amount.amount >= 200000 and checkMessageFee(r)).reverse()
+        for message in (response.filter (r) -> checkMessageFee(r)).reverse()
           bid = try angular.fromJson(message.message.replace(/\\\"/g,'\"'))
           catch err
             null
@@ -124,29 +150,50 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
               userid:   message.publisher_id,
               username: message.publisher_id
               message:  bid.creative.creative.text
+              timestamp: bid.starts_at
               is_mine:  mine
+              txid:     trx_id
+              block_num: null
+              trx_num:  0
+              is_fresh: false
 
             message_trx.push trx_id
 
         # fetch names
         if new_messages.length > 0
-          RpcService.request("batch", [ "blockchain_get_account", (new_messages.map (m)-> [m.userid]) ]).then (response) ->
-            for i in [0...new_messages.length]
-              new_messages[i].username = response.result[i].name
+          requests =
+            accts: RpcService.request("batch", [ "blockchain_get_account", (new_messages.map (m)-> [m.userid]) ])
+            trxs:  RpcService.request("batch", [ "blockchain_get_transaction", (new_messages.map (m)-> [m.txid]) ])
 
-            # concat messages to $scope.messages
+          $q.all(requests).then (response) ->
+            accts = response.accts.result
+            trxs  = response.trxs.result
+
+            for i in [0...new_messages.length]
+              msg = new_messages[i]
+
+              msg.username = accts[i].name
+              chain = trxs[i][1].chain_location
+              msg.block_num = chain.block_num
+              msg.trx_num   = chain.trx_num
+
+              msg.is_fresh = (i == 0 or (i > 0 and chain.block_num - new_messages[i-1].block_num > chatSepBlockInterval))
+
+            # sort message by block_num, trx_num
+            new_messages
+
             Array::push.apply $scope.messages, new_messages
 
-        $timeout ->
-          keep_chat_down()
-        , 300
+            $timeout ->
+              keep_chat_down()
+            , 300
 
-  getRequiredFee = (msgSize) ->
-    (pricing?.price + (parseInt( msgSize / 400 ) + 1) * Info.PRECISION) / Info.PRECISION
+  getRequiredFee = (message_str) ->
+    (pricing?.price + AD.getMessageFee(message_str) * Info.PRECISION) / Info.PRECISION
 
   checkMessageFee = (message) ->
-    msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
-    feeRequired = getRequiredFee(msgSize)
+    # msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
+    feeRequired = getRequiredFee(message.message)
 
     return message.amount.amount / Info.PRECISION >= feeRequired
 
@@ -162,8 +209,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
       form.$setValidity "message", false
       form.message.$error.reg_acct_required = true
 
-    msgSize = Utils.byteLength JSON.stringify($scope.chatBid)
-    $scope.feeRequired = getRequiredFee(msgSize + 10) # deail with marginal length problem
+    $scope.feeRequired = getRequiredFee($scope.chatBid)
 
     if $scope.feeRequired > $scope.from.account.balance.amount / $scope.precision
       form.$setValidity "message", false
@@ -181,7 +227,6 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, Rp
 
     # do api call
     public_message = JSON.stringify( $scope.chatBid )#.replace(/"/g,'\\\"')
-    console.log public_message
     WalletAPI.buy_ad($scope.feeRequired, $scope.symbol, $scope.from.account.account_name, chatAdPositionAcct, public_message).then (response) ->
 
       # notify staging

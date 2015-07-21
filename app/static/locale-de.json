@@ -431,7 +431,8 @@
     "registered" : "Registriert am",
     "pay_to": "Überweisung an",
     "unknown": "Unknown Account",
-    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account",
+    "wait_to_synchronize": "The wallet needs to be fully synchronized with the blockchain in order to create an account. Please be patient."
   },
   "accounts": {
     "add_account": "Konto erstellen",
@@ -539,7 +540,8 @@
     "time_too_low": "Die Zeitüberschreitung für Benutzereingaben wurde auf erhöht auf 15",
     "time_too_high": "Die Zeitüberschreitung für Benutzereingaben wurde auf auf 99999999 verringert.",
     "fee_too_low": "Die Transaktionsgebühren wurden auf den Minimalwert von 0.1 PLS erhöht.",
-    "updated": "Präferenzen aktualisiert"
+    "updated": "Präferenzen aktualisiert",
+    "timezone": "Time Zone"
   },
   "console": {
     "type_cmd_and_enter": "Wählen Sie ein Kommando und bestätigen Sie anschließend mit der Eingabetaste."
@@ -608,7 +610,8 @@
     "n_network_connection": "{{value}} Netzwerkverbindungen",
     "network_problems": "Netzwerkprobleme",
     "severe_network_problems": "Schwerwiegende Netzwerkprobleme",
-    "delegate_participation_below": "Delegiertenbeteiligung liegt derzeit unter {{value}}, bitte stellen Sie (falls möglich) alle Überweisungen zurück bis das Netzwerk wieder 100% erreicht hat."
+    "delegate_participation_below": "Delegiertenbeteiligung liegt derzeit unter {{value}}, bitte stellen Sie (falls möglich) alle Überweisungen zurück bis das Netzwerk wieder 100% erreicht hat.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "Abgelaufen",

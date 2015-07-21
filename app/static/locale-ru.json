@@ -429,7 +429,8 @@
     "claimed": "Claimed {{amount}} {{symbol}}",
     "public_data": "Public Data",
     "unknown": "Unknown Account",
-    "memo_tip_account_only": "Memo is available only when recipient is a registered account"
+    "memo_tip_account_only": "Memo is available only when recipient is a registered account",
+    "wait_to_synchronize": "The wallet needs to be fully synchronized with the blockchain in order to create an account. Please be patient."
   },
   "accounts": {
     "add_account": "Добавить аккаунт",
@@ -539,7 +540,8 @@
     "time_too_low": "User-input timeout was too low. It was increased to 15",
     "time_too_high": "User-input timeout was too high. It was decreased to 99999999",
     "fee_too_low": "Transaction fee was too low. It was increased to 0.1 PLS",
-    "updated": "Preferences Updated"
+    "updated": "Preferences Updated",
+    "timezone": "Time Zone"
   },
   "console": {
     "type_cmd_and_enter": "Введите команду и нажмите Enter"
@@ -608,7 +610,8 @@
     "n_network_connection": "{{value}} network connections",
     "network_problems": "Network problem",
     "severe_network_problems": "Severe network problem",
-    "delegate_participation_below": "Delegate participation rate below {{value}}, please postpone transactions until it returns to 100%."
+    "delegate_participation_below": "Delegate participation rate below {{value}}, please postpone transactions until it returns to 100%.",
+    "sync_progress": "Blockchain synchronization progress"
   },
   "utils": {
     "expired": "Истек",
