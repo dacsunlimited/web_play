@@ -62,7 +62,11 @@
       }
 
       .username {
-        display:block;
+        display:block; font-weight:bold;
+      }
+
+      .rp {
+        font-weight:normal; font-size:10px; margin-left:4px;
       }
 
       .message-container {

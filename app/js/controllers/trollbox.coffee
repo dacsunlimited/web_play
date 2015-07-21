@@ -147,8 +147,9 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
                 $scope.staged_messages.splice foundIndex, 1
 
             new_messages.push
-              userid:   message.publisher_id,
+              userid:   message.publisher_id
               username: message.publisher_id
+              rp: null
               message:  bid.creative.creative.text
               timestamp: bid.starts_at
               is_mine:  mine
@@ -171,9 +172,11 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
             for i in [0...new_messages.length]
               msg = new_messages[i]
-
-              msg.username = accts[i].name
+              acct  = accts[i]
               chain = trxs[i][1].chain_location
+
+              msg.username  = acct.name
+              msg.rp        = acct.stats_info.rp
               msg.block_num = chain.block_num
               msg.trx_num   = chain.trx_num
 

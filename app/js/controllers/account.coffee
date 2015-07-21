@@ -53,11 +53,6 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     $scope.private_key = {value : ""}
     $scope.p = { pendingRegistration: Wallet.pendingRegistrations[name] }
     $scope.wallet_info = {file: "", password: "", type: 'Bitcoin/PTS'}
-    Blockchain.refresh_delegates().then ->
-        if ($scope.account and $scope.account.delegate_info)
-            $scope.active_delegate = Blockchain.delegate_active_hash_map[name]
-            $scope.rank = Blockchain.all_delegates[name].rank
-
 
     account_balances_observer =
         name: "account_balances_observer"
@@ -71,13 +66,11 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     Wallet.get_account(name).then (acct)->
         $scope.account = acct
         $scope.account.private_data ||= {}
-        $scope.account_name = acct.name
+        $scope.account_name = acct.name + 'acc'
         Wallet.set_current_account(acct)
         Observer.registerObserver(account_balances_observer)
         if $scope.account.delegate_info
             update_delegate_info (acct) # update delegate info
-            Blockchain.get_asset(0).then (asset_type) ->
-                $scope.account.delegate_info.pay_balance_asset = Utils.asset($scope.account.delegate_info.pay_balance, asset_type)
 
         #check if already registered.  this call should be removed when the name conflict info is added to the Wallet.get_account return value
         BlockchainAPI.get_account(name).then (result) ->
@@ -93,12 +86,14 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
             Wallet.refresh_contacts().then ->
                 BlockchainAPI.get_account(name).then (val) ->
                     val = Wallet.contacts[name] unless val
-                    account = { name: val.name, registration_date: val.registration_date }
+                    account = val
                     account.active_key = val.active_key_history[val.active_key_history.length - 1][1] if val.active_key_history?.length > 0
                     account.registered = val.registration_date and val.registration_date != "1970-01-01T00:00:00"
                     account.is_my_account = false
                     account.is_address_book_contact = !!Wallet.contacts[name]
                     $scope.account = account
+
+                    update_delegate_info() if account.delegate_info
 
 
     #Wallet.refresh_account(name)
@@ -138,10 +133,22 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
         Observer.unregisterObserver(account_balances_observer)
 
     update_delegate_info = (acct) ->
-        $scope.delegate = {}
-        if acct.public_data?.delegate?.role >= 0
-            $translate('delegate.role_' + acct.public_data.delegate.role).then (role) ->
-                $scope.delegate.role = role
+        requests =
+            asset_type: Blockchain.get_asset(0)
+            delegates: Blockchain.refresh_delegates()
+
+        $q.all(requests).then (response) ->
+            asset_type = response.asset_type
+            $scope.account.delegate_info.pay_balance_asset = Utils.asset($scope.account.delegate_info.pay_balance, asset_type)
+
+            if ($scope.account and $scope.account.delegate_info)
+                $scope.active_delegate = Blockchain.delegate_active_hash_map[name]
+                $scope.rank = Blockchain.all_delegates[name].rank
+
+            $scope.delegate = {}
+            if $scope.account.public_data?.delegate?.role >= 0
+                $translate('delegate.role_' + $scope.account.public_data.delegate.role).then (role) ->
+                    $scope.delegate.role = role
 
     $scope.vesting_balance_percentage = ->
       if $scope.vesting_balance
