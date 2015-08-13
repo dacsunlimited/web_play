@@ -122,7 +122,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
     new_messages = []
     # get latest chat messages (limit n messages)
     BlockchainAPI.get_account_ads(chatAdPositionAcct, limit).then (response) ->
-      if response.length > 0
+      if response?.length > 0
         my_account_ids = $scope.accounts.map (acct) -> acct.account_id
         # min amount is 200000
         for message in (response.filter (r) -> checkMessageFee(r)).reverse()
