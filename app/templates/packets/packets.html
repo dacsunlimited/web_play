@@ -4,18 +4,19 @@
       <h3 class="header-title">搜索红包</h3>
     </div>
 
-    <form name="form_search_packet" layout="row" ng-submit="search()">
-      <span flex="25"></span>
-      <md-input-container flex="50">
-        <label translate>packet.search_string</label>
-        <input ng-model="frm_search.id" type="text" name="id" required>
-        <div ng-messages="form_search_packet.id.$error" ng-show="form_search_packet.id.$dirty && !form_search_packet.id.$valid">
-          <div ng-message="required">{{'tip.required'|translate}}</div>
-          <div ng-message="notFound">{{'packet.tip.not_found'|translate}}</div>
-        </div>
-      </md-input-container>
-      <md-button type="submit">search</md-button>
-      <span flex=></span>
+    <form name="form_search_packet" layout="row" layout-align="center" ng-submit="search()">
+      <div flex="75" layout="row">
+        <md-input-container flex>
+          <label translate>packet.search_string</label>
+          <input ng-model="frm_search.id" type="text" name="id" required>
+          <div ng-messages="form_search_packet.id.$error" ng-show="form_search_packet.id.$dirty && !form_search_packet.id.$valid">
+            <div ng-message="required">{{'tip.required'|translate}}</div>
+            <div ng-message="notFound">{{'packet.tip.not_found'|translate}}</div>
+          </div>
+        </md-input-container>
+        <md-button type="submit" translate>packet.btn.search</md-button>
+        <md-button type="button" ng-click="create_packet" translate>packet.btn.create_packet</md-button>
+      </div>
     </form>
 
     <!--result -->
