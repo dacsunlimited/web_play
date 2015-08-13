@@ -226,7 +226,8 @@
     "lock": "Lock",
     "daily_income": "Network Daily Income",
     "daily_expense": "Network Daily Expense",
-    "daily_burn": "Network Daily Burn"
+    "daily_burn": "Network Daily Burn",
+    "packets": "Red Packets"
   },
   "delegate": {
     "title": "Delegates",
@@ -683,6 +684,32 @@
     "delegates": "Delegates",
     "account_details": "Account Details",
     "advanced": "Advanced"
+  },
+  "packet":{
+    "type":{
+      "created": "Recently Created",
+      "claimed": "Recently Claimed"
+    },
+    "search_string": "Red Packet ID Code",
+    "from_title": "Red Pakcet From {{sender}}",
+    "from": "From:",
+    "total": "Total:",
+    "input_password": "Red Packet Password",
+    "tip": {
+      "password_allow_blank": "If no password is required for the red packet, leave it blank",
+      "bad_password": "Incorrect Password",
+      "all_claimed": "Whoops, you are late, all red packets have been claimed.",
+      "dup_claim": "You have claimed this red packet already.",
+      "insufficient_balances": "You need to spend transaction fee to claim red packet.  Not enought balance.",
+      "successful_claimed": "Claim Success",
+      "not_found": "Red Packet Not Found"
+    },
+    "btn":{
+      "search": "Search",
+      "close": "Close",
+      "claim": "Claim",
+      "create_packet": "Create Red Packet"
+    }
   },
   "ad": {
     "promo": "Promo",

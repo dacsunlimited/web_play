@@ -280,4 +280,44 @@ class Blockchain
                 @id_delegates[results.dels[i].id] = results.dels[i]
                 @delegate_inactive_hash_map[@inactive_delegates[i-results.config.delegate_num].name]=true
 
+
+    # add property for packet object
+    #   from_acount[Account]: sender account
+    #   slots_acount[Integer]: total packets
+    #   claimed_count[Integer]: claimed packets
+    refresh_recent_packets: ->
+        deferred = @q.defer()
+
+        request =
+          created: @blockchain_api.list_recently_created_packets()
+          claimed: @blockchain_api.list_recently_claimed_packets()
+
+        result =
+          created: []
+          claimed: []
+
+        account_mapping = {}
+
+        @q.all(request).then (response) =>
+          account_ids = []
+          for k, v of response
+            for p in v
+              account_ids.push p.from_account_id
+              p.slots_count = p.claim_statuses.length
+              p.claimed_count = (p.claim_statuses.filter (s) -> s.account_id > -1).length
+
+          # get from account account/name
+          account_ids = @utils.unique_array(account_ids).map (a)-> [a]
+          @rpc.request("batch", ["blockchain_get_account", account_ids]).then (data) ->
+            if data.result.length > 0
+              account_mapping[account.id] = account for account in data.result
+
+            for k, v of response
+              p.from_account = account_mapping[p.from_account_id] for p in v
+
+            deferred.resolve response
+
+        return deferred.promise
+
 angular.module("app").service("Blockchain", ["Client", "NetworkAPI", "RpcService", "BlockchainAPI", "Utils", "$q", "$interval", Blockchain])
+
