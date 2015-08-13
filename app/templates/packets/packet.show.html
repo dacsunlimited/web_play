@@ -1,10 +1,10 @@
 <md-dialog aria-label="{{packet.id}}" class="packet-show">
-  <form name="claim_packet_form">
+  <form name="claim_packet_form" ng-submit="claim()">
   <md-toolbar ng-init="form = claim_packet_form">
     <div class="md-toolbar-tools">
       <h2 translate translate-values="{sender:packet.from_account.name}">packet.from_title</h2>
       <span flex></span>
-      <md-button class="md-icon-button" ng-click="cancel()">
+      <md-button type="button" class="md-icon-button" ng-click="cancel()">
         <!-- <i class="material-icons">close</i> -->
         <md-icon md-svg-src="img/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
       </md-button>
@@ -28,7 +28,7 @@
 
     <!--availabitity -->
     <div layout="rolw" layout-align="center center">
-      <md-input-container flex="50">
+      <md-input-container flex="65">
         <label translate>packet.input_password</label>
         <input ng-model="frm_data.password" type="text" name="password">
         <div ng-messages="form.password.$error" ng-show="form.password.$dirty" flex-order="3">
@@ -69,14 +69,11 @@
       </md-list-item>
     </md-list>
 
-
-
-
   </md-dialog-content>
 
   <div class="md-actions" layout="row">
-    <md-button ng-click="cancel()" class="md-primary">{{'packet.btn.close'|translate}}</md-button>
-    <md-button ng-click="claim()" class="md-primary" translate>packet.btn.claim</md-button>
+    <md-button type="button" ng-click="cancel()" class="md-primary" >{{'packet.btn.close'|translate}}</md-button>
+    <md-button type="submit" class="md-primary" translate>packet.btn.claim</md-button>
   </div>
   </form>
 </md-dialog>
