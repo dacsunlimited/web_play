@@ -305,6 +305,29 @@ class WalletAPI
     @rpc.request('wallet_note', [amount_to_pay, asset_symbol, owner_account_name, message, encrypted], error_handler).then (response) ->
       response.result
 
+  # Create a red packet(gift money) to others.
+  # parameters:
+  #   string `amount` - the amount of shares to burn
+  #   asset_symbol `asset_symbol` - the asset to give
+  #   sending_account_name `from_account_name` - the source account to draw the shares from
+  #   string `message` - a message to post
+  #   string `password` - the password to claim the red packet
+  #   uint32_t `count` - the count of the red packets
+  # return_type: `transaction_record`
+  create_red_packet: (amount, asset_symbol, from_account_name, message, password, count, error_handler = null) ->
+    @rpc.request('wallet_create_red_packet', [amount, asset_symbol, from_account_name, message, password, count], error_handler).then (response) ->
+      response.result
+
+  # Claim from a red packet(gift money) to an account.
+  # parameters:
+  #   packet_id `id` - the id of the packet
+  #   sending_account_name `to_account_name` - the destination account to claim the shares to
+  #   string `password` - the password to claim the red packet
+  # return_type: `transaction_record`
+  claim_red_packet: (id, to_account_name, password, error_handler = null) ->
+    @rpc.request('wallet_claim_red_packet', [id, to_account_name, password], error_handler).then (response) ->
+      response.result
+
   # Fetch notes and decrypt it if it is a secret note
   # parameters:
   #   sending_account_name `owner_account_name` - the owner of the secret_note
@@ -568,6 +591,13 @@ class WalletAPI
   # return_type: `wallet_account_record_array`
   list_accounts: (error_handler = null) ->
     @rpc.request('wallet_list_accounts', error_handler).then (response) ->
+      response.result
+
+  # Lists all packet entries
+  # parameters:
+  # return_type: `wallet_packet_record_array`
+  list_packets: (error_handler = null) ->
+    @rpc.request('wallet_list_packets', error_handler).then (response) ->
       response.result
 
   # Get the specified account entry

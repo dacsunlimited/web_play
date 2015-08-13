@@ -77,6 +77,20 @@ class BlockchainAPI
     @rpc.request('blockchain_list_recently_registered_accounts').then (response) ->
       response.result
 
+  # Returns a list of recently created packets
+  # parameters:
+  # return_type: `packet_record_array`
+  list_recently_created_packets: (error_handler = null) ->
+    @rpc.request('blockchain_list_recently_created_packets').then (response) ->
+      response.result
+
+  # Returns a list of recently claimed packets
+  # parameters:
+  # return_type: `packet_record_array`
+  list_recently_claimed_packets: (error_handler = null) ->
+    @rpc.request('blockchain_list_recently_claimed_packets').then (response) ->
+      response.result
+
   # Returns registered assets starting with a given name upto a the limit provided
   # parameters:
   #   asset_symbol `first_symbol` - the prefix of the first asset symbol name to include
@@ -132,6 +146,14 @@ class BlockchainAPI
   # return_type: `optional_operation_reward_record`
   get_operation_reward: (op_type, error_handler = null) ->
     @rpc.request('blockchain_get_operation_reward', [op_type]).then (response) ->
+      response.result
+
+  # Get detailed information about the red packet in the blockchain
+  # parameters:
+  #   string `packet_id` - the base58 packet ID to return
+  # return_type: `optional_packet_record`
+  get_red_packet: (packet_id, error_handler = null) ->
+    @rpc.request('blockchain_get_red_packet', [packet_id]).then (response) ->
       response.result
 
   # Get detailed information about an in-wallet transaction
