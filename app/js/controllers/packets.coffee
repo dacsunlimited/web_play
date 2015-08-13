@@ -48,6 +48,7 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
     .then (succ) ->
       $scope.refresh_recent_packets()
+      $scope.$apply()
     , () ->
       # cancelled, do nothing
 
