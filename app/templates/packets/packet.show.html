@@ -42,10 +42,12 @@
       </md-input-container>
     </div>
 
-    <md-divider style="margin-top:1em;"></md-divider>
+
+
+    <md-divider style="margin-top:1em;" ng-show="claimers.length > 0"></md-divider>
 
     <!-- claim history -->
-    <md-list class="claimers">
+    <md-list class="claimers" ng-show="claimers.length > 0">
       <md-subheader class="md-sticky">
         <span>{{packet.claimed_count|number}} / {{packet.slots_count|number}}</span>
         <!-- <span class="pull-right">Lucky Rank</span> -->
