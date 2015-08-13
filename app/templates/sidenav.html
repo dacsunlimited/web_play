@@ -14,7 +14,27 @@
           Close Sidenav Left
           </md-button>
           <header class="nav-header">
-            <a ng-href="#/" class="play-logo" href="#/">
+            <div ng-show="current_account" layout-align="center">
+              <a ui-sref="account({name: current_account.name})" class="play-logo" ng-if="current_account">
+                <identicon account="{{current_account.name}}" size="150" class="identicon" />
+              </a>
+
+              <md-select class="accounts-dp" ng-model="current_account" ng-change="switchCurrentAccount(current_account.name);" layout-align="center">
+                  <md-select-label class="current-account">
+                    <div>{{ current_account.name }} <span class="rp">(RP: {{current_account.stats_info.rp/100000|number:0}})</span></div>
+                  </md-select-label>
+                  <md-option ng-repeat="(name, account) in accounts track by name" ng-value="account">
+<identicon account="{{account.name}}" size="32" class="identicon" /> {{account.name}}
+                  </md-option>
+              </md-select>
+
+              <!-- <div class="current-account-summary" ng-show="current_account">
+                RP: {{current_account.stats_info.rp/100000|number:0}}
+              </div> -->
+
+            </div>
+
+            <a ui-sref="home" class="play-logo" ng-if="!current_account">
               <img src="img/play-logo-ico.svg">
               <h1 class="docs-logotype md-heading">DAC PLAY</h1>
             </a>
