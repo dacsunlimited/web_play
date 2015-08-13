@@ -684,7 +684,8 @@
       "dup_claim": "你已经领过啦",
       "insufficient_balances": "领红包也要手续费哦，当前账户余额不够",
       "successful_claimed": "红包领取成功",
-      "not_found": "红包未找到"
+      "not_found": "红包未找到",
+      "account_not_registered": "你的当前账户必须是在区块链上注册过的账户"
     },
     "btn":{
       "search": "搜索",

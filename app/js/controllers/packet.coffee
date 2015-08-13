@@ -104,7 +104,7 @@ angular.module("app").controller "PacketController", ($scope, $q, BlockchainAPI,
 
       if code == 31005
           $scope.form.password.$error.badPassword = true
-      if code == 20010
+      else if code == 20010
           $scope.form.password.$error.insufficientFund = true
       else if code == 10
 
@@ -112,7 +112,8 @@ angular.module("app").controller "PacketController", ($scope, $q, BlockchainAPI,
           $scope.form.password.$error.allClaimed = true
         else if error.message.indexOf("This account already claimed this packet!") > -1
           $scope.form.password.$error.dupClaim = true
+        else if error.message.indexOf("to_account_rec.valid") > -1
+          $scope.form.password.$error.accountNotRegistered = true
 
       else
           $scope.form.password.error_message = Utils.formatAssertException(error.data.error.message)
-    # $mdDialog.hide()

@@ -702,7 +702,8 @@
       "dup_claim": "You have claimed this red packet already.",
       "insufficient_balances": "You need to spend transaction fee to claim red packet.  Not enought balance.",
       "successful_claimed": "Claim Success",
-      "not_found": "Red Packet Not Found"
+      "not_found": "Red Packet Not Found",
+      "account_not_registered": "Your current account must be a blockchain-registered account"
     },
     "btn":{
       "search": "Search",
