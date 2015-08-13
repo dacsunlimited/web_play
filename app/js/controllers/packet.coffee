@@ -1,7 +1,6 @@
 angular.module("app").controller "PacketController", ($scope, $q, BlockchainAPI, Wallet, WalletAPI, Utils, RpcService, $mdDialog, Growl, $translate, id, packet) ->
 
   $scope.packet = packet if packet
-  console.log "show", packet
   $scope.claimers = []
 
   $scope.form = null
