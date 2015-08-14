@@ -1,4 +1,4 @@
-angular.module("app").controller "PacketsController", ($scope, $location, $stateParams, $state, Blockchain, BlockchainAPI, Utils, $mdDialog) ->
+angular.module("app").controller "PacketsController", ($scope, $location, $stateParams, $state, Blockchain, BlockchainAPI, Utils, $mdDialog, Observer) ->
 
   $scope.frm_search =
     id: ""
@@ -24,9 +24,23 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
       $scope.form_search_packet.id.error_message = Utils.formatAssertException(error.data.error.message)
 
   # get recent packets
-  $scope.refresh_recent_packets = ->
+  refresh_recent_packets = ->
     Blockchain.refresh_recent_packets().then (result) ->
+      console.log 'refresh packets', result
       $scope.packets = result
+
+  # monitor every block update
+  recent_packets_observer =
+    name: "recent_packets_observer"
+    frequency: "each_block"
+    update: (data, deferred) =>
+      console.log 'onBlock'
+      refresh_recent_packets()
+      deferred.resolve(true)
+
+  Observer.registerObserver(recent_packets_observer)
+  $scope.$on "$destroy", -> Observer.unregisterObserver(recent_packets_observer)
+
 
   $scope.showPacket = (evt, id, pwd = null) ->
     # get packet cache from collection
@@ -47,11 +61,11 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
         packet: (packet.password = pwd if pwd; packet)
 
     .then (succ) ->
-      $scope.refresh_recent_packets()
-      $scope.$apply()
+      refresh_recent_packets()
     , () ->
       # cancelled, do nothing
 
 
+
   # init
-  $scope.refresh_recent_packets()
+  refresh_recent_packets()
