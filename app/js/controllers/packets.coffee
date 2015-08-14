@@ -25,16 +25,13 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
   # get recent packets
   refresh_recent_packets = ->
-    Blockchain.refresh_recent_packets().then (result) ->
-      console.log 'refresh packets', result
-      $scope.packets = result
+    Blockchain.refresh_recent_packets().then (result) -> $scope.packets = result
 
   # monitor every block update
   recent_packets_observer =
     name: "recent_packets_observer"
     frequency: "each_block"
     update: (data, deferred) =>
-      console.log 'onBlock'
       refresh_recent_packets()
       deferred.resolve(true)
 
