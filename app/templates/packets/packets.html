@@ -30,13 +30,13 @@
   </md-card-content>
 </md-card>
 
-<md-card class="packets">
+<md-card class="packets" ng-show="packets.created.length>0 || packets.claimed.length>0">
   <md-card-content ng-repeat="type in ['created', 'claimed']">
-    <div class="header-title">
+    <div class="header-title" ng-show="packets[type].length>0">
       <h3 class="header-title">{{"packet.type."+type | translate}}</h3>
     </div>
 
-    <div class="packet-item" ng-repeat="p in packets[type]" ng-click="showPacket($event, p.id)">
+    <div class="packet-item" ng-show="packets[type].length>0" ng-repeat="p in packets[type]" ng-click="showPacket($event, p.id)">
       <i class="fa fa-envelope"></i>
       <div class="packet-message" ng-bind-html="p.message | simpleFormat"></div>
       <div class="packet-sender">{{'packet.from'|translate}} {{p.from_account.name}}</div>
