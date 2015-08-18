@@ -319,5 +319,53 @@ class Blockchain
 
         return deferred.promise
 
+    get_red_packet: (id) ->
+        deferred = @q.defer()
+
+        @blockchain_api.get_red_packet(id).then (data) =>
+          packet = data
+          packet.claimed_count ||= 0
+          packet.slots_count   ||= packet.claim_statuses.length
+
+          # get amount asset
+          amount_asset              = @asset_records[packet.amount.asset_id]
+          packet.amount.symbol      = amount_asset.symbol
+          packet.amount.precision   = amount_asset.precision
+
+          @blockchain_api.get_account(data.from_account_id).then (res) =>
+            packet.from_account      = res
+
+            # claimers
+            account_mapping = {}
+            claimer_ids = (packet.claim_statuses.filter (s) -> s.account_id != -1).map (s) -> [s.account_id]
+
+            if claimer_ids.length > 0
+              packet.claimers = []
+
+              @rpc.request('batch', ['blockchain_get_account', claimer_ids]).then (d) =>
+                if d.result.length > 0
+                  account_mapping[account.id] = account for account in d.result
+
+                for status in packet.claim_statuses
+                  if status.account_id != -1
+                    status.amount.symbol    = packet.amount.symbol
+                    status.amount.precision = packet.amount.precision
+                    status.claimer          = account_mapping[status.account_id]
+                    # status.claimer.is_mine = my_accounts.indexOf(status.account_id) > -1
+                    packet.claimers.push status
+
+                # update claimed_count
+                packet.claimed_count  = packet.claimers.length
+
+                account_mapping = null
+
+                deferred.resolve packet
+            else
+              deferred.resolve packet
+
+        return deferred.promise
+
+
+
 angular.module("app").service("Blockchain", ["Client", "NetworkAPI", "RpcService", "BlockchainAPI", "Utils", "$q", "$interval", Blockchain])
 

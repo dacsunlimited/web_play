@@ -27,14 +27,14 @@
     <md-divider style="margin:1em 0;"></md-divider>
 
     <!--availabitity -->
-    <div layout="rolw" layout-align="center center">
+    <div layout="row" layout-align="center center">
       <md-input-container flex="65">
         <label translate>packet.input_password</label>
         <input ng-model="frm_data.password" type="text" name="password">
         <div ng-messages="form.password.$error" ng-show="form.password.$dirty" flex-order="3">
           <div ng-message="badPassword">{{'packet.tip.bad_password'|translate}}</div>
           <div ng-message="allClaimed">{{'packet.tip.all_claimed'|translate}}</div>
-          <div ng-message="dupClaim">{{'packet.tip.dup_cliam'|translate}}</div>
+          <div ng-message="dupClaim">{{'packet.tip.dup_claim'|translate}}</div>
           <div ng-message="insufficientFund">{{'packet.tip.insufficient_balances'|translate}}</div>
           <div ng-message="accountNotRegistered">{{'packet.tip.account_not_registered'|translate}}</div>
         </div>
@@ -47,13 +47,13 @@
     <md-divider style="margin-top:1em;" ng-show="claimers.length > 0"></md-divider>
 
     <!-- claim history -->
-    <md-list class="claimers" ng-show="claimers.length > 0">
+    <md-list class="claimers" ng-show="packet.claimers.length > 0">
       <md-subheader class="md-sticky">
         <span>{{packet.claimed_count|number}} / {{packet.slots_count|number}}</span>
         <!-- <span class="pull-right">Lucky Rank</span> -->
       </md-subheader>
 
-      <md-list-item ng-repeat="slot in claimers" class="claimer" ng-class="{mine: slot.claimer.is_mine}">
+      <md-list-item ng-repeat="slot in packet.claimers" class="claimer" ng-class="{mine: slot.claimer.is_mine}">
         <div class="claimer-icon col-md-5">
           <identicon account="{{slot.claimer.name}}" size="50" class="identicon" />
           <span>{{slot.claimer.name}}</span>
@@ -72,7 +72,7 @@
   </md-dialog-content>
 
   <div class="md-actions" layout="row">
-    <md-button type="button" ng-click="cancel()" class="md-primary" >{{'packet.btn.close'|translate}}</md-button>
+    <md-button type="button" ng-click="cancel()" class="" >{{'packet.btn.close'|translate}}</md-button>
     <md-button type="submit" class="md-primary" translate>packet.btn.claim</md-button>
   </div>
   </form>
