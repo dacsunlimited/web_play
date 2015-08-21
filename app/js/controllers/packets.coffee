@@ -13,10 +13,13 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
     [id, pwd] = patten.split('|')
 
     Blockchain.get_red_packet(id).then (data) ->
+      $scope.search_packet = null
+
       if data
         $scope.search_packet = data
         $scope.search_packet.password = pwd if pwd
         $scope.form_search_packet.id.$valid = true
+        $scope.form_search_packet.id.$error = {}
       else
         $scope.form_search_packet.id.$valid = false
         $scope.form_search_packet.id.$error.notFound = true

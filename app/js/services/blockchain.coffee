@@ -325,6 +325,8 @@ class Blockchain
         deferred = @q.defer()
 
         @blockchain_api.get_red_packet(id).then (data) =>
+          deferred.resolve false unless data
+
           packet = data
           packet.claimed_count ||= 0
           packet.slots_count   ||= packet.claim_statuses.length
