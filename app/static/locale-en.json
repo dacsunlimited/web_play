@@ -50,7 +50,9 @@
     "you_are_idle": "You are idle.",
     "will_be_logged_out": "You will be logged out in",
     "required": "This is required",
-    "too_short": "Too short"
+    "too_short": "Too short",
+    "maxlength": "Too long",
+    "number": "Please input number"
   },
   "th": {
     "date": "DATE",
@@ -692,9 +694,16 @@
     },
     "search_string": "Red Packet ID Code",
     "from_title": "Red Pakcet From {{sender}}",
-    "from": "From:",
-    "total": "Total:",
+    "from": "From",
+    "total": "Total",
     "input_password": "Red Packet Password",
+    "count": "Number of red packets",
+    "claim_password": "Password to claim",
+    "message": "Message to attach",
+    "create_packet_title": "Create Packet",
+    "default_message": "This is a small gift, hope you like it.",
+    "create_packet_title": "Create Red Packet",
+    "select_from_accounts": "From Account",
     "tip": {
       "password_allow_blank": "If no password is required for the red packet, leave it blank",
       "bad_password": "Incorrect Password",
@@ -703,13 +712,14 @@
       "insufficient_balances": "You need to spend transaction fee to claim red packet.  Not enought balance.",
       "successful_claimed": "Claim Success",
       "not_found": "Red Packet Not Found",
-      "account_not_registered": "Your current account must be a blockchain-registered account"
+      "account_not_registered": "Your current account must be a blockchain-registered account",
+      "successful_created": "Red Packet is created with success and being submitted to the blockchain"
     },
     "btn":{
       "search": "Search",
       "close": "Close",
       "claim": "Claim",
-      "create_packet": "Create Red Packet"
+      "create_packet": "Create"
     }
   },
   "ad": {

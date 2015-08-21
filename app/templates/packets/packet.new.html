@@ -1,0 +1,95 @@
+<md-dialog aria-label="{{packet.id}}" class="packet-new" flex="66">
+  <form name="create_packet_form">
+  <md-toolbar ng-init="form = create_packet_form">
+    <div class="md-toolbar-tools">
+      <h2 translate>packet.create_packet_title</h2>
+      <span flex></span>
+      <md-button type="button" class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout="column">
+    <div class="packet-preview" layout-align="center">
+
+      <div class="packet-item">
+        <i class="fa fa-envelope"></i>
+        <div class="packet-message" ng-bind-html="frm_data.message | simpleFormat"></div>
+        <div class="packet-sender">{{'packet.from'|translate}} {{frm_data.from_account_name}}</div>
+        <div class="packet-stat">0/{{frm_data.count}}</div>
+      </div>
+
+    </div>
+
+    <md-divider style="margin:1em 0;"></md-divider>
+
+    <md-content layout="row" layout-align="center center">
+      <div flex="1" layout="row">
+        <md-input-container flex>
+          <label translate>packet.total</label>
+          <input required type="number" step="1" name="amount" ng-model="frm_data.amount.amount" min="1" minlength="1">
+          <div ng-messages="form.amount.$error" ng-show="form.amount.$dirty">
+            <div ng-message="required">{{'tip.required'|translate}}</div>
+            <div ng-message="number">{{'tip.number'|translate}}</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label translate>asset.symbol</label>
+          <md-select name="symbol" required ng-model="frm_data.amount.symbol" layout-align="center">
+              <md-option ng-value="frm_data.amount.symbol">{{frm_data.amount.symbol}}</md-option>
+          </md-select>
+          <div ng-messages="form.symbol.$error" ng-show="form.symbol.$dirty">
+            <div ng-message="required">{{'tip.required'|translate}}</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <md-input-container flex="1">
+        <label translate>packet.count</label>
+        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="1" max="50">
+        <div ng-messages="form.count.$error" ng-show="form.count.$dirty">
+          <div ng-message="required">{{'tip.required'|translate}}</div>
+          <div ng-message="number">{{'tip.number'|translate}}</div>
+        </div>
+      </md-input-container>
+    </md-content>
+
+    <md-content layout="row">
+      <md-input-container flex="1">
+        <label translate>packet.select_from_accounts</label>
+        <md-select name="from_account" required ng-model="frm_data.from_account_name" layout-align="center">
+            <md-option ng-repeat="(name, account) in my_accounts track by name" ng-value="account.name">
+              <identicon account="{{account.name}}" size="32" class="identicon" /> {{account.name}}: <span class="text-muted">{{account.balance|formatAsset}}</span>
+            </md-option>
+        </md-select>
+        <div ng-messages="form.from_account.$error" ng-show="form.from_account.$dirty">
+          <div ng-message="required">{{'tip.required'|translate}}</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container flex="1">
+        <label translate>packet.claim_password</label>
+        <input ng-model="frm_data.password" type="text" name="password">
+      </md-input-container>
+    </md-content>
+
+    <md-content>
+      <md-input-container>
+        <label translate>packet.message</label>
+        <input name="message" ng-model="frm_data.message" required></input>
+        <div ng-messages="form.message.$error" ng-show="form.message.$dirty">
+          <div ng-message="required">{{'tip.required'|translate}}</div>
+        </div>
+      </md-input-container>
+    </md-content>
+
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button type="button" ng-click="cancel()" class="md-primary">{{'packet.btn.close'|translate}}</md-button>
+    <md-button type="submit" ng-click="create()" class="md-primary" translate>packet.btn.create_packet</md-button>
+  </div>
+  </form>
+</md-dialog>

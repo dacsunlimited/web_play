@@ -1,4 +1,4 @@
-angular.module("app").controller "PacketsController", ($scope, $location, $stateParams, $state, Blockchain, BlockchainAPI, Utils, $mdDialog, Observer) ->
+angular.module("app").controller "PacketsController", ($scope, $location, $stateParams, $state, Blockchain, Utils, $mdDialog, Observer) ->
 
   $scope.frm_search =
     id: ""
@@ -12,7 +12,7 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
     [id, pwd] = patten.split('|')
 
-    BlockchainAPI.get_red_packet(id).then (data) ->
+    Blockchain.get_red_packet(id).then (data) ->
       if data
         $scope.search_packet = data
         $scope.search_packet.password = pwd if pwd
@@ -56,6 +56,18 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
       locals:
         id: id
         packet: (packet.password = pwd if pwd; packet)
+
+    .then (succ) ->
+      refresh_recent_packets()
+    , () ->
+      # cancelled, do nothing
+
+  $scope.createpacket = (evt) ->
+    $mdDialog.show
+      controller: "PacketNewController",
+      templateUrl: 'packets/packet.new.html'
+      parent: angular.element(document.body)
+      targetEvent: evt
 
     .then (succ) ->
       refresh_recent_packets()
