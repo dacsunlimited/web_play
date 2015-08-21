@@ -1,4 +1,4 @@
-angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, AD) ->
+angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, $mdDialog, AD) ->
   chatAdPositionAcct    = Info.CHAT_ADD_POSITION_ACCT
   chatAdPricingID       = "plain1m"
   chatListLimit         = 50
@@ -42,7 +42,16 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
             account_name: account_name,
             balance: balance,
             account_id: $scope.registered_accounts[account_name].id
-      $scope.from.account ||= $scope.accounts[0] if $scope.accounts.length > 0
+
+      # determine default chat account
+      # try to fetch from Wallet.current_account, otherwise, use the first account of
+      # avaialble accounts (registered and with balance)
+      unless $scope.from.account
+        $scope.from.account = $scope.accounts[0] if $scope.accounts.length > 0
+
+        if Wallet.current_account and (foundIndex = ($scope.accounts.findIndex (acct)-> acct.account_name == Wallet.current_account.name))
+          $scope.from.account = $scope.accounts[foundIndex]
+
 
       if skip_once
         skip_once = false
@@ -240,9 +249,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
       # reset form
       $scope.chatBid.creative.creative.text = ''
-      form.message.$pristine = true
-      form.$pristine = true
-      # console.log "buy success"
+      form.message.$dirty = false
 
     , (error) ->
         if (error.response.data.error.code == 20010)
