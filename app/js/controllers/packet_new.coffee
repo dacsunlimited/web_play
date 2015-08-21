@@ -3,7 +3,7 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
   $scope.form = null
   $scope.frm_data =
     amount:
-      amount: 10
+      amount: 100
       symbol: Info.symbol
     from_account_name: Wallet.current_account?.name
     message: ""
