@@ -33,27 +33,12 @@ angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wa
 
   , (err) ->
     Growl.notice "", "Error occured"
-    # if (err.response.data.error.code == 20010)
-    #     $translate('market.tip.insufficient_balances').then (val) ->
-    #         Growl.notice "", val
-
 
   # check claim statuses
   $scope.$watch ->
     Wallet.current_account
   , ->
-    # $scope.packet
     $scope.frm_data.to_account_name = Wallet.current_account.name
-
-  # highlight my claimed (my means any account in my wallet)
-  # $scope.$watchCollection ->
-  #   Wallet.accounts
-  # , ->
-  #   my_accounts = []
-  #   my_accounts.push acct.id if acct.id > 0 for k, acct of Wallet.accounts
-  #
-  #   for status in $scope.packet.claimers
-  #     status.claimer.is_mine = my_accounts.indexOf(status.account_id) > -1
 
 
   $scope.hide = ->
