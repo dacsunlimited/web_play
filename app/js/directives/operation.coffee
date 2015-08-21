@@ -15,5 +15,9 @@ angular.module("app.directives").directive "operationDiv", ($q, Utils, Blockchai
             scope.content = "Create new asset with symbol " + op.data.symbol + " , the name of this asset is " + op.data.name + ", the detail is " + angular.toJson(op)
         else if op.type == 'note_op_type'
             scope.content = "Spent #{op.data.amount.amount} satoshi amount of asset for creating #{op.data.message.type} note"
+        else if op.type == 'red_packet_op_type'
+            scope.content = "Create red packet with amount of #{op.data.amount.amount} satoshi"
+        else if op.type == 'claim_packet_op_type'
+            scope.content = "Claim red packet"
         else
             scope.content = op

@@ -253,6 +253,8 @@ class Blockchain
         game_op_type: "Game Operation"
         buy_chips_type: "Buy Chip Operation"
         create_game_operation_type: "Create Game Operation"
+        red_packet_op_type: "Create Red Packet"
+        claim_packet_op_type: "Claim Red Packet"
 
     # TODO
     populate_delegate: (record, active, rank) ->
