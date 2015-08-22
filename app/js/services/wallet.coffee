@@ -69,6 +69,11 @@ class Wallet
         @current_account = account
         @set_setting("current_account", account.name)
 
+    set_current_account_by_name: (new_account_name) ->
+        acct = @accounts[new_account_name]
+        @set_current_account acct
+        acct
+
     check_wallet_status: ->
         deferred = @q.defer()
         @open().then =>

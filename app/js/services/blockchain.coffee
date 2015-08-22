@@ -253,6 +253,8 @@ class Blockchain
         game_op_type: "Game Operation"
         buy_chips_type: "Buy Chip Operation"
         create_game_operation_type: "Create Game Operation"
+        red_packet_op_type: "Create Red Packet"
+        claim_packet_op_type: "Claim Red Packet"
 
     # TODO
     populate_delegate: (record, active, rank) ->
@@ -280,4 +282,94 @@ class Blockchain
                 @id_delegates[results.dels[i].id] = results.dels[i]
                 @delegate_inactive_hash_map[@inactive_delegates[i-results.config.delegate_num].name]=true
 
+
+    # add property for packet object
+    #   from_acount[Account]: sender account
+    #   slots_acount[Integer]: total packets
+    #   claimed_count[Integer]: claimed packets
+    refresh_recent_packets: ->
+        deferred = @q.defer()
+
+        request =
+          created: @blockchain_api.list_recently_created_packets()
+          claimed: @blockchain_api.list_recently_claimed_packets()
+
+        result =
+          created: []
+          claimed: []
+
+        account_mapping = {}
+
+        @q.all(request).then (response) =>
+          account_ids = []
+          for k, v of response
+            for p in v
+              account_ids.push p.from_account_id
+              p.slots_count = p.claim_statuses.length
+              p.claimed_count = (p.claim_statuses.filter (s) -> s.account_id > -1).length
+
+          # get from account account/name
+          account_ids = @utils.unique_array(account_ids).map (a)-> [a]
+          @rpc.request("batch", ["blockchain_get_account", account_ids]).then (data) ->
+            if data.result.length > 0
+              account_mapping[account.id] = account for account in data.result
+
+            for k, v of response
+              p.from_account = account_mapping[p.from_account_id] for p in v
+
+            deferred.resolve response
+
+        return deferred.promise
+
+    get_red_packet: (id) ->
+        deferred = @q.defer()
+
+        @blockchain_api.get_red_packet(id).then (data) =>
+          deferred.resolve false unless data
+
+          packet = data
+          packet.claimed_count ||= 0
+          packet.slots_count   ||= packet.claim_statuses.length
+
+          # get amount asset
+          amount_asset              = @asset_records[packet.amount.asset_id]
+          packet.amount.symbol      = amount_asset.symbol
+          packet.amount.precision   = amount_asset.precision
+
+          @blockchain_api.get_account(data.from_account_id).then (res) =>
+            packet.from_account      = res
+
+            # claimers
+            account_mapping = {}
+            claimer_ids = (packet.claim_statuses.filter (s) -> s.account_id != -1).map (s) -> [s.account_id]
+
+            if claimer_ids.length > 0
+              packet.claimers = []
+
+              @rpc.request('batch', ['blockchain_get_account', claimer_ids]).then (d) =>
+                if d.result.length > 0
+                  account_mapping[account.id] = account for account in d.result
+
+                for status in packet.claim_statuses
+                  if status.account_id != -1
+                    status.amount.symbol    = packet.amount.symbol
+                    status.amount.precision = packet.amount.precision
+                    status.claimer          = account_mapping[status.account_id]
+                    # status.claimer.is_mine = my_accounts.indexOf(status.account_id) > -1
+                    packet.claimers.push status
+
+                # update claimed_count
+                packet.claimed_count  = packet.claimers.length
+
+                account_mapping = null
+
+                deferred.resolve packet
+            else
+              deferred.resolve packet
+
+        return deferred.promise
+
+
+
 angular.module("app").service("Blockchain", ["Client", "NetworkAPI", "RpcService", "BlockchainAPI", "Utils", "$q", "$interval", Blockchain])
+

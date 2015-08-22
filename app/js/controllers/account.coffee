@@ -66,7 +66,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
     Wallet.get_account(name).then (acct)->
         $scope.account = acct
         $scope.account.private_data ||= {}
-        $scope.account_name = acct.name + 'acc'
+        $scope.account_name = acct.name
         Wallet.set_current_account(acct)
         Observer.registerObserver(account_balances_observer)
         if $scope.account.delegate_info

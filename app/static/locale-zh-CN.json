@@ -50,7 +50,9 @@
     "you_are_idle": "你离开了么？",
     "will_be_logged_out": "本次会话即将注销",
     "required": "必填项",
-    "too_short": "太短"
+    "too_short": "太短",
+    "maxlength": "太长",
+    "number": "请输入数字"
   },
   "th": {
     "date": "日期",
@@ -225,7 +227,8 @@
     "lock": "锁定钱包",
     "daily_income": "网络每日收入",
     "daily_expense": "网络每日花费",
-    "daily_burn": "网络每日销毁"
+    "daily_burn": "网络每日销毁",
+    "packets": "红包"
   },
   "delegate": {
     "title": "受托人",
@@ -665,6 +668,40 @@
     "delegates": "受托人",
     "account_details": "账户细节",
     "advanced": "进阶选项"
+  },
+  "packet":{
+    "type":{
+      "created": "最近创建",
+      "claimed": "最近领取"
+    },
+    "search_string": "红包标示码",
+    "from_title": "来自 {{sender}} 的红包",
+    "from": "来自",
+    "total": "总额",
+    "input_password": "红包密码",
+    "count": "红包个数",
+    "claim_password": "红包密码",
+    "message": "消息",
+    "default_message": "大家开开心心",
+    "create_packet_title": "创建红包",
+    "select_from_accounts": "发送账户",
+    "tip": {
+      "password_allow_blank": "如果红包没有设置密码，可留空",
+      "bad_password": "密码错误",
+      "all_claimed": "你来晚啦，红包已经领光了",
+      "dup_claim": "你已经领过啦",
+      "insufficient_balances": "领红包也要手续费哦，当前账户余额不够",
+      "successful_claimed": "红包领取成功",
+      "not_found": "红包未找到",
+      "account_not_registered": "你的当前账户必须是在区块链上注册过的账户",
+      "successful_created": "红包创建成功，正在提交至网络"
+    },
+    "btn":{
+      "search": "搜索",
+      "close": "关闭",
+      "claim": "领取",
+      "create_packet": "创建红包"
+    }
   },
   "ad": {
     "promo": "推广",

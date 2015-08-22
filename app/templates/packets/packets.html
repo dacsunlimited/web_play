@@ -1,0 +1,52 @@
+<md-card>
+  <md-card-content>
+    <div class="header-title">
+      <h3 class="header-title">搜索红包</h3>
+    </div>
+
+    <form name="form_search_packet" layout="row" layout-align="center" ng-submit="search()">
+      <div flex="75" layout="row">
+        <md-input-container flex>
+          <label translate>packet.search_string</label>
+          <input ng-model="frm_search.id" type="text" name="id" required>
+          <div ng-messages="form_search_packet.id.$error" ng-show="form_search_packet.id.$dirty && !form_search_packet.id.$valid">
+            <div ng-message="required">{{'tip.required'|translate}}</div>
+            <div ng-message="notFound">{{'packet.tip.not_found'|translate}}</div>
+          </div>
+        </md-input-container>
+        <md-button type="submit" translate>packet.btn.search</md-button>
+        <md-button type="button" ng-click="createpacket()" translate>packet.btn.create_packet</md-button>
+      </div>
+    </form>
+
+    <!--result -->
+    <div class="packet-item" ng-show="search_packet" ng-click="showPacket($event, search_packet.id, search_packet.password)">
+      <i class="fa fa-envelope"></i>
+      <div class="packet-message" ng-bind-html="search_packet.message | simpleFormat"></div>
+      <div class="packet-sender">{{'packet.from'|translate}} {{search_packet.from_account.name}}</div>
+      <div class="packet-stat">{{search_packet.claimed_count}}/{{search_packet.slots_count}}</div>
+    </div>
+
+  </md-card-content>
+</md-card>
+
+<md-card class="packets" ng-show="packets.created.length>0 || packets.claimed.length>0">
+  <md-card-content ng-repeat="type in ['created', 'claimed']">
+    <div class="header-title" ng-show="packets[type].length>0">
+      <h3 class="header-title">{{"packet.type."+type | translate}}</h3>
+    </div>
+
+    <div class="packet-item" ng-show="packets[type].length>0" ng-repeat="p in packets[type]" ng-click="showPacket($event, p.id)">
+      <i class="fa fa-envelope"></i>
+      <div class="packet-message" ng-bind-html="p.message | simpleFormat"></div>
+      <div class="packet-sender">{{'packet.from'|translate}} {{p.from_account.name}}</div>
+      <div class="packet-stat">{{p.claimed_count}}/{{p.slots_count}}</div>
+    </div>
+  </md-card-content>
+</md-card>
+
+<md-card style="margin-bottom:2em;">
+  <md-card-content layout="row" layout-align="center center">
+    <md-button type="button" class="md-primary md-raised" flex="50" ng-click="createpacket()" translate>packet.btn.create_packet</md-button>
+  </md-card-content>
+</md-card>

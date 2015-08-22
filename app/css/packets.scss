@@ -1,0 +1,58 @@
+$packet_red:#BD0000;
+
+.packet-item {
+  position:relative; overflow:hidden; width:200px;
+  color:white; margin:1em; display:inline-block;
+
+  i { font-size:15em; color:$packet_red; line-height:160px; }
+
+  .packet-message {
+    position:absolute;
+    top:25px; left:5px; width:190px; height:40px; font-size:14px;
+    text-align:center; overflow:hidden; text-overflow:ellipsis;
+  }
+
+  .packet-sender {
+    position:absolute;
+    bottom:15px;
+    left:10px;
+    text-align:left;
+  }
+
+  .packet-stat {
+    position:absolute;
+    bottom:15px;
+    right:10px;
+    text-align:right;
+  }
+}
+
+.packet-show {
+  .packet-cover {
+    color:$packet_red; font-size:8em; line-height:75px;
+  }
+
+  .claimers {
+    .claimer {
+      &.mine {
+        background-color:transparentize(red, 0.95);
+        font-weight:bold;
+      }
+      .claimer-icon {
+        margin-right:10px;
+        padding-left:0px;
+      }
+
+      .lucky-rank {
+        text-align:right; padding-right:0px;
+      }
+
+    }
+  }
+}
+
+.packet-new {
+  .packet-preview {
+    text-align:center;
+  }
+}

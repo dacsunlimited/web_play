@@ -162,3 +162,8 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
         url: prefix + '/note/:name'
         templateUrl: 'notes/notes.html'
         controller: "NotesController"
+
+    sp.state "packets",
+        url: prefix + '/packets'
+        templateUrl: 'packets/packets.html'
+        controller:  'PacketsController'

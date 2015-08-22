@@ -1,0 +1,79 @@
+<md-dialog aria-label="{{packet.id}}" class="packet-show">
+  <form name="claim_packet_form" ng-submit="claim()">
+  <md-toolbar ng-init="form = claim_packet_form">
+    <div class="md-toolbar-tools">
+      <h2 translate translate-values="{sender:packet.from_account.name}">packet.from_title</h2>
+      <span flex></span>
+      <md-button type="button" class="md-icon-button" ng-click="cancel()">
+        <!-- <i class="material-icons">close</i> -->
+        <md-icon md-svg-src="img/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content layout="column">
+    <!-- overview -->
+    <div layout="row">
+      <i class="fa fa-envelope packet-cover"></i>
+
+      <div style="margin-left:1em;">
+        <p>ID: {{packet.id}}</p>
+        <p>{{'packet.from'|translate}} {{packet.from_account.name}}</p>
+        <p>{{'packet.total'|translate}} {{packet.amount|formatAsset}}</p>
+        <div><strong>{{packet.message}}</strong></div>
+      </div>
+    </div>
+
+    <md-divider style="margin:1em 0;"></md-divider>
+
+    <!--availabitity -->
+    <div layout="row" layout-align="center center">
+      <md-input-container flex="65">
+        <label translate>packet.input_password</label>
+        <input ng-model="frm_data.password" type="text" name="password">
+        <div ng-messages="form.password.$error" ng-show="form.password.$dirty" flex-order="3">
+          <div ng-message="badPassword">{{'packet.tip.bad_password'|translate}}</div>
+          <div ng-message="allClaimed">{{'packet.tip.all_claimed'|translate}}</div>
+          <div ng-message="dupClaim">{{'packet.tip.dup_claim'|translate}}</div>
+          <div ng-message="insufficientFund">{{'packet.tip.insufficient_balances'|translate}}</div>
+          <div ng-message="accountNotRegistered">{{'packet.tip.account_not_registered'|translate}}</div>
+        </div>
+        <div flex-order="4" ng-show="form.password.$pristine && form.password.$valid" translate>packet.tip.password_allow_blank</div>
+      </md-input-container>
+    </div>
+
+
+
+    <md-divider style="margin-top:1em;" ng-show="claimers.length > 0"></md-divider>
+
+    <!-- claim history -->
+    <md-list class="claimers" ng-show="packet.claimers.length > 0">
+      <md-subheader class="md-sticky">
+        <span>{{packet.claimed_count|number}} / {{packet.slots_count|number}}</span>
+        <!-- <span class="pull-right">Lucky Rank</span> -->
+      </md-subheader>
+
+      <md-list-item ng-repeat="slot in packet.claimers" class="claimer" ng-class="{mine: slot.claimer.is_mine}">
+        <div class="claimer-icon col-md-5">
+          <identicon account="{{slot.claimer.name}}" size="50" class="identicon" />
+          <span>{{slot.claimer.name}}</span>
+        </div>
+
+        <div class="md-list-item-text col-md-5 col-md-offset-2" style="text-align:right;">
+          {{ slot.amount | formatAsset }}
+        </div>
+
+        <!-- <div class="lucky-rank col-md-2">
+          1
+        </div> -->
+      </md-list-item>
+    </md-list>
+
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button type="button" ng-click="cancel()" class="" >{{'packet.btn.close'|translate}}</md-button>
+    <md-button type="submit" class="md-primary" translate>packet.btn.claim</md-button>
+  </div>
+  </form>
+</md-dialog>

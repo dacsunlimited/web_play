@@ -1,5 +1,6 @@
 JOSN Object Spec
 ===
+ref: http://google-styleguide.googlecode.com/svn/trunk/jsoncstyleguide.xml
 
 # Announcement
     {
