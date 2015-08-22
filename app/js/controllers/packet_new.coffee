@@ -8,7 +8,7 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
     from_account_name: Wallet.current_account?.name
     message: ""
     password: ""
-    count: 1
+    count: 5
 
   $scope.my_accounts = []
 
