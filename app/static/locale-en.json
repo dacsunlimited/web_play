@@ -713,7 +713,8 @@
       "successful_claimed": "Claim Success",
       "not_found": "Red Packet Not Found",
       "account_not_registered": "Your current account must be a blockchain-registered account",
-      "successful_created": "Red Packet is created with success and being submitted to the blockchain"
+      "successful_created": "Red Packet is created with success and being submitted to the blockchain",
+      "count_min_tmp": "Minimum count is 2"
     },
     "btn":{
       "search": "Search",

@@ -48,10 +48,11 @@
 
       <md-input-container flex="1">
         <label translate>packet.count</label>
-        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="1" max="50">
+        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="2" max="50">
         <div ng-messages="form.count.$error" ng-show="form.count.$dirty">
           <div ng-message="required">{{'tip.required'|translate}}</div>
           <div ng-message="number">{{'tip.number'|translate}}</div>
+          <div ng-message="min">{{'packet.tip.count_min_tmp'|translate}}</div>
         </div>
       </md-input-container>
     </md-content>

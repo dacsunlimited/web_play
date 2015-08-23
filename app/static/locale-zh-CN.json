@@ -694,7 +694,8 @@
       "successful_claimed": "红包领取成功",
       "not_found": "红包未找到",
       "account_not_registered": "你的当前账户必须是在区块链上注册过的账户",
-      "successful_created": "红包创建成功，正在提交至网络"
+      "successful_created": "红包创建成功，正在提交至网络",
+      "count_min_tmp": "红包数量至少2个"
     },
     "btn":{
       "search": "搜索",
