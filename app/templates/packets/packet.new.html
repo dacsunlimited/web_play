@@ -60,7 +60,7 @@
     <md-content layout="row">
       <md-input-container flex="1">
         <label translate>packet.select_from_accounts</label>
-        <md-select name="from_account" required ng-model="frm_data.from_account_name" layout-align="center">
+        <md-select name="from_account" required ng-model="frm_data.from_account_name" layout-align="center" required>
             <md-option ng-repeat="(name, account) in my_accounts track by name" ng-value="account.name">
               <identicon account="{{account.name}}" size="32" class="identicon" /> {{account.name}}: <span class="text-muted">{{account.balance|formatAsset}}</span>
             </md-option>

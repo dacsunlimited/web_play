@@ -5,7 +5,7 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
     amount:
       amount: 100
       symbol: Info.symbol
-    from_account_name: Wallet.current_account?.name
+    from_account_name: if Wallet.current_account?.registered then Wallet.current_account?.name else null
     message: ""
     password: ""
     count: 5
@@ -13,7 +13,7 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
   $scope.my_accounts = []
 
   Wallet.get_current_or_first_account().then (acct)->
-    $scope.frm_data.from_account_name = acct.name
+    $scope.frm_data.from_account_name = acct.name if acct.registered
 
   # get accounts with balance of given asset
   # and filter with registered account only
@@ -26,13 +26,16 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
           acct.balance = balance[asset]
           $scope.my_accounts.push acct
 
+      # if current account is not regisered
+      if !$scope.frm_data.from_account_name and $scope.my_accounts.length > 0
+        $scope.frm_data.from_account_name = $scope.my_accounts[0].name
+
   getAccountsWithBalance(Info.symbol)
 
-  # check claim statuses
   $scope.$watch ->
     Wallet.current_account
   , (newVal, oldVal, scope)->
-    $scope.frm_data.from_account_name = newVal?.name
+    $scope.frm_data.from_account_name = newVal?.name if newVal.registered
 
   $scope.checkForm = ->
     if $scope.form.$valid
@@ -53,7 +56,7 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
     WalletAPI.create_red_packet(frm.amount.amount, frm.amount.symbol, frm.from_account_name, frm.message, frm.password, frm.count).then (response) =>
       $translate('packet.tip.successful_created').then (val) -> Growl.notice "", val
       $mdDialog.hide(true)
-    , (error) ->
+    , (err) ->
       # code = error.response.data.error.code
       # $scope.form.password.$dirty = true
       # $scope.form.password.$valid = false
