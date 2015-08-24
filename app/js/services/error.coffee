@@ -50,7 +50,7 @@ processRpcError = (response, $injector, Shared) ->
         error_msg = JSON.stringify(response) unless error_msg
         console.log "RPC Server Error: #{error_msg} (#{response.status})\n#{response.config?.stack}"
 
-        if error_code and error_code != 10
+        if error_code and error_code > 10
           $injector.get('$translate')("error.#{error_code}").then (locale_msg)->
             error_msg = locale_msg
             if response.data?.error?.message?
