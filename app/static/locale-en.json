@@ -693,7 +693,7 @@
       "claimed": "Recently Claimed"
     },
     "search_string": "Red Packet ID Code",
-    "from_title": "Red Pakcet From {{sender}}",
+    "from_title": "Red Packet From {{sender}}",
     "from": "From",
     "total": "Total",
     "input_password": "Red Packet Password",
