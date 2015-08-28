@@ -145,15 +145,19 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
             my_transfer_form?.payto.tip_registered = ""
             $scope.account_registration_date = ""
             Growl.notice "", "Transfer transaction broadcasted"
-        , (error) ->
-            if error.data.error.code == 20005
+        , (err) ->
+            error = err.data?.error || err.response?.data?.error
+            code  = error.code
+            error_message = error.locale_message || error.message
+
+            if error.code == 20005
                 $translate('account.unknown').then (val) ->
                     my_transfer_form.payto.error_message = val
-            else if error.data.error.code == 20010
+            else if error.code == 20010
                 $translate('market.tip.insufficient_balances').then (val) ->
                     my_transfer_form.amount.error_message = val
             else
-                my_transfer_form.payto.error_message = Utils.formatAssertException(error.data.error.message)
+                my_transfer_form.payto.error_message = Utils.formatAssertException error_message
 
     $scope.send = ->
         my_transfer_form.amount.error_message = null
