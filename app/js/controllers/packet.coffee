@@ -35,7 +35,7 @@ angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wa
   $scope.$watch ->
     Wallet.current_account
   , ->
-    $scope.frm_data.to_account_name = Wallet.current_account.name
+    $scope.frm_data.to_account_name = Wallet.current_account?.name
 
 
   $scope.hide = ->
@@ -52,7 +52,7 @@ angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wa
       $scope.form.password.$valid = false
       $scope.form.password.$error = {}
 
-      error   = err.data.error
+      error   = err.data?.error || err.response?.data?.error
       code    = error.code
 
       if code
