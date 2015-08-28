@@ -28,10 +28,12 @@
       <div flex="1" layout="row">
         <md-input-container flex>
           <label translate>packet.total</label>
-          <input required type="number" step="1" name="amount" ng-model="frm_data.amount.amount" min="1" minlength="1">
+          <input required type="number" step="1" name="amount" ng-model="frm_data.amount.amount" ng-min="(frm_data.count + 1) || 1">
           <div ng-messages="form.amount.$error" ng-show="form.amount.$dirty">
             <div ng-message="required">{{'tip.required'|translate}}</div>
             <div ng-message="number">{{'tip.number'|translate}}</div>
+            <div ng-message="min">{{'tip.need_at_least_amount' | translate }} {{ (frm_data.count + 1) || 1 }}</div>
+            <div ng-message="remoteError">{{form.amount.$error.remoteError}}</div>
           </div>
         </md-input-container>
 
@@ -85,6 +87,10 @@
         </div>
       </md-input-container>
     </md-content>
+
+    <div ng-messages="form.$error.remoteError" class="error-container" ng-show="form.$error.remoteError">
+      <div>{{form.$error.remoteError}}</div>
+    </div>
 
   </md-dialog-content>
 

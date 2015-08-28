@@ -52,7 +52,8 @@
     "required": "This is required",
     "too_short": "Too short",
     "maxlength": "Too long",
-    "number": "Please input number"
+    "number": "Please input number",
+    "need_at_least_amount": "至少需要{{value}}"
   },
   "th": {
     "date": "DATE",

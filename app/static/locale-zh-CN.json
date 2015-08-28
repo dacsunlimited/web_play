@@ -52,7 +52,8 @@
     "required": "必填项",
     "too_short": "太短",
     "maxlength": "太长",
-    "number": "请输入数字"
+    "number": "请输入数字",
+    "need_at_least_amount": "至少需要{{value}}"
   },
   "th": {
     "date": "日期",
