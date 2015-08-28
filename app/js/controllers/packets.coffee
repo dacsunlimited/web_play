@@ -28,7 +28,11 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
   # get recent packets
   refresh_recent_packets = ->
-    Blockchain.refresh_recent_packets().then (result) -> $scope.packets = result
+    Blockchain.refresh_recent_packets().then (result) ->
+      if result
+        $scope.packets =
+          created: result.created?.reverse()
+          claimed: result.claimed?.reverse()
 
   # monitor every block update
   recent_packets_observer =
