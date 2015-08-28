@@ -1,13 +1,10 @@
-angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wallet, WalletAPI, Utils, RpcService, $mdDialog, Growl, $translate, id, packet) ->
-
-  $scope.packet = packet if packet
-  # $scope.claimers = []
+angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wallet, WalletAPI, Utils, RpcService, $mdDialog, Growl, $translate, id, password) ->
 
   $scope.form = null
   $scope.frm_data =
-    id: packet?.id || null
+    id: id || null
     to_account_name: Wallet.current_account?.name
-    password: packet.password || ""
+    password: password || ""
 
   my_accounts = []
 

@@ -43,13 +43,6 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
 
   $scope.showPacket = (evt, id, pwd = null) ->
-    # get packet cache from collection
-    for p in $scope.packets.created
-      packet = p if p.id == id
-
-    unless packet
-      for p in $scope.packets.claimed
-        packet = p if p.id == id
 
     $mdDialog.show
       controller: "PacketController",
@@ -58,7 +51,7 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
       targetEvent: evt,
       locals:
         id: id
-        packet: (packet.password = pwd if pwd; packet)
+        password: pwd
 
     .then (succ) ->
       refresh_recent_packets()
