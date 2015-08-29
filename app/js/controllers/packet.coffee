@@ -1,13 +1,10 @@
-angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wallet, WalletAPI, Utils, RpcService, $mdDialog, Growl, $translate, id, packet) ->
-
-  $scope.packet = packet if packet
-  # $scope.claimers = []
+angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wallet, WalletAPI, Utils, RpcService, $mdDialog, Growl, $translate, id, password) ->
 
   $scope.form = null
   $scope.frm_data =
-    id: packet?.id || null
+    id: id || null
     to_account_name: Wallet.current_account?.name
-    password: packet.password || ""
+    password: password || ""
 
   my_accounts = []
 
@@ -38,7 +35,7 @@ angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wa
   $scope.$watch ->
     Wallet.current_account
   , ->
-    $scope.frm_data.to_account_name = Wallet.current_account.name
+    $scope.frm_data.to_account_name = Wallet.current_account?.name
 
 
   $scope.hide = ->
@@ -49,24 +46,30 @@ angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wa
     WalletAPI.claim_red_packet($scope.frm_data.id, $scope.frm_data.to_account_name, $scope.frm_data.password).then (response) =>
       $translate('packet.tip.successful_claimed').then (val) -> Growl.notice "", val
       $mdDialog.hide(true)
-    , (error) ->
-      code = error.response.data.error.code
+    , (err) ->
+
       $scope.form.password.$dirty = true
       $scope.form.password.$valid = false
       $scope.form.password.$error = {}
 
-      if code == 31005
-          $scope.form.password.$error.badPassword = true
-      else if code == 20010
-          $scope.form.password.$error.insufficientFund = true
-      else if code == 10
+      error   = err.data?.error || err.response?.data?.error
+      code    = error.code
 
-        if error.message.indexOf("All of this red packet has already been claimed!") > -1
-          $scope.form.password.$error.allClaimed = true
-        else if error.message.indexOf("This account already claimed this packet!") > -1
-          $scope.form.password.$error.dupClaim = true
-        else if error.message.indexOf("to_account_rec.valid") > -1
-          $scope.form.password.$error.accountNotRegistered = true
+      if code
+        if code == 10 or code == 31005
+
+          if code == 31005
+            $scope.form.password.$error.badPassword = true
+          else if error.message.indexOf("All of this red packet has already been claimed!") > -1
+            $scope.form.password.$error.allClaimed = true
+          else if error.message.indexOf("This account already claimed this packet!") > -1
+            $scope.form.password.$error.dupClaim = true
+          else if error.message.indexOf("to_account_rec.valid") > -1
+            $scope.form.password.$error.accountNotRegistered = true
+
+        else
+
+          $scope.form.password.$error.errorMessage = error.locale_message
 
       else
-          $scope.form.password.error_message = Utils.formatAssertException(error.data.error.message)
+        $scope.form.password.$error.errorMessage = Utils.formatAssertException(error.message)

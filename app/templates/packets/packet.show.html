@@ -37,6 +37,7 @@
           <div ng-message="dupClaim">{{'packet.tip.dup_claim'|translate}}</div>
           <div ng-message="insufficientFund">{{'packet.tip.insufficient_balances'|translate}}</div>
           <div ng-message="accountNotRegistered">{{'packet.tip.account_not_registered'|translate}}</div>
+          <div ng-message="errorMessage">{{form.password.$error.errorMessage}}</div>
         </div>
         <div flex-order="4" ng-show="form.password.$pristine && form.password.$valid" translate>packet.tip.password_allow_blank</div>
       </md-input-container>

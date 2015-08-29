@@ -28,7 +28,11 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
   # get recent packets
   refresh_recent_packets = ->
-    Blockchain.refresh_recent_packets().then (result) -> $scope.packets = result
+    Blockchain.refresh_recent_packets().then (result) ->
+      if result
+        $scope.packets =
+          created: result.created?.reverse()
+          claimed: result.claimed?.reverse()
 
   # monitor every block update
   recent_packets_observer =
@@ -43,13 +47,6 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
 
   $scope.showPacket = (evt, id, pwd = null) ->
-    # get packet cache from collection
-    for p in $scope.packets.created
-      packet = p if p.id == id
-
-    unless packet
-      for p in $scope.packets.claimed
-        packet = p if p.id == id
 
     $mdDialog.show
       controller: "PacketController",
@@ -58,7 +55,7 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
       targetEvent: evt,
       locals:
         id: id
-        packet: (packet.password = pwd if pwd; packet)
+        password: pwd
 
     .then (succ) ->
       refresh_recent_packets()
