@@ -49,10 +49,11 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
   $scope.showPacket = (evt, id, pwd = null) ->
 
     $mdDialog.show
-      controller: "PacketController",
-      templateUrl: 'packets/packet.show.html',
-      parent: angular.element(document.body),
-      targetEvent: evt,
+      controller: "PacketController"
+      templateUrl: 'packets/packet.show.html'
+      parent: angular.element(document.body)
+      targetEvent: evt
+      clickOutsideToClose:true
       locals:
         id: id
         password: pwd
@@ -68,6 +69,7 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
       templateUrl: 'packets/packet.new.html'
       parent: angular.element(document.body)
       targetEvent: evt
+      clickOutsideToClose:true
 
     .then (succ) ->
       refresh_recent_packets()
