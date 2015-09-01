@@ -1,5 +1,4 @@
 <md-dialog aria-label="{{packet.id}}" class="packet-quick-search" flex="33">
-  <form name="packets_quick_search_form" ng-submit="claim()">
   <md-toolbar ng-init="form = packets_quick_search_form">
     <div class="md-toolbar-tools">
       <h2 translate>packet.select_from_mine</h2>
@@ -21,7 +20,7 @@
 
     <md-list class="packets" ng-show="packets.length > 0">
 
-      <md-list-item ng-repeat="packet in packets | filter:searchString" class="packet" ng-click="select_packet(packet)">
+      <md-list-item ng-repeat="packet in packets | filter:searchString" ng-class="{mine: selected_packet.id == packet.id}" class="packet" ng-click="selectPacket(packet)">
         <div flex>
           <i class="fa fa-envelope packet-cover"></i> {{ packet.message }}
         </div>
@@ -38,6 +37,7 @@
 
   <div class="md-actions" layout="row">
     <md-button type="button" ng-click="cancel()" class="" >{{'packet.btn.close'|translate}}</md-button>
+    <md-button type="submit" ng-click="sendPacket()" ng-disabled="selected_packet == null" class="md-primary" translate>btn.send</md-button>
+
   </div>
-  </form>
 </md-dialog>

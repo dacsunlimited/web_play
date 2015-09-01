@@ -1,4 +1,5 @@
 angular.module("app").controller "MyPacketSearchController", ($scope, $location, $stateParams, $state, Blockchain, Wallet, Utils, $mdDialog, Observer, RpcService, account_id) ->
+  $scope.selected_packet = null
 
   # get recent packets
   refresh_my_packets = (acct_id) ->
@@ -25,8 +26,11 @@ angular.module("app").controller "MyPacketSearchController", ($scope, $location,
           $scope.packets = ps
           console.log $scope.packets[0]
 
-  $scope.select_packet = (packet) ->
-    $mdDialog.hide(packet)
+  $scope.selectPacket = (packet) ->
+    $scope.selected_packet = packet
+
+  $scope.sendPacket = ->
+    $mdDialog.hide($scope.selected_packet)
 
   $scope.hide = ->
     $mdDialog.hide()

@@ -27,6 +27,10 @@ $packet_red:#BD0000;
   }
 }
 
+.mine {
+  background-color:transparentize(red, 0.95);
+  font-weight:bold;
+}
 .packet-cover { color:$packet_red; }
 .packet-show {
   .packet-cover {
@@ -36,8 +40,7 @@ $packet_red:#BD0000;
   .claimers {
     .claimer {
       &.mine {
-        background-color:transparentize(red, 0.95);
-        font-weight:bold;
+        @extend .mine;
       }
       .claimer-icon {
         margin-right:10px;
