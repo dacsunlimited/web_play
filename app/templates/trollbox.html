@@ -19,6 +19,7 @@
                 <div class="packet-item" ng-click="showPacket($event, packet.id)">
                   <i class="fa fa-envelope"></i>
                   <div class="packet-message" ng-bind-html="packet.message | simpleFormat"></div>
+                  <div class="packet-amount">{{packet.amount.amount/packet.amount.precision}} <span  class="unit">{{packet.amount.symbol}}</span></div>
                   <div class="packet-sender">{{'packet.from'|translate}} {{packet.from_account.name}} </div>
                   <div class="packet-stat">{{packet.claimed_count}}/{{packet.slots_count}}</div>
                 </div>

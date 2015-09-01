@@ -23,6 +23,7 @@
     <div class="packet-item" ng-show="search_packet" ng-click="showPacket($event, search_packet.id, search_packet.password)">
       <i class="fa fa-envelope"></i>
       <div class="packet-message" ng-bind-html="search_packet.message | simpleFormat"></div>
+      <div class="packet-amount">{{search_packet.amount.amount/search_packet.amount.precision}} <span class="unit">{{search_packet.amount.symbol}}</span></div>
       <div class="packet-sender">{{'packet.from'|translate}} {{search_packet.from_account.name}}</div>
       <div class="packet-stat">{{search_packet.claimed_count}}/{{search_packet.slots_count}}</div>
     </div>
@@ -39,6 +40,7 @@
     <div class="packet-item" ng-show="packets[type].length>0" ng-repeat="p in packets[type]" ng-click="showPacket($event, p.id)">
       <i class="fa fa-envelope"></i>
       <div class="packet-message" ng-bind-html="p.message | simpleFormat"></div>
+      <div class="packet-amount">{{p.amount.amount/p.amount.precision}} <span class="unit">{{p.amount.symbol}}</span></div>
       <div class="packet-sender">{{'packet.from'|translate}} {{p.from_account.name}}</div>
       <div class="packet-stat">{{p.claimed_count}}/{{p.slots_count}}</div>
     </div>

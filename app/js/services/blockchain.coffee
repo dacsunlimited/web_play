@@ -59,7 +59,11 @@ class Blockchain
     # # # # #
     #  Asset Records
 
-    asset_records: {}
+    asset_records:
+      0:
+        symbol: 'XTS'
+        precision: 100000
+
     asset_records_array: []
     market_asset_records_array: []
     symbol2records: {}
@@ -307,6 +311,10 @@ class Blockchain
               account_ids.push p.from_account_id
               p.slots_count = p.claim_statuses.length
               p.claimed_count = (p.claim_statuses.filter (s) -> s.account_id > -1).length
+              # get amount asset
+              amount_asset         = @asset_records[p.amount.asset_id]
+              p.amount.symbol      = amount_asset.symbol
+              p.amount.precision   = amount_asset.precision
 
           # get from account account/name
           account_ids = @utils.unique_array(account_ids).map (a)-> [a]
