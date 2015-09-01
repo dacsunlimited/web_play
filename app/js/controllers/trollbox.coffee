@@ -200,12 +200,16 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
               keep_chat_down()
             , 300
 
-  getRequiredFee = (message_str) ->
-    (pricing?.price + AD.getMessageFee(message_str) * Info.PRECISION) / Info.PRECISION
+  getRequiredFee = (bidid, message_str) ->
+    # if bidid is not identified, give a large enough price
+    # so that it will fail and be skipped
+    bid_price = pricings[bidid]?.price || 100000000
 
-  checkMessageFee = (message) ->
+    (bid_price + AD.getMessageFee(message_str) * Info.PRECISION) / Info.PRECISION
+
+  checkMessageFee = (bidid, message) ->
     # msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
-    feeRequired = getRequiredFee(message.message)
+    feeRequired = getRequiredFee(bidid, message.message)
 
     return message.amount.amount / Info.PRECISION >= feeRequired
 
@@ -221,7 +225,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
       form.$setValidity "message", false
       form.message.$error.reg_acct_required = true
 
-    $scope.feeRequired = getRequiredFee($scope.chatBid)
+    $scope.feeRequired = getRequiredFee(chatAdPricingID, $scope.chatBid)
 
     if $scope.feeRequired > $scope.from.account.balance.amount / $scope.precision
       form.$setValidity "message", false
