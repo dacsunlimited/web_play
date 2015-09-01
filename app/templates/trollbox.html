@@ -55,7 +55,7 @@
 
           <md-input-container flex>
             <label>{{'ad.write_sth'|translate}}</label>
-            <input name="message" ng-model="chatBid.creative.creative.text" ng-change="checkFee();" required minlength="1">
+            <input name="message" ng-model="chatBid.creative.creative.text" ng-change="checkFee(chatBid);" required minlength="1">
             <div ng-messages="chat_form.message.$error" ng-show="chat_form.message.$dirty">
               <div ng-message="required">{{'tip.required'|translate}}</div>
               <div ng-message="minlength">{{'tip.too_short'|translate}}</div>
@@ -66,7 +66,12 @@
             <div class="hint text-muted" style="order:5;text-align:right;" ng-show="chatBid.creative.creative.text">{{feeRequired}} {{symbol}}</div>
           </md-input-container>
 
-          <md-button class="md-primary md-mini">{{'btn.send'|translate}}</md-button>
+          <md-button type="button" class="md-icon-button"
+                    aria-label="{{'packet.send_red_packet'|translate}}"
+                    ng-click="showSearchPakcetDialog($event)">
+              <i class="fa fa-envelope packet-cover"></i>
+          </md-button>
+          <md-button type="submit" class="md-primary md-mini">{{'btn.send'|translate}}</md-button>
         </div>
 
     </form>

@@ -1,6 +1,10 @@
 angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, $mdDialog, AD) ->
   chatAdPositionAcct    = Info.CHAT_ADD_POSITION_ACCT
-  chatAdPricingID       = "plain1m"
+
+
+  textPriceID           = "plain1m"
+  packetPriceID         = "packet1m"
+
   chatListLimit         = 50
   chatSepBlockInterval  = 120 # 2 minutes
 
@@ -16,13 +20,24 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
   $scope.symbol     = Info.symbol
   $scope.precision  = Info.PRECISION
 
+  # plain text chat
   $scope.chatBid =
-    bidid: "#{chatAdPricingID}"
+    bidid: "#{textPriceID}"
     creative:
       version: 0.1
       type: 'text'
       creative:
         text: null
+    starts_at: null
+
+  # packet chat
+  $scope.packetBid =
+    bidid: "#{packetPriceID}"
+    creative:
+      version: 0.1
+      type: 'packet'
+      creative:
+        id: null
     starts_at: null
 
   $scope.messages = []
@@ -120,7 +135,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
       if ad_spec and ad_spec.ad and ad_spec.ad.pricing?.length > 0
         adSpec = ad_spec
 
-        plain1m = ad_spec.ad.pricing.filter (p) -> p.id == chatAdPricingID
+        plain1m = ad_spec.ad.pricing.filter (p) -> p.id == textPriceID
         pricing = plain1m[0]
 
         for p in ad_spec.ad.pricing
@@ -233,12 +248,12 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
               keep_chat_down()
             , 300
 
-  getRequiredFee = (bidid, message_str) ->
+  getRequiredFee = (bidid, bidJSON) ->
     # if bidid is not identified, give a large enough price
     # so that it will fail and be skipped
     bid_price = pricings[bidid]?.price || 100000000
 
-    (bid_price + AD.getMessageFee(message_str) * Info.PRECISION) / Info.PRECISION
+    (bid_price + AD.getMessageFee(bidJSON) * Info.PRECISION) / Info.PRECISION
 
   checkMessageFee = (bidid, message) ->
     # msgSize = Utils.byteLength JSON.stringify(message.message) - 20 # deal with marginal length problem
@@ -248,8 +263,8 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
   $scope.setForm = (frm) -> form = frm
 
-  $scope.checkFee = ->
-    message = $scope.chatBid.creative.creative.text
+  $scope.checkFee = (bid)->
+    message = getBidMsg(bid)
     if !message || message == ''
       $scope.feeRequired = 0
       return false
@@ -258,7 +273,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
       form.$setValidity "message", false
       form.message.$error.reg_acct_required = true
 
-    $scope.feeRequired = getRequiredFee(chatAdPricingID, $scope.chatBid)
+    $scope.feeRequired = getRequiredFee(textPriceID, bid)
 
     if $scope.feeRequired > $scope.from.account.balance.amount / $scope.precision
       form.$setValidity "message", false
@@ -267,29 +282,31 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
     return true
 
+  $scope.doSend = (bid) ->
+    bid.starts_at = Utils.formatUTCDate(new Date())
 
-  $scope.doSend = ->
-    $scope.chatBid.starts_at = Utils.formatUTCDate(new Date())
-
-    unless $scope.checkFee()
+    unless $scope.checkFee(bid)
       return false
 
     # do api call
-    public_message = JSON.stringify( $scope.chatBid )#.replace(/"/g,'\\\"')
+    public_message = JSON.stringify( bid )#.replace(/"/g,'\\\"')
     WalletAPI.buy_ad($scope.feeRequired, $scope.symbol, $scope.from.account.account_name, chatAdPositionAcct, public_message).then (response) ->
 
       # notify staging
       angular.element('.troll-staging').removeClass('hide')
+      msg = getBidMsg(bid)
       $scope.staged_messages.push
-        fp: Utils.hashString($scope.chatBid.creative.creative.text),
-        message: $scope.chatBid.creative.creative.text
+        fp: Utils.hashString( msg ),
+        message: msg.substr(0,20)
 
       # reset form
-      $scope.chatBid.creative.creative.text = ''
+      $scope.chatBid.creative.creative.text = null
+      $scope.packetBid.creative.creative.id = null
       form.message.$dirty = false
 
-    , (error) ->
-        if (error.response.data.error.code == 20010)
+    , (err) ->
+        error = err.data?.error || err.response?.data?.error
+        if (error.code == 20010)
             $translate('market.tip.insufficient_balances').then (val) ->
                 Growl.notice "", val
         else
@@ -300,12 +317,10 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
     $scope.chatBid.creative.creative.text = chat_form.message.value
     $scope.chatBid.starts_at = Utils.formatUTCDate(new Date())
 
-    $scope.doSend()
+    $scope.doSend($scope.chatBid)
 
   $scope.showSearchPakcetDialog = (evt) ->
     $mdDialog.show
-      # controller: "PacketNewController",
-      # templateUrl: 'packets/packet.new.html'
       controller: "MyPacketSearchController"
       templateUrl: 'packets/packets.my.search.html'
       parent: angular.element(document.body)
@@ -318,6 +333,11 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
       if packet
         console.log 'searchPacketDialog successfully submitted'
         console.log 'packet', packet
+
+        $scope.packetBid.creative.creative.id = packet.id
+        $scope.packetBid.starts_at = Utils.formatUTCDate(new Date())
+
+        $scope.doSend($scope.packetBid)
     , () ->
       # cancelled, do nothing
 
