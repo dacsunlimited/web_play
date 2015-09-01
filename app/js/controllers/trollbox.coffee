@@ -6,6 +6,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
   adSpec = null
   pricing = null
+  pricings = {}
   $scope.accounts = []
   $scope.registered_accounts = {}
   $scope.from =
@@ -122,6 +123,18 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
         plain1m = ad_spec.ad.pricing.filter (p) -> p.id == chatAdPricingID
         pricing = plain1m[0]
 
+        for p in ad_spec.ad.pricing
+          pricings[p.id] = p
+
+  # based on bid type, return descriptiontive message, eg text or id
+  getBidMsg = (bid) ->
+    switch bid.creative.type
+      when 'text'
+        bid.creative.creative.text
+      when 'packet'
+        bid.creative.creative.id
+      else
+        bid.creative.creative.text
 
   is_mine = (id, myids) ->
     # console.log id, myids, (id > 0 and myids.indexOf(id) > -1)
@@ -134,12 +147,13 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
       if response?.length > 0
         my_account_ids = $scope.accounts.map (acct) -> acct.account_id
         # min amount is 200000
-        for message in (response.filter (r) -> checkMessageFee(r)).reverse()
+        for message in response.reverse() #(response.filter (r) -> checkMessageFee(r)).reverse()
           bid = try angular.fromJson(message.message.replace(/\\\"/g,'\"'))
           catch err
             null
 
-          # console.log bid.creative.creative.text
+          # if json parse error or didn't pay enough fee, skip
+          continue unless bid && checkMessageFee(bid.bidid, message)
 
           trx_id = message.index.transaction_id
 
@@ -150,7 +164,7 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
             # if it's my message, find it in staged message and clear it
             if mine and $scope.staged_messages.length > 0
-              fp = Utils.hashString bid.creative.creative.text
+              fp = Utils.hashString getBidMsg(bid)
               foundIndex = ($scope.staged_messages.map (m) -> m.fp).indexOf(fp)
               if foundIndex > -1
                 $scope.staged_messages.splice foundIndex, 1
@@ -159,7 +173,8 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
               userid:   message.publisher_id
               username: message.publisher_id
               rp: null
-              message:  bid.creative.creative.text
+              # message:  bid.creative.creative.text
+              creative: bid.creative
               timestamp: bid.starts_at
               is_mine:  mine
               txid:     trx_id
@@ -175,9 +190,14 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
             accts: RpcService.request("batch", [ "blockchain_get_account", (new_messages.map (m)-> [m.userid]) ])
             trxs:  RpcService.request("batch", [ "blockchain_get_transaction", (new_messages.map (m)-> [m.txid]) ])
 
+          packet_messages = new_messages.filter (m) -> m.creative.type == 'packet'
+          if packet_messages.length > 0
+            requests.packets = Blockchain.get_red_packets(packet_messages.map (m)-> m.creative.creative.id)
+
           $q.all(requests).then (response) ->
             accts = response.accts.result
             trxs  = response.trxs.result
+            packets = response.packets
 
             for i in [0...new_messages.length]
               msg = new_messages[i]
@@ -190,6 +210,19 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
               msg.trx_num   = chain.trx_num
 
               msg.is_fresh = (i == 0 or (i > 0 and chain.block_num - new_messages[i-1].block_num > chatSepBlockInterval))
+
+            # packets
+            if packets?.length > 0
+              # packets mapping
+              packets_mapping = {}
+              for p in packets
+                packets_mapping[p.id] = p
+
+              for msg in new_messages
+                if msg.creative.type == 'packet'
+                  msg.creative.creative.packet = packets_mapping[msg.creative.creative.id]
+
+              packets_mapping = null
 
             # sort message by block_num, trx_num
             new_messages
