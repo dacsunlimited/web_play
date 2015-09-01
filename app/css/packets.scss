@@ -27,6 +27,7 @@ $packet_red:#BD0000;
   }
 }
 
+.packet-cover { color:$packet_red; }
 .packet-show {
   .packet-cover {
     color:$packet_red; font-size:8em; line-height:75px;

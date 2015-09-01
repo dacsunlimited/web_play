@@ -686,6 +686,9 @@
     "default_message": "大家开开心心",
     "create_packet_title": "创建红包",
     "select_from_accounts": "发送账户",
+    "send_red_packet": "发送红包",
+    "select_from_mine": "从我创建的红包中选择",
+    "search_id_or_msg": "ID或消息",
     "tip": {
       "password_allow_blank": "如果红包没有设置密码，可留空",
       "bad_password": "密码错误",

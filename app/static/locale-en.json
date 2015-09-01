@@ -705,6 +705,9 @@
     "default_message": "This is a small gift, hope you like it.",
     "create_packet_title": "Create Red Packet",
     "select_from_accounts": "From Account",
+    "send_red_packet": "Send Red Packet",
+    "select_from_mine": "Select Red Packet",
+    "search_id_or_msg": "Search ID or message",
     "tip": {
       "password_allow_blank": "If no password is required for the red packet, leave it blank",
       "bad_password": "Incorrect Password",

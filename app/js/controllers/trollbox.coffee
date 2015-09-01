@@ -269,6 +269,27 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
 
     $scope.doSend()
 
+  $scope.showSearchPakcetDialog = (evt) ->
+    $mdDialog.show
+      # controller: "PacketNewController",
+      # templateUrl: 'packets/packet.new.html'
+      controller: "MyPacketSearchController"
+      templateUrl: 'packets/packets.my.search.html'
+      parent: angular.element(document.body)
+      targetEvent: evt
+      clickOutsideToClose:true
+      locals:
+        account_id: $scope.from.account.account_id
+
+    .then (packet) ->
+      if packet
+        console.log 'searchPacketDialog successfully submitted'
+        console.log 'packet', packet
+    , () ->
+      # cancelled, do nothing
+
+
+
   if !$scope.symbol and Info.symbol == ''
     Info.refresh_info().then ->
       $scope.symbol = Info.symbol
