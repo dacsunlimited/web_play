@@ -321,7 +321,24 @@ angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q
     , () ->
       # cancelled, do nothing
 
+  $scope.showPacket = (evt, id, pwd = null) ->
 
+    $mdDialog.show
+      controller: "PacketController"
+      templateUrl: 'packets/packet.show.html'
+      parent: angular.element(document.body)
+      targetEvent: evt
+      clickOutsideToClose:true
+      locals:
+        id: id
+        password: pwd
+
+    .then (succ) ->
+      # TODO
+      # update specific packet message
+      console.log 'packet claimed', succ
+    , () ->
+      # cancelled, do nothing
 
   if !$scope.symbol and Info.symbol == ''
     Info.refresh_info().then ->
