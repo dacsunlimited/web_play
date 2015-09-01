@@ -321,13 +321,25 @@ class Blockchain
 
         return deferred.promise
 
-    get_red_packet: (id) ->
-        deferred = @q.defer()
+    # @param ids: id string or array of id string
+    #
+    # @return Packet or [Packet]: based on input ids is string or array
+    get_red_packets: (ids) ->
+      deferred = @q.defer()
 
-        @blockchain_api.get_red_packet(id).then (data) =>
-          deferred.resolve false unless data
+      if ids instanceof Array
+        param_ids = ids.map (id)-> [id]
+      else
+        param_ids = [[ids]]
 
-          packet = data
+      @rpc.request("batch", ["blockchain_get_red_packet", param_ids]).then (data) =>
+        # not found or other exceptions
+        deferred.resolve false unless (data?.result?.length > 0 and data.result[0]?)
+
+        account_mapping = {}
+        account_ids = []
+
+        for packet in (data.result.filter (d)-> d?)
           packet.claimed_count ||= 0
           packet.slots_count   ||= packet.claim_statuses.length
 
@@ -335,40 +347,44 @@ class Blockchain
           amount_asset              = @asset_records[packet.amount.asset_id]
           packet.amount.symbol      = amount_asset.symbol
           packet.amount.precision   = amount_asset.precision
+          packet.claimers           = [] if packet.claim_statuses.length > 0
 
-          @blockchain_api.get_account(data.from_account_id).then (res) =>
-            packet.from_account      = res
+          account_ids.push packet.from_account_id
+          for claimer in packet.claim_statuses
+             account_ids.push claimer.account_id if claimer.account_id != -1
 
-            # claimers
-            account_mapping = {}
-            claimer_ids = (packet.claim_statuses.filter (s) -> s.account_id != -1).map (s) -> [s.account_id]
+        account_ids = @utils.unique_array(account_ids).map (a)-> [a]
+        if account_ids.length > 0
+          @rpc.request("batch", ["blockchain_get_account", account_ids]).then (acct_data) =>
+            account_mapping[acct.id] = acct for acct in acct_data.result
 
-            if claimer_ids.length > 0
-              packet.claimers = []
+            for packet in data.result
+              packet.from_account = account_mapping[packet.from_account_id]
 
-              @rpc.request('batch', ['blockchain_get_account', claimer_ids]).then (d) =>
-                if d.result.length > 0
-                  account_mapping[account.id] = account for account in d.result
+              for status in packet.claim_statuses
+                if status.account_id != -1
+                  status.amount.symbol    = packet.amount.symbol
+                  status.amount.precision = packet.amount.precision
+                  status.claimer          = account_mapping[status.account_id]
+                  # status.claimer.is_mine = my_accounts.indexOf(status.account_id) > -1
+                  packet.claimers.push status
 
-                for status in packet.claim_statuses
-                  if status.account_id != -1
-                    status.amount.symbol    = packet.amount.symbol
-                    status.amount.precision = packet.amount.precision
-                    status.claimer          = account_mapping[status.account_id]
-                    # status.claimer.is_mine = my_accounts.indexOf(status.account_id) > -1
-                    packet.claimers.push status
+              # update claimed_count
+              packet.claimed_count  = packet.claimers.length
 
-                # update claimed_count
-                packet.claimed_count  = packet.claimers.length
+            account_mapping = null
+            account_ids = null
 
-                account_mapping = null
-
-                deferred.resolve packet
+            # if querying ids, return array
+            # if querying specific id, return a simply object
+            if ids instanceof Array
+              deferred.resolve data.result
             else
-              deferred.resolve packet
+              deferred.resolve data.result[0]
+      , (err) ->
+        deferred.reject err
 
-        return deferred.promise
-
+      return deferred.promise
 
 
 angular.module("app").service("Blockchain", ["Client", "NetworkAPI", "RpcService", "BlockchainAPI", "Utils", "$q", "$interval", Blockchain])

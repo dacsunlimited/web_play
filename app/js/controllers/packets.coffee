@@ -12,7 +12,7 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
 
     [id, pwd] = patten.split('|')
 
-    Blockchain.get_red_packet(id).then (data) ->
+    Blockchain.get_red_packets(id).then (data) ->
       $scope.search_packet = null
 
       if data
@@ -23,8 +23,14 @@ angular.module("app").controller "PacketsController", ($scope, $location, $state
       else
         $scope.form_search_packet.id.$valid = false
         $scope.form_search_packet.id.$error.notFound = true
+
     , (err) ->
-      $scope.form_search_packet.id.error_message = Utils.formatAssertException(error.data.error.message)
+      error = err.data?.error || err.response?.data?.error
+      error_message = error.locale_message || error.message
+
+      $scope.form_search_packet.id.error_message = Utils.formatAssertException(error_message)
+
+
 
   # get recent packets
   refresh_recent_packets = ->
