@@ -353,11 +353,11 @@ COMBINED
     
 XTS: 
 
-    wallet_account_update_registration chat.dacplay dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"},{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"}]}}"
+    wallet_account_update_registration chat.dacplay chat.dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"},{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"}]}}"
     
 PLS: 
 
-    wallet_account_update_registration chat.dacplay dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"},{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"}]}}"
+    wallet_account_update_registration chat.dacplay chat.dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"},{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"}]}}"
 
 # Post Chat Message
 
