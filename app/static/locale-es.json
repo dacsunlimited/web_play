@@ -151,7 +151,8 @@
   "blocks": {
     "load_more_blocks": "Cargar mas Bloques",
     "info": "Información mas detallada acerca de los Bloques",
-    "trxs_only": "Mostrar Solo Bloques con Transacciones"
+    "trxs_only": "Mostrar Solo Bloques con Transacciones",
+    "simple_view": "Simple View"
   },
   "unlock": {
     "btn_unlock": "Desbloquear",

@@ -153,7 +153,8 @@
   "blocks": {
     "load_more_blocks": "更多区块",
     "info": "更多关于区块的信息",
-    "trxs_only": "只显示带有交易的那些区块"
+    "trxs_only": "只显示带有交易的那些区块",
+    "simple_view": "简单视图"
   },
   "unlock": {
     "btn_unlock": "解 锁",

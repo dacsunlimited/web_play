@@ -150,7 +150,8 @@
   "blocks": {
     "load_more_blocks": "Weitere Blöcke laden",
     "info": "Details zu den bisherigen Blöcken",
-    "trxs_only": "Nur Blöcke mit Transaktionen zeigen"
+    "trxs_only": "Nur Blöcke mit Transaktionen zeigen",
+    "simple_view": "Simple View"
   },
   "unlock": {
     "btn_unlock": "Anmelden",

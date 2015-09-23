@@ -152,7 +152,8 @@
   "blocks": {
     "load_more_blocks": "블록 더 가져오기",
     "info": "블록 상세 정보",
-    "trxs_only": "트랜잭션이 있는 블록만 보기"
+    "trxs_only": "트랜잭션이 있는 블록만 보기",
+    "simple_view": "Simple View"
   },
   "unlock": {
     "btn_unlock": "잠금 해제",

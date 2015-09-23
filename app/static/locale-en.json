@@ -153,7 +153,8 @@
   "blocks": {
     "load_more_blocks": "Load more blocks",
     "info": "More detailed info about blocks",
-    "trxs_only": "Only show blocks with transactions"
+    "trxs_only": "Only show blocks with transactions",
+    "simple_view": "Simple View"
   },
   "unlock": {
     "btn_unlock": "unlock",
