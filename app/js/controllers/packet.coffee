@@ -9,7 +9,7 @@ angular.module("app").controller "PacketController", ($scope, $q, Blockchain, Wa
   my_accounts = []
 
   Wallet.get_current_or_first_account().then (acct)->
-    $scope.frm_data.to_account_name = acct.name
+    $scope.frm_data.to_account_name = acct?.name
 
     # my registered accounts
     for k, acct of Wallet.accounts

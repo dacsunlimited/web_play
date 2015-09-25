@@ -18,7 +18,7 @@ angular.module("app").controller "SidenavController", ($scope, $state, $rootScop
 
   Wallet.get_current_or_first_account().then (acct) ->
     $scope.current_account = acct
-    $scope.current_account_name = acct.name
+    $scope.current_account_name = acct?.name
 
   # Wallet.refresh_accounts().then (accts) ->
   #   debugger
