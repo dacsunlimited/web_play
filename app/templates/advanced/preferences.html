@@ -10,7 +10,7 @@
           <!-- wallet lock timeout -->
           <label class="col-sm-offset-1 col-sm-3 control-label" for="timeout" translate>pref.logout_timeout</label>
           <md-input-container>
-             <div class="col-sm-3 input-group">
+             <div class="col-sm-4 input-group">
                <input id="timeout" numonly autofocus ng-model="model.timeout" name="timeout" class="form-control" />
                 <span class="input-group-addon">{{ 'utils.seconds' | translate}}</span>
              </div>
@@ -20,7 +20,7 @@
          <label class="col-sm-offset-1 col-sm-3 control-label" for="transaction_fee" translate>pref.trx_fee</label>
 
          <md-input-container>
-            <div class="col-sm-3 input-group">
+            <div class="col-sm-4 input-group">
               <input id="transaction_fee" decimalonly ng-model="model.transaction_fee" name="transaction_fee"
                      class="form-control" ng-disabled="is_bitshares_js"/>
               <span class="input-group-addon">{{model.symbol}}</span>
@@ -30,7 +30,7 @@
          <!-- voting options -->
          <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.default_vote</label>
          <md-input-container>
-           <div class="col-sm-3 input-group">
+           <div class="col-sm-4 input-group">
              <div class="btn-group" dropdown is-open="status3.isopen">
                <button type="button" class="btn dropdown-toggle" dropdown-toggle>
                  {{ ('account.vote.' + voting.vote_options[voting.default_vote]) | translate }} <span class="caret"></span>
@@ -48,7 +48,7 @@
         <!-- interface language -->
         <label class="col-sm-offset-1 col-sm-3 control-label" for="language" translate>pref.language</label>
         <md-input-container>
-          <div class="col-sm-3 input-group" dropdown is-open="status2.isopen">
+          <div class="col-sm-4 input-group" dropdown is-open="status2.isopen">
             <button type="button" class="btn dropdown-toggle" dropdown-toggle>
               {{model.language_name}} <span class="caret"></span>
             </button>
@@ -62,7 +62,7 @@
 
         <!-- timezone -->
         <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.timezone</label>
-        <md-autocomplete class="col-sm-3 input-group"
+        <md-autocomplete class="col-sm-4 input-group"
                   md-search-text-change="searchTextChange()"
                   md-selected-item="model.timezone"
                   md-search-text="search_text"
@@ -81,7 +81,7 @@
 
       <!-- <md-input-container>
         <label translate>pref.theme</label>
-        <div class="col-sm-3 no-lr-padding">
+        <div class="col-sm-4 no-lr-padding">
           <div class="btn-group" dropdown is-open="status3.isopen">
             <button type="button" class="btn dropdown-toggle" dropdown-toggle>
               {{model.theme_name}} <span class="caret"></span>
