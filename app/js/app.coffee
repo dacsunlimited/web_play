@@ -115,6 +115,7 @@ app.config ($mdThemingProvider, IdleProvider, $translateProvider, $tooltipProvid
     $translateProvider.useStaticFilesLoader
         prefix: 'locale-',
         suffix: '.json'
+    $translateProvider.useSanitizeValueStrategy(null);
 
     [lang,zone] = switch(window.navigator.language.toLowerCase())
       when "zh-cn" then ["zh-CN","Asia/Shanghai"]
