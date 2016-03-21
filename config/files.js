@@ -10,46 +10,42 @@ module.exports = function(lineman) {
   return {
     js: {
       vendor: [
-        "vendor/bower/jquery/dist/jquery.js",
-        "vendor/bower/growl/javascripts/jquery.growl.js",
-        "vendor/bower/stacktrace/dist/stacktrace.js",
-        "vendor/js/bootstrap.js",
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/angular/angular.js",
+        "node_modules/angular-growl-v2/build/angular-growl.js",
+        "vendor/js/stacktrace.js", // "node_modules/stacktrace-js/stacktrace.js",
+        // "vendor/js/bootstrap.js", // node_modules/angular-bootstrap/ui-bootstrap.min.js ? it's been included below maybe can be deleted
 
-        "vendor/bower/angular/angular.js",
         // angular-material
-        "vendor/bower/angular-aria/angular-aria.js",
-        "vendor/bower/angular-animate/angular-animate.js",
-        "vendor/bower/angular-material/angular-material.js",
-        "vendor/bower/angular-messages/angular-messages.js",
+        "node_modules/angular-aria/angular-aria.js",
+        "node_modules/angular-animate/angular-animate.js",
+        "node_modules/angular-material/angular-material.js",
+        "node_modules/angular-messages/angular-messages.js",
         // float button
-        "vendor/bower/ng-mfb/src/mfb-directive.js",
+        "node_modules/ng-material-floating-button/src/mfb-directive.js",
 
 
-        // "vendor/bower/hammerjs/hammer.js",
-        "vendor/bower/angular-resource/angular-resource.js",
-        "vendor/js/angular-ui-router.js",
-        "vendor/bower/angular-pageslide-directive/dist/angular-pageslide-directive.js",
-        "vendor/bower/angular-bootstrap/ui-bootstrap.js",
-        "vendor/bower/angular-bootstrap/ui-bootstrap-tpls.js",
-        "vendor/bower/moment/min/moment-with-locales.js",
-        "vendor/bower/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
+        "node_modules/angular-resource/angular-resource.js",
+        "node_modules/angular-ui-router/release/angular-ui-router.js", // originally "vendor/js/angular-ui-router.js",
+        "node_modules/angular-pageslide-directive/dist/angular-pageslide-directive.js",
+        "node_modules/angular-bootstrap/ui-bootstrap.js",
+        "node_modules/angular-bootstrap/ui-bootstrap-tpls.js",
+        "node_modules/moment/min/moment-with-locales.js",
+        "node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
 
-        "vendor/bower/angular-ui-grid/ui-grid.js",
-        "vendor/bower/ng-idle/angular-idle.js",
-        "vendor/bower/angular-ui-utils/validate.js",
-        "vendor/bower/angular-xeditable/dist/js/xeditable.js",
-        "vendor/bower/angular-translate/angular-translate.js",
-        "vendor/bower/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
+        "node_modules/angular-ui-grid/ui-grid.js",
+        "node_modules/ng-idle/angular-idle.js",
+        "node_modules/angular-ui-utils/modules/validate/validate.js",
+        "node_modules/angular-xeditable/dist/js/xeditable.js",
+        "node_modules/angular-translate/dist/angular-translate.js",
+        "node_modules/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
 
         "vendor/js/jsonpath.js",
-        // "vendor/js/highstock.js",
-        // "vendor/js/technical-indicators.src.js",
-        // "vendor/js/angu-fixed-header-table.js",
         "vendor/js/bytebuffer.js",
         "vendor/js/sha256.js",
         "vendor/js/jdenticon.js",
-        "vendor/bower/angular-touch/angular-touch.min.js",
-        "vendor/bower/angular-carousel/dist/angular-carousel.min.js"
+        "node_modules/angular-touch/angular-touch.js", //angular-material doesn't like this, but angular-carousel depends on it
+        "node_modules/angular-carousel/dist/angular-carousel.js"
       ],
       app: [
         // "app/js/app.js",
@@ -67,16 +63,15 @@ module.exports = function(lineman) {
 
     css: {
       vendor: [
-        "vendor/bower/growl/stylesheets/jquery.growl.css",
-        "vendor/bower/angular-ui-grid/ui-grid.css",
-        "vendor/bower/angular-xeditable/dist/css/xeditable.css",
-        "vendor/bower/angular-carousel/dist/angular-carousel.css",
+        "node_modules/angular-growl-v2/build/angular-growl.min.css", //original "node_modules/growl/stylesheets/jquery.growl.css",
+        "node_modules/angular-ui-grid/ui-grid.min.css",
+        "node_modules/angular-xeditable/dist/css/xeditable.min.css",
+        "node_modules/angular-carousel/dist/angular-carousel.min.css",
         "vendor/css/bootstrap.css",
         "vendor/css/font-awesome.css",
         "vendor/css/ark.css",
-        // "vendor/bower/bootstrap-material-design/dist/css/material.min.css",
-        "vendor/bower/angular-material/angular-material.css",
-        "vendor/bower/ng-mfb/mfb/dist/mfb.css",
+        "node_modules/angular-material/angular-material.min.css",
+        "node_modules/ng-material-floating-button/mfb/dist/mfb.css",
         "vendor/css/ionicons.css"
       ],
       app: [
