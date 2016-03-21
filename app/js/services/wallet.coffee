@@ -546,4 +546,4 @@ class Wallet
         @timeout = @idle._options().idleDuration
         @timezone = moment.defaultZone.name
 
-angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "$idle", Wallet])
+angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "Idle", Wallet])

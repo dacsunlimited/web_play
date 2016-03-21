@@ -1,4 +1,4 @@
-angular.module("app").controller "RootController", ($scope, $location, $modal, $q, $http, $rootScope, $state, $stateParams, Wallet, Client, $idle, Shared, Info, WalletAPI, Observer) ->
+angular.module("app").controller "RootController", ($scope, $location, $modal, $q, $http, $rootScope, $state, $stateParams, Wallet, Client, Idle, Shared, Info, WalletAPI, Observer) ->
     $scope.unlockwallet = false
     $scope.bodyclass = "cover"
     $scope.currentPath = $location.path()
@@ -23,7 +23,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
             $scope.timedout = null
         return
     $scope.started = false
-    $scope.$on "$idleStart", ->
+    $scope.$on "IdleStart", ->
         closeModals()
         $scope.warning = $modal.open(
             templateUrl: "warning-dialog.html"
@@ -31,11 +31,11 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
         )
         return
 
-    $scope.$on "$idleEnd", ->
+    $scope.$on "IdleEnd", ->
         closeModals()
         return
 
-    $scope.$on "$idleTimeout", ->
+    $scope.$on "IdleTimeout", ->
         closeModals()
         Wallet.wallet_lock().then ->
             console.log('Wallet was locked due to inactivity')
@@ -43,14 +43,14 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
 
     $scope.startIdleWatch = ->
         closeModals()
-        $idle.watch()
+        Idle.watch()
         $scope.started = true
         Info.watch_for_updates()
         return
 
     $scope.stopIdleWatch = ->
         closeModals()
-        $idle.unwatch()
+        Idle.unwatch()
         $scope.started = false
         Info.watch_for_updates shutdown=true
         return

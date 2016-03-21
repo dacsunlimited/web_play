@@ -14,12 +14,12 @@ window.open_external_url = (url) ->
 
 
 app = angular.module("app",
-    ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
+    ["ngResource", "ui.router", "ngIdle", "app.services", "app.directives", "ui.bootstrap",
      "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid",
      "ngMaterial", "utils.autofocus", "ngMessages", "ui.grid.autoResize", "ngAnimate",
     "ng-mfb", "angular-carousel"])
 
-app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
+app.run ($rootScope, $location, Idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
 
     $templateCache.put 'ui-grid/uiGridViewport',
         '''<div class="ui-grid-viewport">
@@ -101,9 +101,9 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
 
     $rootScope.current_account = null
 
-    $idle.watch()
+    Idle.watch()
 
-app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
+app.config ($mdThemingProvider, IdleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
     $mdThemingProvider.theme('default').primaryPalette('indigo')
 
     $compileProvider.debugInfoEnabled false
@@ -130,8 +130,8 @@ app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvi
 
     $translateProvider.preferredLanguage(lang).fallbackLanguage('en')
 
-    $idleProvider.idleDuration(1776)
-    $idleProvider.warningDuration(60)
+    IdleProvider.idle(1776)
+    IdleProvider.timeout(60)
 
 # define app.services module
 angular.module("app.services", [])

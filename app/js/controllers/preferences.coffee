@@ -1,4 +1,4 @@
-angular.module("app").controller "PreferencesController", ($scope, $rootScope, $location, $q, Wallet, WalletAPI, Blockchain, Shared, Growl, Utils, $idle, $translate, $filter) ->
+angular.module("app").controller "PreferencesController", ($scope, $rootScope, $location, $q, Wallet, WalletAPI, Blockchain, Shared, Growl, Utils, Idle, $translate, $filter) ->
     $scope.model = { transaction_fee: null, symbol: null }
     $scope.model.timeout = Wallet.timeout
     $scope.model.symbol = ''
@@ -102,7 +102,7 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
             Growl.notice "", $scope.warnings.fee_too_low
         Wallet.timeout = $scope.model.timeout
         Wallet.timezone = $scope.model.timezone
-        $idle._options().idleDuration = Wallet.timeout
+        Idle._options().idle Wallet.timeout
         pf = $scope.model.transaction_fee
         calls = [
                 Wallet.set_setting('timeout', $scope.model.timeout),
