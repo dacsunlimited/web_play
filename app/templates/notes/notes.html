@@ -4,16 +4,17 @@
 </nav>
 
 
-<md-card>
   <md-content>
-    <md-list-item class="md-2-line note-entry" ng-repeat="r in note_records | orderBy:'-note.block_num'">
-      <div class="md-list-item-text">
-        <small class="pull-right">{{ r.note.timestamp | prettyDate }}</small>
-        <h3 class="note-title">{{ r.note.title }}</h3>
-        <div class="note-para" ng-bind-html="r.note.body | simpleFormat"></div>
-      </div>
-      <md-divider></md-divider>
-    </md-list-item>
+    <md-list>
+        <md-list-item class="md-2-line note-entry" ng-repeat="r in note_records | orderBy:'-note.block_num'">
+          <div class="md-list-item-text">
+            <small class="pull-right">{{ r.note.timestamp | prettyDate }}</small>
+            <h3 class="note-title">{{ r.note.title }}</h3>
+            <div class="note-para" ng-bind-html="r.note.body | simpleFormat"></div>
+          </div>
+          <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
   </md-content>
 
   <md-card-content ng-show="note_records.length < 1">
@@ -23,4 +24,3 @@
       </div>
     </div>
   </md-card-content>
-</md-card>

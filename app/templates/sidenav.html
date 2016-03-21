@@ -20,7 +20,7 @@
               </a>
 
               <md-input-container>
-                <md-select class="accounts-dp" ng-model="current_account_name" md-on-close="switchCurrentAccount(current_account_name);" layout-align="center">
+                <md-select class="accounts-dp" ng-model="current_account_name" md-on-close="switchCurrentAccount(current_account_name);" layout-align="center" placeholder="{{'accounts.select_account'|translate}}">
                     <md-option ng-repeat="(name, account) in accounts" ng-value="name">
                       <identicon account="{{name}}" size="32" class="identicon" /> {{name}} <span class="rp">(RP: {{account.stats_info.rp/100000|number:0}})</span>
                     </md-option>
