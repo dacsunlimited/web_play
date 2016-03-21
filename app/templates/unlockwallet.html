@@ -20,7 +20,7 @@
 
             </div>
             <div layout="row" layout-align="center">
-              <md-button flex="50" ng-disabled="!spending_password || loading_indicator.show" type="submit" tabindex="2" class="md-primary" translate > unlock.btn_unlock </md-button>
+              <md-button flex="50" ng-disabled="!spending_password || loading_indicator.show" type="submit" tabindex="2" class="md-primary">{{ 'unlock.btn_unlock' | translate }}</md-button>
             </div>
 
             <label class="text-danger" ng-show="wrongPass" translate> unlock.wrong_pass </label> <label
