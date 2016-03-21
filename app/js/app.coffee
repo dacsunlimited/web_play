@@ -17,7 +17,7 @@ app = angular.module("app",
     ["ngResource", "ui.router", "ngIdle", "app.services", "app.directives", "ui.bootstrap",
      "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid",
      "ngMaterial", "utils.autofocus", "ngMessages", "ui.grid.autoResize", "ngAnimate",
-    "ng-mfb", "angular-carousel"])
+    "angular-carousel", "ng-mfb", "angular-growl"])
 
 app.run ($rootScope, $location, Idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
 
