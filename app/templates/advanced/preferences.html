@@ -1,106 +1,84 @@
-<md-card>
-  <md-card-content>
+<md-card layout="column">
+  <form role="form" name="pform" ng-submit="updatePreferences()" ng-class="{ 'has-error' : pform.wp.$invalid && !pform.wp.$pristine }" novalidate>
+
+  <md-content layout-padding layout="column">
     <div class="header">
       <h3 class="header-title" translate>pref.title</h3>
     </div>
 
-    <form class="form-horizontal" flex="50" role="form" name="pform" ng-submit="updatePreferences()"
-          ng-class="{ 'has-error' : pform.wp.$invalid && !pform.wp.$pristine }" novalidate>
-
+    <div layout="row" layout-align="start start">
           <!-- wallet lock timeout -->
-          <label class="col-sm-offset-1 col-sm-3 control-label" for="timeout" translate>pref.logout_timeout</label>
-          <md-input-container>
-             <div class="col-sm-4 input-group">
-               <input id="timeout" numonly autofocus ng-model="model.timeout" name="timeout" class="form-control" />
-                <span class="input-group-addon">{{ 'utils.seconds' | translate}}</span>
-             </div>
-          </md-input-container>
+          <div layout="row" flex layout-align="start center">
+            <md-input-container flex>
+              <label for="timeout" translate>pref.logout_timeout</label>
+              <input id="timeout" numonly autofocus ng-model="model.timeout" name="timeout" />
+            </md-input-container>
+            <span class="input-group-addon">{{ 'utils.seconds' | translate}}</span>
+          </div>
+
+          <span flex="5"></span>
 
           <!-- transaction fee -->
-         <label class="col-sm-offset-1 col-sm-3 control-label" for="transaction_fee" translate>pref.trx_fee</label>
-
-         <md-input-container>
-            <div class="col-sm-4 input-group">
-              <input id="transaction_fee" decimalonly ng-model="model.transaction_fee" name="transaction_fee"
-                     class="form-control" ng-disabled="is_bitshares_js"/>
-              <span class="input-group-addon">{{model.symbol}}</span>
-            </div>
-         </md-input-container>
-
-         <!-- voting options -->
-         <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.default_vote</label>
-         <md-input-container>
-           <div class="col-sm-4 input-group">
-             <div class="btn-group" dropdown is-open="status3.isopen">
-               <button type="button" class="btn dropdown-toggle" dropdown-toggle>
-                 {{ ('account.vote.' + voting.vote_options[voting.default_vote]) | translate }} <span class="caret"></span>
-               </button>
-               <ul class="dropdown-menu" role="menu">
-                 <li ng-repeat="(k, v) in voting.vote_options">
-                   <a ng-click="voting.default_vote=k; status3.isopen=false">{{ ('account.vote.' + v) | translate }}</a>
-                 </li>
-               </ul>
-             </div>
-           </div>
-         </md-input-container>
-
-
-        <!-- interface language -->
-        <label class="col-sm-offset-1 col-sm-3 control-label" for="language" translate>pref.language</label>
-        <md-input-container>
-          <div class="col-sm-4 input-group" dropdown is-open="status2.isopen">
-            <button type="button" class="btn dropdown-toggle" dropdown-toggle>
-              {{model.language_name}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-repeat="(k, v) in model.languages">
-                <a ng-click="model.language_locale=k; model.language_name=v; status2.isopen=false">{{v}}</a>
-              </li>
-            </ul>
+          <div layout="row" flex layout-align="start center">
+            <md-input-container flex>
+              <label for="transaction_fee" translate>pref.trx_fee</label>
+              <input id="transaction_fee" decimalonly ng-model="model.transaction_fee" name="transaction_fee" ng-disabled="is_bitshares_js"/>
+            </md-input-container>
+            <span class="input-group-addon">{{model.symbol}}</span>
           </div>
-        </md-input-container>
+    </div>
 
-        <!-- timezone -->
-        <label class="col-sm-offset-1 col-sm-3 control-label" translate>pref.timezone</label>
-        <md-autocomplete class="col-sm-4 input-group"
-                  md-search-text-change="searchTextChange()"
-                  md-selected-item="model.timezone"
-                  md-search-text="search_text"
-                  md-selected-item-change="selectedItemChange(item)"
-                  md-items="item in queryTimezones()"
-                  md-item-text="item"
-                  md-min-length="1"
-                  placeholder="Input your timezone">
+    <div layout="row">
+      <md-input-container class="md-block" flex-gt-sm>
+        <label translate>pref.default_vote</label>
+        <md-select ng-model="voting.default_vote">
+          <md-option ng-repeat="(k, v) in voting.vote_options" ng-value="v">
+            {{ ('account.vote.' + v) | translate }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+
+    <div layout="row" layout-align="start start">
+
+      <div layout="row" flex>
+        <!-- interface language -->
+        <md-input-container flex>
+          <label for="language" translate>pref.language</label>
+          <md-select ng-model="model.language_name">
+            <md-option ng-repeat="(k, v) in model.languages" ng-value="v" ng-click="model.language_locale=k; model.language_name=v">
+              {{v}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <span flex="5"></span>
+
+      <!-- timezone -->
+      <div layout="row" flex>
+          <md-autocomplete flex
+                md-floating-label="{{'pref.timezone'|translate}}"
+                md-search-text-change="searchTextChange()"
+                md-selected-item="model.timezone"
+                md-search-text="search_text"
+                md-selected-item-change="selectedItemChange(item)"
+                md-items="item in queryTimezones()"
+                md-item-text="item"
+                md-min-length="1">
             <md-item-template>
               <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
             </md-item-template>
             <md-not-found>
               No matches found for "{{searchText}}".
             </md-not-found>
-        </md-autocomplete>
+          </md-autocomplete>
+      </div>
 
-      <!-- <md-input-container>
-        <label translate>pref.theme</label>
-        <div class="col-sm-4 no-lr-padding">
-          <div class="btn-group" dropdown is-open="status3.isopen">
-            <button type="button" class="btn dropdown-toggle" dropdown-toggle>
-              {{model.theme_name}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li ng-repeat="(k, v) in model.themes">
-                <a ng-click="model.theme=k; model.theme_name=v; status3.isopen=false">{{v}}</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </md-input-container> -->
-
-        <md-divider style="margin:1rem 0px;"></md-divider>
-
-        <div class="col-sm-offset-4">
-          <md-button type="submit" class="md-primary md-raised">{{ 'btn.update' | translate }}</md-button>
-        </div>
-
-    </form>
-  </md-card-content>
+    </div>
+  </md-content>
+  <md-card-actions layout-align="end start" layout="row">
+    <md-button type="submit" class="md-primary md-raised">{{ 'btn.update' | translate }}</md-button>
+  </md-card-actions>
+  </form>
 </md-card>
