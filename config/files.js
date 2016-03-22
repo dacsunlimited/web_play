@@ -63,13 +63,13 @@ module.exports = function(lineman) {
 
     css: {
       vendor: [
+        "vendor/css/bootstrap.css",
+        "vendor/css/font-awesome.css",
+        "vendor/css/ark.css",
         "node_modules/angular-growl-v2/build/angular-growl.min.css", //original "node_modules/growl/stylesheets/jquery.growl.css",
         "node_modules/angular-ui-grid/ui-grid.min.css",
         "node_modules/angular-xeditable/dist/css/xeditable.min.css",
         "node_modules/angular-carousel/dist/angular-carousel.min.css",
-        "vendor/css/bootstrap.css",
-        "vendor/css/font-awesome.css",
-        "vendor/css/ark.css",
         "node_modules/angular-material/angular-material.min.css",
         "node_modules/ng-material-floating-button/mfb/dist/mfb.css",
         "vendor/css/ionicons.css"
