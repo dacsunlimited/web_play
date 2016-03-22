@@ -83,7 +83,7 @@ class Wallet
                 @get_setting('timeout').then (result) =>
                     if result && result.value
                         @timeout = result.value
-                        @idle._options().idleDuration = @timeout
+                        @idle.setIdle @timeout
                         @idle.watch()
                 @get_setting('default_vote').then (result) =>
                     @default_vote = result.value if result?.value
@@ -543,7 +543,7 @@ class Wallet
 
     constructor: (@q, @log, @location, @translate, @growl, @rpc, @blockchain, @utils, @wallet_api, @blockchain_api, @RpcService, @interval, @idle) ->
         @wallet_name = ""
-        @timeout = @idle._options().idleDuration
+        @timeout = @idle.getIdle()
         @timezone = moment.defaultZone.name
 
 angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "Idle", Wallet])

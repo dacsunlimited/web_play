@@ -102,7 +102,7 @@ angular.module("app").controller "PreferencesController", ($scope, $rootScope, $
             Growl.notice "", $scope.warnings.fee_too_low
         Wallet.timeout = $scope.model.timeout
         Wallet.timezone = $scope.model.timezone
-        Idle._options().idle Wallet.timeout
+        Idle.setIdle Wallet.timeout
         pf = $scope.model.transaction_fee
         calls = [
                 Wallet.set_setting('timeout', $scope.model.timeout),
