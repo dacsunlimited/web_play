@@ -17,6 +17,7 @@ $default_blue: #3f51b5;
 @import 'help';
 @import 'splashpage';
 @import 'layout';
+@import 'blocks';
 @import 'sidebar';
 @import 'toolbar';
 @import 'footer';
@@ -681,4 +682,8 @@ a.delegate-link {
 // disable tab switching transition
 [role="tabpanel"] {
     transition: none;
+}
+
+.error-container {
+  color: red;
 }

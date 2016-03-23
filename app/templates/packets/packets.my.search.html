@@ -1,0 +1,43 @@
+<md-dialog aria-label="{{packet.id}}" class="packet-quick-search" flex="33">
+  <md-toolbar ng-init="form = packets_quick_search_form">
+    <div class="md-toolbar-tools">
+      <h2 translate>packet.select_from_mine</h2>
+      <span flex></span>
+      <md-button type="button" class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+
+  <md-dialog-content layout="column">
+    <div>
+      <md-input-container md-no-float>
+        <md-icon md-svg-src="img/icons/ic_search_black_24px.svg"></md-icon>
+        <input ng-model="searchString" type="text" placeholder="{{'packet.search_id_or_msg'|translate}}">
+      </md-input-container>
+    </div>
+
+    <md-list class="packets" ng-show="packets.length > 0">
+
+      <md-list-item ng-repeat="packet in packets | filter:searchString" ng-class="{mine: selected_packet.id == packet.id}" class="packet" ng-click="selectPacket(packet)">
+        <div flex>
+          <i class="fa fa-envelope packet-cover"></i> {{ packet.message }}
+        </div>
+
+        <div flex="25" class="packet-stat text-center">{{packet.claimed_count}}/{{packet.slots_count}}</div>
+
+        <div flex="25" class="md-list-item-text" style="text-align:right;">
+          {{ packet.amount | formatAsset }}
+        </div>
+      </md-list-item>
+    </md-list>
+
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button type="button" ng-click="cancel()" class="" >{{'packet.btn.close'|translate}}</md-button>
+    <md-button type="submit" ng-click="sendPacket()" ng-disabled="selected_packet == null" class="md-primary" translate>btn.send</md-button>
+
+  </div>
+</md-dialog>

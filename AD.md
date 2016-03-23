@@ -16,14 +16,20 @@ ref: http://google-styleguide.googlecode.com/svn/trunk/jsoncstyleguide.xml
     {
       "level":"info", 
       "title":"客户端更新", 
-      "message":"最新版PLAY客户端0.1.4已经发布，请前往官网下载", 
-      "url":"https://github.com/dacsunlimited/dac_play/releases/tag/pls%2F0.1.3",
-      "starts_at":"20150630T12:00:00",
-      "expires_at":"2015-07-01T00:00:00"
+      "message":"最新版PLAY客户端0.3.3 (Rebalance) 已经发布，请前往官网下载。硬分叉将发生于区块#1340000(约2015年9月3日16点30分)。Latest Client 0.3.3 (Rebalance) has been released. Please visit link to download.  Hard fork is scheduled to take place at block height #1340000 (around 2015-09-03 08:30 UTC).", 
+      "url":"https://github.com/dacsunlimited/dac_play/releases",
+      "starts_at":"20150901T00:00:00",
+      "expires_at":"2015-09-03T08:30:00"
     }
 
-    wallet_note 5.1 XTS ann.dacplay '{"level":"info", "title":"客户端更新", "message":"最新版PLAY客户端0.1.4已经发布，请前往官网下载", "url":"https://github.com/dacsunlimited/dac_play/releases/tag/pls%2F0.1.3","starts_at":"20150630T12:00:00","expires_at":"2015-07-10T00:00:00"}' false
-    
+XTS:
+
+    wallet_note 5.1 XTS ann.dacplay '{"level":"info","title":"客户端更新","message":"最新版PLAY客户端0.3.3 (Rebalance) 已经发布，请前往官网下载。硬分叉将发生于区块#1340000(约2015年9月3日16点30分)。Latest Client 0.3.3 (Rebalance) has been released. Please visit link to download.  Hard fork is scheduled to take place at block height #1340000 (around 2015-09-03 08:30 UTC).","url":"https://github.com/dacsunlimited/dac_play/releases","starts_at":"20150901T00:00:00","expires_at":"2015-09-03T08:30:00"}' false
+
+PLS:
+
+    wallet_note 5.1 PLS ann.dacplay '{"level":"info","title":"客户端更新","message":"最新版PLAY客户端0.3.3 (Rebalance) 已经发布，请前往官网下载。硬分叉将发生于区块#1340000(约2015年9月3日16点30分)。Latest Client 0.3.3 (Rebalance) has been released. Please visit link to download.  Hard fork is scheduled to take place at block height #1340000 (around 2015-09-03 08:30 UTC).","url":"https://github.com/dacsunlimited/dac_play/releases","starts_at":"20150901T00:00:00","expires_at":"2015-09-03T08:30:00"}' false
+
 # AdCreative
     {
       version: Integer,
@@ -262,6 +268,7 @@ bid on ad.dacplay
 1PLS per bid + 1 PLS * (message size / 400 bytes + 1) (transaction fee)
     
 Ad Position setting
+PLAIN TEXT
 
     {
       "ad": {
@@ -271,20 +278,90 @@ Ad Position setting
         "width": "auto",
         "height": "auto",
         "pricing": [
-        {
-          "id": "plain1m",
-          "duration": "1m",
-          "price": 100000,
-          "asset": "XTS"
-        }
+          {
+            "id": "plain1m",
+            "duration": "1m",
+            "price": 100000,
+            "asset": "XTS"
+          }
         ]
       }
     }
     
+XTS: 
+
     wallet_account_update_registration chat.dacplay dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"}]}}"
+
+PLS: 
+
+    wallet_account_update_registration chat.dacplay dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"}]}}"
+
+RED PACKET
+
+    {
+      "ad": {
+        "version": 0.1,
+        "desc": "Trollbox",
+        "detail_link": "",
+        "width": "auto",
+        "height": "auto",
+        "pricing": [
+          {
+            "id": "packet1m",
+            "duration": "1m",
+            "price": 100000,
+            "asset": "XTS"
+          }
+        ]
+      }
+    }
     
+XTS: 
+
+    wallet_account_update_registration chat.dacplay dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"}]}}"
+
+PLS: 
+
+    wallet_account_update_registration chat.dacplay dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"}]}}"
+
+    
+COMBINED
+
+    {
+      "ad": {
+        "version": 0.1,
+        "desc": "Trollbox",
+        "detail_link": "",
+        "width": "auto",
+        "height": "auto",
+        "pricing": [
+          {
+            "id": "plain1m",
+            "duration": "1m",
+            "price": 100000,
+            "asset": "XTS"
+          },
+          {
+            "id": "packet1m",
+            "duration": "1m",
+            "price": 100000,
+            "asset": "XTS"
+          }
+        ]
+      }
+    }
+    
+XTS: 
+
+    wallet_account_update_registration chat.dacplay chat.dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"},{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"XTS\"}]}}"
+    
+PLS: 
+
+    wallet_account_update_registration chat.dacplay chat.dacplay "{\"ad\":{\"version\":0.1,\"desc\":\"Trollbox\",\"detail_link\":\"\",\"width\":\"auto\",\"height\":\"auto\",\"pricing\":[{\"id\":\"plain1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"},{\"id\":\"packet1m\",\"duration\":\"1m\",\"price\":100000,\"asset\":\"PLS\"}]}}"
+
 # Post Chat Message
 
+PLAINTEXT
     {
       "bidid": "plain1m",
       "creative": {
@@ -297,4 +374,32 @@ Ad Position setting
       "starts_at": "2015-07-09T00:00:00"
     }
     
-    wallet_buy_ad 2 XTS alice chat.dacplay '{"bidid":"plain1m","creative":{"version":0.1,"type":"text","creative":{"text":"Hello World"}},"starts_at":"2015-07-09T00:00:00"}'
+XTS: 
+
+    wallet_buy_ad 2 XTS alice chat.dacplay {"bidid":"plain1m","creative":{"version":0.1,"type":"text","creative":{"text":"Hello World"}},"starts_at":"2015-07-09T00:00:00"}
+
+PLS: 
+    
+    wallet_buy_ad 2 PLS alice chat.dacplay {"bidid":"plain1m","creative":{"version":0.1,"type":"text","creative":{"text":"Hello World"}},"starts_at":"2015-07-09T00:00:00"}
+
+REDPACKET
+
+    {
+      "bidid": "packet1m",
+      "creative": {
+        "version": 0.1,
+        "type": "packet",
+        "creative": {
+          "id": "c808295907756b0a546c7ce707c189545d8e1fc4"
+        }
+      },
+      "starts_at": "2015-08-31T00:00:00"
+    }
+    
+XTS: 
+    
+    wallet_buy_ad 2 XTS alice chat.dacplay {"bidid":"packet1m","creative":{"version":0.1,"type":"packet","creative":{"id":"c808295907756b0a546c7ce707c189545d8e1fc4"}},"starts_at":"2015-08-31T00:00:00"}
+
+PLS: 
+
+    wallet_buy_ad 2 PLS alice chat.dacplay {"bidid":"packet1m","creative":{"version":0.1,"type":"packet","creative":{"id":"c808295907756b0a546c7ce707c189545d8e1fc4"}},"starts_at":"2015-08-31T00:00:00"}

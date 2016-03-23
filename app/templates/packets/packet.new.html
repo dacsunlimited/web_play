@@ -28,10 +28,12 @@
       <div flex="1" layout="row">
         <md-input-container flex>
           <label translate>packet.total</label>
-          <input required type="number" step="1" name="amount" ng-model="frm_data.amount.amount" min="1" minlength="1">
+          <input required type="number" step="1" name="amount" ng-model="frm_data.amount.amount" ng-min="(frm_data.count + 1) || 1">
           <div ng-messages="form.amount.$error" ng-show="form.amount.$dirty">
             <div ng-message="required">{{'tip.required'|translate}}</div>
             <div ng-message="number">{{'tip.number'|translate}}</div>
+            <div ng-message="min">{{'tip.need_at_least_amount' | translate }} {{ (frm_data.count + 1) || 1 }}</div>
+            <div ng-message="remoteError">{{form.amount.$error.remoteError}}</div>
           </div>
         </md-input-container>
 
@@ -48,10 +50,11 @@
 
       <md-input-container flex="1">
         <label translate>packet.count</label>
-        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="1" max="50">
+        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="1" max="30">
         <div ng-messages="form.count.$error" ng-show="form.count.$dirty">
           <div ng-message="required">{{'tip.required'|translate}}</div>
           <div ng-message="number">{{'tip.number'|translate}}</div>
+          <div ng-message="min">{{'packet.tip.count_min_tmp'|translate}}</div>
         </div>
       </md-input-container>
     </md-content>
@@ -59,7 +62,7 @@
     <md-content layout="row">
       <md-input-container flex="1">
         <label translate>packet.select_from_accounts</label>
-        <md-select name="from_account" required ng-model="frm_data.from_account_name" layout-align="center">
+        <md-select name="from_account" required ng-model="frm_data.from_account_name" layout-align="center" required>
             <md-option ng-repeat="(name, account) in my_accounts track by name" ng-value="account.name">
               <identicon account="{{account.name}}" size="32" class="identicon" /> {{account.name}}: <span class="text-muted">{{account.balance|formatAsset}}</span>
             </md-option>
@@ -84,6 +87,10 @@
         </div>
       </md-input-container>
     </md-content>
+
+    <div ng-messages="form.$error.remoteError" class="error-container" ng-show="form.$error.remoteError">
+      <div>{{form.$error.remoteError}}</div>
+    </div>
 
   </md-dialog-content>
 

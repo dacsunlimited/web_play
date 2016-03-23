@@ -5,15 +5,15 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
     amount:
       amount: 100
       symbol: Info.symbol
-    from_account_name: Wallet.current_account?.name
+    from_account_name: if Wallet.current_account?.registered then Wallet.current_account?.name else null
     message: ""
     password: ""
-    count: 1
+    count: 5
 
   $scope.my_accounts = []
 
   Wallet.get_current_or_first_account().then (acct)->
-    $scope.frm_data.from_account_name = acct.name
+    $scope.frm_data.from_account_name = acct?.name if acct?.registered
 
   # get accounts with balance of given asset
   # and filter with registered account only
@@ -26,20 +26,23 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
           acct.balance = balance[asset]
           $scope.my_accounts.push acct
 
+      # if current account is not regisered
+      if !$scope.frm_data.from_account_name and $scope.my_accounts.length > 0
+        $scope.frm_data.from_account_name = $scope.my_accounts[0].name
+
   getAccountsWithBalance(Info.symbol)
 
-  # check claim statuses
   $scope.$watch ->
     Wallet.current_account
   , (newVal, oldVal, scope)->
-    $scope.frm_data.from_account_name = newVal?.name
+    $scope.frm_data.from_account_name = newVal?.name if newVal?.registered
 
   $scope.checkForm = ->
     if $scope.form.$valid
       return true
     else
       for err_type, objs of $scope.form.$error
-        objs[0].$setDirty()
+        objs[0]?.$setDirty()
         return false
 
   $scope.hide = ->
@@ -53,23 +56,15 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
     WalletAPI.create_red_packet(frm.amount.amount, frm.amount.symbol, frm.from_account_name, frm.message, frm.password, frm.count).then (response) =>
       $translate('packet.tip.successful_created').then (val) -> Growl.notice "", val
       $mdDialog.hide(true)
-    , (error) ->
-      # code = error.response.data.error.code
-      # $scope.form.password.$dirty = true
-      # $scope.form.password.$valid = false
-      #
-      # if code == 31005
-      #     $scope.form.password.$error.badPassword = true
-      # else if code == 20010
-      #     $scope.form.password.$error.insufficientFund = true
-      # else if code == 10
-      #
-      #   if error.message.indexOf("All of this red packet has already been claimed!") > -1
-      #     $scope.form.password.$error.allClaimed = true
-      #   else if error.message.indexOf("This account already claimed this packet!") > -1
-      #     $scope.form.password.$error.dupClaim = true
-      #   else if error.message.indexOf("to_account_rec.valid") > -1
-      #     $scope.form.password.$error.accountNotRegistered = true
-      #
-      # else
-      #     $scope.form.password.error_message = Utils.formatAssertException(error.data.error.message)
+    , (err) ->
+      error = err.data?.error || err.response?.data?.error
+      code  = error.code
+      error_message = error.locale_message || error.message
+
+      if code == 20010
+        $scope.form.amount.$dirty = true
+        $scope.form.amount.$error.remoteError = error_message
+      else if code == 10 and error.message.indexOf("The paid amount must larger than the sum") > -1
+        $scope.form.amount.$error.remoteError = Utils.formatAssertException(error_message)
+      else
+        $scope.form.$error.remoteError = Utils.formatAssertException(error_message)

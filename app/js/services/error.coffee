@@ -16,15 +16,24 @@ servicesModule.config ($httpProvider, $provide) ->
                 delegate(exception, cause)
     ]
 
-processRpcError = (response, Shared) ->
+logOrThrow = (error_msg, response, stack) ->
+  if magic_unicorn?
+      magic_unicorn.log_message("rpc error: #{error_msg} (#{response.status})\n#{stack}")
+  else
+      throw new RpcException(error_msg, response)
+
+processRpcError = (response, $injector, Shared) ->
     dont_report = false
     method = null
-    error_msg = if response.data?.error?.message? then response.data.error.message else response.data
+    error_msg   = if response.data?.error?.message? then response.data.error.message else response.data
+    error_code  = response.data?.error?.code
 
-    if error_msg and response.config?.url? and response.config.url.match(/\/rpc$/)
-        if error_msg.match(/No such wallet exists/) or error_msg.match(/wallet does not exist/)
+    if error_msg and error_code and response.config?.url? and response.config.url.match(/\/rpc$/)
+        # if error_msg.match(/No such wallet exists/) or error_msg.match(/wallet does not exist/)
+        if error_code == 20004 or error_msg.match(/No such wallet exists/)
             navigate_to("createwallet") unless window.location.hash == "#/createwallet"
             dont_report = true
+
         if error_msg.match(/The wallet must be opened/) or error_msg.match(/spending key must be unlocked before executing this command/)
             navigate_to("unlockwallet") unless window.location.hash == "#/unlockwallet" or window.location.hash == "#/createwallet"
             dont_report = true
@@ -40,14 +49,20 @@ processRpcError = (response, Shared) ->
             delete response.config.stack
         error_msg = JSON.stringify(response) unless error_msg
         console.log "RPC Server Error: #{error_msg} (#{response.status})\n#{response.config?.stack}"
-        Shared.addError(error_msg, stack, response.data?.error?.detail)
-        if magic_unicorn?
-            magic_unicorn.log_message("rpc error: #{error_msg} (#{response.status})\n#{stack}")
+
+        if error_code and error_code > 10
+          $injector.get('$translate')("error.#{error_code}").then (locale_msg)->
+            error_msg = locale_msg
+            if response.data?.error?.message?
+              response.data.error.locale_message = locale_msg
+            Shared.addError(error_msg, stack, response.data?.error?.detail)
+
+            logOrThrow(error_msg, response, stack)
         else
-            throw new RpcException(error_msg, response)
+          logOrThrow(error_msg, response, stack)
 
 
-servicesModule.factory "myHttpInterceptor", ($q, Shared) ->
+servicesModule.factory "myHttpInterceptor", ($q, $injector, Shared) ->
     response: (response) ->
         return response until window.rpc_calls_performance_data
         method = response.config.data?.method
@@ -58,7 +73,7 @@ servicesModule.factory "myHttpInterceptor", ($q, Shared) ->
             window.rpc_calls_performance_data[method] = method_data = { duration: 0.0, calls: 0,  stack: response.config.stack}
         method_data.duration += duration
         ++method_data.calls
-        #console.log "------ response method ------>", method, duration
+        # console.log "------ response method ------>", method, duration
         return response
 
     responseError: (response) ->
@@ -68,7 +83,7 @@ servicesModule.factory "myHttpInterceptor", ($q, Shared) ->
         return '' if response.status == 403
         if response.config?.error_handler
             res = response.config.error_handler(response)
-            processRpcError(response, Shared) unless res
+            processRpcError(response, $injector, Shared) unless res
             return $q.reject(response)
-        processRpcError(response, Shared)
+        processRpcError(response, $injector, Shared)
         return $q.reject(response)

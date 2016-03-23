@@ -523,6 +523,24 @@ class Wallet
 
         return deferred.promise
 
+    # list my involved packets, included:
+    # created
+    # claimed
+    list_red_packets: (acct_id = null) ->
+      deferred = @q.defer()
+
+      @wallet_api.list_packets().then (packets) ->
+        if !packets or packets.length == 0
+          deferred.resolve []
+
+        packets = (packets.filter (p) -> p.account_id == acct_id) if acct_id
+        deferred.resolve packets
+      , (err) ->
+        deferred.reject err
+
+      return deferred.promise
+
+
     constructor: (@q, @log, @location, @translate, @growl, @rpc, @blockchain, @utils, @wallet_api, @blockchain_api, @RpcService, @interval, @idle) ->
         @wallet_name = ""
         @timeout = @idle._options().idleDuration

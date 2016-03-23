@@ -98,7 +98,8 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
             when off
                 Observer.unregisterObserver Wallet.observer_config()
 
-        navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
+        # navigate_to('unlockwallet') if Info.info.wallet_open and !unlocked
+        navigate_to('unlockwallet') if !Info.info.wallet_open or !unlocked
     , true
 
     $scope.clear_form_errors = (form) ->
