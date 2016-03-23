@@ -6,103 +6,81 @@ class GameAPI
     #@log.info "---- Network API Constructor ----"
 
 
-  # Attempts add or remove <node> from the peer list or try a connection to <node> once
+  # Exchange lto for chips
   # parameters: 
-  #   string `node` - The node (see network_get_peer_info for nodes), example: 192.168.1.5:5678
-  #   string `command` - 'add' to add a node to the list, 'remove' to remove a node from the list, 'onetry' to try a connection to the node once, example: add
-  # return_type: `void`
-  network_add_node: (node, command, error_handler = null) ->
-    @rpc.request('network_add_node', [node, command], error_handler).then (response) ->
+  #   account_name `from_account_name` - the account that will provide funds for the bid
+  #   string `quantity` - the quantity of items you would like to buy
+  #   asset_symbol `quantity_symbol` - the type of chips you would like to buy
+  # return_type: `transaction_record`
+  buy_chips: (from_account_name, quantity, quantity_symbol, error_handler = null) ->
+    @rpc.request('game_buy_chips', [from_account_name, quantity, quantity_symbol], error_handler).then (response) ->
       response.result
 
-  # Returns the number of fully-established connections to other nodes
+  # Creates a new game and binding to an asset
   # parameters: 
-  # return_type: `uint32_t`
-  network_get_connection_count: (error_handler = null) ->
-    @rpc.request('network_get_connection_count', error_handler).then (response) ->
+  #   string `game_name` - the name of the game
+  #   string `owner_name` - the name of the owner of the game
+  #   string `script_url` - the url of the rule script for this game
+  #   string `script_hash` - the hash of the rule script
+  #   string `description` - a description of the asset
+  #   json_variant `public_data` - arbitrary data attached to the asset
+  # return_type: `transaction_record`
+  create: (game_name, owner_name, script_url, script_hash, description, public_data, error_handler = null) ->
+    @rpc.request('game_create', [game_name, owner_name, script_url, script_hash, description, public_data], error_handler).then (response) ->
       response.result
 
-  # Returns data about each connected node
+  # Update a exist game
   # parameters: 
-  #   bool `not_firewalled` - true to output only peers not behind a firewall and false otherwise
-  # return_type: `json_object_array`
-  network_get_peer_info: (not_firewalled, error_handler = null) ->
-    @rpc.request('network_get_peer_info', [not_firewalled], error_handler).then (response) ->
+  #   string `paying_account` - the name of the paying account
+  #   string `game_name` - the name of the game
+  #   string `script_url` - the url of the rule script for this game
+  #   string `script_hash` - the hash of the rule script
+  #   string `description` - a description of the asset
+  #   json_variant `public_data` - arbitrary data attached to the asset
+  # return_type: `transaction_record`
+  update: (paying_account, game_name, script_url, script_hash, description, public_data, error_handler = null) ->
+    @rpc.request('game_update', [paying_account, game_name, script_url, script_hash, description, public_data], error_handler).then (response) ->
       response.result
 
-  # Broadcast a previously-created signed transaction to the network
+  # Play game with param variant
   # parameters: 
-  #   signed_transaction `transaction_to_broadcast` - The transaction to broadcast to the network
-  # return_type: `transaction_id`
-  network_broadcast_transaction: (transaction_to_broadcast, error_handler = null) ->
-    @rpc.request('network_broadcast_transaction', [transaction_to_broadcast], error_handler).then (response) ->
+  #   string `game_name` - the name of the game
+  #   json_variant `param` - the param of the game action
+  # return_type: `transaction_record`
+  play: (game_name, param, error_handler = null) ->
+    @rpc.request('game_play', [game_name, param], error_handler).then (response) ->
       response.result
 
-  # Sets advanced node parameters, used for setting up automated tests
+  # Returns stored game datas starting with a given game name upto a the limit provided
   # parameters: 
-  #   json_object `params` - A JSON object containing the name/value pairs for the parameters to set
-  # return_type: `void`
-  network_set_advanced_node_parameters: (params, error_handler = null) ->
-    @rpc.request('network_set_advanced_node_parameters', [params], error_handler).then (response) ->
+  #   account_name `game_name` - the game name to include
+  #   uint32_t `limit` - the maximum number of items to list
+  # return_type: `game_data_record_array`
+  list_datas: (game_name, limit, error_handler = null) ->
+    @rpc.request('game_list_datas', [game_name, limit], error_handler).then (response) ->
       response.result
 
-  # Sets advanced node parameters, used for setting up automated tests
+  # Returns the status of a particular game, including any trading errors.
   # parameters: 
-  # return_type: `json_object`
-  network_get_advanced_node_parameters: (error_handler = null) ->
-    @rpc.request('network_get_advanced_node_parameters', error_handler).then (response) ->
+  #   account_name `game_name` - the game name to include
+  # return_type: `game_status`
+  status: (game_name, error_handler = null) ->
+    @rpc.request('game_status', [game_name], error_handler).then (response) ->
       response.result
 
-  # Returns the time the transaction was first seen by this client
+  # Returns a list of active game statuses
   # parameters: 
-  #   transaction_id `transaction_id` - the id of the transaction
-  # return_type: `message_propagation_data`
-  network_get_transaction_propagation_data: (transaction_id, error_handler = null) ->
-    @rpc.request('network_get_transaction_propagation_data', [transaction_id], error_handler).then (response) ->
+  # return_type: `game_status_array`
+  list_status: (error_handler = null) ->
+    @rpc.request('game_list_status', error_handler).then (response) ->
       response.result
 
-  # Returns the time the block was first seen by this client
+  # Returns a list of game result transactions executed on a given block.
   # parameters: 
-  #   block_id_type `block_hash` - the id of the block
-  # return_type: `message_propagation_data`
-  network_get_block_propagation_data: (block_hash, error_handler = null) ->
-    @rpc.request('network_get_block_propagation_data', [block_hash], error_handler).then (response) ->
-      response.result
-
-  # Sets the list of peers this node is allowed to connect to
-  # parameters: 
-  #   node_id_list `allowed_peers` - the list of allowable peers
-  # return_type: `void`
-  network_set_allowed_peers: (allowed_peers, error_handler = null) ->
-    @rpc.request('network_set_allowed_peers', [allowed_peers], error_handler).then (response) ->
-      response.result
-
-  # Returns assorted information about the network settings and connections
-  # parameters: 
-  # return_type: `json_object`
-  network_get_info: (error_handler = null) ->
-    @rpc.request('network_get_info', error_handler).then (response) ->
-      response.result
-
-  # Returns list of potential peers
-  # parameters: 
-  # return_type: `potential_peer_record_array`
-  network_list_potential_peers: (error_handler = null) ->
-    @rpc.request('network_list_potential_peers', error_handler).then (response) ->
-      response.result
-
-  # Get information on UPNP status including whether it's enabled and what the client believes its IP to be
-  # parameters: 
-  # return_type: `json_object`
-  network_get_upnp_info: (error_handler = null) ->
-    @rpc.request('network_get_upnp_info', error_handler).then (response) ->
-      response.result
-
-  # Get bandwidth usage stats
-  # parameters: 
-  # return_type: `json_object`
-  network_get_usage_stats: (error_handler = null) ->
-    @rpc.request('network_get_usage_stats', error_handler).then (response) ->
+  #   uint32_t `block_number` - Block to get game result transaction operations for.
+  # return_type: `game_result_transaction_array`
+  list_result_transactions: (block_number, error_handler = null) ->
+    @rpc.request('game_list_result_transactions', [block_number], error_handler).then (response) ->
       response.result
 
 
