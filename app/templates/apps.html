@@ -1,0 +1,18 @@
+<md-content>
+  <div layout="flow" layout-align="center start">
+    <md-card flex="33" ng-repeat="app in apps">
+      <img ui-sref="{{app.route}}" ng-src="{{app.header_image}}" class="md-card-image" alt="Washed Out" style="cursor:pointer;">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{app.heading|translate}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>{{(app.id+'.desc')|translate}}</p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="{{app.route}}">{{'btn.start'|translate}}</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</md-content>

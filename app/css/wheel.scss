@@ -1,0 +1,25 @@
+.wheel {
+
+  .wheelIndicator {
+    width:100px; height:100px;
+    position:absolute; top: 0px; right: 0px;
+    z-index:1;
+  }
+
+  .inlineWheel {
+    width:50px; height:50px;
+  }
+
+  .win {
+    color:green; font-weight:bold;
+    display:inline-block;
+    width:100px;
+  }
+
+  .lose {
+    color:red;
+    display:inline-block;
+    width:100px;
+  }
+
+}

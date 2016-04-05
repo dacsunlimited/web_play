@@ -13,7 +13,8 @@
     "close": "关闭",
     "remove": "移除",
     "learn_more": "了解详情",
-    "send": "发送"
+    "send": "发送",
+    "start": "启动"
   },
   "tip": {
     "privacy_statement": "隐私申明",
@@ -219,6 +220,9 @@
     "directory": "目录",
     "notes": "私密日志",
     "delegates": "受托人",
+    "apps": "应用市场",
+    "dices": "DICE游戏",
+    "wheel": "超级幸运大转盘",
     "chips": "游戏资产",
     "games": "游戏",
     "market": "市场",
@@ -257,7 +261,6 @@
     "role_5": "技术支持",
     "role_6": "法律/法规",
     "role_7": "媒体/公关"
-
   },
   "market": {
     "title": "市场",
@@ -484,6 +487,7 @@
   },
   "notes": {
     "title": "日志簿",
+    "desc": "你可以在区块链上保存公开或私密的日志。隐秘日志只有你自己才能打开阅读。",
     "open": "打开",
     "need_to_register": "你需要先在区块链上注册这个账号才能使用",
     "notes_not_found": "你还没有日志。你知道吗？写日志也有机会中奖哦。",
@@ -671,7 +675,27 @@
     "account_details": "账户细节",
     "advanced": "进阶选项"
   },
+  "game": {
+    "buy_chip": "购买筹码",
+    "withdraw": "提现",
+    "bet": "下注",
+    "buy_chip_amount": "数量",
+    "bet_amount": "下注额",
+    "result": "开奖",
+    "waiting_to_draw": "等待开奖",
+    "remain_blocks": "剩余 {{remain}} 个区块"
+  },
+  "dice":{
+    "desc": "简单的筛子游戏，可以选择筛子数量猜数字。"
+  },
+  "wheel":{
+    "desc": "超级幸运大转盘，可自选轮盘区隔数量，调整中奖概率。",
+    "segment_num": "区隔数量",
+    "lucky_number": "幸运数字",
+    "odds": "几率"
+  },
   "packet":{
+    "desc": "大家一起来发红包、抢红包",
     "type":{
       "created": "最近创建",
       "claimed": "最近领取"

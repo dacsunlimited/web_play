@@ -442,8 +442,8 @@ class Wallet
 
     get_balance: ->
         @rpc.request('wallet_get_balance').then (response) ->
-            asset = response.result[0]
-            {amount: asset[0], asset_type: asset[1]}
+          asset = response.result[0]
+          {amount: asset[0], asset_type: asset[1]}
 
     get_wallet_name: ->
         @rpc.request('wallet_get_name').then (response) =>

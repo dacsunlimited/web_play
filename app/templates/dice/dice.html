@@ -1,0 +1,125 @@
+
+<!-- <md-content> -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="header">
+            <h3 class="header-title">DICE</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p>dice 玩法介绍 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+
+    <div layout="row">
+      <md-card flex layout="column" layout-padding layout-align="center" class="text-center" style="background-color: aliceblue;">
+        <!-- dice number -->
+        <md-slider-container flex="">
+          <md-input-container flex="50">
+            <input flex="" type="number" ng-model="dice_num" aria-label="筛子数量" aria-controls="dice-num-slider" class="text-center">
+          </md-input-container>
+          <md-slider md-discrete="" ng-model="dice_num" min="0" max="100" step="10" aria-label="bass" class="md-primary" md-vertical=""></md-slider>
+
+          <h5>筛子数量</h5>
+        </md-slider-container>
+      </md-card>
+
+      <md-card flex layout="column" layout-padding layout-align="center" class="text-center" style="background-color: #F2D7E0;">
+        <!-- guess num -->
+        <md-slider-container flex="">
+          <md-input-container>
+            <input flex="" type="number" ng-model="guess_num" aria-label="幸运数字" aria-controls="guess-num-slider" class="text-center">
+          </md-input-container>
+          <md-slider md-discrete="" ng-model="guess_num" min="0" max="100" step="10" aria-label="bass" class="md-accent" md-vertical=""></md-slider>
+
+          <h5>幸运数字</h5>
+        </md-slider-container>
+      </md-card>
+
+      <md-card flex layout="column" layout-padding layout-align="center" class="text-center" style="background-color: #FAE3D4;">
+        <!-- bet amount -->
+        <md-slider-container flex="">
+          <md-input-container>
+            <input flex="" type="number" ng-model="bet_amount" aria-label="下注额" aria-controls="bet-amount-slider" class="text-center">
+          </md-input-container>
+          <md-slider md-discrete="" ng-model="bet_amount" min="0" max="100" step="10" aria-label="bass" class="md-warn" md-vertical=""></md-slider>
+
+          <h5>下注额</h5>
+        </md-slider-container>
+      </md-card>
+    </div>
+    <md-card flex>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">DICE</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout="row" layout-padding>
+
+        <!-- dice number -->
+        <md-slider-container flex="">
+          <md-input-container>
+            <input flex="" type="number" ng-model="dice_num" aria-label="筛子数量" aria-controls="dice-num-slider">
+          </md-input-container>
+          <md-slider md-discrete="" ng-model="dice_num" min="0" max="100" step="10" aria-label="bass" class="md-primary" md-vertical=""></md-slider>
+
+          <h5>筛子数量</h5>
+        </md-slider-container>
+
+        <!-- guess num -->
+        <md-slider-container flex="">
+          <md-input-container>
+            <input flex="" type="number" ng-model="guess_num" aria-label="幸运数字" aria-controls="guess-num-slider">
+          </md-input-container>
+          <md-slider md-discrete="" ng-model="guess_num" min="0" max="100" step="10" aria-label="bass" class="md-accent" md-vertical=""></md-slider>
+
+          <h5>幸运数字</h5>
+        </md-slider-container>
+
+        <!-- bet amount -->
+        <md-slider-container flex="">
+          <md-input-container>
+            <input flex="" type="number" ng-model="bet_amount" aria-label="下注额" aria-controls="bet-amount-slider">
+          </md-input-container>
+          <md-slider md-discrete="" ng-model="bet_amount" min="0" max="100" step="10" aria-label="bass" class="md-primary" md-vertical=""></md-slider>
+
+          <h5>下注额</h5>
+        </md-slider-container>
+
+      </md-card-content>
+
+      <md-card-actions layout="row" layout-align="end center">
+        <div>我的余额：130,232 XTS</div>
+        <span flex="5"></span>
+        <md-button class="md-accent md-raised">购买筹码</md-button>
+        <md-button class="" ng-disabled="true">提现</md-button>
+      </md-card-actions>
+    </md-card>
+
+    <md-card>
+      <md-card-content>
+
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab>
+              <md-tab-label>{{'notes.pot.my_winning_records' | translate}}</md-tab-label>
+              <md-tab-body>
+                <div ng-show="account_transactions.length == 0" translate>notes.pot.winning_not_found</div>
+                <div ng-show="account_transactions.length > 0" ng-include src="'transactions.html'"></div>
+              </md-tab-body>
+            </md-tab>
+
+            <md-tab md-on-select="getRecentWinners()">
+              <md-tab-label>{{'notes.pot.th.latest_winner' | translate:'{days:7}'}}</md-tab-label>
+              <md-tab-body>
+                <div ng-show="recent_winners.length == 0" translate>no winners</div>
+                <div ng-show="recent_winners.length > 0" ng-include src="'recent_winners.html'"></div>
+              </md-tab-body>
+            </md-tab>
+        </md-tabs>
+
+
+      </md-card-content>
+    </md-card>
+<!-- </md-content> -->

@@ -1,0 +1,48 @@
+<md-dialog flex="50" placeholder="{{'game.buy_chip'|translate}}">
+
+  <!-- <md-subheader class="md-sticky-no-effect">Mango (Fruit)</md-subheader> -->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{'game.buy_chip'|translate}}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <div class="md-dialog-content">
+
+      <form ng-init="buychipForm=this" name="buychip_form" class="form-horizontal" role="form" novalidate>
+
+        <div layout="column" layout-padding>
+          <!-- from -->
+            <!-- <md-select ng-model="note.from" placeholder="{{'notes.note.from'|translate}}">
+              <md-option ng-value="a" ng-repeat="a in note.accounts">{{'notes.note.from'|translate}}: {{a}}</md-option>
+            </md-select> -->
+
+
+          <!-- amount -->
+          <md-input-container>
+            <label>{{'game.buy_chip_amount'|translate}}</label>
+            <input name="amount" ng-model="buychip.amount" required type="number" min="1"
+                   autocomplete="off" ng-change="hot_check_buychip_amount();">
+            <div ng-messages="buychip_form.amount.$error" ng-show="buychip_form.$dirty">
+              <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
+            </div>
+          </md-input-container>
+
+        </div>
+      </form>
+      </div>
+    </md-dialog-content>
+
+    <!--Submit-->
+    <md-dialog-actions layout="row" layout-sm="column" layout-align="center center">
+      <span flex></span>
+      <md-button class="" ng-click="hide()">{{'btn.cancel'|translate}}</md-button>
+      <md-button id="submitPurchaseBtn" class="md-primary"
+        ng-click="doPurchase()">{{'game.buy_chip'|translate}}</md-button>
+    </md-dialog-actions>
+</md-dialog>

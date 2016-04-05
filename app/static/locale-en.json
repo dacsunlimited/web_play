@@ -13,7 +13,8 @@
     "close": "Close",
     "remove": "Remove",
     "learn_more": "Learn more",
-    "send": "Send"
+    "send": "Send",
+    "start": "Start"
   },
   "tip": {
     "privacy_statement": "Privacy Statement",
@@ -217,8 +218,11 @@
     "overview": "Overview",
     "my_account": "My Accounts",
     "directory": "Directory",
-    "delegates": "Delegates",
     "notes": "Secret Notes",
+    "delegates": "Delegates",
+    "apps": "APPs",
+    "dices": "DICE",
+    "wheel": "Super Lucky Wheel",
     "chips": "Game Assets",
     "games": "Games",
     "market": "Market",
@@ -502,6 +506,7 @@
   },
   "notes": {
     "title": "Journal Books",
+    "desc": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
     "open": "Open",
     "need_to_register": "You need to register this account on blockchain first",
     "notes_not_found": "You don't have notes yet.  Do you know you can have free lucky draws if you write notes?",
@@ -689,7 +694,27 @@
     "account_details": "Account Details",
     "advanced": "Advanced"
   },
+  "game": {
+    "buy_chip": "Buy Chips",
+    "withdraw": "Withdraw",
+    "bet": "Place Bet",
+    "buy_chip_amount": "Amount",
+    "bet_amount": "Bet Amount",
+    "result": "Winning Draw",
+    "waiting_to_draw": "Waiting to draw",
+    "remain_blocks": "Remain {{remain}} blocks"
+  },
+  "dice":{
+    "desc": "Simple DICE game, you can control the number of dices to roll and guess the lucky number.",
+    "segment_num": "Number of Segments",
+    "lucky_number": "Lucky Number",
+    "odds": "Odds"
+  },
+  "wheel":{
+    "desc": "Super Lucky Wheel.  Player can adjust number of segment for various odds."
+  },
   "packet":{
+    "desc": "Let's send and collect red packets together",
     "type":{
       "created": "Recently Created",
       "claimed": "Recently Claimed"

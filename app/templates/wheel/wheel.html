@@ -1,0 +1,88 @@
+
+<!-- <md-content> -->
+<div class="wheel">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="header">
+            <h3 class="header-title" translate>index.wheel</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p translate>wheel.desc</p>
+      </div>
+    </div>
+
+    <div layout="row">
+      <md-card flex layout="column" layout-padding layout-align="center"
+        class="text-center" style="background-color:
+        aliceblue;position:relative;" ng-init="the_wheel = drawWheel(seg_num, 'canvasDisplay')">
+        <!-- dice number -->
+        <md-slider-container flex="" style="overflow:hidden;">
+          <md-input-container flex="50">
+            <input flex="" type="number" ng-model="seg_num" aria-label="{{'wheel.segment_num'|translate}}" aria-controls="seg_num-slider" class="text-center">
+          </md-input-container>
+          <md-slider ng-model="seg_num" min="1" max="30" step="1" aria-label="{{'wheel.segment_num'|translate}}" class="md-primary" md-vertical=""></md-slider>
+
+          <h5 translate>wheel.segment_num</h5>
+        </md-slider-container>
+
+        <canvas id="canvasDisplay" width="100" height="100" class="wheelIndicator">
+            <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+        </canvas>
+      </md-card>
+
+      <md-card flex layout="column" layout-padding layout-align="center" class="text-center" style="background-color: #F2D7E0; overflow:hidden;">
+        <!-- guess num -->
+        <md-slider-container flex="" style="overflow:hidden;">
+          <md-input-container>
+            <input flex="" type="number" ng-model="guess_num" aria-label="{{'wheel.lucky_number'|translate}}" aria-controls="guess-num-slider" class="text-center">
+          </md-input-container>
+          <md-slider ng-model="guess_num" min="1" max="{{seg_num}}" step="1" aria-label="{{'wheel.lucky_number'|translate}}" class="md-accent" md-vertical=""></md-slider>
+
+          <h5>{{'wheel.lucky_number'|translate}}</h5>
+        </md-slider-container>
+      </md-card>
+
+      <md-card flex layout="column" layout-padding layout-align="center" class="text-center" style="background-color: #FAE3D4; overflow:hidden;">
+        <!-- bet amount -->
+        <md-slider-container flex="" style="overflow:hidden;">
+          <md-input-container>
+            <input flex="" type="number" ng-model="bet_amount"
+            aria-label="{{'game.bet_amount'|translate}}" aria-controls="bet-amount-slider" class="text-center">
+          </md-input-container>
+          <md-slider ng-model="bet_amount" min="100" max="{{bet_max}}" step="100" aria-label="bass" class="md-warn" md-vertical=""></md-slider>
+
+          <h5>{{'game.bet_amount'|translate}}</h5>
+        </md-slider-container>
+      </md-card>
+    </div>
+    <md-card flex>
+      <md-card-content layout="row" layout-padding layout-wrap layout-align="center center" >
+        <div flex="100" layout-align="center" class="text-center md-display-1">
+          <span ng-class="{'red':lastBet=='win','green':lastBet=='lose','':lastBet==''}">{{ current_balance ? (current_balance | formatAsset) : 0}}</span>
+        </div>
+        <md-card-actions flex="100" layout="row" layout-align="end center">
+          <md-button class="md-accent md-raised"
+                     ng-click="showPurchaseDialog($event)">{{'game.buy_chip'|translate}}</md-button>
+                   <md-button class=""
+                     ng-disabled="true">{{'game.withdraw'|translate}}</md-button>
+          <span flex></span>
+          <md-button ng-disabled="wheel_spinning" class="md-accent md-raised"
+                                                  ng-click="placeBet()">{{'game.bet'|translate}}</md-button>
+          <!-- <md-button ng-disabled="!wheel_spinning" class="md-accent md-raised" ng-click="resetWheel()">RESET</md-button> -->
+        </md-card-actions>
+
+      </md-card-content>
+    </md-card>
+
+    <md-card>
+      <md-card-content>
+
+        <div ng-show="account_transactions.length > 0" ng-include src="'wheel/transactions.html'"></div>
+
+      </md-card-content>
+    </md-card>
+</div>
+<!-- </md-content> -->
