@@ -45,7 +45,11 @@ module.exports = function(lineman) {
         "vendor/js/sha256.js",
         "vendor/js/jdenticon.js",
         "node_modules/angular-touch/angular-touch.js", //angular-material doesn't like this, but angular-carousel depends on it
-        "node_modules/angular-carousel/dist/angular-carousel.js"
+        "node_modules/angular-carousel/dist/angular-carousel.js",
+
+        //games
+        "vendor/js/games/TweenMax.min.js",
+        "vendor/js/games/Winwheel.js"
       ],
       app: [
         // "app/js/app.js",
