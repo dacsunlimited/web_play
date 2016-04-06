@@ -107,6 +107,9 @@ app.config ($mdThemingProvider, IdleProvider, $translateProvider, $tooltipProvid
     $mdThemingProvider.theme('default').primaryPalette('indigo')
 
     $compileProvider.debugInfoEnabled false
+    $mdThemingProvider.theme("warning-toast")
+    $mdThemingProvider.theme("notice-toast")
+    $mdThemingProvider.theme("error-toast")
     # set this to false in production to gain performance boost
     # use angular.reloadWithDebugInfo() to reload the page and obtain debug capability
 

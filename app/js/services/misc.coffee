@@ -1,8 +1,8 @@
 servicesModule = angular.module("app.services")
 
 servicesModule.factory "Growl", ($mdToast) ->
-  toastPosition: "right top"
-  fadeTime: 3000
+  toastPosition: "bottom right"
+  fadeTime: 3000000
 
   error: (title, message) ->
     # jQuery.growl.error(title: title, message: message)
@@ -23,5 +23,6 @@ servicesModule.factory "Growl", ($mdToast) ->
       .content("#{message}")
       .position(this.toastPosition)
       .hideDelay(this.fadeTime)
+      .theme("#{type}-toast")
     )
 

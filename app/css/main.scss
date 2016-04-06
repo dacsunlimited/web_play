@@ -688,3 +688,26 @@ a.delegate-link {
 .error-container {
   color: red;
 }
+
+
+md-toast.md-notice-toast-theme {
+    .md-toast-content {
+        background-color: #1fa67a;
+        color:white;
+    }
+}
+md-toast.md-warning-toast-theme {
+    .md-toast-content {
+        background-color: #f5683b;
+        color:white;
+    }
+}
+md-toast.md-error-toast-theme {
+    .md-toast-content {
+        background-color: #ff4081;
+        color:white;
+    }
+}
+md-toast {
+  margin-bottom:40px;
+}
