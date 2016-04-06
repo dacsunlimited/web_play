@@ -172,7 +172,7 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
         lentry = trx.ledger_entries[0]
 
         # this should be play trx
-        if !trx.is_virtual and lentry.to == $scope.current_account_name and lentry.memo == 'play dice'
+        if !trx.is_virtual and lentry.to == $scope.current_account_name and lentry.memo == "play #{$scope.game_name}"
           checkIds.push trx.block_num
 
           # construct a map for faster look up
