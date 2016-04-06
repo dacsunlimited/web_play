@@ -2,7 +2,7 @@ servicesModule = angular.module("app.services")
 
 servicesModule.factory "Growl", ($mdToast) ->
   toastPosition: "bottom right"
-  fadeTime: 3000000
+  fadeTime: 3000
 
   error: (title, message) ->
     # jQuery.growl.error(title: title, message: message)
