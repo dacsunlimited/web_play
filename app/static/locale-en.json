@@ -700,6 +700,7 @@
     "bet": "Place Bet",
     "buy_chip_amount": "Amount",
     "bet_amount": "Bet Amount",
+    "chip_price": "Chip Price",
     "result": "Winning Draw",
     "waiting_to_draw": "Waiting to draw",
     "remain_blocks": "Remain {{remain}} blocks"

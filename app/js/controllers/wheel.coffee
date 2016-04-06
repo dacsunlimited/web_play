@@ -2,6 +2,7 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
   $scope.game_name = 'wheel'
   $scope.chip_asset_name = 'WHEELS'
   $scope.chip_asset = null
+  $scope.chip_price = null
   $scope.reveal_block_distance = 10
 
   # max allowed bet amount, default 1000
@@ -19,12 +20,13 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
   $scope.current_account = null
   $scope.current_account_name = null
   $scope.current_balance = null
+  $scope.current_core_balance = null
 
   $scope.account_transactions = []
 
   $scope.buychipForm = null
   $scope.buychip =
-    amount: 100
+    amount: 1000
 
   $scope.betForm = null
 
@@ -108,12 +110,19 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
         preserveScope: true
         templateUrl: "wheel/purchase.html"
         targetEvent: evt
+    .then ->
+      $scope.fetchGameAssetPrice()
 
   $scope.cancel = ->
       $mdDialog.cancel()
 
   $scope.hide = ->
       $mdDialog.hide()
+
+  $scope.fetchGameAssetPrice = ->
+    BlockchainAPI.get_asset($scope.chip_asset_name).then (asset) ->
+      $scope.chip_asset = asset
+      $scope.chip_price = Utils.formatDecimal((asset.current_collateral / ($scope.current_core_balance?.precision || 5)) / (asset.current_supply / asset.precision), 2)
 
   $scope.hotCheckBuyChipAmount = ->
     return $scope.buychip.amount > 0
@@ -153,8 +162,6 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
     return "..." unless trx.is_confirmed
 
     $scope.reveal_block_distance - (Info.info.last_block_num - trx.block_num)
-
-
 
 
   refresh_transactions = ->
@@ -268,11 +275,14 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
 
   refresh_balance = ->
     Wallet.refresh_balances().then ->
+      $scope.current_core_balance = Wallet.balances[$scope.current_account_name]?[Info.info.symbol]
       $scope.current_balance = Wallet.balances[$scope.current_account_name]?[$scope.chip_asset_name]
       if $scope.current_balance?.amount > 0
         $scope.bet_max = $scope.current_balance.amount / $scope.current_balance.precision
         # if old bet amount overflows, set it to bet max
         $scope.bet_amount = $scope.bet_max if $scope.bet_max < $scope.bet_amount
+
+      $scope.fetchGameAssetPrice()
 
   block_observer =
     name: "wheel_block_observer"

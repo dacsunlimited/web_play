@@ -69,8 +69,7 @@
                    <md-button class=""
                      ng-disabled="true">{{'game.withdraw'|translate}}</md-button>
           <span flex></span>
-          <md-button ng-disabled="wheel_spinning" class="md-accent md-raised"
-                                                  ng-click="placeBet()">{{'game.bet'|translate}}</md-button>
+          <md-button ng-disabled="!current_balance || bet_amount > current_balance.amount" class="md-accent md-raised" ng-click="placeBet()">{{'game.bet'|translate}}</md-button>
           <!-- <md-button ng-disabled="!wheel_spinning" class="md-accent md-raised" ng-click="resetWheel()">RESET</md-button> -->
         </md-card-actions>
 

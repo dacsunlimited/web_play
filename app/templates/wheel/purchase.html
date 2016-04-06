@@ -17,16 +17,22 @@
       <form ng-init="buychipForm=this" name="buychip_form" class="form-horizontal" role="form" novalidate>
 
         <div layout="column" layout-padding>
-          <!-- from -->
-            <!-- <md-select ng-model="note.from" placeholder="{{'notes.note.from'|translate}}">
-              <md-option ng-value="a" ng-repeat="a in note.accounts">{{'notes.note.from'|translate}}: {{a}}</md-option>
-            </md-select> -->
+          <div layout="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>{{'account.balances'|translate}} ({{current_core_balance.symbol}})</label>
+            <input value="{{current_core_balance | formatAsset}}" disabled>
+          </md-input-container>
 
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>{{'game.chip_price'|translate}} ({{current_core_balance.symbol}})</label>
+            <input value="{{chip_price}}" disabled>
+          </md-input-container>
+        </div>
 
           <!-- amount -->
           <md-input-container>
-            <label>{{'game.buy_chip_amount'|translate}}</label>
-            <input name="amount" ng-model="buychip.amount" required type="number" min="1"
+            <label>{{'game.buy_chip_amount'|translate}} ({{chip_asset_name}})</label>
+            <input name="amount" ng-model="buychip.amount" required type="number" min="1" max="{{parseInt(current_core_balance.amount/current_core_balance.precision)}}"
                    autocomplete="off" ng-change="hot_check_buychip_amount();">
             <div ng-messages="buychip_form.amount.$error" ng-show="buychip_form.$dirty">
               <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>

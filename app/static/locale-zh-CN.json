@@ -679,8 +679,9 @@
     "buy_chip": "购买筹码",
     "withdraw": "提现",
     "bet": "下注",
-    "buy_chip_amount": "数量",
+    "buy_chip_amount": "购买数量",
     "bet_amount": "下注额",
+    "chip_price": "筹码价格",
     "result": "开奖",
     "waiting_to_draw": "等待开奖",
     "remain_blocks": "剩余 {{remain}} 个区块"
