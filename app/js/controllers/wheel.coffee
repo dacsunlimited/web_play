@@ -1,6 +1,6 @@
 angular.module("app").controller "WheelController", ($scope, $mdDialog, $stateParams, BlockchainAPI, Observer, Utils, Wallet, $rootScope, RpcService, Info, GameAPI, Growl) ->
-  $scope.game_name = 'dice'
-  $scope.chip_asset_name = 'DICE'
+  $scope.game_name = 'wheel'
+  $scope.chip_asset_name = 'WHEELS'
   $scope.chip_asset = null
   $scope.reveal_block_distance = 10
 
