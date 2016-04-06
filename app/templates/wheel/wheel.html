@@ -61,7 +61,7 @@
     <md-card flex>
       <md-card-content layout="row" layout-padding layout-wrap layout-align="center center" >
         <div flex="100" layout-align="center" class="text-center md-display-1">
-          <span ng-class="{'red':lastBet=='win','green':lastBet=='lose','':lastBet==''}">{{ current_balance ? (current_balance | formatAsset) : 0}}</span>
+          <span ng-class="{'red':lastBet=='win','green':lastBet=='lose','':lastBet==''}">{{ current_balance ? (current_balance | formatAsset) : 0 + ' ' + chip_asset_name}}</span>
         </div>
         <md-card-actions flex="100" layout="row" layout-align="end center">
           <md-button class="md-accent md-raised"

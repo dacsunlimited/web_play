@@ -64,8 +64,8 @@
             {{'wheel.odds'|translate}}:1/{{t.reveal.data.odds}}
           </span>
 
-          <span ng-if="!t.reveal">{{'game.waiting_to_draw'|translate}}
-            ({{'game.remain_blocks'|translate:'{remain:calculate_waiting_blocks(t)}'}})</span>
+          <span ng-if="!t.reveal">
+            {{'game.waiting_to_draw'|translate}} ({{'game.remain_blocks'|translate:"{remain:"+calculate_waiting_blocks(t)+"}"}})</span>
         </td>
          <td>
             <span ng-if="t.is_confirmed && !t.error">{{t.pretty_time}}</span><br/>

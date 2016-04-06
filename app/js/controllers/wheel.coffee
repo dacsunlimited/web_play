@@ -122,7 +122,7 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
     return false unless $scope.hotCheckBuyChipAmount()
 
     GameAPI.buy_chips($scope.current_account_name, $scope.buychip.amount, $scope.chip_asset_name).then (response) ->
-      console.log 'purchase success', response
+      # console.log 'purchase success', response
       Growl.notice 'Success', '购买成功'
     , (err) ->
       console.log 'buychip error', err
@@ -190,13 +190,13 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
       .filter (x) ->
         x != null
 
-      console.log 'account_transactions', $scope.account_transactions.map (x)-> x.block_num
-      console.log 'idBlockMap'
-      for block_num, index of idBlockMap
-        console.log "#{block_num} => #{index}"
+      # console.log 'account_transactions', $scope.account_transactions.map (x)-> x.block_num
+      # console.log 'idBlockMap'
+      # for block_num, index of idBlockMap
+      #   console.log "#{block_num} => #{index}"
 
       ids = Utils.unique_array(checkIds).map (x)->[x+$scope.reveal_block_distance]
-      console.log 'ids', ids.map (x)-> x[0]
+      # console.log 'ids', ids.map (x)-> x[0]
       RpcService.request('batch', ['game_list_result_transactions', ids]).then (resp) ->
         reveals = resp.result
 
