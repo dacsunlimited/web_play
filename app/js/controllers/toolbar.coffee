@@ -1,4 +1,4 @@
-angular.module("app").controller "ToolbarController", ($scope, $state, $rootScope, Shared, Wallet) ->
+angular.module("app").controller "ToolbarController", ($scope, $state, $rootScope, Shared, Wallet, $mdSidenav) ->
 
     $scope.current_account = null
     $scope.accounts = []
@@ -16,6 +16,9 @@ angular.module("app").controller "ToolbarController", ($scope, $state, $rootScop
         $scope.accounts.splice(0, $scope.accounts.length)
         $scope.accounts.push(name) for name, a of all_accounts #when a.is_my_account #and name != $scope.current_account
     , true
+
+    $scope.toggleMenu = ->
+      $mdSidenav("sidenav").toggle()
 
     $scope.open_context_help = ->
         $scope.context_help.open = true

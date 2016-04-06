@@ -10,9 +10,7 @@
         </md-toolbar> -->
 
         <md-content role="navigation" ng-controller="SidenavController">
-          <md-button ng-click="close()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
-          </md-button>
+
           <header class="nav-header">
             <div ng-show="current_account" layout-align="center">
               <a ui-sref="account({name: current_account.name})" class="play-logo" ng-if="current_account">
