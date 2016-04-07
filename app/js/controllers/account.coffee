@@ -1,6 +1,8 @@
 angular.module("app").controller "AccountController", ($scope, $state, $filter, $location, $stateParams, $window, $q, Growl, Wallet, Utils, WalletAPI, $modal, Blockchain, BlockchainAPI, Info, Observer, $translate) ->
 
     Info.refresh_info()
+
+    $scope.baseAsset = null
     name = $stateParams.name
     $scope.account_name = name
     $scope.utils = Utils
@@ -100,6 +102,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
 
     Blockchain.get_asset(0).then (asset_type) =>
         $scope.current_xts_supply = asset_type.current_supply
+        $scope.baseAsset = asset_type
 
 #    $scope.$watch ->
 #        Wallet.accounts[name]
