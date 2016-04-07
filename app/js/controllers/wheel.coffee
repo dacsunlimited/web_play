@@ -149,7 +149,7 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
     GameAPI.play($scope.game_name, gameParam).then (resp) ->
       console.log resp
 
-      $scope.current_balance.amount -= gameParam.amount
+      $scope.current_balance.amount -= gameParam.amount * $scope.current_balance.precision
 
       refresh_balance()
 
