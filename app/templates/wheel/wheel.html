@@ -52,7 +52,8 @@
             <input flex="" type="number" ng-model="bet_amount"
             aria-label="{{'game.bet_amount'|translate}}" aria-controls="bet-amount-slider" class="text-center">
           </md-input-container>
-          <md-slider ng-model="bet_amount" min="100" max="{{bet_max}}" step="100" aria-label="bass" class="md-warn" md-vertical=""></md-slider>
+          <md-slider ng-model="bet_amount" min="{{ getMinBetAmount() }}" max="{{bet_max}}"
+            step="{{ getBetStep() }}" aria-label="{{'game.bet_amount'|translate}}" class="md-warn" md-vertical=""></md-slider>
 
           <h5>{{'game.bet_amount'|translate}}</h5>
         </md-slider-container>
@@ -69,7 +70,8 @@
                    <md-button class=""
                      ng-disabled="true">{{'game.withdraw'|translate}}</md-button>
           <span flex></span>
-          <md-button ng-disabled="!current_balance || bet_amount > current_balance.amount" class="md-accent md-raised" ng-click="placeBet()">{{'game.bet'|translate}}</md-button>
+          <md-button ng-disabled="!current_balance || bet_amount >
+            current_balance.amount / current_balance.precision" class="md-accent md-raised" ng-click="placeBet()">{{'game.bet'|translate}}</md-button>
           <!-- <md-button ng-disabled="!wheel_spinning" class="md-accent md-raised" ng-click="resetWheel()">RESET</md-button> -->
         </md-card-actions>
 

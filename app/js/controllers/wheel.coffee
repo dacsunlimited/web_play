@@ -103,6 +103,20 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
     # Do basic alert of the segment text. You would probably want to do something more interesting with this information.
     alert("You have won " + winningSegment.text)
 
+  # decide min bet amount
+  $scope.getMinBetAmount = ->
+    unless $scope.current_balance
+      100
+    else
+      Math.min(100, parseInt($scope.current_balance.amount / $scope.current_balance.precision)/20)
+  
+  # make step for 20 rounds
+  $scope.getBetStep = ->
+    unless $scope.current_balance
+      100
+    else
+      parseInt($scope.current_balance.amount / $scope.current_balance.precision / 20)
+
   $scope.showPurchaseDialog = (evt) ->
     $mdDialog.show
         parent: angular.element document.body
