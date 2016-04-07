@@ -18,19 +18,20 @@
 
         <div layout="column" layout-padding>
           <div layout="row">
-          <md-input-container class="md-block" flex-gt-xs>
+          <md-input-container class="md-block" flex>
             <label>{{'account.balances'|translate}} ({{current_core_balance.symbol}})</label>
             <input value="{{current_core_balance | formatAsset}}" disabled>
           </md-input-container>
 
-          <md-input-container class="md-block" flex-gt-xs>
+          <md-input-container class="md-block" flex>
             <label>{{'game.chip_price'|translate}} ({{current_core_balance.symbol}})</label>
             <input value="{{chip_price}}" disabled>
           </md-input-container>
         </div>
 
+        <div layout="row">
           <!-- amount -->
-          <md-input-container>
+          <md-input-container class="md-block" flex>
             <label>{{'game.buy_chip_amount'|translate}} ({{chip_asset_name}})</label>
             <input name="amount" ng-model="buychip.amount" required type="number" min="1" max="{{parseInt(current_core_balance.amount/current_core_balance.precision)}}"
                    autocomplete="off" ng-change="hot_check_buychip_amount();">
@@ -38,6 +39,13 @@
               <div ng-message="insufficientFund">{{'market.tip.insufficient_balances'|translate}}</div>
             </div>
           </md-input-container>
+
+          <md-input-container class="md-block" flex>
+            <label>{{'game.cost'|translate}} ({{current_core_balance.symbol}})</label>
+            <input value="{{chip_price * buychip.amount}}" disabled>
+          </md-input-container>
+
+        </div>
 
         </div>
       </form>

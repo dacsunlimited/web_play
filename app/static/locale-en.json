@@ -699,6 +699,7 @@
     "withdraw": "Withdraw",
     "bet": "Place Bet",
     "buy_chip_amount": "Amount",
+    "cost": "Cost",
     "bet_amount": "Bet Amount",
     "chip_price": "Chip Price",
     "result": "Winning Draw",
