@@ -47,10 +47,10 @@
         <td>
 
           <span ng-if="t.reveal && (win_amount = t.reveal.data.jackpot_received) > 0" class="lose" style="width:100px;">
-            WIN: {{win_amount}}
+            WIN: {{ win_amount / current_balance.precision }}
           </span>
           <span ng-if="t.reveal && (win_amount = t.reveal.data.jackpot_received) == 0" class="win" style="width:100px;">
-            LOSE: {{win_amount}}
+            LOSE: {{ win_amount / current_balance.precision }}
           </span>
 
           <span ng-if="t.reveal ">
