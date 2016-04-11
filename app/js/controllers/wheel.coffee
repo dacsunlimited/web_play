@@ -148,7 +148,9 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
       # console.log 'purchase success', response
       Growl.notice 'Success', '购买成功'
     , (err) ->
-      console.log 'buychip error', err
+      error = err.data?.error || err.response?.data?.error
+      error_message = error.locale_message || error.message
+      Growl.error "", error_message
 
     $scope.hide()
 
@@ -161,7 +163,7 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
       guess: $scope.guess_num
 
     GameAPI.play($scope.game_name, gameParam).then (resp) ->
-      console.log resp
+      # console.log resp
 
       $scope.current_balance.amount -= gameParam.amount * $scope.current_balance.precision
 
@@ -169,7 +171,9 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
 
       Growl.notice "", "下注:#{gameParam.amount}，几率:1/#{gameParam.odds}"
     , (err) ->
-      console.log 'play error', err
+      error = err.data?.error || err.response?.data?.error
+      error_message = error.locale_message || error.message
+      Growl.error "", error_message
 
 
   $scope.calculate_waiting_blocks = (trx) ->
