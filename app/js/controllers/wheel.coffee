@@ -145,7 +145,6 @@ angular.module("app").controller "WheelController", ($scope, $mdDialog, $statePa
     return false unless $scope.hotCheckBuyChipAmount()
 
     GameAPI.buy_chips($scope.current_account_name, $scope.buychip.amount, $scope.chip_asset_name).then (response) ->
-      # console.log 'purchase success', response
       Growl.notice 'Success', '购买成功'
     , (err) ->
       error = err.data?.error || err.response?.data?.error
