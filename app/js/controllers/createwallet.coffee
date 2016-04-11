@@ -1,4 +1,4 @@
-angular.module("app").controller "CreateWalletController", ($scope, $rootScope, $modal, $log, $location, Idle, RpcService, Wallet, Growl) ->
+angular.module("app").controller "CreateWalletController", ($scope, $rootScope, $uibModal, $log, $location, Idle, RpcService, Wallet, Growl) ->
     $rootScope.splashpage = true
 
     Idle.unwatch()

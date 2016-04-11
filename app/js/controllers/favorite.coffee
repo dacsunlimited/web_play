@@ -1,4 +1,4 @@
-angular.module("app").controller "FavoriteController", ($scope, $state, $location, $modal, $q, $http, $rootScope, WalletAPI, Utils, Wallet) ->
+angular.module("app").controller "FavoriteController", ($scope, $state, $location, $uibModal, $q, $http, $rootScope, WalletAPI, Utils, Wallet) ->
     $scope.contacts = []
 
     $scope.refresh_contacts = ->
@@ -20,7 +20,7 @@ angular.module("app").controller "FavoriteController", ($scope, $state, $locatio
       account.is_favorite
 
     $scope.toggleFavorite = (name) ->
-        $modal.open
+        $uibModal.open
             templateUrl: "dialog-confirmation.html"
             controller: "DialogConfirmationController"
             resolve:

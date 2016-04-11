@@ -1,4 +1,4 @@
-angular.module("app").controller "TrollboxController", ($scope, $modal, $log, $q, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, $mdDialog, AD) ->
+angular.module("app").controller "TrollboxController", ($scope, $uibModal, $log, $q, RpcService, Wallet, WalletAPI, BlockchainAPI, Blockchain, Growl, Info, Utils, Observer, $timeout, $mdDialog, AD) ->
   chatAdPositionAcct    = Info.CHAT_ADD_POSITION_ACCT
 
 

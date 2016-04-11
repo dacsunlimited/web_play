@@ -1,4 +1,4 @@
-angular.module("app").controller "IssueAssetController", ($scope, $location, $stateParams, RpcService, Wallet, Growl, Shared, BlockchainAPI, Utils, $modal, Blockchain) ->
+angular.module("app").controller "IssueAssetController", ($scope, $location, $stateParams, RpcService, Wallet, Growl, Shared, BlockchainAPI, Utils, $uibModal, Blockchain) ->
 
     $scope.issue_asset =
         amount : ""
@@ -7,7 +7,7 @@ angular.module("app").controller "IssueAssetController", ($scope, $location, $st
         memo : ""
 
     $scope.issue = ->
-        $modal.open
+        $uibModal.open
             templateUrl: "dialog-confirmation.html"
             controller: "DialogConfirmationController"
             resolve:
@@ -27,7 +27,7 @@ angular.module("app").controller "IssueAssetController", ($scope, $location, $st
         $scope.memo_size_max = config.memo_size_max
 
     $scope.newContactModal = ->
-        $modal.open
+        $uibModal.open
             templateUrl: "addressbookmodal.html"
             controller: "AddressBookModalController"
             resolve:

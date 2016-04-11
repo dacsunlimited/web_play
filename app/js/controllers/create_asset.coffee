@@ -1,4 +1,4 @@
-angular.module("app").controller "CreateAssetController", ($scope, $location, $stateParams, $modal, Growl, BlockchainAPI, RpcService, Utils, Info, Blockchain, WalletAPI) ->
+angular.module("app").controller "CreateAssetController", ($scope, $location, $stateParams, $uibModal, Growl, BlockchainAPI, RpcService, Utils, Info, Blockchain, WalletAPI) ->
     $scope.name = $stateParams.name
     $scope.reg_fee =
         symbol: ''
@@ -46,7 +46,7 @@ angular.module("app").controller "CreateAssetController", ($scope, $location, $s
         if maximum_supply * precision > 1000000000000000
             @create_asset_form.$error.message = "You need to specify a lower precision or fewer shares."
             return
-        $modal.open
+        $uibModal.open
             templateUrl: "dialog-asset-confirmation.html"
             controller: "DialogWithDataController"
             resolve:

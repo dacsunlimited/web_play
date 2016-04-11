@@ -1,10 +1,10 @@
 <div class="vote-tab-header clearfix">
   <div ng-if="has_balance" class="pull-right">
-    <div class="btn-group" dropdown is-open="status2.isopen">
-      <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+    <div class="btn-group" uib-dropdown is-open="status2.isopen">
+      <button type="button" class="btn dropdown-toggle" uib-dropdown-toggle>
         {{ ('account.vote.'+vote_options[data.vote]) | translate }} <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu left" role="menu">
+      <ul class="dropdown-menu left" role="menu" uib-dropdown-menu>
         <li ng-repeat="(k, v) in vote_options">
           <a ng-click="data.vote=k; status2.isopen=false">{{ ('account.vote.'+v) | translate }}</a>
         </li>

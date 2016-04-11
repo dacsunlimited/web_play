@@ -28,8 +28,10 @@ module.exports = function(lineman) {
         "node_modules/angular-resource/angular-resource.js",
         "node_modules/angular-ui-router/release/angular-ui-router.js", // originally "vendor/js/angular-ui-router.js",
         "node_modules/angular-pageslide-directive/dist/angular-pageslide-directive.js",
-        "node_modules/angular-bootstrap/ui-bootstrap.js",
-        "node_modules/angular-bootstrap/ui-bootstrap-tpls.js",
+        // "node_modules/angular-bootstrap/ui-bootstrap.js",
+        // "node_modules/angular-bootstrap/ui-bootstrap-tpls.js",
+        "node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js",
+        "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
         "node_modules/moment/min/moment-with-locales.js",
         "node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
 
@@ -68,6 +70,7 @@ module.exports = function(lineman) {
     css: {
       vendor: [
         "vendor/css/bootstrap.css",
+        "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css",
         "vendor/css/font-awesome.css",
         "vendor/css/ark.css",
         "node_modules/angular-growl-v2/build/angular-growl.min.css", //original "node_modules/growl/stylesheets/jquery.growl.css",

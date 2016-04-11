@@ -1,4 +1,4 @@
-angular.module("app").controller "HomeController", ($scope, $modal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote, $timeout, AD) ->
+angular.module("app").controller "HomeController", ($scope, $uibModal, Shared, $log, RpcService, Wallet, BlockchainAPI, Blockchain, Growl, Info, Utils, SecretNote, $timeout, AD) ->
     annoucement_account = Info.ANNOUNCEMENT_ACCT
     ad_account = Info.HOME_AD_POSITION_ACCT
 

@@ -1,4 +1,4 @@
-angular.module("app").controller "RootController", ($scope, $location, $modal, $q, $http, $rootScope, $state, $stateParams, Wallet, Client, Idle, Shared, Info, WalletAPI, Observer) ->
+angular.module("app").controller "RootController", ($scope, $location, $uibModal, $q, $http, $rootScope, $state, $stateParams, Wallet, Client, Idle, Shared, Info, WalletAPI, Observer) ->
     $scope.unlockwallet = false
     $scope.bodyclass = "cover"
     $scope.currentPath = $location.path()
@@ -25,7 +25,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
     $scope.started = false
     $scope.$on "IdleStart", ->
         closeModals()
-        $scope.warning = $modal.open(
+        $scope.warning = $uibModal.open(
             templateUrl: "warning-dialog.html"
             windowClass: "modal-danger"
         )
@@ -57,7 +57,7 @@ angular.module("app").controller "RootController", ($scope, $location, $modal, $
 
     open_wallet = (mode) ->
         $rootScope.cur_deferred = $q.defer()
-        $modal.open
+        $uibModal.open
             templateUrl: "openwallet.html"
             controller: "OpenWalletController"
             resolve:

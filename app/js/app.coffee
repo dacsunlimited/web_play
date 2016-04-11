@@ -103,7 +103,7 @@ app.run ($rootScope, $location, Idle, $state, $interval, $window, $templateCache
 
     Idle.watch()
 
-app.config ($mdThemingProvider, IdleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
+app.config ($mdThemingProvider, IdleProvider, $translateProvider, $uibTooltipProvider, $compileProvider) ->
     $mdThemingProvider.theme('default').primaryPalette('indigo')
 
     $compileProvider.debugInfoEnabled false
@@ -113,7 +113,7 @@ app.config ($mdThemingProvider, IdleProvider, $translateProvider, $tooltipProvid
     # set this to false in production to gain performance boost
     # use angular.reloadWithDebugInfo() to reload the page and obtain debug capability
 
-    $tooltipProvider.options { appendToBody: true }
+    $uibTooltipProvider.options { appendToBody: true }
 
     $translateProvider.useStaticFilesLoader
         prefix: 'locale-',

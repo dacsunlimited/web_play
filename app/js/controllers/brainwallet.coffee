@@ -1,4 +1,4 @@
-angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $rootElement, $modal, $log, $location, Idle, $q, $timeout, $http, RpcService, Wallet, Growl) ->
+angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $rootElement, $uibModal, $log, $location, Idle, $q, $timeout, $http, RpcService, Wallet, Growl) ->
 
     return unless window.bts
 

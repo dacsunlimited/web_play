@@ -1,4 +1,4 @@
-angular.module("app").controller "DialogTransferConfirmationController", ($scope, $translate, $modalInstance, trx, action, transfer_type) ->
+angular.module("app").controller "DialogTransferConfirmationController", ($scope, $translate, $uibModalInstance, trx, action, transfer_type) ->
 
     $scope.trx = trx
     if transfer_type == 'burn'
@@ -12,11 +12,11 @@ angular.module("app").controller "DialogTransferConfirmationController", ($scope
 
 
     $scope.cancel = ->
-        $modalInstance.dismiss "cancel"
+        $uibModalInstance.dismiss "cancel"
 
     $scope.ok = ->
         action()
-        $modalInstance.close("ok")
+        $uibModalInstance.close("ok")
         
     $scope.transfer_type = transfer_type
         

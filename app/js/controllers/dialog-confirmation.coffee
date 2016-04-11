@@ -1,11 +1,11 @@
-angular.module("app").controller "DialogConfirmationController", ($scope, $modalInstance, title, message, action) ->
+angular.module("app").controller "DialogConfirmationController", ($scope, $uibModalInstance, title, message, action) ->
 
     $scope.title=title
     $scope.message = message
 
     $scope.cancel = ->
-        $modalInstance.dismiss "cancel"
+        $uibModalInstance.dismiss "cancel"
 
     $scope.ok = ->
         action()
-        $modalInstance.close("ok")
+        $uibModalInstance.close("ok")

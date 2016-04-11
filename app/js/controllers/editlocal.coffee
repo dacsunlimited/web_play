@@ -1,4 +1,4 @@
-angular.module("app").controller "EditLocalController", ($scope, $filter, $location, $stateParams, Growl, Wallet, Utils, WalletAPI, $modal, Blockchain) ->
+angular.module("app").controller "EditLocalController", ($scope, $filter, $location, $stateParams, Growl, Wallet, Utils, WalletAPI, $uibModal, Blockchain) ->
     name = $stateParams.name
     $scope.model={}
     $scope.model.newName=$stateParams.name
