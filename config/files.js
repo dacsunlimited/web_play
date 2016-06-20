@@ -49,6 +49,9 @@ module.exports = function(lineman) {
         "node_modules/angular-touch/angular-touch.js", //angular-material doesn't like this, but angular-carousel depends on it
         "node_modules/angular-carousel/dist/angular-carousel.js",
 
+        //js-combinatorics
+        "node_modules/js-combinatorics/combinatorics.js",
+
         //games
         "vendor/js/games/TweenMax.min.js",
         "vendor/js/games/Winwheel.js"

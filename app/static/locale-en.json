@@ -223,6 +223,8 @@
     "apps": "APPs",
     "dices": "DICE",
     "wheel": "Super Lucky Wheel",
+    "scolorball": "Single Color Ball",
+    "dcolorball": "Double Color Ball",
     "chips": "Game Assets",
     "games": "Games",
     "market": "Market",
@@ -235,7 +237,8 @@
     "daily_income": "Network Daily Income",
     "daily_expense": "Network Daily Expense",
     "daily_burn": "Network Daily Burn",
-    "packets": "Red Packets"
+    "packets": "Red Packets",
+    "placeholder": "More Game"
   },
   "delegate": {
     "title": "Delegates",
@@ -714,6 +717,41 @@
   },
   "wheel":{
     "desc": "Super Lucky Wheel.  Player can adjust number of segment for various odds."
+  },
+  "scolorball":{
+    "desc": "Select several red balls to bet, better odds."
+  },
+  "placeholder":{
+    "desc": "More games coming soon."
+  },
+  "scolorball":{
+    "desc": "Select several red balls for one bet",
+    "mode":{
+      "label_2/4": "2/4 2 of 4",
+      "label_3/6": "3/6 3 of 6",
+      "label_4/8": "4/8 4 of 8",
+      "hint_2/4": "Select 2 red balls out of 4, each bet contains 2 red balls.",
+      "hint_3/6": "Select 3 red balls out of 6, each bet contains 3 red balls.",
+      "hint_4/8": "Select 4 red balls out of 8, each bet contains 4 red balls."
+    }
+  },
+  "dcolorball":{
+    "desc": "Select several red balls and 1 blue ball for one bet",
+    "game_mode": "Select Game Mode",
+    "section_red": "Red Zone",
+    "section_blue": "Blue Zone",
+    "rand_select": "Random",
+    "clear_selected": "Clear",
+    "clear_all": "Clear All",
+    "your_bet": "Your choices",
+    "mode":{
+      "label_2/5": "2/5 2 of 5",
+      "label_5/10": "5/10 5 of 10",
+      "label_5/15": "5/15 5 of 15",
+      "hint_2/5": "Select 2 red balls out of 5 and 1 blue ball out of 4, each bet contains 2 red balls and 1 blue ball.",
+      "hint_5/10": "Select 5 red balls out of 10 and 1 blue ball out of 4, each bet contains 5 red balls and 1 blue ball.",
+      "hint_5/15": "Select 5 red balls out of 15 and 1 blue ball out of 4, each bet contains 5 red balls and 1 blue ball."
+    }
   },
   "packet":{
     "desc": "Let's send and collect red packets together",
