@@ -1,6 +1,6 @@
 angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $stateParams, BlockchainAPI, Observer, Utils, Wallet, $rootScope, RpcService, Info, GameAPI, Growl) ->
   $scope.game_name = 'dice'
-  $scope.chip_asset_name = 'DICE'
+  $scope.chip_asset_name = 'DICECOIN'
   # the name within play trx memo, if multiple games share one contract
   # this needs to be set and it's probably different from game name
   $scope.memo_game_name = 'dice'
@@ -34,10 +34,12 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
       blue:       [1,4],
 
   # compute Ns
+  $scope.game_ns = []
   for section, mode of modes
     mode.red_n  = Combinatorics.C(mode.red[1], mode.red[0])
     mode.blue_n = Combinatorics.C(mode.blue[1], mode.blue[0])
     mode.combined_n = mode.red_n * mode.blue_n
+    $scope.game_ns.push mode.combined_n
 
   # game mode list
   $scope.gameModes = modes
@@ -208,6 +210,12 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
   # blue_rank = rank % blue_n
   $scope.revealResult = (rank, odds) ->
     gameMode = $scope.getGameFromOdds(odds)
+
+    # if gameMode not found, meaning this request's trx does not
+    # belong to this game
+    # wrong odds
+    return {} unless gameMode
+
     red_rank  = parseInt(rank / gameMode.blue_n)
     blue_rank = rank % gameMode.blue_n
 
@@ -255,17 +263,19 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
 
 
   refresh_transactions = ->
-    console.log 'refresh_transactions'
     Wallet.refresh_transactions().then ->
       return unless Wallet.transactions[$scope.current_account_name]?.length > 0
 
       # store result transactions temporarily
+      # block_num array
       checkIds = []
+      # trx_id array
       checkTrx = []
+      # object { block_num: [trx_id1, trx_id2]}
       idBlockMap = {}
 
       i = 0
-      $scope.account_transactions = Wallet.transactions[$scope.current_account_name].map (trx) ->
+      account_transactions = Wallet.transactions[$scope.current_account_name].map (trx) ->
         # ledger entry
         lentry = trx.ledger_entries[0]
 
@@ -289,69 +299,104 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
       .filter (x) ->
         x != null
 
-      # console.log 'account_transactions', $scope.account_transactions.map (x)-> x.block_num
-      # console.log 'idBlockMap'
-      # for block_num, index of idBlockMap
-      #   console.log "#{block_num} => #{index}"
+      return unless checkTrx.length > 0
 
-      ids = Utils.unique_array(checkIds).map (x)->[x+$scope.reveal_block_distance]
-      trxes = Utils.unique_array(checkTrx).map (x)->[x]
-
-      RpcService.request('batch', ['blockchain_get_transaction', trxes]).then (resp) ->
+      #
+      # get transaction detail for each trx to
+      #   check if the transaction belongs to my game
+      #     if yes
+      #       find original bet info (guess number etc)
+      #     else
+      #       remove it from account_transactions
+      #
+      RpcService.request('batch', ['blockchain_get_transaction', (checkTrx.map (x)->[x])]).then (resp) ->
+        indexToDelete = []
         l = resp.result.length
         if l > 0
           i = 0
           for trx_data in (resp.result.map (x) -> x[1])
             bet = -1
+            block_num = trx_data.chain_location.block_num
+            # trx_id = resp.result[i][0]
+
             for op in trx_data.trx.operations
               if op.type == 'game_play_op_type'
                 bet = op.data.input.data
-                block_num = trx_data.chain_location.block_num
-                trx_ids = idBlockMap[block_num]
-                trx = $scope.account_transactions[trx_ids[0]]
+
+                # check if this trx's odds belongs to this game
+                if ($scope.game_ns.indexOf(bet.odds) == -1)
+                  indexToDelete.push i
+                  # checkIds.splice(i, 1)
+                  # checkTrx.splice(i, 1)
+                  # account_transactions.splice(i, 1)
+                  break
+
+                trx = account_transactions[i]
                 if bet != -1
                   trx.bet = bet
                   trx.bet.combination = $scope.revealResult(bet.guess, bet.odds)
                 break
             i++
 
-      RpcService.request('batch', ['game_list_result_transactions', ids]).then (resp) ->
-        reveals = resp.result
+          # TODO:
+          # we don't remove unqualified game trx here
+          # because that will affect idBlockMap's containing element's index value
+          # we move this to the bottom of the func
+          # although we wasted some resource processing other game's transactions
+          # we keep it this way for now
+          #
+          # for i in indexToDelete.sort().reverse()
+          #   checkIds.splice(i, 1)
+          #   checkTrx.splice(i, 1)
+          #   account_transactions.splice(i, 1)
 
-        game_ns = []
-        game_ns.push mode.combined_n for section, mode of $scope.gameModes
+        # get reveal results from target block nums
+        #
+        ids = Utils.unique_array(checkIds).map (x)->[x+$scope.reveal_block_distance]
+        console.log "checkIds", ids
+        RpcService.request('batch', ['game_list_result_transactions', ids]).then (resp) ->
+          reveals = resp.result
 
-        l = reveals.length
-        if l > 0
-          i = 0
-          for datas in reveals
-            block_num = ids[i]
+          l = reveals.length
+          if l > 0
+            i = 0
+            for datas in reveals
+              block_num = ids[i]
 
-            j = 0
-            trx_ids = idBlockMap[block_num - $scope.reveal_block_distance]
-            # console.log 'trx_ids', trx_ids
-            while datas.length > 0
-              data = datas.shift()
+              j = 0
+              trx_ids = idBlockMap[block_num - $scope.reveal_block_distance]
+              # console.log 'trx_ids', trx_ids
+              # debugger
+              while datas.length > 0
+                data = datas.shift()
 
-              # check if this belongs to this game's odds
-              if (game_ns.indexOf(data.data.odds) == -1)
-                $scope.account_transactions.splice(trx_ids[j],1)
-                break
+                if ($scope.game_ns.indexOf(data.data.odds) == -1)
+                  break
 
-              trx = $scope.account_transactions[trx_ids[j]]
-              trx.reveal = data
-              trx.reveal.combination = $scope.revealResult(data.data.lucky_number, data.data.odds)
+                trx = account_transactions[trx_ids[j]]
+                trx.reveal = data
+                trx.reveal.combination = $scope.revealResult(data.data.lucky_number, data.data.odds)
 
-              # this is the last bet result
-              if i == 0 and j == 0
-                if data.data.jackpot_received > 0
-                  $scope.lastBet = 'win'
-                else
-                  $scope.lastBet = 'lose'
-                # console.log 'lastBet', $scope.lastBet
+                # this is the last bet result
+                if i == 0 and j == 0
+                  if data.data.jackpot_received > 0
+                    console.log "win data", trx
+                    $scope.lastBet = 'win'
+                  else
+                    $scope.lastBet = 'lose'
+                  # console.log 'lastBet', $scope.lastBet
 
-              j++
-            i++
+                j++
+              i++
+
+          # remove unqualified transactions
+          for i in indexToDelete.sort().reverse()
+            # checkIds.splice(i, 1)
+            # checkTrx.splice(i, 1)
+            account_transactions.splice(i, 1)
+
+          # assign qualified trx to scope variable
+          $scope.account_transactions = account_transactions if account_transactions.length > 0
 
 
   BlockchainAPI.get_asset($scope.chip_asset_name).then (asset) ->
