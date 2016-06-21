@@ -13,10 +13,11 @@ window.open_external_url = (url) ->
         window.open(url)
 
 # debugger
-window.getHandlers = ->
-  # get service
-  services = ['Idle', 'Wallet', 'Info']
-  window[service] = angular.element(document.body).injector().get(service) for service in services
+# window.getHandlers = ->
+#   # get service
+#   services = ['Idle', 'Wallet', 'Info']
+#   window[service] = angular.element(document.body).injector().get(service) for service in services
+#   window["scope"] = angular.element('.dball-container').scope()
 
 app = angular.module("app",
     ["ngResource", "ui.router", "ngIdle", "app.services", "app.directives", "ui.bootstrap", "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages", "ui.grid.autoResize", "ngAnimate", "angular-carousel","ng-mfb", "angular-growl"])
@@ -114,7 +115,7 @@ app.config ($mdThemingProvider, IdleProvider, $translateProvider, $uibTooltipPro
 
     # $touchProvider.ngClickOverrideEnabled(true);
 
-    $compileProvider.debugInfoEnabled true
+    $compileProvider.debugInfoEnabled false
     # set this to false in production to gain performance boost
     # use angular.reloadWithDebugInfo() to reload the page and obtain debug capability
 
