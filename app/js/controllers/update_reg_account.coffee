@@ -1,4 +1,4 @@
-angular.module("app").controller "UpdateRegAccountController", ($scope, $stateParams, $modal, Wallet, Shared, RpcService, Blockchain, Info, Utils, WalletAPI, Growl) ->
+angular.module("app").controller "UpdateRegAccountController", ($scope, $stateParams, $uibModal, Wallet, Shared, RpcService, Blockchain, Info, Utils, WalletAPI, Growl) ->
     name = $stateParams.name
 
     account_listener = $scope.$watch ->
@@ -63,7 +63,7 @@ angular.module("app").controller "UpdateRegAccountController", ($scope, $statePa
 
         public_info_tip = ""
 
-        $modal.open
+        $uibModal.open
             templateUrl: "dialog-confirmation.html"
             controller: "DialogConfirmationController"
             resolve:

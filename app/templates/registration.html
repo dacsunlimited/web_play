@@ -15,7 +15,8 @@
       </div>
       <div form-hgroup ng-show="m.payfrom" label="Pay fee with">
         <select name="pay_with" ng-model="m.payfrom" class="form-control"
-                ng-options="account | formatAccountBalance for (key, account) in accounts | filter:symbol"/>
+                ng-options="account | formatAccountBalance:baseAsset.symbol for
+                (key, account) in accounts"/>
       </div>
       <div form-hgroup ng-show="!m.payfrom && !m.subaccount" label="Use faucet">
         <select name="faucet" ng-model="m.faucet" class="form-control" ng-options="obj.name for obj in available_faucets track by obj.url"/>

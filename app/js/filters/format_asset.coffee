@@ -12,7 +12,13 @@ angular.module("app").filter "formatDecimal", (Utils)->
     (asset, decimals, truncate0s) -> Utils.formatDecimal(asset, decimals, truncate0s)
 
 angular.module("app").filter "formatAccountBalance", (Blockchain, Utils) ->
-    (account) ->
-        result = account[0] + " | "
-        balances = (Utils.formatAsset(balance) for balance in account[1])
-        result + balances.join('; ')
+  (account, filterSymbol) ->
+    result = account[0] + " | "
+    balances = []
+    for balance in account[1]
+      # if filterSymbol is provided and not match, skip balance
+      continue if filterSymbol and balance.symbol != filterSymbol
+
+      balances.push Utils.formatAsset(balance)
+
+    result + balances.join('; ')

@@ -1,4 +1,4 @@
-angular.module("app").controller "AccountWallController", ($scope, $modal, $stateParams, BlockchainAPI, Blockchain, Utils, Wallet, WalletAPI) ->
+angular.module("app").controller "AccountWallController", ($scope, $uibModal, $stateParams, BlockchainAPI, Blockchain, Utils, Wallet, WalletAPI) ->
     $scope.account_name = $stateParams.name
     $scope.burn_records = []
     $scope.burn =
@@ -59,7 +59,7 @@ angular.module("app").controller "AccountWallController", ($scope, $modal, $stat
             Blockchain.get_asset(tx_fee.asset_id).then (tx_fee_asset) ->
                 transaction_fee = Utils.formatAsset(Utils.asset(tx_fee.amount, tx_fee_asset))
                 trx = {to: $scope.account_name, amount: $scope.transfer_amount, fee: transaction_fee, memo: $scope.burn.message, vote: null}
-                $modal.open
+                $uibModal.open
                     templateUrl: "dialog-transfer-confirmation.html"
                     controller: "DialogTransferConfirmationController"
                     resolve:

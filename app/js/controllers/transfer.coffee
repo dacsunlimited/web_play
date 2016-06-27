@@ -1,4 +1,4 @@
-angular.module("app").controller "TransferController", ($scope, $stateParams, $modal, $q, $filter, Wallet, WalletAPI, Blockchain, BlockchainAPI, Utils, Info, Growl, Observer, $translate) ->
+angular.module("app").controller "TransferController", ($scope, $stateParams, $uibModal, $q, $filter, Wallet, WalletAPI, Blockchain, BlockchainAPI, Utils, Info, Growl, Observer, $translate) ->
     pubkey_regexp = ""
     Info.refresh_info().then ->
         pubkey_regexp = new RegExp("^#{Info.info.address_prefix}[a-zA-Z0-9]+")
@@ -179,7 +179,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                     address_type: $scope.address_type
                     to_id: $scope.transfer_info.payto_account_id
                     to_registration_date: $scope.account_registration_date
-                $modal.open
+                $uibModal.open
                     templateUrl: "dialog-transfer-confirmation.html"
                     controller: "DialogTransferConfirmationController"
                     resolve:
@@ -189,7 +189,7 @@ angular.module("app").controller "TransferController", ($scope, $stateParams, $m
                             if transfer_asset.id is 0 then 'xts' else ''
 
     $scope.newContactModal = (add_contact_mode = false) ->
-        $modal.open
+        $uibModal.open
             templateUrl: "addressbookmodal.html"
             controller: "AddressBookModalController"
             resolve:

@@ -12,14 +12,17 @@ window.open_external_url = (url) ->
     else
         window.open(url)
 
+# debugger
+# window.getHandlers = ->
+#   # get service
+#   services = ['Idle', 'Wallet', 'Info']
+#   window[service] = angular.element(document.body).injector().get(service) for service in services
+#   window["scope"] = angular.element('.dball-container').scope()
 
 app = angular.module("app",
-    ["ngResource", "ui.router", 'ngIdle', "app.services", "app.directives", "ui.bootstrap",
-     "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid",
-     "ngMaterial", "utils.autofocus", "ngMessages", "ui.grid.autoResize", "ngAnimate",
-    "ng-mfb", "angular-carousel"])
+    ["ngResource", "ui.router", "ngIdle", "app.services", "app.directives", "ui.bootstrap", "ui.validate", "xeditable", "pascalprecht.translate", "pageslide-directive", "ui.grid", "ngMaterial", "utils.autofocus", "ngMessages", "ui.grid.autoResize", "ngAnimate", "angular-carousel","ng-mfb", "angular-growl"])
 
-app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
+app.run ($rootScope, $location, Idle, $state, $interval, $window, $templateCache, $translate, editableOptions, editableThemes) ->
 
     $templateCache.put 'ui-grid/uiGridViewport',
         '''<div class="ui-grid-viewport">
@@ -101,20 +104,27 @@ app.run ($rootScope, $location, $idle, $state, $interval, $window, $templateCach
 
     $rootScope.current_account = null
 
-    $idle.watch()
+    Idle.watch()
 
-app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvider, $compileProvider) ->
+app.config ($mdThemingProvider, IdleProvider, $translateProvider, $uibTooltipProvider, $compileProvider) ->
     $mdThemingProvider.theme('default').primaryPalette('indigo')
+
+    $mdThemingProvider.theme("warning-toast")
+    $mdThemingProvider.theme("notice-toast")
+    $mdThemingProvider.theme("error-toast")
+
+    # $touchProvider.ngClickOverrideEnabled(true);
 
     $compileProvider.debugInfoEnabled false
     # set this to false in production to gain performance boost
     # use angular.reloadWithDebugInfo() to reload the page and obtain debug capability
 
-    $tooltipProvider.options { appendToBody: true }
+    $uibTooltipProvider.options { appendToBody: true }
 
     $translateProvider.useStaticFilesLoader
         prefix: 'locale-',
         suffix: '.json'
+    $translateProvider.useSanitizeValueStrategy(null);
 
     [lang,zone] = switch(window.navigator.language.toLowerCase())
       when "zh-cn" then ["zh-CN","Asia/Shanghai"]
@@ -130,8 +140,8 @@ app.config ($mdThemingProvider, $idleProvider, $translateProvider, $tooltipProvi
 
     $translateProvider.preferredLanguage(lang).fallbackLanguage('en')
 
-    $idleProvider.idleDuration(1776)
-    $idleProvider.warningDuration(60)
+    IdleProvider.idle(1776)
+    IdleProvider.timeout(60)
 
 # define app.services module
 angular.module("app.services", [])

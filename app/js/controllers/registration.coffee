@@ -1,4 +1,4 @@
-angular.module("app").controller "RegistrationController", ($scope, $modalInstance, $window, Wallet, WalletAPI, Shared, RpcService, Blockchain, Info, Utils, Observer) ->
+angular.module("app").controller "RegistrationController", ($scope, $uibModalInstance, $window, Wallet, WalletAPI, Shared, RpcService, Blockchain, Info, Utils, Observer) ->
     $scope.symbolOptions = []
 
     $scope.m = { subaccount: $scope.account.name.indexOf(".") > -1 }
@@ -34,7 +34,7 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
         refresh_accounts()
 
     $scope.cancel = ->
-        $modalInstance.dismiss "cancel"
+        $uibModalInstance.dismiss "cancel"
 
     $scope.register = ->
         if !$scope.m.payfrom and $scope.m.faucet?.url and $scope.m.faucet.url != 'add'
@@ -42,7 +42,7 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
             app_id = magic_unicorn.get_app_id() if magic_unicorn? and magic_unicorn.get_app_id
             url = "#{$scope.m.faucet.url}?account_name=#{$scope.account.name}&active_key=#{$scope.account.active_key}&owner_key=#{$scope.account.owner_key}&app_id=#{app_id}"
             open_external_url(url)
-            $modalInstance.close("ok")
+            $uibModalInstance.close("ok")
             return
 
         payrate = if $scope.m.delegate then $scope.m.payrate else -1
@@ -52,7 +52,7 @@ angular.module("app").controller "RegistrationController", ($scope, $modalInstan
 
         Wallet.wallet_account_register($scope.account.name, $scope.m.payfrom[0], null, payrate, "public_account").then (response) ->
             $scope.p.pendingRegistration = Wallet.pendingRegistrations[$scope.account.name] = "pending"
-            $modalInstance.close("ok")
+            $uibModalInstance.close("ok")
 
     $scope.addCustomFaucet = ->
         faucets = $scope.available_faucets

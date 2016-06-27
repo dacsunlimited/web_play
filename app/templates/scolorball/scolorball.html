@@ -1,0 +1,131 @@
+
+<!-- <md-content> -->
+<div class="dball-container" ng-init="setGameMode(currentMode)">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="header">
+            <h3 class="header-title" translate>index.scolorball</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p translate>scolorball.desc</p>
+      </div>
+    </div>
+
+    <md-card flex layout="column" layout-padding layout-align="center" class="text-center">
+
+      <div layout="row" layout-align="start center" layout-wrap>
+        <h3 translate>dcolorball.game_mode</h3>
+        <md-input-container flex-offset="5">
+          <md-select ng-model="currentMode">
+            <md-option ng-repeat="mode in gameModes" value="{{mode.label}}">
+              {{('scolorball.mode.label_' + mode.label) | translate}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <p style="text-align:left;">{{'scolorball.mode.hint_'+currentMode | translate}}</p>
+
+      <div layout="row" layout-align="start">
+
+        <!-- loop red and blues -->
+        <div ng-repeat="section in ['red']" layout="column" flex class="{{section + '-numbers'}}">
+          <div layout="row" layout-align="start center" class="title-section">
+            <h3 class="title">{{('dcolorball.section_'+section) | translate}}</h3>
+            <md-button class="{{section == 'red' ? 'md-accent' : 'md-primary'}}" ng-click="randSelect(section)">
+              {{'dcolorball.rand_select' | translate}}
+            </md-button>
+            <md-button class="" ng-click="clearSelection(section)">{{'dcolorball.clear_selected' | translate}}</md-button>
+          </div>
+
+          <div layout="row" layout-wrap>
+            <div flex="10" ng-repeat="i in getNumbers(section) track by i" class="ball-wrapper">
+              <div ng-click="userSelect(section, i)" class="{{userSelected(section, i) ? 'ball-'+section : 'ball-default'}}" v="{{i}}">{{i}}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </md-card>
+
+    <md-card flex>
+      <md-card-content layout="row" layout-padding layout-wrap layout-align="center" >
+
+      <div flex="33" layout="column" layout-align="center" layout-padding>
+        <div layout-align="center" class="text-center">
+          <small>余额</small>
+          <h3 ng-class="{'red':lastBet=='win','green':lastBet=='lose','':lastBet==''}">{{ current_balance ? (current_balance | formatAsset) : 0 + ' ' + chip_asset_name}}</h3>
+        </div>
+
+        <span flex></span>
+
+        <md-card-actions layout="row" layout-align="center center">
+          <md-button class="md-accent md-raised"
+                     ng-click="showPurchaseDialog($event)">{{'game.buy_chip'|translate}}</md-button>
+          <md-button class=""
+            ng-disabled="true">{{'game.withdraw'|translate}}</md-button>
+        </md-card-actions>
+      </div>
+
+      <div flex="33" layout="row" layout-align="center" layout-padding>
+        <md-slider-container flex="" style="overflow:hidden; text-align:center;">
+          <md-input-container>
+            <input flex="" type="number" ng-model="bet_amount"
+            aria-label="{{'game.bet_amount'|translate}}" aria-controls="bet-amount-slider" class="text-center">
+          </md-input-container>
+          <md-slider ng-model="bet_amount" min="{{ getMinBetAmount() }}" max="{{bet_max}}"
+            step="{{ getBetStep() }}" aria-label="{{'game.bet_amount'|translate}}" class="md-warn" md-vertical=""></md-slider>
+
+          <h5>{{'game.bet_amount'|translate}}</h5>
+        </md-slider-container>
+      </div>
+
+
+      <div flex="33" layout="column" layout-align="center" layout-padding>
+        <div layout="column" layout-align="center center" class="bet-notice"
+              ng-show="bet_amount > 0 || selections.red.length > 0 || selections.blue.length > 0">
+          <div style="margin-right:5px;">{{'dcolorball.your_bet'|translate}}</div>
+
+          <div layout="row" layout-align="center center" layout-padding>
+            <div class="red-numbers" layout="row">
+              <div ng-repeat="i in selections.red track by i" class="ball-wrapper">
+                <div  class="ball-red" v="{{i}}">{{i}}</div>
+              </div>
+            </div>
+            <div class="blue-numbers" layout="row">
+              <div ng-repeat="i in selections.blue track by i" class="ball-wrapper">
+                <div  class="ball-blue" v="{{i}}">{{i}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-left:5px;">{{'game.bet'|translate}} <strong>{{ bet_amount + ' ' + chip_asset_name}}</strong></div>
+        </div>
+
+        <span flex></span>
+
+        <md-card-actions layout="row" layout-align="center">
+          <md-button ng-disabled="!current_balance || bet_amount <= 0 || bet_amount >
+            current_balance.amount / current_balance.precision || !betted()" class="md-accent md-raised" ng-click="placeBet()">{{'game.bet'|translate}}</md-button>
+          <md-button class="" ng-click="clearSelections()">{{'dcolorball.clear_selected' | translate}}</md-button>
+        </md-card-actions>
+      </div>
+
+
+
+      </md-card-content>
+    </md-card>
+
+
+    <md-card layout-padding ng-show="account_transactions.length > 0">
+      <md-card-content>
+
+        <div ng-include src="'scolorball/transactions.html'"></div>
+
+      </md-card-content>
+    </md-card>
+</div>
+<!-- </md-content> -->

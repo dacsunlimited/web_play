@@ -1,4 +1,4 @@
-angular.module("app").controller "DirectoryController", ($scope, $state, $location, $rootScope, $filter, $modal, Blockchain, Wallet, WalletAPI, Utils) ->
+angular.module("app").controller "DirectoryController", ($scope, $state, $location, $rootScope, $filter, $uibModal, Blockchain, Wallet, WalletAPI, Utils) ->
     $scope.alphabet = "abcdefghijklmnopqrstuvwxyz"
     $scope.first_letter = ""
 

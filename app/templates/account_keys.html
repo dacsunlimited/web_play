@@ -41,11 +41,11 @@
       <div class="form-group">
         <label for="wallet_file" class="col-sm-2 control-label" translate>account.wallet_type</label>
         <div class="col-sm-9 input-group">
-          <div class="btn-group" dropdown is-open="status.isopen">
-            <button type="button" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+          <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">
               {{wallet_info.type}} <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu">
               <li><a ng-click="wallet_info.type = 'Bitcoin/PTS'; status.isopen = false">Bitcoin/PTS</a></li>
               <!--<li><a ng-click="wallet_info.type = 'Multibit'; status.isopen = false">Multibit</a></li>-->
               <li><a ng-click="wallet_info.type = 'Electrum'; status.isopen = false">Electrum</a></li>

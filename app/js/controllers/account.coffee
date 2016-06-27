@@ -1,6 +1,8 @@
-angular.module("app").controller "AccountController", ($scope, $state, $filter, $location, $stateParams, $window, $q, Growl, Wallet, Utils, WalletAPI, $modal, Blockchain, BlockchainAPI, Info, Observer, $translate) ->
+angular.module("app").controller "AccountController", ($scope, $state, $filter, $location, $stateParams, $window, $q, Growl, Wallet, Utils, WalletAPI, $uibModal, Blockchain, BlockchainAPI, Info, Observer, $translate) ->
 
     Info.refresh_info()
+
+    $scope.baseAsset = null
     name = $stateParams.name
     $scope.account_name = name
     $scope.utils = Utils
@@ -76,7 +78,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
         BlockchainAPI.get_account(name).then (result) ->
             if result and $scope.account.owner_key != result.owner_key
                 #Growl.error 'Rename this account to use it', 'Account with the name ' + name + ' is already registered on the blockchian.'
-                $modal.open
+                $uibModal.open
                     templateUrl: "dialog-rename.html"
                     controller: "DialogRenameController"
                     resolve:
@@ -100,6 +102,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
 
     Blockchain.get_asset(0).then (asset_type) =>
         $scope.current_xts_supply = asset_type.current_supply
+        $scope.baseAsset = asset_type
 
 #    $scope.$watch ->
 #        Wallet.accounts[name]
@@ -200,7 +203,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
             $scope.wallet_info.type = 'Bitcoin/PTS'
             $scope.wallet_info.file = ""
             $scope.wallet_info.password = ""
-            $modal.open
+            $uibModal.open
                 templateUrl: "dialog-ok.html"
                 controller: "DialogOKController"
                 resolve:
@@ -218,7 +221,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
                 form.pass.error_message = "Unable to decrypt wallet"
                 form.pass.$invalid = true
             else
-                $modal.open
+                $uibModal.open
                     templateUrl: "dialog-ok.html"
                     controller: "DialogOKController"
                     resolve:
@@ -236,7 +239,7 @@ angular.module("app").controller "AccountController", ($scope, $state, $filter, 
             $scope.account.approved=newApproval
 
     $scope.regDial = ->
-        $modal.open
+        $uibModal.open
             templateUrl: "registration.html"
             controller: "RegistrationController"
             scope: $scope

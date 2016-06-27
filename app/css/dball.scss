@@ -1,0 +1,97 @@
+.dball-container {
+
+  .ball-wrapper {
+    padding-bottom: 7px;
+    padding-right: 8px;
+    -moz-user-select: none;
+    cursor: pointer;
+
+    .ball-default, .ball-red, .ball-blue {
+      width: 39px;
+      height: 37px;
+      line-height: 36px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 微软雅黑 arial;
+      background: url(/img/dball-assets.png) no-repeat;
+    }
+
+    .ball-blue-hover {
+      background-position: -95px 0;
+      color: #ca1f27;
+    }
+
+    .ball-default {
+      background-position: -55px 0;
+      color: #333;
+    }
+
+    .ball-red {
+      background-position: -135px 0;
+      color: #fff;
+    }
+
+    .ball-blue {
+      background-position: -215px 0;
+      color: #fff;
+    }
+  }
+
+  .title-section {
+    margin-bottom:2em;
+
+    .title {
+      margin:0 1em 0 0;
+    }
+  }
+
+  .blue-numbers {
+    background-color: #ececf7;
+    padding: 1em;
+
+    .ball-default:hover, .ball-default:active {
+      background-position: -175px 0;
+      color: #0d3f73;
+    }
+
+    .title { color: #0d3f73; }
+  }
+
+  .red-numbers {
+    background-color: #ffebef;
+    padding: 1em;
+
+    .ball-default:hover, .ball-default:active {
+      background-position: -95px 0;
+      color: #ca1f27;
+    }
+
+    .title { color: red; }
+  }
+
+  .bet-notice {
+    margin:0 5px;
+    .red-numbers, .blue-numbers { padding:0; background-color: transparent; }
+    .ball-wrapper { zoom: 0.8; }
+  }
+
+  .result-pane{
+    .result{
+      padding:2px 5px; color:#666; font-weight:bold;
+      display:inline-block; background-color:#ccc;
+      &.win {
+        color:white;
+        background-color:green;
+      }
+      &.lose {
+        color:white;
+        background-color:red;
+      }
+    }
+    .ball-wrapper {
+      zoom: 0.7;
+    }
+  }
+}

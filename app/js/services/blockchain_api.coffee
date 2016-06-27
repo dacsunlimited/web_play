@@ -264,6 +264,14 @@ class BlockchainAPI
     @rpc.request('blockchain_get_asset', [asset]).then (response) ->
       response.result
 
+  # Retrieves the record for the given game name or ID
+  # parameters:
+  #   string `game_name` - game name or ID to retrieve
+  # return_type: `optional_game_record`
+  get_game: (game_name, error_handler = null) ->
+    @rpc.request('blockchain_get_game', [game_name]).then (response) ->
+      response.result
+
   # Retrieves all current feeds for the given asset
   # parameters:
   #   string `asset` - asset ticker symbol or ID to retrieve

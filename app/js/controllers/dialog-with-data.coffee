@@ -1,10 +1,10 @@
-angular.module("app").controller "DialogWithDataController", ($scope, $modalInstance, data, action) ->
+angular.module("app").controller "DialogWithDataController", ($scope, $uibModalInstance, data, action) ->
 
     $scope.data = data
 
     $scope.cancel = ->
-        $modalInstance.dismiss "cancel"
+        $uibModalInstance.dismiss "cancel"
 
     $scope.ok = ->
         action()
-        $modalInstance.close("ok")
+        $uibModalInstance.close("ok")

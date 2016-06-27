@@ -3,10 +3,9 @@ angular.module("app").controller "SidenavController", ($scope, $state, $rootScop
   $scope.sectionPrimary = [
       { heading: 'index.overview',        route: 'home', icon: 'fa-home' },
       { heading: "index.my_account",      route: 'accounts', icon: "fa-bank" },
+      { heading: "index.apps",            route: 'apps', icon: "fa-globe" },
       { heading: "index.directory",       route: 'directory.registered', icon: "fa-book" },
       { heading: "index.delegates",       route: 'delegates', icon: "fa-flag" },
-      { heading: "index.packets",         route: 'packets', icon: "fa-envelope" },
-      { heading: "index.notes",           route: 'notebooks', icon: "fa-flag" },
       { heading: "index.block_explorer",  route: 'blocks', icon: "fa-link" }
   ]
 
@@ -18,7 +17,7 @@ angular.module("app").controller "SidenavController", ($scope, $state, $rootScop
 
   Wallet.get_current_or_first_account().then (acct) ->
     $scope.current_account = acct
-    $scope.current_account_name = acct.name
+    $scope.current_account_name = acct?.name
 
   # Wallet.refresh_accounts().then (accts) ->
   #   debugger

@@ -1,8 +1,8 @@
-angular.module("app").controller "DialogOKController", ($scope, $modalInstance, title, message, bsStyle) ->
+angular.module("app").controller "DialogOKController", ($scope, $uibModalInstance, title, message, bsStyle) ->
 
     $scope.title=title
     $scope.message = message
     $scope.bsStyle = bsStyle
 
     $scope.ok = ->
-        $modalInstance.close("ok")
+        $uibModalInstance.close("ok")

@@ -167,3 +167,28 @@ angular.module("app").config ($stateProvider, $urlRouterProvider, $locationProvi
         url: prefix + '/packets'
         templateUrl: 'packets/packets.html'
         controller:  'PacketsController'
+
+    sp.state "wheel",
+        url: prefix + '/wheel'
+        templateUrl: 'wheel/wheel.html'
+        controller:  'WheelController'
+
+    sp.state "dcolorball",
+        url: prefix + '/dcolorball'
+        templateUrl: 'dcolorball/dcolorball.html'
+        controller:  'DColorBallController'
+
+    sp.state "scolorball",
+        url: prefix + '/scolorball'
+        templateUrl: 'scolorball/scolorball.html'
+        controller:  'SColorBallController'
+
+    sp.state "dice",
+        url: prefix + '/dice'
+        templateUrl: 'dice/dice.html'
+        controller:  'DiceController'
+
+    sp.state "apps",
+        url: prefix + '/apps'
+        templateUrl: 'apps.html'
+        controller:  'AppsController'

@@ -1,17 +1,29 @@
 <md-card>
   <md-card-content>
     <div class="pull-right">
-      <a class="btn btn-primary btn-success btn-top-right"
-         href="#/blocks/round/{{last_block_round + 1}}?withtrxs={{filter_zero_trxs}}"><i class="fa fa-cubes"></i>
-         {{'blocks.load_more_blocks' | translate}}...</a>
+      <div class="checkbox">
+        <label>
+          <div class="checker">
+              <input type="checkbox" name="simple_view" ng-model="simple_view">{{ 'blocks.simple_view' | translate }}</input>
+          </div>
+        </label>
+      </div>
     </div>
-
     <div class="header">
       <h3 class="header-title" translate>block.block_explorer</h3>
       <p class="header-info" translate>blocks.info</p>
     </div>
 
+		<iframe ng-if="!simple_view" width="100%" id="dacplayblocks" name="dacplayblocks" ng-src="http://blocks.dacplay.org/"></iframe>
+
+		<div class="internal-explorer" ng-show="simple_view">
+
+    <a class="btn btn-primary btn-success btn-top-right"
+       href="#/blocks/round/{{last_block_round + 1}}?withtrxs={{filter_zero_trxs}}"><i class="fa fa-cubes"></i>
+       {{'blocks.load_more_blocks' | translate}}...
+		</a>
     <div class="p-inner pull-right">
+
       <div class="checkbox">
         <label>
           <div class="checker">
@@ -60,5 +72,6 @@
        </tr>
        </tbody>
     </table>
+		</div>
   </md-card-content>
 </md-card>

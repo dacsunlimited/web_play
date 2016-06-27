@@ -20,9 +20,9 @@
     <div class="header">
       <div class="p-inner">
         <span class="account-from"><span translate>account.from</span>:</span>
-        <div class="btn-group" dropdown is-open="status.isopen1">
-          <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>{{account_from.name}} <span class="caret"></span></button>
-          <ul class="dropdown-menu scrollable-menu-short"  role="menu">
+        <div class="btn-group" uib-dropdown is-open="status.isopen1">
+          <button type="button" class="btn btn-primary dropdown-toggle" uib-dropdown-toggle>{{account_from.name}} <span class="caret"></span></button>
+          <ul class="dropdown-menu scrollable-menu-short" uib-dropdown-menu role="menu">
             <li ng-repeat="account in my_accounts">
               <a ui-sref="transfer({from: account.name})">{{account.name}}</a>
             </li>
@@ -81,13 +81,13 @@
                 autocomplete="off" required/>
 
             <!-- asset selector -->
-            <div class="input-group-btn" dropdown is-open="status.isopen">
-              <button type="button" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+            <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+              <button type="button" class="btn dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">
                 <span ng-show="transfer_info.symbol">{{transfer_info.symbol}}</span>
                 <span ng-show="!transfer_info.symbol" translate>account.select_currency</span>
                 <span ng-show="currencies.length > 1" class="caret"></span>
               </button>
-              <ul ng-if="currencies.length > 1" class="dropdown-menu scrollable-menu-extra-short" role="menu">
+              <ul ng-if="currencies.length > 1" class="dropdown-menu scrollable-menu-extra-short" uib-dropdown-menu role="menu">
                 <li ng-repeat="c in currencies" ng-show="c">
                   <a ng-click="transfer_info.symbol = c; status.isopen=false">{{c}}</a>
                 </li>
@@ -104,11 +104,11 @@
 
         <!-- vote options -->
         <div ng-show="transfer_info.show_vote_options" class="col-md-2" ng-show="transfer_info.symbol == 'XTS' || transfer_info.symbol == 'BTS' || transfer_info.symbol == 'DVS'">
-          <div class="btn-group" dropdown is-open="status2.isopen">
-            <button type="button" class="btn dropdown-toggle" dropdown-toggle tooltip="{{ 'account.vote.vote_for' | translate }}">
+          <div class="btn-group" uib-dropdown is-open="status2.isopen">
+            <button type="button" class="btn dropdown-toggle" uib-dropdown-toggle tooltip="{{ 'account.vote.vote_for' | translate }}">
               {{ ('account.vote.' + vote_options[transfer_info.vote]) | translate }} <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
               <li ng-repeat="(k, v) in vote_options">
                 <a ng-click="transfer_info.vote=k; status2.isopen=false">{{ ('account.vote.' + v) | translate }}</a>
               </li>
