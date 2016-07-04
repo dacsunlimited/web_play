@@ -327,6 +327,7 @@ angular.module("app").controller "SColorBallController", ($scope, $mdDialog, $st
                   trx.bet = bet
                   trx.bet.combination = $scope.revealResult(bet.guess, bet.odds)
                 break
+
             i++
 
           # see dcolorball comments
@@ -373,7 +374,7 @@ angular.module("app").controller "SColorBallController", ($scope, $mdDialog, $st
               i++
 
           # remove unqualified transactions
-          for i in indexToDelete.sort().reverse()
+          for i in (indexToDelete.sort (a,b)-> b-a)
             # checkIds.splice(i, 1)
             # checkTrx.splice(i, 1)
             account_transactions.splice(i, 1)
