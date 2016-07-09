@@ -338,22 +338,10 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
                 break
             i++
 
-          # TODO:
-          # we don't remove unqualified game trx here
-          # because that will affect idBlockMap's containing element's index value
-          # we move this to the bottom of the func
-          # although we wasted some resource processing other game's transactions
-          # we keep it this way for now
-          #
-          # for i in indexToDelete.sort().reverse()
-          #   checkIds.splice(i, 1)
-          #   checkTrx.splice(i, 1)
-          #   account_transactions.splice(i, 1)
-
         # get reveal results from target block nums
         #
         ids = Utils.unique_array(checkIds).map (x)->[x+$scope.reveal_block_distance]
-        console.log "checkIds", ids
+        # console.log "checkIds", ids
         RpcService.request('batch', ['game_list_result_transactions', ids]).then (resp) ->
           reveals = resp.result
 
@@ -380,7 +368,7 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
                 # this is the last bet result
                 if i == 0 and j == 0
                   if data.data.jackpot_received > 0
-                    console.log "win data", trx
+                    # console.log "win data", trx
                     $scope.lastBet = 'win'
                   else
                     $scope.lastBet = 'lose'
@@ -390,7 +378,7 @@ angular.module("app").controller "DColorBallController", ($scope, $mdDialog, $st
               i++
 
           # remove unqualified transactions
-          for i in indexToDelete.sort().reverse()
+          for i in (indexToDelete.sort (a,b)-> b-a)
             # checkIds.splice(i, 1)
             # checkTrx.splice(i, 1)
             account_transactions.splice(i, 1)

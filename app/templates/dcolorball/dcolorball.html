@@ -91,12 +91,12 @@
 
           <div layout="row" layout-align="center center" layout-padding>
             <div class="red-numbers" layout="row">
-              <div ng-repeat="i in selections.red track by i" class="ball-wrapper">
+              <div ng-repeat="i in selections.red | orderBy:'toString()' track by i" class="ball-wrapper">
                 <div  class="ball-red" v="{{i}}">{{i}}</div>
               </div>
             </div>
             <div class="blue-numbers" layout="row">
-              <div ng-repeat="i in selections.blue track by i" class="ball-wrapper">
+              <div ng-repeat="i in selections.blue | orderBy:'toString()' track by i" class="ball-wrapper">
                 <div  class="ball-blue" v="{{i}}">{{i}}</div>
               </div>
             </div>
