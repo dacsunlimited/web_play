@@ -1,4 +1,7 @@
 <div class="md-toolbar-tools">
+  <!-- <md-button class="md-icon-button md-primary" aria-label="Menu" ng-click="toggleMenu()" ng-show="!$mdMedia('gt-sm')">
+    <i class="fa fa-bars fa-fw"></i>
+  </md-button> -->
   <md-button ui-sref="accounts">
     <i class="fa fa-dashboard fa-fw"></i>{{ 'toolbar.dashboard' | translate }}
   </md-button>
@@ -9,13 +12,25 @@
   <span flex></span>
 
   <div class="md-toolbar-item">
-    <ul class="nav navbar-nav">
-      <li class="dropdown notification error-notifications" ng-show="errors.list.length > 0" ng-class="{'new-error': errors.new_error}" on-toggle="error_notifier_toggled(open)" style="display:block !important;">
-        <md-button class="dropdown-toggle count-info" dropdown-toggle data-toggle="dropdown">
+    <div class="nav navbar-nav">
+        <md-button ng-click="lock()">
+          <i class="fa fa-lock fa-fw"></i>{{ 'index.lock' | translate }}
+        </md-button>
+
+        <md-button ng-show="context_help.show" class="context-help" ng-click="open_context_help()">
+          {{'help.title'|translate}}<i class="fa fa-angle-double-left fa-fw"/>
+        </md-button>
+
+        <div class="btn-group dropdown notification error-notifications"
+        ng-show="errors.list.length > 0" ng-class="{'new-error':
+        errors.new_error}" on-toggle="error_notifier_toggled(open)"
+        uib-dropdown auto-close="outsideClick">
+        <md-button class="dropdown-toggle count-info" uib-dropdown-toggle
+          data-toggle="dropdown" ng-disabled="disabled">
           <i class="fa fa-bell"></i> <span class="label label-danger pull-right">{{errors.num_errors}}</span>
         </md-button>
-        <ul class="dropdown-menu pull-right">
-          <li ng-repeat="e in errors.list">
+        <ul class="dropdown-menu pull-right" uib-dropdown-menu role="menu">
+          <li ng-repeat="e in errors.list" class="menuitem">
              <span class="time">{{e.time}}</span>
              <p>
                <span class="badge badge-warning" ng-show="e.counter > 1">{{e.counter}}</span>
@@ -24,17 +39,10 @@
              <pre class="error-stack" ng-show="e.details" ng-click="$event.stopPropagation();">{{e.details}}<hr/>{{e.toolkit_error}}<br/><br/><a ng-click="e.details = null">[hide details]</a></pre>
           </li>
         </ul>
-      </li>
-    </ul>
+      </div>
+    </div>
 
-    <md-button ng-click="lock()">
-      <i class="fa fa-lock fa-fw"></i>{{ 'index.lock' | translate }}
-    </md-button>
-
-    <md-button ng-show="context_help.show" class="context-help" ng-click="open_context_help()">
-      {{'help.title'|translate}}<i class="fa fa-angle-double-left fa-fw"/>
-    </md-button>
-  </div>
+ </div>
 
 </div>
 

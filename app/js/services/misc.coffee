@@ -1,7 +1,7 @@
 servicesModule = angular.module("app.services")
 
 servicesModule.factory "Growl", ($mdToast) ->
-  toastPosition: "right top"
+  toastPosition: "bottom right"
   fadeTime: 3000
 
   error: (title, message) ->
@@ -23,5 +23,6 @@ servicesModule.factory "Growl", ($mdToast) ->
       .content("#{message}")
       .position(this.toastPosition)
       .hideDelay(this.fadeTime)
+      .theme("#{type}-toast")
     )
 

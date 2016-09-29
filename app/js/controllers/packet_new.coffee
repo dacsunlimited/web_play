@@ -13,7 +13,7 @@ angular.module("app").controller "PacketNewController", ($scope, $q, BlockchainA
   $scope.my_accounts = []
 
   Wallet.get_current_or_first_account().then (acct)->
-    $scope.frm_data.from_account_name = acct.name if acct.registered
+    $scope.frm_data.from_account_name = acct?.name if acct?.registered
 
   # get accounts with balance of given asset
   # and filter with registered account only

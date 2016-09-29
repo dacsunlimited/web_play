@@ -1,17 +1,17 @@
-angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $rootElement, $modal, $log, $location, $idle, $q, $timeout, $http, RpcService, Wallet, Growl) ->
-    
+angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $rootElement, $uibModal, $log, $location, Idle, $q, $timeout, $http, RpcService, Wallet, Growl) ->
+
     return unless window.bts
-    
-    $idle.unwatch()
+
+    Idle.unwatch()
     $scope.stopIdleWatch()
-    
+
     $rootScope.splashpage = true
     $scope.has_secure_random = bts.wallet.Wallet.has_secure_random()
     $scope.new_brainkey_info = 'new_brainkey_info0'
     $scope.data = {}
     creating_wallet = off
     LANDING_PAGE = 'accounts'
-    
+
     $scope.stepChange=(step)->
         #console.log 'step change',step
         $scope.entropy_collection = off
@@ -36,15 +36,15 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
                 rotate_brainkey_help()
             when 'existing_brainkey'
                 rotate_brainkey_help()
-        
+
         $scope.step = step
     $scope.stepChange 'open_create'
-    
+
     $scope.reset=->
         $scope.stepChange 'open_create'
-    
+
     WalletDb = bts.wallet.WalletDb
-    
+
     walletName = (spending_password) ->
         pw = spending_password
         # Master key checksum is 2 hashes so there is no
@@ -53,7 +53,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
         pw = bts.hash.sha512 pw
         name = pw.toString('hex').substring 0,32
         $scope.wallet_name = name
-        
+
     $scope.submitForm = () ->
         $scope.entropy_collection = off
         #console.log '... $scope.step',JSON.stringify $scope.step
@@ -63,7 +63,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
                 unless $scope.wform.$valid
                     console.log "ERROR, button should have been disabled.  Unable to create a wallet. Please correct the form."
                     return
-                
+
                 wallet_name = walletName spending_password
                 if WalletDb.exists wallet_name
                     Wallet.open(wallet_name).then ->
@@ -71,7 +71,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
                             navigate_to LANDING_PAGE
                 else
                     $scope.stepChange 'confirm_password'
-            
+
             when 'confirm_password'
                 unless $scope.wform.csp.$valid
                     Growl.error "", "Unable to confirm password"
@@ -90,7 +90,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
                 unless $scope.wform.$valid
                     console.log "ERROR, but should have been disabled.  Unable to create a wallet. Please correct the form."
                     return
-                
+
                 WalletDb = bts.wallet.WalletDb
                 wallet_name = walletName spending_password
                 if WalletDb.exists wallet_name
@@ -117,13 +117,13 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
     rotate_brainkey_help=->
         if rotate_brainkey_help_promise
             $timeout.cancel rotate_brainkey_help_promise
-        
+
         rotate_brainkey_help_promise = $timeout ()->
             $scope.brainKeyHelp 'right'
         ,
             5*1000
         return
-    
+
     $scope.brainKeyHelp=(direction)->
         rotate_brainkey_help()
         info = $scope.new_brainkey_info
@@ -136,35 +136,35 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
         $rootScope.splashpage = false
         $scope.startIdleWatch()
         $scope.reset()
-    
+
     BRAINKEY_WORD_COUNT=13
     DICTIONARY_WORD_COUNT=49745
-    
+
     dictionary_hashes=
         '/dictionary_en.txt':"562e4a7a914c6b907d836b4332629b555b14424b"
     dictionary_url=""
     dictionary_lines=[]
     dictionary=(url = '/dictionary_en.txt')->
         if (
-            url is dictionary_url and 
+            url is dictionary_url and
             dictionary_lines.length is DICTIONARY_WORD_COUNT
         )
             return
-        
+
         dictionary_url = url
         $http.get(url).success (data)->
             #console.log '... data',data
             dictionary_hash = bts.hash.sha1 data
             unless dictionary_hashes[url] is dictionary_hash.toString 'hex'
                 throw new Error "dictionary #{url} sha1 didn't match #{dictionary_hashes[url]} (unknown #{dictionary_hash.toString 'hex'})"
-            
+
             lines = data.split '\n'
             if lines.length isnt DICTIONARY_WORD_COUNT
                 throw new Error "dictionary #{url} has #{lines.length} words, but needs needs #{DICTIONARY_WORD_COUNT}"
             dictionary_lines = lines
-    
+
     # Shorter pharases may be gained while keeping the same bit strength
-    # by changing parameters.  Assumes the full dictionary is sorted by 
+    # by changing parameters.  Assumes the full dictionary is sorted by
     # word length.
     generateBrainkey=(
         word_count = BRAINKEY_WORD_COUNT
@@ -174,14 +174,14 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
             throw new Error 'Something is wrong, should have lots of entropy'
         if dictionary_lines.length isnt DICTIONARY_WORD_COUNT
             throw new Error "Something is wrong, should have #{DICTIONARY_WORD_COUNT} words instead of #{dictionary_lines.length}"
-        
+
         entropy = private_entropy.join ''
         entropy += bts.secureRandom.randomBuffer(32).toString()
         #console.log '... entropy',entropy
-        
+
         randomBuffer = bts.hash.sha512 entropy # 64 bytes
         #console.log '... randomBuffer',randomBuffer.toString 'hex'
-        
+
         brainkey = for i in [0...(word_count * 2)] by 2
             # randomBuffer has 256 bits / 16 bits per word == 16 words
             num = (randomBuffer[i]<<8) + randomBuffer[i+1]
@@ -191,7 +191,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
             #console.log '... i,num,rndMultiplier,wordIndex',i,num,rndMultiplier,wordIndex
             dictionary_lines[wordIndex]
         brainkey.join ' '
-    
+
     #(->
     private_entropy = []
     public_entropy = []
@@ -207,7 +207,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
             bts.wallet.Wallet.add_entropy private_entropy.join ''
             private_entropy.length = 0
             return
-        
+
         num = (x, y) ->
             new Date().getTime() + Math.pow(x,5) + Math.pow(y,4) +
             bts.secureRandom.randomUint8Array(1)[0]
@@ -227,7 +227,7 @@ angular.module("app").controller "BrainWalletController", ($scope, $rootScope, $
     $rootElement.on 'mousemove', (event) ->
         on_mouse_event event
         #console.log event
-        #on_mouse_event event.originalEvent.changedTouches[0] 
+        #on_mouse_event event.originalEvent.changedTouches[0]
     $rootElement.on 'mousetouch', (event) ->
         on_mouse_event(event)
     $rootElement.on 'touchmove', (event) ->

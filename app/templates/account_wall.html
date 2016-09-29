@@ -35,9 +35,9 @@
       <form name="burn_form" class="form-horizontal" role="form" ng-submit="post()" novalidate>
         <!-- from -->
         <div form-hgroup label="{{'account.from'|translate}}">
-          <div class="input-group-btn" dropdown is-open="status.isopen">
-            <button type="button" class="btn dropdown-toggle" dropdown-toggle>{{burn.from}} <span class="caret"></span></button>
-            <ul class="dropdown-menu scrollable-menu-short" role="menu">
+          <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn dropdown-toggle" uib-dropdown-toggle>{{burn.from}} <span class="caret"></span></button>
+            <ul class="dropdown-menu scrollable-menu-short" role="menu" uib-dropdown-menu>
               <li ng-repeat="a in burn.accounts">
                 <a ng-click="burn.from = a; status.isopen=false">{{a}}</a>
               </li>
@@ -52,9 +52,9 @@
             ui-validate="'$value > 0'" ng-change="hot_check_send_amount();"
             autocomplete="off" required/>
             <!-- asset selector -->
-            <div class="input-group-btn" dropdown is-open="status.isopen">
-              <button type="button" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">{{burn.symbol}} <span class="caret"></span></button>
-              <ul class="dropdown-menu" role="menu">
+            <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+              <button type="button" class="btn dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">{{burn.symbol}} <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
                 <li ng-repeat="symbol in burn.symbols">
                   <a ng-click="burn.symbol = symbol; status.isopen=false">{{symbol}}</a>
                 </li>

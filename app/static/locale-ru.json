@@ -13,7 +13,8 @@
     "close": "Закрыть",
     "remove": "Remove",
     "learn_more": "Learn more",
-    "send": "Send"
+    "send": "Send",
+    "start": "Start"
   },
   "tip": {
     "privacy_statement": "Заявление о конфиденциальности",
@@ -150,7 +151,8 @@
   "blocks": {
     "load_more_blocks": "Загрузить еще",
     "info": "Более подробная информация о блоках",
-    "trxs_only": "Показывать только блоки с транзакциями"
+    "trxs_only": "Показывать только блоки с транзакциями",
+    "simple_view": "Simple View"
   },
   "unlock": {
     "btn_unlock": "Разблокировать",
@@ -179,6 +181,11 @@
     "directory": "Каталог",
     "notes": "Secret Notes",
     "delegates": "Делегаты",
+    "apps": "应用市场",
+    "dices": "DICE游戏",
+    "wheel": "Super Lucky Wheel",
+    "chips": "游戏资产",
+    "games": "游戏",
     "market": "Рынок",
     "block_explorer": "Обозреватель блоков",
     "preferences": "Настройки",
@@ -441,6 +448,7 @@
   },
   "notes": {
     "title": "Journal Books",
+    "desc": "You can write private/public journal and store them on blockchain.  Only you can view your private journals.",
     "open": "Open",
     "need_to_register": "You need to register this account on blockchain first",
     "notes_not_found": "You don't have notes yet.  Do you know you can have free lucky draws if you write notes?",
@@ -627,6 +635,52 @@
     "delegates": "Делегаты",
     "account_details": "Текущий аккаунт",
     "advanced": "Настройки"
+  },
+  "dice":{
+    "desc": "Simple DICE game, you can control the number of dices to roll and guess the lucky number."
+  },
+  "wheel":{
+    "desc": "Super Lucky Wheel.  Player can adjust number of segment for various odds."
+  },
+  "packet":{
+    "desc": "Let's send and collect red packets together",
+    "type":{
+      "created": "Recently Created",
+      "claimed": "Recently Claimed"
+    },
+    "search_string": "Red Packet ID Code",
+    "from_title": "Red Packet From {{sender}}",
+    "from": "From",
+    "total": "Total",
+    "input_password": "Red Packet Password",
+    "count": "Number of red packets",
+    "claim_password": "Password to claim",
+    "message": "Message to attach",
+    "create_packet_title": "Create Packet",
+    "default_message": "This is a small gift, hope you like it.",
+    "create_packet_title": "Create Red Packet",
+    "select_from_accounts": "From Account",
+    "send_red_packet": "Send Red Packet",
+    "select_from_mine": "Select Red Packet",
+    "search_id_or_msg": "Search ID or message",
+    "tip": {
+      "password_allow_blank": "If no password is required for the red packet, leave it blank",
+      "bad_password": "Incorrect Password",
+      "all_claimed": "Whoops, you are late, all red packets have been claimed.",
+      "dup_claim": "You have claimed this red packet already.",
+      "insufficient_balances": "You need to spend transaction fee to claim red packet.  Not enought balance.",
+      "successful_claimed": "Claim Success",
+      "not_found": "Red Packet Not Found",
+      "account_not_registered": "Your current account must be a blockchain-registered account",
+      "successful_created": "Red Packet is created with success and being submitted to the blockchain",
+      "count_min_tmp": "Minimum count is 2"
+    },
+    "btn":{
+      "search": "Search",
+      "close": "Close",
+      "claim": "Claim",
+      "create_packet": "Create"
+    }
   },
   "ad": {
     "promo": "Promo",

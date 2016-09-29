@@ -1,0 +1,134 @@
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-3">
+            <br> <input type="text" class="form-control" ng-model="q.q" placeholder='{{"pagination.filter"|translate}}'> <br>
+        </div>
+        <div class="col-md-6">
+            <ul class="pagination pagination-sm" ng-show="p.numberOfPages > 1 && !pending_only">
+                <li ><a class="btn" ng-disabled="p.currentPage == 0" ng-click="p.currentPage=0" translate> pagination.first</a></li>
+                <li><a class="btn" ng-disabled="p.currentPage == 0" ng-click="p.currentPage=p.currentPage-1" translate>pagination.prev</a></li>
+                <li> <span class="btn btn-primary" style="color: #FFF; font-size: 110%; font-weight: 100;padding: 4px 12px;">{{p.currentPage+1}}/{{p.numberOfPages}}</span></li>
+                <li><a class="btn" ng-disabled="p.currentPage >= p.numberOfPages - 1" ng-click="p.currentPage=p.currentPage+1" translate>pagination.next</a></li>
+                <li><a class="btn" ng-disabled="p.currentPage == p.numberOfPages - 1" ng-click="p.currentPage=p.numberOfPages - 1" translate>pagination.last</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="transaction_history">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><span translate>th.from</span> <i class='fa fa-long-arrow-right'></i> <span translate>th.to</span></th>
+        <th translate>th.fee</th>
+        <th translate>{{game.bet_amount}}</th>
+        <th translate ng-show="showBalances">th.balance</th>
+        <th>{{'game.result'|translate}}</th>
+        <th translate>th.date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="t in account_transactions | orderBy: '-time' | filter:q.q | startFrom: p.currentPage * p.pageSize | limitTo : p.pageSize  track by $index">
+        <td>
+            <span class="trx-from-to"> {{ t.ledger_entries[0].from }} </span>
+        </td>
+        <td>{{ t.fee | formatAsset}}</td>
+        <td>
+            <span ng-repeat="entry in t.ledger_entries">
+              <span class="bold text-default">{{ entry.amount_asset | formatAsset }}</span>
+            </span>
+        </td>
+        <td ng-show="showBalances">
+            <span ng-repeat="entry in t.ledger_entries">
+                <span ng-repeat="balance in entry.running_balances">
+                    <span class="bold">{{ balance | formatAsset}}</span> <br>
+                </span>
+            </span>
+        </td>
+        <td>
+
+
+
+          <div ng-if="t.reveal" class="result-pane">
+            <div class="{{(win_amount = t.reveal.data.jackpot_received) > 0 ? 'result win' : 'result lose'}}">
+              <span ng-if="(win_amount = t.reveal.data.jackpot_received) > 0">
+                WIN: {{ win_amount / current_balance.precision }}
+              </span>
+              <span ng-if="(win_amount = t.reveal.data.jackpot_received) == 0">
+                LOSE: {{ win_amount / current_balance.precision }}
+              </span>
+            </div>
+
+            <div layout="row" style="margin-bottom:5px;">
+              <div class="red-numbers" layout="row">
+                <div ng-repeat="i in t.bet.combination.red track by i" class="ball-wrapper">
+                  <div  class="ball-red" v="{{i}}">{{i}}</div>
+                </div>
+              </div>
+              <div class="blue-numbers" layout="row">
+                <div ng-repeat="i in t.bet.combination.blue track by i" class="ball-wrapper">
+                  <div  class="ball-blue" v="{{i}}">{{i}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="result">
+              <span>{{'game.result'|translate}} ({{'wheel.odds'|translate}}:1/{{t.reveal.data.odds}}): </span>
+            </div>
+
+            <div layout="row">
+              <div class="red-numbers" layout="row">
+                <div ng-repeat="i in t.reveal.combination.red track by i" class="ball-wrapper">
+                  <div  class="ball-red" v="{{i}}">{{i}}</div>
+                </div>
+              </div>
+              <div class="blue-numbers" layout="row">
+                <div ng-repeat="i in t.reveal.combination.blue track by i" class="ball-wrapper">
+                  <div  class="ball-blue" v="{{i}}">{{i}}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div ng-if="!t.reveal" class="result-pane">
+            <div class="result">
+              <span>{{'game.waiting_to_draw'|translate}} ({{'game.remain_blocks'|translate:"{remain:"+calculate_waiting_blocks(t)+"}"}})</span>
+            </div>
+
+            <div layout="row" style="margin-bottom:5px;">
+              <div class="red-numbers" layout="row">
+                <div ng-repeat="i in t.bet.combination.red track by i" class="ball-wrapper">
+                  <div  class="ball-red" v="{{i}}">{{i}}</div>
+                </div>
+              </div>
+              <div class="blue-numbers" layout="row">
+                <div ng-repeat="i in t.bet.combination.blue track by i" class="ball-wrapper">
+                  <div  class="ball-blue" v="{{i}}">{{i}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </td>
+         <td>
+            <span ng-if="t.is_confirmed && !t.error">{{t.pretty_time}}</span><br/>
+            <span ng-if="(!t.is_confirmed)&&(!t.is_virtual) && !t.error">
+              <a ng-show="t.status!='rebroadcasted'" ng-click="rebroadcastTransaction(t)" tooltip="Click to rebroadcast transaction" translate>tip.pending</a>
+              <span ng-show="t.status=='rebroadcasted'"><span translate>tip.pending</span> (rebroadcasted)</span>
+              <br/>Expires {{t.expiration_pretty_time}}
+            </span>
+            <span ng-if="t.error" class='text-danger'>{{t.error.message}}</span>
+            <span class="label label-warning" ng-if="t.is_virtual" translate>account.transaction_virtual</span>
+            <span ng-if="!t.is_virtual && t.is_confirmed && !t.error"><a class="label label-info" ui-sref="transaction({id:t.id})"><span translate>account.transaction_details</span></a></span>
+        </td>
+
+      </tr>
+      <tr ng-if="warning">
+        <td translate>{{warning}}</td>
+        <td colspan="6"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

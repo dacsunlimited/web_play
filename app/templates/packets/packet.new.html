@@ -11,7 +11,7 @@
   </md-toolbar>
 
   <md-dialog-content layout="column">
-    <div class="packet-preview" layout-align="center">
+    <div class="md-dialog-content packet-preview" layout-align="center">
 
       <div class="packet-item">
         <i class="fa fa-envelope"></i>
@@ -20,7 +20,7 @@
         <div class="packet-stat">0/{{frm_data.count}}</div>
       </div>
 
-    </div>
+
 
     <md-divider style="margin:1em 0;"></md-divider>
 
@@ -50,7 +50,7 @@
 
       <md-input-container flex="1">
         <label translate>packet.count</label>
-        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="2" max="50">
+        <input required type="number" step="1" name="count" ng-model="frm_data.count" min="1" max="30">
         <div ng-messages="form.count.$error" ng-show="form.count.$dirty">
           <div ng-message="required">{{'tip.required'|translate}}</div>
           <div ng-message="number">{{'tip.number'|translate}}</div>
@@ -79,7 +79,7 @@
     </md-content>
 
     <md-content>
-      <md-input-container>
+      <md-input-container layout="row">
         <label translate>packet.message</label>
         <input name="message" ng-model="frm_data.message" required></input>
         <div ng-messages="form.message.$error" ng-show="form.message.$dirty">
@@ -92,11 +92,14 @@
       <div>{{form.$error.remoteError}}</div>
     </div>
 
+    </div>
+
   </md-dialog-content>
 
-  <div class="md-actions" layout="row">
+  <md-dialog-actions layout="row">
+    <span flex></span>
     <md-button type="button" ng-click="cancel()" class="md-primary">{{'packet.btn.close'|translate}}</md-button>
-    <md-button type="submit" ng-click="create()" class="md-primary" translate>packet.btn.create_packet</md-button>
-  </div>
+    <md-button type="submit" ng-click="create()" class="md-primary">{{'packet.btn.create_packet'|translate}}</md-button>
+  </md-dialog-actions>
   </form>
 </md-dialog>

@@ -13,7 +13,8 @@
     "close": "关闭",
     "remove": "移除",
     "learn_more": "了解详情",
-    "send": "发送"
+    "send": "发送",
+    "start": "启动"
   },
   "tip": {
     "privacy_statement": "隐私申明",
@@ -153,13 +154,14 @@
   "blocks": {
     "load_more_blocks": "更多区块",
     "info": "更多关于区块的信息",
-    "trxs_only": "只显示带有交易的那些区块"
+    "trxs_only": "只显示带有交易的那些区块",
+    "simple_view": "简单视图"
   },
   "unlock": {
     "btn_unlock": "解 锁",
     "caps_lock_on": "大写键已按下!",
     "desc_title": "DAC PLAY",
-    "desc_content_1": "DAC PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台",
+    "desc_content_1": "DAC PLAY是一个实验性的去中心化、自运营的游戏资产交易市场和游戏平台。项目处于早期实验性阶段，以及面对的虚拟资产的特性，请充分理解其隐含的风险。",
     "desc_content_2": "",
     "spending_password": "密 码",
     "wrong_pass": "密码错误",
@@ -218,6 +220,11 @@
     "directory": "目录",
     "notes": "私密日志",
     "delegates": "受托人",
+    "apps": "应用市场",
+    "dices": "DICE游戏",
+    "wheel": "超级幸运大转盘",
+    "scolorball": "单色球",
+    "dcolorball": "双色球",
     "chips": "游戏资产",
     "games": "游戏",
     "market": "市场",
@@ -229,7 +236,8 @@
     "daily_income": "网络每日收入",
     "daily_expense": "网络每日花费",
     "daily_burn": "网络每日销毁",
-    "packets": "红包"
+    "packets": "红包",
+    "placeholder": "更多游戏"
   },
   "delegate": {
     "title": "受托人",
@@ -256,7 +264,6 @@
     "role_5": "技术支持",
     "role_6": "法律/法规",
     "role_7": "媒体/公关"
-
   },
   "market": {
     "title": "市场",
@@ -483,6 +490,7 @@
   },
   "notes": {
     "title": "日志簿",
+    "desc": "你可以在区块链上保存公开或私密的日志。",
     "open": "打开",
     "need_to_register": "你需要先在区块链上注册这个账号才能使用",
     "notes_not_found": "你还没有日志。你知道吗？写日志也有机会中奖哦。",
@@ -670,7 +678,64 @@
     "account_details": "账户细节",
     "advanced": "进阶选项"
   },
+  "game": {
+    "buy_chip": "购买筹码",
+    "withdraw": "提现",
+    "bet": "下注",
+    "buy_chip_amount": "购买数量",
+    "cost": "花费",
+    "bet_amount": "下注额",
+    "chip_price": "筹码价格",
+    "result": "开奖",
+    "waiting_to_draw": "等待开奖",
+    "remain_blocks": "剩余 {{remain}} 个区块"
+  },
+  "dice":{
+    "desc": "简单的筛子游戏，可以选择筛子数量猜数字。"
+  },
+  "wheel":{
+    "desc": "超级幸运大转盘，可自选轮盘区隔数量，调整中奖概率。",
+    "segment_num": "区隔数量",
+    "lucky_number": "幸运数字",
+    "odds": "几率"
+  },
+  "scolorball":{
+    "desc": "选择若干个红球，进行组合投注，中奖概率更高。"
+  },
+  "placeholder":{
+    "desc": "更多游戏，敬请期待。"
+  },
+  "dcolorball":{
+    "desc": "选择若干个红色球和1个蓝色球，进行组合投注。",
+    "game_mode": "选择玩法",
+    "section_red": "红区",
+    "section_blue": "蓝区",
+    "rand_select": "机选",
+    "clear_selected": "清除已选",
+    "clear_all": "重新选择",
+    "your_bet": "你的选择",
+    "mode":{
+      "label_2/5": "2/5 五选二",
+      "label_5/10": "5/10 十选五",
+      "label_5/15": "5/15 十五选五",
+      "hint_2/5": "5个红球中选择2个，4个蓝球中选择1个，每注包含2个红球1个蓝球",
+      "hint_5/10": "10个红球中选择5个，4个蓝球中选择1个，每注包含5个红球1个蓝球",
+      "hint_5/15": "15个红球中选择5个，4个蓝球中选择1个，每注包含5个红球1个蓝球"
+    }
+  },
+  "scolorball":{
+    "desc": "选择若干个红色球，进行组合投注。",
+    "mode":{
+      "label_2/4": "2/4 四选二",
+      "label_3/6": "3/6 六选三",
+      "label_4/8": "4/8 八选四",
+      "hint_2/4": "4个红球中选择2个，每注包含2个红球",
+      "hint_3/6": "6个红球中选择3个，每注包含3个红球",
+      "hint_4/8": "8个红球中选择4个，每注包含4个红球"
+    }
+  },
   "packet":{
+    "desc": "大家一起来发红包、抢红包，看谁的手气好。",
     "type":{
       "created": "最近创建",
       "claimed": "最近领取"
@@ -686,6 +751,9 @@
     "default_message": "大家开开心心",
     "create_packet_title": "创建红包",
     "select_from_accounts": "发送账户",
+    "send_red_packet": "发送红包",
+    "select_from_mine": "从我创建的红包中选择",
+    "search_id_or_msg": "ID或消息",
     "tip": {
       "password_allow_blank": "如果红包没有设置密码，可留空",
       "bad_password": "密码错误",

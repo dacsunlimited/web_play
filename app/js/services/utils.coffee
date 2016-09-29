@@ -286,3 +286,39 @@ angular.module("app.services").factory "Utils", ($translate,$q,$sce) ->
         newInstance[key] = @clone obj[key]
 
       return newInstance
+
+
+    # https://github.com/dacsunlimited/dac_play/blob/master/libraries/utilities/combinatorics.cpp
+    # rank [0..n]
+    ranking: (comb) ->
+      rank = 0
+      # each x is human number, need to minus 1 to map to rank
+      sorted = (comb.map (x) -> x - 1).sort()
+      for i in [1..sorted.length]
+        rank += Combinatorics.C(sorted[i-1], i)
+
+      # rank should plus 1
+      return rank + 1
+
+    # # https://github.com/dacsunlimited/dac_play/blob/master/libraries/utilities/combinatorics.cpp
+    # rank [0..n]
+    unranking: (rank, k, n) ->
+      # passed in rank should be minus 1 to map to rank
+      rank -= 1
+      comb = []
+      max = n
+
+      for i in [k..1]
+        if rank <= 0 then comb.push i-1
+        else
+          while max >= 1
+            c_max_i = Combinatorics.C(max, i)
+            if rank >= c_max_i
+              comb.push max
+              rank -= c_max_i
+              break
+
+            max--
+
+      return comb.sort()
+

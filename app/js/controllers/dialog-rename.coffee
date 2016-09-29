@@ -1,4 +1,4 @@
-angular.module("app").controller "DialogRenameController", ($scope, $modalInstance, oldname, Wallet, $location) ->
+angular.module("app").controller "DialogRenameController", ($scope, $uibModalInstance, oldname, Wallet, $location) ->
 
     $scope.m = {}
     $scope.m.oldname = oldname
@@ -6,9 +6,9 @@ angular.module("app").controller "DialogRenameController", ($scope, $modalInstan
     $scope.m.translate_data = {value: oldname}
 
     $scope.cancel = ->
-        $modalInstance.dismiss "cancel"
+        $uibModalInstance.dismiss "cancel"
 
     $scope.ok = ->
       Wallet.wallet_rename_account(oldname, $scope.m.newname).then ->
-        $modalInstance.close("ok")
+        $uibModalInstance.close("ok")
         $location.path("accounts/"+$scope.m.newname)

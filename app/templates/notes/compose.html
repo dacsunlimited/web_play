@@ -1,13 +1,20 @@
-<md-dialog flex="80" aria-label="{{'notes.note.post_title'|translate}}">
+<md-dialog flex="80" placeholder="{{'notes.note.post_title'|translate}}">
 
   <!-- <md-subheader class="md-sticky-no-effect">Mango (Fruit)</md-subheader> -->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>{{'notes.note.post_title'|translate}}</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
 
   <md-dialog-content>
-    <md-subheader class="md-primary md-default-theme" translate>
-      notes.note.post_title
-    </md-subheader>
+    <div class="md-dialog-content">
 
-    <p translate translate-values="{account_name: account_name}">notes.note.explain</p>
+      <p translate translate-values="{account_name: account_name}">notes.note.explain</p>
 
       <form name="note_form" class="form-horizontal" role="form" novalidate>
 
@@ -57,11 +64,13 @@
           </md-input-container>
         </div>
       </form>
+      </div>
     </md-dialog-content>
 
     <!--Submit-->
-    <section class="md-actions" layout="row" layout-sm="column" layout-align="center center">
-      <md-button id="submitNoteBtn" class="md-primary" ng-click="doSend()" disabled="disabled" translate>notes.note.post</md-button>
-      <md-button class="" ng-click="hide()" translate>btn.cancel</md-button>
-    </section>
+    <md-dialog-actions layout="row" layout-sm="column" layout-align="center center">
+      <span flex></span>
+      <md-button class="" ng-click="hide()">{{'btn.cancel'|translate}}</md-button>
+      <md-button id="submitNoteBtn" class="md-primary" ng-click="doSend()" disabled="disabled">{{'notes.note.post'|translate}}</md-button>
+    </md-dialog-actions>
 </md-dialog>

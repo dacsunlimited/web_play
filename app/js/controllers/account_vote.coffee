@@ -1,4 +1,4 @@
-angular.module("app").controller "AccountVoteController", ($scope, $translate, Wallet, WalletAPI, Info, $modal, Blockchain, Growl, Utils, Observer) ->
+angular.module("app").controller "AccountVoteController", ($scope, $translate, Wallet, WalletAPI, Info, $uibModal, Blockchain, Growl, Utils, Observer) ->
     $scope.votes = []
     balMinusFee = 0
     $scope.accounts = Wallet.accounts
@@ -58,7 +58,7 @@ angular.module("app").controller "AccountVoteController", ($scope, $translate, W
     $scope.updateVotes = ->
         myBal = $scope.balances[Info.symbol]
         balMinusFee = parseInt(myBal.amount / myBal.precision - Wallet.info.transaction_fee.amount / myBal.precision)
-        $modal.open
+        $uibModal.open
             templateUrl: "dialog-confirmation.html"
             controller: "DialogConfirmationController"
             resolve:

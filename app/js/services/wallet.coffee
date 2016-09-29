@@ -83,7 +83,7 @@ class Wallet
                 @get_setting('timeout').then (result) =>
                     if result && result.value
                         @timeout = result.value
-                        @idle._options().idleDuration = @timeout
+                        @idle.setIdle @timeout
                         @idle.watch()
                 @get_setting('default_vote').then (result) =>
                     @default_vote = result.value if result?.value
@@ -442,8 +442,8 @@ class Wallet
 
     get_balance: ->
         @rpc.request('wallet_get_balance').then (response) ->
-            asset = response.result[0]
-            {amount: asset[0], asset_type: asset[1]}
+          asset = response.result[0]
+          {amount: asset[0], asset_type: asset[1]}
 
     get_wallet_name: ->
         @rpc.request('wallet_get_name').then (response) =>
@@ -523,9 +523,27 @@ class Wallet
 
         return deferred.promise
 
+    # list my involved packets, included:
+    # created
+    # claimed
+    list_red_packets: (acct_id = null) ->
+      deferred = @q.defer()
+
+      @wallet_api.list_packets().then (packets) ->
+        if !packets or packets.length == 0
+          deferred.resolve []
+
+        packets = (packets.filter (p) -> p.account_id == acct_id) if acct_id
+        deferred.resolve packets
+      , (err) ->
+        deferred.reject err
+
+      return deferred.promise
+
+
     constructor: (@q, @log, @location, @translate, @growl, @rpc, @blockchain, @utils, @wallet_api, @blockchain_api, @RpcService, @interval, @idle) ->
         @wallet_name = ""
-        @timeout = @idle._options().idleDuration
+        @timeout = @idle.getIdle()
         @timezone = moment.defaultZone.name
 
-angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "$idle", Wallet])
+angular.module("app").service("Wallet", ["$q", "$log", "$location", "$translate", "Growl", "RpcService", "Blockchain", "Utils", "WalletAPI", "BlockchainAPI", "RpcService", "$interval", "Idle", Wallet])

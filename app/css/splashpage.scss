@@ -23,6 +23,7 @@
 .splashpage-wrapper {
   width: 380px;
 //  height: 458px;
+  margin:auto;
 
   p {
     text-align: center;
@@ -40,6 +41,8 @@
   /*  border-bottom: 1px solid rgba(255, 255, 255, .5);*/
     -webkit-background-clip: padding-box;
             background-clip: padding-box;
+
+    img { width:80%; }
   }
 
   .str-content {
