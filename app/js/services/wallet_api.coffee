@@ -110,6 +110,14 @@ class WalletAPI
     @rpc.request('wallet_backup_restore', [json_filename, wallet_name, imported_wallet_passphrase], error_handler).then (response) ->
       response.result
 
+  # Exports encrypted keys to a JSON file
+  # parameters:
+  #   filename `json_filename` - the full path and filename of JSON file to generate, example: /path/to/exported_wallet.json
+  # return_type: `void`
+  export_keys: (json_filename, error_handler = null) ->
+    @rpc.request('wallet_export_keys', [json_filename], error_handler).then (response) ->
+      response.result
+
   # Enables or disables automatic wallet backups
   # parameters:
   #   bool `enabled` - true to enable and false to disable
@@ -798,6 +806,14 @@ class WalletAPI
   # return_type: `account_balance_summary_type`
   account_yield: (account_name, error_handler = null) ->
     @rpc.request('wallet_account_yield', [account_name], error_handler).then (response) ->
+      response.result
+
+  # Lists all public keys in this account
+  # parameters:
+  #   account_name `account_name` - the account for which public keys should be listed
+  # return_type: `public_key_summary_array`
+  account_list_public_keys: (account_name, error_handler = null) ->
+    @rpc.request('wallet_account_list_public_keys', [account_name], error_handler).then (response) ->
       response.result
 
   # Lists all public keys in this account
